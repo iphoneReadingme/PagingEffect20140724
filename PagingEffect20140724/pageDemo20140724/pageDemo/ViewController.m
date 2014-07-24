@@ -7,17 +7,17 @@
 //
 
 
-//#import "ContentViewController.h"
+#import "ContentViewController.h"
 #import "ViewController.h"
 
 
-@interface ViewController()
+@interface NBPageViewController()
 
 @property (nonatomic, assign)int currentPageIndex; ///< 当前显示页面的索引
 
 @end
 
-@implementation ViewController
+@implementation NBPageViewController
 
 #pragma mark - View lifecycle
 
@@ -81,11 +81,11 @@
 		[UIColor brownColor],
 	};
 	
-//    UIViewController *viewCtrl = [[[ContentViewController alloc] init] autorelease];
-    UIViewController *viewCtrl = [[[UIViewController alloc] init] autorelease];
+    UIViewController *viewCtrl = [[[ContentViewController alloc] init] autorelease];
+//    UIViewController *viewCtrl = [[[UIViewController alloc] init] autorelease];
 	
 	UILabel* lable = [[UILabel alloc] initWithFrame:[viewCtrl.view frame]];
-	viewCtrl.view = lable;
+	//viewCtrl.view = lable;
 	lable.text = [NSString stringWithFormat:@"color=%d, %@", index, [UIColor purpleColor]];
 	[lable release];
 	

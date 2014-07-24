@@ -1,12 +1,21 @@
 //
-//  ViewController.m
+//  NBPageViewController.m
 //  pageDemo
 //
 //  Created by ren kai on 27/12/2011.
 //  Copyright (c) 2011 none. All rights reserved.
 //
 
+
+#import "ContentViewController.h"
 #import "NBPageViewController.h"
+
+
+@interface NBPageViewController()
+
+@property (nonatomic, assign)int currentPageIndex; ///< 当前显示页面的索引
+
+@end
 
 @implementation NBPageViewController
 
@@ -15,69 +24,89 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIViewController *startCtrl = [[UIViewController alloc] init];
-    startCtrl.view.backgroundColor = [UIColor blueColor];
     self.delegate = self;
     self.dataSource = self;
-    
+	
+	_currentPageIndex = 0;
+	
+    UIViewController *startCtrl = nil;
+	startCtrl = [self getCurrentPageViewController:0]; ///< 初始化当前UIViewController
+	
     [self setViewControllers:[NSArray arrayWithObject:startCtrl] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
-       viewControllerAfterViewController:(UIViewController *)viewController{
-    if ([viewController.view.backgroundColor isEqual:[UIColor blackColor]]) {
-        return nil;
-    }
-	//    + (UIColor *)blackColor;      // 0.0 white
-	//	+ (UIColor *)darkGrayColor;   // 0.333 white
-	//	+ (UIColor *)lightGrayColor;  // 0.667 white
-	//	+ (UIColor *)whiteColor;      // 1.0 white
-	//	+ (UIColor *)grayColor;       // 0.5 white
-	//	+ (UIColor *)redColor;        // 1.0, 0.0, 0.0 RGB
-	//	+ (UIColor *)greenColor;      // 0.0, 1.0, 0.0 RGB
-	//	+ (UIColor *)blueColor;       // 0.0, 0.0, 1.0 RGB
-	//	+ (UIColor *)cyanColor;       // 0.0, 1.0, 1.0 RGB
-	//	+ (UIColor *)yellowColor;     // 1.0, 1.0, 0.0 RGB
-	//	+ (UIColor *)magentaColor;    // 1.0, 0.0, 1.0 RGB
-	//	+ (UIColor *)orangeColor;     // 1.0, 0.5, 0.0 RGB
-	//	+ (UIColor *)purpleColor;     // 0.5, 0.0, 0.5 RGB
-	//	+ (UIColor *)brownColor;      // 0.6, 0.4, 0.2 RGB
-	//	+ (UIColor *)clearColor;      // 0.0 white, 0.0 alpha
+///< 翻到下一页
+- (UIViewController *)turnToNextPage
+{
+	_currentPageIndex++;
+	if (_currentPageIndex > 13)
+	{
+		_currentPageIndex = 0;
+	}
 	
+	return [self getCurrentPageViewController:_currentPageIndex];
+}
+
+///< 翻到上一页
+- (UIViewController *)turnToPreviousPage
+{
+	_currentPageIndex--;
+	if (_currentPageIndex < 0)
+	{
+		_currentPageIndex = 0;
+	}
+	return [self getCurrentPageViewController:_currentPageIndex];
+}
+
+- (UIViewController *)getCurrentPageViewController:(int)index
+{
+	UIColor* bgColor[] =
+	{
+		[UIColor blueColor],
+		[UIColor darkGrayColor],
+		[UIColor lightGrayColor],
+		[UIColor whiteColor],
+		[UIColor grayColor],
+		[UIColor redColor],
+		[UIColor greenColor],
+		[UIColor blueColor],
+		[UIColor cyanColor],
+		[UIColor yellowColor],
+		[UIColor magentaColor],
+		[UIColor orangeColor],
+		[UIColor purpleColor],
+		[UIColor brownColor],
+	};
 	
-    UIViewController *viewCtrl = [[UIViewController alloc] init];
-    if ([viewController.view.backgroundColor isEqual:[UIColor blueColor]]) {
-        viewCtrl.view.backgroundColor = [UIColor blackColor];
-    } else {
-        viewCtrl.view.backgroundColor = [UIColor blueColor];
-    }
-    
+    UIViewController *viewCtrl = [[[ContentViewController alloc] init] autorelease];
+//    UIViewController *viewCtrl = [[[UIViewController alloc] init] autorelease];
 	
-    
+	UILabel* lable = [[UILabel alloc] initWithFrame:[viewCtrl.view frame]];
+	viewCtrl.view = lable;
+	lable.text = [NSString stringWithFormat:@"color=%d, %@", index, [UIColor purpleColor]];
+	[lable release];
+	
+	viewCtrl.view.backgroundColor = bgColor[index];
+	
     return viewCtrl;
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
-      viewControllerBeforeViewController:(UIViewController *)viewController{
-    if ([viewController.view.backgroundColor isEqual:[UIColor redColor]]) {
-        return nil;
-    }
-    
-    UIViewController *viewCtrl = [[UIViewController alloc] init];
-    if ([viewController.view.backgroundColor isEqual:[UIColor blueColor]]) {
-        viewCtrl.view.backgroundColor = [UIColor redColor];
-    } else {
-        viewCtrl.view.backgroundColor = [UIColor blueColor];
-    }
-    
-    
-    return viewCtrl;
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
+       viewControllerAfterViewController:(UIViewController *)viewController
+{
+	return [self turnToNextPage];
 }
 
-- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
+      viewControllerBeforeViewController:(UIViewController *)viewController
+{
+	return [self turnToPreviousPage];
+}
+
+- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController 
                    spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation{
     UIViewController *currentViewController = [self.viewControllers objectAtIndex:0];
     NSArray *viewControllers = [NSArray arrayWithObject:currentViewController];

@@ -8,6 +8,12 @@
 
 #import "ViewController.h"
 
+@interface ViewController()
+
+@property (nonatomic, assign)int currentPageIndex;
+
+@end
+
 @implementation ViewController
 
 #pragma mark - View lifecycle
@@ -18,63 +24,79 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIViewController *startCtrl = [[UIViewController alloc] init];
-    startCtrl.view.backgroundColor = [UIColor blueColor];
     self.delegate = self;
     self.dataSource = self;
-    
+	_currentPageIndex = 0;
+	
+    UIViewController *startCtrl = nil;
+	startCtrl = [self getCurrentPageViewController:0];
+	
     [self setViewControllers:[NSArray arrayWithObject:startCtrl] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
-       viewControllerAfterViewController:(UIViewController *)viewController{
-    if ([viewController.view.backgroundColor isEqual:[UIColor blackColor]]) {
-        return nil;
-    } 
-//    + (UIColor *)blackColor;      // 0.0 white
-//	+ (UIColor *)darkGrayColor;   // 0.333 white
-//	+ (UIColor *)lightGrayColor;  // 0.667 white
-//	+ (UIColor *)whiteColor;      // 1.0 white
-//	+ (UIColor *)grayColor;       // 0.5 white
-//	+ (UIColor *)redColor;        // 1.0, 0.0, 0.0 RGB
-//	+ (UIColor *)greenColor;      // 0.0, 1.0, 0.0 RGB
-//	+ (UIColor *)blueColor;       // 0.0, 0.0, 1.0 RGB
-//	+ (UIColor *)cyanColor;       // 0.0, 1.0, 1.0 RGB
-//	+ (UIColor *)yellowColor;     // 1.0, 1.0, 0.0 RGB
-//	+ (UIColor *)magentaColor;    // 1.0, 0.0, 1.0 RGB
-//	+ (UIColor *)orangeColor;     // 1.0, 0.5, 0.0 RGB
-//	+ (UIColor *)purpleColor;     // 0.5, 0.0, 0.5 RGB
-//	+ (UIColor *)brownColor;      // 0.6, 0.4, 0.2 RGB
-//	+ (UIColor *)clearColor;      // 0.0 white, 0.0 alpha
+- (UIViewController *)turnTopageForwardIndex
+{
+	_currentPageIndex++;
+	if (_currentPageIndex > 13)
+	{
+		_currentPageIndex = 0;
+	}
 	
+	return [self getCurrentPageViewController:_currentPageIndex];
+}
 
-    UIViewController *viewCtrl = [[UIViewController alloc] init];
-    if ([viewController.view.backgroundColor isEqual:[UIColor blueColor]]) {
-        viewCtrl.view.backgroundColor = [UIColor blackColor];
-    } else {
-        viewCtrl.view.backgroundColor = [UIColor blueColor];
-    }
-    
+- (UIViewController *)turnTopageBackIndex
+{
+	_currentPageIndex--;
+	if (_currentPageIndex < 0)
+	{
+		_currentPageIndex = 0;
+	}
+	return [self getCurrentPageViewController:_currentPageIndex];
+}
 
-    
+- (UIViewController *)getCurrentPageViewController:(int)index
+{
+	UIColor* bgColor[] =
+	{
+		[UIColor blueColor],
+		[UIColor darkGrayColor],
+		[UIColor lightGrayColor],
+		[UIColor whiteColor],
+		[UIColor grayColor],
+		[UIColor redColor],
+		[UIColor greenColor],
+		[UIColor blueColor],
+		[UIColor cyanColor],
+		[UIColor yellowColor],
+		[UIColor magentaColor],
+		[UIColor orangeColor],
+		[UIColor purpleColor],
+		[UIColor brownColor],
+	};
+	
+    UIViewController *viewCtrl = [[[UIViewController alloc] init] autorelease];
+	
+	UILabel* lable = [[UILabel alloc] initWithFrame:[viewCtrl.view frame]];
+	viewCtrl.view = lable;
+	lable.text = [NSString stringWithFormat:@"color=%d, %@", index, [UIColor purpleColor]];
+	[lable release];
+	
+	viewCtrl.view.backgroundColor = bgColor[index];
+	
     return viewCtrl;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
-      viewControllerBeforeViewController:(UIViewController *)viewController{
-    if ([viewController.view.backgroundColor isEqual:[UIColor redColor]]) {
-        return nil;
-    } 
-    
-    UIViewController *viewCtrl = [[UIViewController alloc] init];
-    if ([viewController.view.backgroundColor isEqual:[UIColor blueColor]]) {
-        viewCtrl.view.backgroundColor = [UIColor redColor];
-    } else {
-        viewCtrl.view.backgroundColor = [UIColor blueColor];
-    }
-    
-    
-    return viewCtrl;
+       viewControllerAfterViewController:(UIViewController *)viewController
+{
+	return [self turnTopageForwardIndex];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
+      viewControllerBeforeViewController:(UIViewController *)viewController
+{
+	return [self turnTopageBackIndex];
 }
 
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController 

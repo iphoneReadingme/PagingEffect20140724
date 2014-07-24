@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B9E3D291980E8CB00572FA1 /* ContentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3D281980E8CB00572FA1 /* ContentViewController.mm */; };
+		5B9E3D2E1980EB9400572FA1 /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3D2B1980EB9400572FA1 /* PageView.m */; };
+		5B9E3D2F1980EB9400572FA1 /* PageViewCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3D2D1980EB9400572FA1 /* PageViewCache.m */; };
 		CB9B18C314A9D2B500C15033 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9B18C214A9D2B500C15033 /* UIKit.framework */; };
 		CB9B18C514A9D2B500C15033 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9B18C414A9D2B500C15033 /* Foundation.framework */; };
 		CB9B18C714A9D2B500C15033 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9B18C614A9D2B500C15033 /* CoreGraphics.framework */; };
@@ -32,6 +35,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B9E3D271980E8CB00572FA1 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		5B9E3D281980E8CB00572FA1 /* ContentViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContentViewController.mm; sourceTree = "<group>"; };
+		5B9E3D2A1980EB9400572FA1 /* PageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageView.h; sourceTree = "<group>"; };
+		5B9E3D2B1980EB9400572FA1 /* PageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageView.m; sourceTree = "<group>"; };
+		5B9E3D2C1980EB9400572FA1 /* PageViewCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewCache.h; sourceTree = "<group>"; };
+		5B9E3D2D1980EB9400572FA1 /* PageViewCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewCache.m; sourceTree = "<group>"; };
 		CB9B18BE14A9D2B500C15033 /* pageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9B18C214A9D2B500C15033 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CB9B18C414A9D2B500C15033 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -76,6 +85,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B9E3D261980E8CB00572FA1 /* PageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5B9E3D271980E8CB00572FA1 /* ContentViewController.h */,
+				5B9E3D281980E8CB00572FA1 /* ContentViewController.mm */,
+				5B9E3D2A1980EB9400572FA1 /* PageView.h */,
+				5B9E3D2B1980EB9400572FA1 /* PageView.m */,
+				5B9E3D2C1980EB9400572FA1 /* PageViewCache.h */,
+				5B9E3D2D1980EB9400572FA1 /* PageViewCache.m */,
+			);
+			path = PageViewController;
+			sourceTree = "<group>";
+		};
 		CB9B18B314A9D2B500C15033 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +135,7 @@
 				CB9B18D214A9D2B600C15033 /* AppDelegate.m */,
 				CB9B18D414A9D2B600C15033 /* ViewController.h */,
 				CB9B18D514A9D2B600C15033 /* ViewController.m */,
+				5B9E3D261980E8CB00572FA1 /* PageViewController */,
 				CB9B18C914A9D2B600C15033 /* Supporting Files */,
 			);
 			path = pageDemo;
@@ -256,7 +279,10 @@
 			files = (
 				CB9B18CF14A9D2B600C15033 /* main.m in Sources */,
 				CB9B18D314A9D2B600C15033 /* AppDelegate.m in Sources */,
+				5B9E3D291980E8CB00572FA1 /* ContentViewController.mm in Sources */,
 				CB9B18D614A9D2B600C15033 /* ViewController.m in Sources */,
+				5B9E3D2F1980EB9400572FA1 /* PageViewCache.m in Sources */,
+				5B9E3D2E1980EB9400572FA1 /* PageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,10 +370,12 @@
 		CB9B18F214A9D2B600C15033 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: yang fasheng (QRZJ36RX88)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "pageDemo/pageDemo-Prefix.pch";
 				INFOPLIST_FILE = "pageDemo/pageDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E18AEF7B-4F86-484E-AF5E-C294CA495C9C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -355,10 +383,12 @@
 		CB9B18F314A9D2B600C15033 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: yang fasheng (QRZJ36RX88)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "pageDemo/pageDemo-Prefix.pch";
 				INFOPLIST_FILE = "pageDemo/pageDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E18AEF7B-4F86-484E-AF5E-C294CA495C9C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

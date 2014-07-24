@@ -6,7 +6,10 @@
 //  Copyright (c) 2011 none. All rights reserved.
 //
 
+
+//#import "ContentViewController.h"
 #import "ViewController.h"
+
 
 @interface ViewController()
 
@@ -78,6 +81,7 @@
 		[UIColor brownColor],
 	};
 	
+//    UIViewController *viewCtrl = [[[ContentViewController alloc] init] autorelease];
     UIViewController *viewCtrl = [[[UIViewController alloc] init] autorelease];
 	
 	UILabel* lable = [[UILabel alloc] initWithFrame:[viewCtrl.view frame]];

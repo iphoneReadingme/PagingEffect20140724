@@ -1,9 +1,9 @@
 //
 //  main.m
-//  PageTest2
+//  pageDemo
 //
-//  Created by apple on 13-9-13.
-//  Copyright (c) 2013年 kongyu. All rights reserved.
+//  Created by ren kai on 27/12/2011.
+//  Copyright (c) 2011 none. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -10,7 +10,7 @@
 
 @interface ViewController()
 
-@property (nonatomic, assign)int currentPageIndex;
+@property (nonatomic, assign)int currentPageIndex; ///< 当前显示页面的索引
 
 @end
 
@@ -26,15 +26,17 @@
     
     self.delegate = self;
     self.dataSource = self;
+	
 	_currentPageIndex = 0;
 	
     UIViewController *startCtrl = nil;
-	startCtrl = [self getCurrentPageViewController:0];
+	startCtrl = [self getCurrentPageViewController:0]; ///< 初始化当前UIViewController
 	
     [self setViewControllers:[NSArray arrayWithObject:startCtrl] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
 }
 
-- (UIViewController *)turnTopageForwardIndex
+///< 翻到下一页
+- (UIViewController *)turnToNextPage
 {
 	_currentPageIndex++;
 	if (_currentPageIndex > 13)
@@ -45,7 +47,8 @@
 	return [self getCurrentPageViewController:_currentPageIndex];
 }
 
-- (UIViewController *)turnTopageBackIndex
+///< 翻到上一页
+- (UIViewController *)turnToPreviousPage
 {
 	_currentPageIndex--;
 	if (_currentPageIndex < 0)
@@ -90,13 +93,13 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
        viewControllerAfterViewController:(UIViewController *)viewController
 {
-	return [self turnTopageForwardIndex];
+	return [self turnToNextPage];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
-	return [self turnTopageBackIndex];
+	return [self turnToPreviousPage];
 }
 
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController 

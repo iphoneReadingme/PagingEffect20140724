@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
+#import "NBPageViewController.h"
 
 @implementation AppDelegate
 

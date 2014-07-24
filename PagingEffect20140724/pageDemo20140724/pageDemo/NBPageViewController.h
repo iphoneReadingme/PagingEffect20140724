@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  NBPageViewController.h
 //  pageDemo
 //
 //  Created by ren kai on 27/12/2011.

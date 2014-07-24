@@ -46,16 +46,38 @@
 //	+ (UIColor *)purpleColor;     // 0.5, 0.0, 0.5 RGB
 //	+ (UIColor *)brownColor;      // 0.6, 0.4, 0.2 RGB
 //	+ (UIColor *)clearColor;      // 0.0 white, 0.0 alpha
+	UIColor* bgColor[] =
+	{
+		[UIColor blueColor],
+		[UIColor darkGrayColor],
+		[UIColor lightGrayColor],
+		[UIColor whiteColor],
+		[UIColor grayColor],
+		[UIColor redColor],
+		[UIColor greenColor],
+		[UIColor blueColor],
+		[UIColor cyanColor],
+		[UIColor yellowColor],
+		[UIColor magentaColor],
+		[UIColor orangeColor],
+		[UIColor purpleColor],
+		[UIColor brownColor],
+	};
 	
-
     UIViewController *viewCtrl = [[UIViewController alloc] init];
-    if ([viewController.view.backgroundColor isEqual:[UIColor blueColor]]) {
-        viewCtrl.view.backgroundColor = [UIColor blackColor];
-    } else {
-        viewCtrl.view.backgroundColor = [UIColor blueColor];
-    }
-    
-
+	static int index = 0;
+	index++;
+	if (index > 13)
+	{
+		index = 0;
+	}
+	
+	viewCtrl.view.backgroundColor = bgColor[index];
+//    if ([viewController.view.backgroundColor isEqual:[UIColor blueColor]]) {
+//        viewCtrl.view.backgroundColor = [UIColor blackColor];
+//    } else {
+//        viewCtrl.view.backgroundColor = [UIColor blueColor];
+//    }
     
     return viewCtrl;
 }

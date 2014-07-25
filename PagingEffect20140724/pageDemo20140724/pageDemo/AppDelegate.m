@@ -29,7 +29,7 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
 	
-	// style: 0.卷曲; 1.平滑
+	// style: 0.卷曲; 1.平滑(ios6.0以上才支持)
 	// orient: 0.左右卷曲/滑动; 1.上下卷曲/滑动
 	UIPageViewControllerTransitionStyle style[2] = {UIPageViewControllerTransitionStylePageCurl, UIPageViewControllerTransitionStyleScroll};
 	UIPageViewControllerNavigationOrientation orient[2] = {UIPageViewControllerNavigationOrientationHorizontal, UIPageViewControllerNavigationOrientationVertical};

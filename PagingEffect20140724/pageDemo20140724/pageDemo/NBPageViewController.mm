@@ -23,6 +23,8 @@ typedef enum
 
 @interface NBPageViewController()
 <
+UIPageViewControllerDelegate,
+UIPageViewControllerDataSource,
 UIGestureRecognizerDelegate
 ,ContentViewControllerDelegate
 >
@@ -60,9 +62,15 @@ UIGestureRecognizerDelegate
 	_currentPageIndex = 0;
 	
     UIViewController *startCtrl = nil;
+    UIViewController *secondCtrl = nil;
 	startCtrl = [self getCurrentPageViewController:0]; ///< 初始化当前UIViewController
+	secondCtrl = [self getCurrentPageViewController:1];
 	
-    [self setViewControllers:[NSArray arrayWithObject:startCtrl] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+    NSArray *viewControllers = nil;
+	viewControllers = [NSArray arrayWithObject:startCtrl];
+	//viewControllers = [NSArray arrayWithObjects:startCtrl, secondCtrl, nil];
+	
+    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
 }
 
 ///< 翻到下一页
@@ -120,12 +128,13 @@ UIGestureRecognizerDelegate
 	};
 	
     ContentViewController *viewCtrl = [[[ContentViewController alloc] init] autorelease];
+	viewCtrl.isBackPage = YES;
 	
 	CGRect rect = CGRectMake(0, 50, 300, 30);
 	UILabel* lable = [[UILabel alloc] initWithFrame:rect];
 	lable.backgroundColor = [UIColor grayColor];
 	[viewCtrl.view addSubview:lable];
-	lable.text = [NSString stringWithFormat:@"color=%d, %@", index, [UIColor purpleColor]];
+	lable.text = [NSString stringWithFormat:@"color=%d, 显示当前页面显示内容：%d%d%d", index, index, index, index];
 	[lable release];
 	
 	viewCtrl.view.backgroundColor = bgColor[index];
@@ -134,21 +143,61 @@ UIGestureRecognizerDelegate
     return viewCtrl;
 }
 
-#pragma mark- UIPageViewControllerDelegate
-- (void)pageViewController:(UIPageViewController*)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray*)previousViewControllers transitionCompleted:(BOOL)completed
+//#pragma mark - UIPageViewControllerDataSource
+- (void)setViewControllers:(NSArray *)viewControllers direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated completion:(void (^)(BOOL finished))completion
 {
+    [super setViewControllers:viewControllers direction:direction animated:animated completion:completion];
 }
+
+#pragma mark- UIPageViewControllerDataSource
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
        viewControllerAfterViewController:(UIViewController *)viewController
 {
-	return [self turnToNextPage];
+	NSLog(@"After viewController = %@", viewController);
+	
+	ContentViewController *newViewController =nil;
+	
+    ContentViewController* curViewController = (ContentViewController*)viewController;
+	if (curViewController.isBackPage)
+	{
+		newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex];
+		newViewController.isBackPage = NO;
+		newViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
+	}
+	else
+	{
+		newViewController = (ContentViewController*)[self turnToNextPage];
+	}
+    
+	return newViewController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
-	return [self turnToPreviousPage];
+	NSLog(@"Before viewController = %@", viewController);
+	
+	ContentViewController *newViewController =nil;
+	
+    ContentViewController* curViewController = (ContentViewController*)viewController;
+	if (curViewController.isBackPage)
+	{
+		newViewController = (ContentViewController*)[self turnToPreviousPage];
+		newViewController.isBackPage = NO;
+		newViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
+	}
+	else
+	{
+		newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex];
+	}
+    
+	return newViewController;
+}
+
+#pragma mark- UIPageViewControllerDelegate
+- (void)pageViewController:(UIPageViewController*)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray*)previousViewControllers transitionCompleted:(BOOL)completed
+{
 }
 
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController 
@@ -157,11 +206,12 @@ UIGestureRecognizerDelegate
     NSArray *viewControllers = [NSArray arrayWithObject:currentViewController];
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
     
-    self.doubleSided = NO;
+    //self.doubleSided = NO;
+	self.doubleSided = YES;
 	
 	UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocationMax;
 	spine = UIPageViewControllerSpineLocationMin;
-    //spine = UIPageViewControllerSpineLocationMid;
+//	spine = UIPageViewControllerSpineLocationMid;
 	
 	return spine;
 }
@@ -176,7 +226,6 @@ UIGestureRecognizerDelegate
 {
 	UIViewController* currentViewController = nil;
 	//currentViewController = [self getCurrentPageViewController:_currentPageIndex];
-	currentViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
 	
 	_currentPageIndex--;
 	if (_currentPageIndex < 0)
@@ -185,6 +234,9 @@ UIGestureRecognizerDelegate
 	}
 	else
 	{
+		currentViewController = [self getCurrentPageViewController:_currentPageIndex];
+		currentViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
+		
 		UIViewController* preViewController = nil;
 		preViewController = [self getCurrentPageViewController:_currentPageIndex];
 		
@@ -205,6 +257,9 @@ UIGestureRecognizerDelegate
 	}
 	else
 	{
+		currentViewController = [self getCurrentPageViewController:_currentPageIndex];
+		currentViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
+		
 		UIViewController* nextViewController = nil;
 		nextViewController = [self getCurrentPageViewController:_currentPageIndex];
 		[self goToNextPageViewController:currentViewController nextViewController:nextViewController];
@@ -213,13 +268,14 @@ UIGestureRecognizerDelegate
 
 - (void)goToPrePageViewController:(UIViewController*)preViewController backViewController:(UIViewController*)backViewController
 {
-//    if (preViewController == nil || backViewController == nil)
-//    {
-//        return;
-//    }
+    if (preViewController == nil || backViewController == nil)
+    {
+        return;
+    }
 	
-    NSArray *viewControllers = [NSArray arrayWithObject:preViewController];
-//	viewControllers = [NSArray arrayWithObjects:preViewController, backViewController, nil];
+    NSArray *viewControllers = nil;
+//	viewControllers = [NSArray arrayWithObject:preViewController];
+	viewControllers = [NSArray arrayWithObjects:preViewController, backViewController, nil];
     
     [self setViewControllers:viewControllers
 				   direction:UIPageViewControllerNavigationDirectionReverse
@@ -229,13 +285,14 @@ UIGestureRecognizerDelegate
 
 - (void)goToNextPageViewController:(UIViewController*)currentViewController nextViewController:(UIViewController*)nextViewController
 {
-//    if (currentViewController == nil || nextViewController == nil)
-//    {
-//        return;
-//    }
+    if (currentViewController == nil || nextViewController == nil)
+    {
+        return;
+    }
     
-    NSArray *viewControllers = [NSArray arrayWithObject:nextViewController];
-//	viewControllers = [NSArray arrayWithObjects:nextViewController, currentViewController, nil]
+    NSArray *viewControllers = nil;
+//	viewControllers = [NSArray arrayWithObject:nextViewController];
+	viewControllers = [NSArray arrayWithObjects:nextViewController, currentViewController, nil];
 	[self setViewControllers:viewControllers
 	 			   direction:UIPageViewControllerNavigationDirectionForward
 					animated:YES
@@ -407,12 +464,6 @@ UIGestureRecognizerDelegate
     }
     
     return shouldBegin;
-}
-
-#pragma mark - UIPageViewControllerDataSource
-- (void)setViewControllers:(NSArray *)viewControllers direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated completion:(void (^)(BOOL finished))completion
-{
-    [super setViewControllers:viewControllers direction:direction animated:animated completion:completion];
 }
 
 #pragma mark - ContentViewControllerDelegate

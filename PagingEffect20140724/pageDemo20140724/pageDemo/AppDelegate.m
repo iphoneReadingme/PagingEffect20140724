@@ -34,7 +34,7 @@
 	UIPageViewControllerTransitionStyle style[2] = {UIPageViewControllerTransitionStylePageCurl, UIPageViewControllerTransitionStyleScroll};
 	UIPageViewControllerNavigationOrientation orient[2] = {UIPageViewControllerNavigationOrientationHorizontal, UIPageViewControllerNavigationOrientationVertical};
 	
-    self.viewController = [[[NBPageViewController alloc] initWithTransitionStyle:style[1]
+    self.viewController = [[[NBPageViewController alloc] initWithTransitionStyle:style[0]
                                                           navigationOrientation:orient[0]
                                                                         options:nil] autorelease];
     self.window.rootViewController = self.viewController;

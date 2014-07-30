@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NBPageViewController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource> {
+@interface NBPageViewController : UIPageViewController
+{
 
 }
 

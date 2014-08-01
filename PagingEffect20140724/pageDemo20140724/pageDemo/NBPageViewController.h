@@ -13,4 +13,6 @@
 
 }
 
++ (NBPageViewController*)createPageViewController;
+
 @end

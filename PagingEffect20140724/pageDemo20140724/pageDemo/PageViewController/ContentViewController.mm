@@ -87,6 +87,7 @@
     self.pageView = nil;
     self.pageTitleView = nil;
 	
+	self.textViewObj = nil;
 	self.delegate = nil;
     
     [super dealloc];

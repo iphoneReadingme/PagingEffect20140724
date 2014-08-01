@@ -11,6 +11,11 @@
 #import "NBPageViewController.h"
 
 
+///< 文件和路径
+//#define kNBSMNWUnitTestData_PATH                        @"/Library"
+#define kNBSMNWUnitTestData_PATH                        @"/Library/Application Support/others"
+#define kNBSMNWUnitTestData_SRCPATH                     @"/HardCodeData"
+#define kNBSMNWUnitTestData_JSON_FileName               @"/testData.txt"
 
 typedef enum
 {
@@ -25,8 +30,8 @@ typedef enum
 <
 UIPageViewControllerDelegate,
 UIPageViewControllerDataSource,
-UIGestureRecognizerDelegate
-,ContentViewControllerDelegate
+UIGestureRecognizerDelegate,
+ContentViewControllerDelegate
 >
 
 @property (nonatomic) TOUCHEVENT_TYPE touchType;
@@ -37,17 +42,90 @@ UIGestureRecognizerDelegate
 
 @property (nonatomic, assign)int currentPageIndex; ///< 当前显示页面的索引
 
+@property (nonatomic, retain) NSString* chapterText;
+
 @end
+
 
 @implementation NBPageViewController
 
-#pragma mark - View lifecycle
++ (NBPageViewController*)createPageViewController
+{
+	/*
+	 UIPageViewControllerTransitionStyle枚举类型定义了如下两个翻转样式。
+	 UIPageViewControllerTransitionStylePageCurl：翻书效果样式。
+	 UIPageViewControllerTransitionStyleScroll：滑屏效果样式。
+	 navigationOrientation设定了翻页方向，UIPageViewControllerNavigationDirection枚举类型定义了以下两种翻页方式。
+	 UIPageViewControllerNavigationDirectionForward：从左往右（或从下往上）；
+	 UIPageViewControllerNavigationDirectionReverse：从右向左（或从上往下）
+	*/
+	// style: 0.卷曲; 1.平滑(ios6.0以上才支持)
+	// orient: 0.左右卷曲/滑动; 1.上下卷曲/滑动
+	UIPageViewControllerTransitionStyle style[2] = {UIPageViewControllerTransitionStylePageCurl, UIPageViewControllerTransitionStyleScroll};
+	UIPageViewControllerNavigationOrientation orient[2] = {UIPageViewControllerNavigationOrientationHorizontal, UIPageViewControllerNavigationOrientationVertical};
+	
+    return [[[NBPageViewController alloc] initWithTransitionStyle:style[0]
+														   navigationOrientation:orient[0]
+																		 options:nil] autorelease];
+}
+
+- (void)dealloc
+{
+	self.chapterText = nil;
+	
+	[super dealloc];
+}
+
+#pragma mark - == 加载测试数据
+- (NSString*)getUnitTestDataPath
+{
+	NSString* folderPath = [NSHomeDirectory() stringByAppendingString:kNBSMNWUnitTestData_PATH];
+    NSString* plistPath = [NSString stringWithFormat:@"%@%@", folderPath, kNBSMNWUnitTestData_JSON_FileName];
+	
+	[[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
+	// 删除
+	[[NSFileManager defaultManager] removeItemAtPath:plistPath error:nil];
+	
+	if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+	{
+		// 如果配置文件不存在, 从资源目录下复制一份
+		NSString* srcPlist = [NSString stringWithFormat:@"%@%@%@", [[NSBundle mainBundle] bundlePath], kNBSMNWUnitTestData_SRCPATH, kNBSMNWUnitTestData_JSON_FileName];
+		[[NSFileManager defaultManager] copyItemAtPath:srcPlist toPath:plistPath error:nil];
+	}
+	
+	NSString* fullPath = nil;
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+	{
+		fullPath = plistPath;
+	}
+	
+	return fullPath;
+}
+
+- (NSString*)getTestDataContent
+{
+	NSString* testData = nil;
+	NSString* filePath = [self getUnitTestDataPath];
+	
+	if ([filePath length] > 0)
+	{
+		NSData* data = [NSData dataWithContentsOfFile:filePath];
+		
+        testData = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+	}
+	
+	return testData;
+}
+
+#pragma mark -== View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
     self.isTurnPage = YES;
+	self.chapterText = [self getTestDataContent];
 	
 	[self addFirstPage];
 }
@@ -63,8 +141,8 @@ UIGestureRecognizerDelegate
 	
     UIViewController *startCtrl = nil;
     UIViewController *secondCtrl = nil;
-	startCtrl = [self getCurrentPageViewController:0]; ///< 初始化当前UIViewController
-	secondCtrl = [self getCurrentPageViewController:1];
+	startCtrl = [self getCurrentPageViewController:0 with:NO]; ///< 初始化当前UIViewController
+	secondCtrl = [self getCurrentPageViewController:1 with:NO];
 	
     NSArray *viewControllers = nil;
 	viewControllers = [NSArray arrayWithObject:startCtrl];
@@ -72,6 +150,29 @@ UIGestureRecognizerDelegate
 	
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
 }
+
+// 屏幕即将旋转 layoutSubviews执行之前发生
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+{
+	;
+}
+
+// 屏幕旋转完毕
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    NSArray *viewControllers = nil;
+	viewControllers = [self viewControllers];
+	for (ContentViewController* ctrl in viewControllers)
+	{
+//		ctrl.view.frame = [self getPageViewBounds:self.spineLocation];
+		ctrl.textViewObj.frame = [self getPageViewBounds:self.spineLocation];
+	}
+}
+
 
 ///< 翻到下一页
 - (UIViewController *)turnToNextPage
@@ -84,7 +185,7 @@ UIGestureRecognizerDelegate
 	}
 	else
 	{
-		nextViewController = [self getCurrentPageViewController:_currentPageIndex];
+		nextViewController = [self getCurrentPageViewController:_currentPageIndex with:NO];
 	}
 	
 	return nextViewController;
@@ -102,40 +203,84 @@ UIGestureRecognizerDelegate
 	}
 	else
 	{
-		preViewController = [self getCurrentPageViewController:_currentPageIndex];
+		preViewController = [self getCurrentPageViewController:_currentPageIndex with:YES];
 	}
 	return preViewController;
 }
 
-- (UIViewController *)getCurrentPageViewController:(int)index
+- (NSString*)getCurChapterText:(int)index with:(BOOL)isBackPage
 {
-	UIColor* bgColor[] =
+	int nTextLen = [self.chapterText length];
+	int nOffset = nTextLen/14;
+	
+	NSRange rangeText = NSMakeRange(index*nOffset, nOffset);
+	NSString* text = [_chapterText substringWithRange:rangeText];
+	if (isBackPage)
+	{
+		text = [NSString stringWithFormat:@"第%d章  %@【背面】\n\n%@", index+1, [text substringToIndex:10], text];
+	}
+	else
+	{
+		text = [NSString stringWithFormat:@"第%d章  %@【正面】\n\n%@", index+1, [text substringToIndex:10], text];
+	}
+	
+	return text;
+}
+
+- (CGRect)getPageViewBounds:(UIPageViewControllerSpineLocation)spineLocation
+{
+	CGRect rect = CGRectMake(0, 50, 300, 30);
+	rect = [self.view bounds];
+	rect.origin.y = 20;
+	rect.size.height -= rect.origin.y;
+	if (spineLocation == UIPageViewControllerSpineLocationMid)
+	{
+		rect.size.width *=0.5f;
+	}
+	
+	return rect;
+}
+
+- (UIViewController *)getCurrentPageViewController:(int)index with:(BOOL)isBackPage
+{
+	UIColor* bgColor[14] =
 	{
 		[UIColor blueColor],
 		[UIColor darkGrayColor],
 		[UIColor lightGrayColor],
 		[UIColor whiteColor],
 		[UIColor grayColor],
+		
 		[UIColor redColor],
 		[UIColor greenColor],
 		[UIColor blueColor],
 		[UIColor cyanColor],
 		[UIColor yellowColor],
+		
 		[UIColor magentaColor],
 		[UIColor orangeColor],
 		[UIColor purpleColor],
-		[UIColor brownColor],
+		[UIColor brownColor]
 	};
+	
 	
     ContentViewController *viewCtrl = [[[ContentViewController alloc] init] autorelease];
 	viewCtrl.isBackPage = YES;
 	
-	CGRect rect = CGRectMake(0, 50, 300, 30);
-	UILabel* lable = [[UILabel alloc] initWithFrame:rect];
-	lable.backgroundColor = [UIColor grayColor];
-	[viewCtrl.view addSubview:lable];
-	lable.text = [NSString stringWithFormat:@"color=%d, 显示当前页面显示内容：%d%d%d", index, index, index, index];
-	[lable release];
+	CGRect rect = [self getPageViewBounds:self.spineLocation];
+	
+	UITextView* textViewObj = [[UITextView alloc] initWithFrame:rect];
+	textViewObj.backgroundColor = [UIColor grayColor];
+	textViewObj.text = [self getCurChapterText:index with:isBackPage];
+	textViewObj.font = [UIFont systemFontOfSize:17];
+	textViewObj.editable = NO;
+	textViewObj.userInteractionEnabled = NO;
+	//textViewObj.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
+	
+	viewCtrl.textViewObj = textViewObj;
+	[viewCtrl.view addSubview:textViewObj];
+	
+	[textViewObj release];
 	
 	viewCtrl.view.backgroundColor = bgColor[index];
 	viewCtrl.delegate = self;
@@ -144,30 +289,33 @@ UIGestureRecognizerDelegate
 }
 
 //#pragma mark - UIPageViewControllerDataSource
+///< 方法用于设定首页中显示的视图
 - (void)setViewControllers:(NSArray *)viewControllers direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated completion:(void (^)(BOOL finished))completion
 {
     [super setViewControllers:viewControllers direction:direction animated:animated completion:completion];
 }
 
-#pragma mark- UIPageViewControllerDataSource
+#pragma mark- ==UIPageViewControllerDataSource
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
        viewControllerAfterViewController:(UIViewController *)viewController
 {
-	NSLog(@"After viewController = %@", viewController);
 	
 	ContentViewController *newViewController =nil;
 	
     ContentViewController* curViewController = (ContentViewController*)viewController;
 	if (curViewController.isBackPage)
 	{
-		newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex];
+		newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex with:YES];
 		newViewController.isBackPage = NO;
 		newViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
+		NSLog(@"背面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
+		//[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	}
 	else
 	{
 		newViewController = (ContentViewController*)[self turnToNextPage];
+		NSLog(@"正面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
 	}
     
 	return newViewController;
@@ -176,7 +324,6 @@ UIGestureRecognizerDelegate
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
-	NSLog(@"Before viewController = %@", viewController);
 	
 	ContentViewController *newViewController =nil;
 	
@@ -186,42 +333,82 @@ UIGestureRecognizerDelegate
 		newViewController = (ContentViewController*)[self turnToPreviousPage];
 		newViewController.isBackPage = NO;
 		newViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
+		
+		NSLog(@"背面，cur=%d, Before viewController = %@", _currentPageIndex, viewController);
+		//[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	}
 	else
 	{
-		newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex];
+		newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex with:NO];
+		
+		NSLog(@"正面，cur=%d, Before viewController = %@", _currentPageIndex, viewController);
 	}
     
 	return newViewController;
 }
 
 #pragma mark- UIPageViewControllerDelegate
-- (void)pageViewController:(UIPageViewController*)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray*)previousViewControllers transitionCompleted:(BOOL)completed
+
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
+{
+	NSLog(@"===翻页动画 【开始】====");
+	//[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+}
+
+///< 翻页动画完成
+- (void)didFinishAnimatingPagingViewController
 {
 }
 
+- (void)pageViewController:(UIPageViewController*)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray*)previousViewControllers transitionCompleted:(BOOL)completed
+{
+	NSLog(@"===翻页动画==completed==");
+	if (completed)
+	{
+		NSLog(@"===翻页动画结束====");
+		[self didFinishAnimatingPagingViewController];
+	}
+	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+}
+
+///< 由于spineLocation属性是只读的，所以只能在这个方法中设置书脊位置，该方法可以根据屏幕旋转方向的不同来动态设定书脊的位置
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController 
-                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation{
-    UIViewController *currentViewController = [self.viewControllers objectAtIndex:0];
-    NSArray *viewControllers = [NSArray arrayWithObject:currentViewController];
-    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+                   spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
+    NSArray *viewControllers = nil;
     
-    //self.doubleSided = NO;
-	self.doubleSided = YES;
+    UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocationMin;
 	
-	UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocationMax;
-	spine = UIPageViewControllerSpineLocationMin;
-//	spine = UIPageViewControllerSpineLocationMid;
+	UIViewController* curViewController = [self getCurrentPageViewController:_currentPageIndex with:NO];
+	
+	if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight)
+	{
+		//取出第一个视图控制器，作为PageViewController首页
+		UIViewController* nextViewController = [self getCurrentPageViewController:_currentPageIndex+1 with:NO];
+		viewControllers = @[curViewController, nextViewController]; // 代码NSArray *viewControllers = @[page1ViewController]相当于NSArray *viewControllers = [NSArray arrayWithObject: page1ViewController , nil]。
+		
+		spine = UIPageViewControllerSpineLocationMid;
+		
+		nextViewController.view.Frame = [self getPageViewBounds:spine];
+	}
+	else
+	{
+		//取出第一个视图控制器，作为PageViewController首页
+		viewControllers = @[curViewController];
+		spine = UIPageViewControllerSpineLocationMin;
+	}
+	curViewController.view.Frame = [self getPageViewBounds:spine];
+	
+	[self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+	
+	// 1.双面显示，是在页面翻起的时候，偶数页面会在背面显示。图6-13右图为doubleSided设置为YES情况，图为 doubleSided设置为NO（单面显示），单面显示在页面翻起的时候，能够看到页面的背面，背面的内容是当前页面透过去的，与当前内容是相反的镜像。
+	self.doubleSided = YES;
 	
 	return spine;
 }
 
 
-
-
-
-
-
+#pragma mark - ==tap点击时的上下翻页
 - (void)goToPrePageView
 {
 	UIViewController* currentViewController = nil;
@@ -234,11 +421,11 @@ UIGestureRecognizerDelegate
 	}
 	else
 	{
-		currentViewController = [self getCurrentPageViewController:_currentPageIndex];
+		currentViewController = [self getCurrentPageViewController:_currentPageIndex with:NO];
 		currentViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
 		
 		UIViewController* preViewController = nil;
-		preViewController = [self getCurrentPageViewController:_currentPageIndex];
+		preViewController = [self getCurrentPageViewController:_currentPageIndex with:YES];
 		
 		[self goToPrePageViewController:preViewController backViewController:currentViewController];
 	}
@@ -257,11 +444,11 @@ UIGestureRecognizerDelegate
 	}
 	else
 	{
-		currentViewController = [self getCurrentPageViewController:_currentPageIndex];
+		currentViewController = [self getCurrentPageViewController:_currentPageIndex with:YES];
 		currentViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
 		
 		UIViewController* nextViewController = nil;
-		nextViewController = [self getCurrentPageViewController:_currentPageIndex];
+		nextViewController = [self getCurrentPageViewController:_currentPageIndex with:NO];
 		[self goToNextPageViewController:currentViewController nextViewController:nextViewController];
 	}
 }
@@ -348,7 +535,7 @@ UIGestureRecognizerDelegate
 {
     BOOL ignore = NO;
     double time = [[NSDate date] timeIntervalSince1970];
-    if (time - _lastTimeTap >= 0.5)
+    if (time - _lastTimeTap >= 0.2)
     {
         _lastTimeTap = time;
     }
@@ -362,7 +549,7 @@ UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch
 {
-    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
+	if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
     {
         CGPoint pointOne = [touch locationInView:self.view];
         self.touchType = [self touchTypeWithPoint:pointOne];

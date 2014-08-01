@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B94F1F9198A3735003ABA9A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B94F1F8198A3735003ABA9A /* Default-568h@2x.png */; };
+		5B94F1FD198A3774003ABA9A /* HardCodeData in Resources */ = {isa = PBXBuildFile; fileRef = 5B94F1FC198A3774003ABA9A /* HardCodeData */; };
 		5B9E3D291980E8CB00572FA1 /* ContentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3D281980E8CB00572FA1 /* ContentViewController.mm */; };
 		5B9E3D2E1980EB9400572FA1 /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3D2B1980EB9400572FA1 /* PageView.m */; };
 		5B9E3D2F1980EB9400572FA1 /* PageViewCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3D2D1980EB9400572FA1 /* PageViewCache.m */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B94F1F8198A3735003ABA9A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5B94F1FC198A3774003ABA9A /* HardCodeData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HardCodeData; sourceTree = "<group>"; };
 		5B9E3D271980E8CB00572FA1 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		5B9E3D281980E8CB00572FA1 /* ContentViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContentViewController.mm; sourceTree = "<group>"; };
 		5B9E3D2A1980EB9400572FA1 /* PageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageView.h; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 		CB9B18B314A9D2B500C15033 = {
 			isa = PBXGroup;
 			children = (
+				5B94F1F8198A3735003ABA9A /* Default-568h@2x.png */,
 				CB9B18C814A9D2B600C15033 /* pageDemo */,
 				CB9B18E614A9D2B600C15033 /* pageDemoTests */,
 				CB9B18C114A9D2B500C15033 /* Frameworks */,
@@ -148,6 +153,7 @@
 				CB9B18CB14A9D2B600C15033 /* InfoPlist.strings */,
 				CB9B18CE14A9D2B600C15033 /* main.m */,
 				CB9B18D014A9D2B600C15033 /* pageDemo-Prefix.pch */,
+				5B94F1FC198A3774003ABA9A /* HardCodeData */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -242,7 +248,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B94F1FD198A3774003ABA9A /* HardCodeData in Resources */,
 				CB9B18CD14A9D2B600C15033 /* InfoPlist.strings in Resources */,
+				5B94F1F9198A3735003ABA9A /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,13 +1,12 @@
 /**
  *****************************************************************************
- * Copyright    :  (C) 2008-2013 UC Mobile Limited. All Rights Reserved
+ * Copyright    :  (C) 2008-2013 me. All Rights Reserved
  * File         :  PageView.h
  * Description	:  小说阅读器每一页视图PageView
- * Author       :  yuping@ucweb.com
- * History      :  Creation, 2013/11/23, yuping, Create the file
+ * Author       :  xxx@ucweb.com
+ * History      :  Creation, 2014/08/01
  ******************************************************************************
  **/
-
 
 
 #import <UIKit/UIKit.h>

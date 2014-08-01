@@ -1,10 +1,10 @@
 /**
  *****************************************************************************
- * Copyright    :  (C) 2008-2013 UC Mobile Limited. All Rights Reserved
- * File         :  ContentViewController.m
+ * Copyright    :  (C) 2008-2013 me. All Rights Reserved
+ * File         :  ContentViewController.mm
  * Description	:  每一页的viewController
- * Author       :  yuping@ucweb.com
- * History      :  Creation, 2013/12/18, yuping, Create the file
+ * Author       :  xxx@ucweb.com
+ * History      :  Creation, 2014/08/01
  ******************************************************************************
  **/
 

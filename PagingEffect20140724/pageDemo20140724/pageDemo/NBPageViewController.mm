@@ -2,7 +2,7 @@
 //  NBPageViewController.m
 //  pageDemo
 //
-//  Created by ren kai on 27/12/2011.
+//  Created by xxx on 27/12/2011.
 //  Copyright (c) 2011 none. All rights reserved.
 //
 

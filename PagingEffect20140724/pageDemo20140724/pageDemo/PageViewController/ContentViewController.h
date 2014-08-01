@@ -35,6 +35,7 @@
 @interface ContentViewController : UIViewController
 
 @property (nonatomic, retain) UITextView* textViewObj;
+@property (nonatomic, retain) UILabel* labelObj;
 @property (nonatomic) NSInteger chapterIndex;
 @property (nonatomic) NSInteger pageIndex;
 @property (nonatomic) BOOL isBackPage;

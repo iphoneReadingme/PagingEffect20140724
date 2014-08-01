@@ -34,6 +34,9 @@ UIGestureRecognizerDelegate,
 ContentViewControllerDelegate
 >
 
+
+@property (nonatomic) BOOL bException;  ///< 翻页是否有异常
+
 @property (nonatomic) TOUCHEVENT_TYPE touchType;
 @property (nonatomic) CGPoint itemBeginPoint;
 @property (nonatomic) BOOL isTurnPage;
@@ -154,11 +157,18 @@ ContentViewControllerDelegate
 // 屏幕即将旋转 layoutSubviews执行之前发生
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+	NSArray *viewControllers = nil;
+	viewControllers = [self viewControllers];
+	for (ContentViewController* ctrl in viewControllers)
+	{
+		ctrl.textViewObj.frame = [self getPageViewBounds:self.spineLocation];
+		ctrl.labelObj.frame = [self getPageViewBounds:self.spineLocation];
+	}
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
-	;
+	
 }
 
 // 屏幕旋转完毕
@@ -168,8 +178,8 @@ ContentViewControllerDelegate
 	viewControllers = [self viewControllers];
 	for (ContentViewController* ctrl in viewControllers)
 	{
-//		ctrl.view.frame = [self getPageViewBounds:self.spineLocation];
 		ctrl.textViewObj.frame = [self getPageViewBounds:self.spineLocation];
+		ctrl.labelObj.frame = [self getPageViewBounds:self.spineLocation];
 	}
 }
 
@@ -269,18 +279,23 @@ ContentViewControllerDelegate
 	
 	CGRect rect = [self getPageViewBounds:self.spineLocation];
 	
-	UITextView* textViewObj = [[UITextView alloc] initWithFrame:rect];
-	textViewObj.backgroundColor = [UIColor grayColor];
-	textViewObj.text = [self getCurChapterText:index with:isBackPage];
-	textViewObj.font = [UIFont systemFontOfSize:17];
-	textViewObj.editable = NO;
-	textViewObj.userInteractionEnabled = NO;
+//	UITextView* viewObj = [[UITextView alloc] initWithFrame:rect];
+//	viewObj.editable = NO;
+//	viewCtrl.textViewObj = viewObj;
+	
+	UILabel* viewObj = [[UILabel alloc] initWithFrame:rect];
+	viewCtrl.labelObj = viewObj;
+	viewObj.textAlignment = NSTextAlignmentLeft;
+	viewObj.numberOfLines = 0;
+	
+	viewObj.backgroundColor = [UIColor grayColor];
+	viewObj.text = [self getCurChapterText:index with:isBackPage];
+	viewObj.font = [UIFont systemFontOfSize:17];
+	viewObj.userInteractionEnabled = NO;
 	//textViewObj.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
 	
-	viewCtrl.textViewObj = textViewObj;
-	[viewCtrl.view addSubview:textViewObj];
-	
-	[textViewObj release];
+	[viewCtrl.view addSubview:viewObj];
+	[viewObj release];
 	
 	viewCtrl.view.backgroundColor = bgColor[index];
 	viewCtrl.delegate = self;
@@ -300,6 +315,17 @@ ContentViewControllerDelegate
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
        viewControllerAfterViewController:(UIViewController *)viewController
 {
+	if (_touchType == touchevent_prepage)
+	{
+		_bException = YES;
+		NSLog(@"[gestureRecognizers]=%@", [pageViewController gestureRecognizers]);
+		NSLog(@"异常消息，cur=%d, After ==", _currentPageIndex);
+		return nil;
+	}
+	if (_bException)
+	{
+		return nil;
+	}
 	
 	ContentViewController *newViewController =nil;
 	
@@ -324,7 +350,18 @@ ContentViewControllerDelegate
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
+	if (_touchType == touchevent_nextpage)
+	{
+		_bException = YES;
+		NSLog(@"[gestureRecognizers]=%@", [pageViewController gestureRecognizers]);
+		NSLog(@"异常消息，cur=%d, Before ==", _currentPageIndex);
+		return nil;
+	}
 	
+	if (_bException)
+	{
+		return nil;
+	}
 	ContentViewController *newViewController =nil;
 	
     ContentViewController* curViewController = (ContentViewController*)viewController;
@@ -358,17 +395,18 @@ ContentViewControllerDelegate
 ///< 翻页动画完成
 - (void)didFinishAnimatingPagingViewController
 {
+	_bException = NO;
 }
 
 - (void)pageViewController:(UIPageViewController*)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray*)previousViewControllers transitionCompleted:(BOOL)completed
 {
-	NSLog(@"===翻页动画==completed==");
+	NSLog(@"===翻页动画==completed==%d=", completed);
 	if (completed)
 	{
-		NSLog(@"===翻页动画结束====");
+		//NSLog(@"===翻页动画结束====");
 		[self didFinishAnimatingPagingViewController];
 	}
-	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	//[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 }
 
 ///< 由于spineLocation属性是只读的，所以只能在这个方法中设置书脊位置，该方法可以根据屏幕旋转方向的不同来动态设定书脊的位置
@@ -657,6 +695,7 @@ ContentViewControllerDelegate
 - (void)beginTouch:(CGPoint)begin
 {
     self.itemBeginPoint = begin;
+	_bException = NO;
 }
 
 - (void)lockGesture

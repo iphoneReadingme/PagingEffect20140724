@@ -131,6 +131,9 @@ ContentViewControllerDelegate
 	self.chapterText = [self getTestDataContent];
 	
 	[self addFirstPage];
+	
+	///< 添加字体
+	[self getFontFilePath];
 }
 
 - (void)addFirstPage
@@ -290,7 +293,12 @@ ContentViewControllerDelegate
 	
 	viewObj.backgroundColor = [UIColor grayColor];
 	viewObj.text = [self getCurChapterText:index with:isBackPage];
-	viewObj.font = [UIFont systemFontOfSize:17];
+	
+	//[UIFont fontNamesForFamilyName:[familyNames objectAtIndex:indFamily]]
+	viewObj.font = [UIFont systemFontOfSize:17];  ///< 系统字体
+	viewObj.font = [UIFont fontWithName:@"Jxixinkai" size:25]; ///< 自字义字体
+	viewObj.font = [UIFont fontWithName:@"SingKaiEG-Bold-GB" size:25]; ///< 自字义字体
+	
 	viewObj.userInteractionEnabled = NO;
 	//textViewObj.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
 	
@@ -301,6 +309,47 @@ ContentViewControllerDelegate
 	viewCtrl.delegate = self;
 	
     return viewCtrl;
+}
+
+- (NSString*)getFontFilePath
+{
+	NSString* filePath = [NSString stringWithFormat:@"%@/pageDemo.app/STxingkai_Normal.ttf", NSHomeDirectory()];
+	
+	BOOL bExist = NO;
+	bExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+	
+	if (bExist)
+	{
+		[self printfFonts];
+	}
+	
+	return filePath;
+}
+
+- (void)printfFonts
+{
+	NSArray *familyNames = [[NSArray alloc] initWithArray:[UIFont familyNames]];
+	NSString* fontName = @"Helvetica";
+	for (NSString* nameItem in familyNames)
+	{
+		if ([nameItem isEqualToString:@"恅隋棉俴翱潠翷"])
+		{
+			fontName = nameItem;
+			//break;
+		}
+		if ([nameItem isEqualToString:@"迷你简细行楷"])
+		{
+			fontName = nameItem;
+			//break;
+		}
+		NSArray* fontNames =[[NSArray alloc]initWithArray:[UIFont fontNamesForFamilyName:fontName]];
+		
+		int indFont = 0;
+		for(indFont=0; indFont<[fontNames count]; ++indFont)
+		{
+			NSLog(@" Font name: %@",[fontNames objectAtIndex:indFont]);
+		}
+	}
 }
 
 //#pragma mark - UIPageViewControllerDataSource

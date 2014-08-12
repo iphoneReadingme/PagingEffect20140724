@@ -7,6 +7,7 @@
 //
 
 
+#import <CoreText/CoreText.h>
 #import "ContentViewController.h"
 #import "NBPageViewController.h"
 
@@ -46,6 +47,7 @@ ContentViewControllerDelegate
 @property (nonatomic, assign)int currentPageIndex; ///< 当前显示页面的索引
 
 @property (nonatomic, retain) NSString* chapterText;
+@property (nonatomic, retain) UIFont* fontObj;
 
 @end
 
@@ -75,6 +77,7 @@ ContentViewControllerDelegate
 - (void)dealloc
 {
 	self.chapterText = nil;
+	self.fontObj = nil;
 	
 	[super dealloc];
 }
@@ -130,10 +133,27 @@ ContentViewControllerDelegate
     self.isTurnPage = YES;
 	self.chapterText = [self getTestDataContent];
 	
-	[self addFirstPage];
-	
 	///< 添加字体
 	[self getFontFilePath];
+	
+	[self loadCustomFont];
+	
+	[self addFirstPage];
+}
+
+- (void)loadCustomFont
+{
+	UIFont* fontObj = [self dynamicLoadFont2];
+	if (fontObj == nil)
+	{
+		fontObj = [self dynamicLoadFont];
+	}
+	if (fontObj == nil)
+	{
+		fontObj = [UIFont systemFontOfSize:17];  ///< 系统字体;
+	}
+	
+	self.fontObj = fontObj;
 }
 
 - (void)addFirstPage
@@ -296,8 +316,9 @@ ContentViewControllerDelegate
 	
 	//[UIFont fontNamesForFamilyName:[familyNames objectAtIndex:indFamily]]
 	viewObj.font = [UIFont systemFontOfSize:17];  ///< 系统字体
-	viewObj.font = [UIFont fontWithName:@"Jxixinkai" size:25]; ///< 自字义字体
-	viewObj.font = [UIFont fontWithName:@"SingKaiEG-Bold-GB" size:25]; ///< 自字义字体
+	//viewObj.font = [UIFont fontWithName:@"Jxixinkai" size:25]; ///< 自字义字体
+	//viewObj.font = [UIFont fontWithName:@"SingKaiEG-Bold-GB" size:25]; ///< 自字义字体
+	viewObj.font = self.fontObj;
 	
 	viewObj.userInteractionEnabled = NO;
 	//textViewObj.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
@@ -311,37 +332,28 @@ ContentViewControllerDelegate
     return viewCtrl;
 }
 
-- (NSString*)getFontFilePath
-{
-	NSString* filePath = [NSString stringWithFormat:@"%@/pageDemo.app/STxingkai_Normal.ttf", NSHomeDirectory()];
-	
-	BOOL bExist = NO;
-	bExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
-	
-	if (bExist)
-	{
-		[self printfFonts];
-	}
-	
-	return filePath;
-}
-
 - (void)printfFonts
 {
 	NSArray *familyNames = [[NSArray alloc] initWithArray:[UIFont familyNames]];
 	NSString* fontName = @"Helvetica";
 	for (NSString* nameItem in familyNames)
 	{
+		NSLog(@" Font name: %@", nameItem);
 		if ([nameItem isEqualToString:@"恅隋棉俴翱潠翷"])
 		{
 			fontName = nameItem;
 			//break;
 		}
-		if ([nameItem isEqualToString:@"迷你简细行楷"])
+		else if ([nameItem isEqualToString:@"迷你简细行楷"])
 		{
 			fontName = nameItem;
 			//break;
 		}
+		else
+		{
+			fontName = nameItem;
+		}
+		
 		NSArray* fontNames =[[NSArray alloc]initWithArray:[UIFont fontNamesForFamilyName:fontName]];
 		
 		int indFont = 0;
@@ -350,6 +362,107 @@ ContentViewControllerDelegate
 			NSLog(@" Font name: %@",[fontNames objectAtIndex:indFont]);
 		}
 	}
+}
+
+- (NSString*)getFontFilePath
+{
+	NSString* filePath = [NSString stringWithFormat:@"%@/pageDemo.app/huawenxingkai.ttf", NSHomeDirectory()];
+	
+	BOOL bExist = NO;
+	bExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+	bExist = NO;
+	if (bExist)
+	{
+		[self printfFonts];
+	}
+	
+	return filePath;
+}
+
+- (UIFont*)dynamicLoadFont
+{
+	UIFont* fontObj = nil;
+    //字体文件所在路径
+    NSString *URL_FONT = [self getFontFilePath];
+	
+    //字体名
+    NSString *fontName = @"STXingkai";
+	
+    //下载字体
+    //NSData *dynamicFontData = [NSData dataWithContentsOfURL:[NSURL URLWithString:URL_FONT]];
+	NSData* dynamicFontData = [NSData dataWithContentsOfFile:URL_FONT];
+	
+    if (!dynamicFontData)
+        return fontObj;
+    CFErrorRef error;
+    CGDataProviderRef providerRef = CGDataProviderCreateWithCFData((CFDataRef)dynamicFontData);
+    CGFontRef font = CGFontCreateWithDataProvider(providerRef);
+    if (! CTFontManagerRegisterGraphicsFont(font, &error))
+    {
+        //如果注册失败，则不使用
+        CFStringRef errorDescription = CFErrorCopyDescription(error);
+        NSLog(@"Failed to load font: %@", errorDescription);
+        CFRelease(errorDescription);
+    }
+    else
+        fontObj = [UIFont fontWithName:fontName size:50];
+    CFRelease(font);
+    CFRelease(providerRef);
+	
+	return fontObj;
+}
+
+- (NSString*)getFontFilePath2
+{
+	NSString* filePath = [NSString stringWithFormat:@"%@/Documents/huawenxingkai.ttf", NSHomeDirectory()];
+	//filePath = [NSString stringWithFormat:@"%@/Documents/STxingkai_Normal.ttf", NSHomeDirectory()];
+	
+	BOOL bExist = NO;
+	bExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+	if (!bExist)
+	{
+		filePath = nil;
+	}
+	
+	return filePath;
+}
+
+- (UIFont*)dynamicLoadFont2
+{
+	UIFont* fontObj = nil;
+    
+    //加载字体
+    CFErrorRef error;
+	NSString *fontPath = [self getFontFilePath2]; // a TTF file in iPhone Documents folder //字体文件所在路径
+	if ([fontPath length] < 1)
+	{
+		return fontObj;
+	}
+	
+	CGDataProviderRef fontDataProvider = CGDataProviderCreateWithFilename([fontPath UTF8String]);
+	CGFontRef customFont = CGFontCreateWithDataProvider(fontDataProvider);
+	
+	bool bRegister = CTFontManagerRegisterGraphicsFont(customFont, &error);
+	
+    if (!bRegister)
+    {
+		//如果注册失败，则不使用
+		CFStringRef errorDescription = CFErrorCopyDescription(error);
+		NSLog(@"Failed to load font: %@", errorDescription);
+		CFRelease(errorDescription);
+    }
+    //else
+	{
+		//字体名
+		NSString *fontName = (__bridge NSString *)CGFontCopyFullName(customFont);
+		NSLog(@"fontName=%@", fontName);
+		fontObj = [UIFont fontWithName:fontName size:25];
+	}
+	
+    CFRelease(customFont);
+	CGDataProviderRelease(fontDataProvider);
+	
+	return fontObj;
 }
 
 //#pragma mark - UIPageViewControllerDataSource

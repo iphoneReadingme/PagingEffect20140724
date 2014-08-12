@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B195EEE1998EC3C009562C3 /* STxingkai_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B195EEC1998EC3C009562C3 /* STxingkai_Bold.ttf */; };
-		5B195EEF1998EC3C009562C3 /* STxingkai_Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B195EED1998EC3C009562C3 /* STxingkai_Normal.ttf */; };
+		5B195F0C1999B39B009562C3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B195F0B1999B39B009562C3 /* CoreText.framework */; };
 		5B94F1F9198A3735003ABA9A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B94F1F8198A3735003ABA9A /* Default-568h@2x.png */; };
 		5B94F1FD198A3774003ABA9A /* HardCodeData in Resources */ = {isa = PBXBuildFile; fileRef = 5B94F1FC198A3774003ABA9A /* HardCodeData */; };
 		5B9E3D291980E8CB00572FA1 /* ContentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3D281980E8CB00572FA1 /* ContentViewController.mm */; };
@@ -39,8 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5B195EEC1998EC3C009562C3 /* STxingkai_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = STxingkai_Bold.ttf; sourceTree = "<group>"; };
-		5B195EED1998EC3C009562C3 /* STxingkai_Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = STxingkai_Normal.ttf; sourceTree = "<group>"; };
+		5B195F0B1999B39B009562C3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		5B94F1F8198A3735003ABA9A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5B94F1FC198A3774003ABA9A /* HardCodeData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HardCodeData; sourceTree = "<group>"; };
 		5B9E3D271980E8CB00572FA1 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -74,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B195F0C1999B39B009562C3 /* CoreText.framework in Frameworks */,
 				CB9B18C314A9D2B500C15033 /* UIKit.framework in Frameworks */,
 				CB9B18C514A9D2B500C15033 /* Foundation.framework in Frameworks */,
 				CB9B18C714A9D2B500C15033 /* CoreGraphics.framework in Frameworks */,
@@ -129,6 +128,7 @@
 		CB9B18C114A9D2B500C15033 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B195F0B1999B39B009562C3 /* CoreText.framework */,
 				CB9B18C214A9D2B500C15033 /* UIKit.framework */,
 				CB9B18C414A9D2B500C15033 /* Foundation.framework */,
 				CB9B18C614A9D2B500C15033 /* CoreGraphics.framework */,
@@ -157,8 +157,6 @@
 				CB9B18CB14A9D2B600C15033 /* InfoPlist.strings */,
 				CB9B18CE14A9D2B600C15033 /* main.m */,
 				CB9B18D014A9D2B600C15033 /* pageDemo-Prefix.pch */,
-				5B195EEC1998EC3C009562C3 /* STxingkai_Bold.ttf */,
-				5B195EED1998EC3C009562C3 /* STxingkai_Normal.ttf */,
 				5B94F1FC198A3774003ABA9A /* HardCodeData */,
 			);
 			name = "Supporting Files";
@@ -254,8 +252,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B195EEE1998EC3C009562C3 /* STxingkai_Bold.ttf in Resources */,
-				5B195EEF1998EC3C009562C3 /* STxingkai_Normal.ttf in Resources */,
 				5B94F1FD198A3774003ABA9A /* HardCodeData in Resources */,
 				CB9B18CD14A9D2B600C15033 /* InfoPlist.strings in Resources */,
 				5B94F1F9198A3735003ABA9A /* Default-568h@2x.png in Resources */,

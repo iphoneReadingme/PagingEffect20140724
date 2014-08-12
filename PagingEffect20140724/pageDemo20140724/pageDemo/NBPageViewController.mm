@@ -136,7 +136,7 @@ ContentViewControllerDelegate
 	///< 添加字体
 	//[self getFontFilePath];
 	
-	self.fontObj = [self loadCustomFont];
+	self.fontObj = [self loadCustomFont:22];
 	
 	[self addFirstPage];
 }
@@ -349,15 +349,15 @@ ContentViewControllerDelegate
 	}
 }
 
-- (UIFont*)loadCustomFont
+- (UIFont*)loadCustomFont:(int)fontSize
 {
 	static UIFont* fontObj = nil;
 	if (fontObj == nil)
 	{
-		fontObj = [self dynamicLoadFont2];
+		fontObj = [self dynamicLoadFont2:fontSize];
 		if (fontObj == nil)
 		{
-			fontObj = [UIFont systemFontOfSize:17];  ///< 系统字体;
+			fontObj = [UIFont systemFontOfSize:fontSize];  ///< 系统字体;
 		}
 	}
 	
@@ -385,7 +385,7 @@ ContentViewControllerDelegate
 	return filePath;
 }
 
-- (UIFont*)dynamicLoadFont2
+- (UIFont*)dynamicLoadFont2:(int)fontSize
 {
 	UIFont* fontObj = nil;
 	
@@ -401,6 +401,8 @@ ContentViewControllerDelegate
 	CGFontRef customFont = CGFontCreateWithDataProvider(fontDataProvider);
 	
 	bool bRegister = CTFontManagerRegisterGraphicsFont(customFont, &error);
+	// result = CTFontManagerUnregisterGraphicsFont((CGFontRef)embeddedFont.cgFont, NULL);
+	///＜ 使用完之后，还要卸载
 	
 	if (!bRegister)
 	{
@@ -414,7 +416,7 @@ ContentViewControllerDelegate
 		//字体名
 		NSString *fontName = (__bridge NSString *)CGFontCopyFullName(customFont);
 		NSLog(@"fontName=%@", fontName);
-		fontObj = [UIFont fontWithName:fontName size:25];
+		fontObj = [UIFont fontWithName:fontName size:fontSize];
 	}
 	
 	CFRelease(customFont);

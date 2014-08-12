@@ -34,7 +34,6 @@
 		5B195F3C199A4BAB009562C3 /* InterfaceToolBarView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B195F31199A4BAB009562C3 /* InterfaceToolBarView.mm */; };
 		5B195F3D199A4BAB009562C3 /* UIGlobal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B195F34199A4BAB009562C3 /* UIGlobal.mm */; };
 		5B195F3E199A4BAB009562C3 /* UITestView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B195F36199A4BAB009562C3 /* UITestView.mm */; };
-		5B36FFA815F709A000BA6A88 /* libBaiduIMLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B36FFA715F709A000BA6A88 /* libBaiduIMLib.a */; };
 		5B38700B17CF40250076514D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B38700A17CF40250076514D /* CoreData.framework */; };
 		5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */; };
 		5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */; };
@@ -51,7 +50,6 @@
 		5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */; };
 		5BD359C015785871002FE41F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD359BF15785871002FE41F /* MapKit.framework */; };
 		5BD5E19E157DAADA0016CBB8 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD5E19D157DAADA0016CBB8 /* libxml2.dylib */; };
-		5BDF5AE215F5AC5B00098555 /* libamuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDF5AE015F5AC5B00098555 /* libamuse.a */; };
 		5BE109C81774072200045347 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 5BE109C71774072200045347 /* res */; };
 		5BE834F517603B0700532011 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE834F417603B0700532011 /* Default-568h@2x.png */; };
 		5BE835051760406300532011 /* DemoViewCALayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BE835011760406300532011 /* DemoViewCALayer.mm */; };
@@ -113,7 +111,6 @@
 		5B195F34199A4BAB009562C3 /* UIGlobal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UIGlobal.mm; sourceTree = "<group>"; };
 		5B195F35199A4BAB009562C3 /* UITestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITestView.h; sourceTree = "<group>"; };
 		5B195F36199A4BAB009562C3 /* UITestView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UITestView.mm; sourceTree = "<group>"; };
-		5B36FFA715F709A000BA6A88 /* libBaiduIMLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduIMLib.a; sourceTree = "<group>"; };
 		5B38700A17CF40250076514D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5B38702F17CF4EEB0076514D /* DemoViewCATransform3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewCATransform3D.h; sourceTree = "<group>"; };
 		5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoViewCATransform3D.mm; sourceTree = "<group>"; };
@@ -135,7 +132,6 @@
 		5BD359BF15785871002FE41F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5BD5E19D157DAADA0016CBB8 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		5BDC308115EF454500B7BA8C /* DemoIncludeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIncludeHeaders.h; sourceTree = "<group>"; };
-		5BDF5AE015F5AC5B00098555 /* libamuse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libamuse.a; sourceTree = "<group>"; };
 		5BE109C71774072200045347 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		5BE834F417603B0700532011 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5BE835001760406300532011 /* DemoViewCALayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewCALayer.h; sourceTree = "<group>"; };
@@ -165,8 +161,6 @@
 				5BD5E19E157DAADA0016CBB8 /* libxml2.dylib in Frameworks */,
 				5B5AE36615D38FBC0078F293 /* AddressBook.framework in Frameworks */,
 				5B5AE36815D38FE10078F293 /* libz.1.dylib in Frameworks */,
-				5BDF5AE215F5AC5B00098555 /* libamuse.a in Frameworks */,
-				5B36FFA815F709A000BA6A88 /* libBaiduIMLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +198,6 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				5BDF5ADF15F5AC5B00098555 /* Library */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -359,15 +352,6 @@
 			path = DemoUIDeviceVIewController20140107;
 			sourceTree = "<group>";
 		};
-		5BDF5ADF15F5AC5B00098555 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				5BDF5AE015F5AC5B00098555 /* libamuse.a */,
-				5B36FFA715F709A000BA6A88 /* libBaiduIMLib.a */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
 		5BE834F61760402E00532011 /* Src20130606 */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,12 +491,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/../../../../iPhoneStudy20130510_00/Reveal\\\\\\\"",
-					/Users/yangfs/Desktop/E/Src20120215/Study2012/Src20130508/iPhoneStudyTrunk/iPhoneStudy20130510_00/Reveal,
-					"/Users/yangfs/Desktop/D/Setup/Reveal/SharedSupport/iOS-Libraries",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -542,12 +521,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/../../../../iPhoneStudy20130510_00/Reveal\\\\\\\"",
-					/Users/yangfs/Desktop/E/Src20120215/Study2012/Src20130508/iPhoneStudyTrunk/iPhoneStudy20130510_00/Reveal,
-					"/Users/yangfs/Desktop/D/Setup/Reveal/SharedSupport/iOS-Libraries",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WebkitDemos_Prefix.pch;
 				GCC_VERSION = "";
@@ -589,7 +563,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
-				SYMROOT = /Users/yangfs/Desktop/E/Src20120215/Dev20120215/BaiduInput20120808/WebkitDemos20120808/build;
 			};
 			name = Debug;
 		};
@@ -613,7 +586,6 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
-				SYMROOT = /Users/yangfs/Desktop/E/Src20120215/Dev20120215/BaiduInput20120808/WebkitDemos20120808/build;
 			};
 			name = Release;
 		};

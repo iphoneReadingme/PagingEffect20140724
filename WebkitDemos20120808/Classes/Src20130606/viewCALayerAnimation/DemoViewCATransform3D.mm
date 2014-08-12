@@ -1,6 +1,6 @@
 
 #import <UIKit/UIKit.h>
-#import "ResManager.h"
+//#import "ResManager.h"
 #import "DemoViewCATransform3D.h"
 #import "DemoViewCALayerMacroDefine.h"
 
@@ -89,7 +89,7 @@
 	CGRect rect = [self getFrame3DAnimationView];
 	m_p3DAnimationView = [[UIImageView alloc] initWithFrame:rect];
 	m_p3DAnimationView.backgroundColor = [UIColor magentaColor];
-	m_p3DAnimationView.image = resGetImage(@"HomePage/appCenter/ucappstore_songshu.png");
+//	m_p3DAnimationView.image = resGetImage(@"HomePage/appCenter/ucappstore_songshu.png");
 	
 	[m_pContainerView addSubview:m_p3DAnimationView];
 }

@@ -92,7 +92,7 @@
 		}
 	}
 	
-	createEventConnection(m_pCurToolBar, @selector(onButtonClickEvent:), self, @selector(onButtonClickEvent:));
+//	createEventConnection(m_pCurToolBar, @selector(onButtonClickEvent:), self, @selector(onButtonClickEvent:));
 	
 }
 
@@ -136,7 +136,7 @@
 		}
 		case BTN_TAG_FLASH_PLAY_RETURN:
 		{
-			emitEvent(nil, @selector(popViewController));
+//			emitEvent(nil, @selector(popViewController));
 			break;
 		}
 			

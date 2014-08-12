@@ -3,7 +3,7 @@
 //#import "iUCTools.h"
 #import "InterfaceToolBarView.h"
 //#import "ResManager.h"
-#import "NSObject_Event.h"
+//#import "NSObject_Event.h"
 #import "UIViewBottomBarMacroDef.h"
 
 
@@ -16,7 +16,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        createGlobalEventConnection( @selector(didThemeChange), self, @selector(didThemeChange));///<监听全局切换主题的事件
+//        createGlobalEventConnection( @selector(didThemeChange), self, @selector(didThemeChange));///<监听全局切换主题的事件
 		
 		[self addBgImageView];
 		
@@ -54,7 +54,7 @@
 	m_bgImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
 	///>背景阴影效果
-	m_shadowImgView = [[UIImageView alloc] initWithImage:resGetImage(kToolBarShadowImage)];
+	m_shadowImgView = [[UIImageView alloc] initWithImage:nil];
 	[m_bgImageView addSubview:m_shadowImgView];
 	
 	[self setBgImageView];
@@ -63,8 +63,8 @@
 
 - (void)setBgImageView
 {
-    m_bgImageView.image = resGetImage(kToolBarBackgroundImage);
-	m_shadowImgView.image = resGetImage(kToolBarShadowImage);
+//    m_bgImageView.image = resGetImage(kToolBarBackgroundImage);
+//	m_shadowImgView.image = resGetImage(kToolBarShadowImage);
 }
 
 // =================================================================
@@ -127,15 +127,15 @@
 
 - (void)setButtonProperty:(UIButton*)pBtn
 {
-	UIImage * btnBkImage = resGetImage(kButtonBgImage);
-	UIColor * titleColor = resGetColor(kBtnTitleColorNormal);
-    UIColor * highlightColor = resGetColor(kBtnTitleColorHighlight);
-	UIColor * disableColor = resGetColor(kBtnTitleColorDisable);
-	titleColor = [UIColor redColor];
-	[pBtn setTitleColor:titleColor forState:UIControlStateNormal];
-    [pBtn setTitleColor:highlightColor forState:UIControlStateHighlighted];
-	[pBtn setTitleColor:disableColor forState:UIControlStateDisabled];
-	[pBtn setBackgroundImage:btnBkImage forState:UIControlStateHighlighted];	///<按钮背景图片
+//	UIImage * btnBkImage = resGetImage(kButtonBgImage);
+//	UIColor * titleColor = resGetColor(kBtnTitleColorNormal);
+//    UIColor * highlightColor = resGetColor(kBtnTitleColorHighlight);
+//	UIColor * disableColor = resGetColor(kBtnTitleColorDisable);
+//	titleColor = [UIColor redColor];
+//	[pBtn setTitleColor:titleColor forState:UIControlStateNormal];
+//    [pBtn setTitleColor:highlightColor forState:UIControlStateHighlighted];
+//	[pBtn setTitleColor:disableColor forState:UIControlStateDisabled];
+//	[pBtn setBackgroundImage:btnBkImage forState:UIControlStateHighlighted];	///<按钮背景图片
 }
 
 - (void)onButtonClickEvent:(UIButton*)sender

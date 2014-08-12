@@ -81,14 +81,14 @@ static const BottombarItem g_FullScreenStatebuttons[] =
 	int nIndex = 0;
 	// "全屏"按钮
 	barItem = (BottombarItem*)&g_defStatebuttons[nIndex++];
-	pBtn = [self createButton:barItem->m_nBtnTag withName:barItem->m_btnName withTitle:resGetText(barItem->m_btnTitle)];
+	pBtn = [self createButton:barItem->m_nBtnTag withName:barItem->m_btnName withTitle:@"全屏"];
 	m_fullScreenBtn = pBtn;
 	[m_fullScreenBtn retain];
 	[pBtn release];
 	
 	// "退出"按钮
 	barItem = (BottombarItem*)&g_defStatebuttons[nIndex++];
-	pBtn = [self createButton:barItem->m_nBtnTag withName:barItem->m_btnName withTitle:resGetText(barItem->m_btnTitle)];
+	pBtn = [self createButton:barItem->m_nBtnTag withName:barItem->m_btnName withTitle:@"退出"];
 	m_ExitAppBtn = pBtn;
 	[m_ExitAppBtn retain];
 	[pBtn release];
@@ -96,7 +96,7 @@ static const BottombarItem g_FullScreenStatebuttons[] =
 	
 	// "返回"按钮
 	barItem = (BottombarItem*)&g_defStatebuttons[nIndex++];
-	pBtn = [self createButton:barItem->m_nBtnTag withName:barItem->m_btnName withTitle:resGetText(barItem->m_btnTitle)];
+	pBtn = [self createButton:barItem->m_nBtnTag withName:barItem->m_btnName withTitle:@"返回"];
 	m_returnButton = pBtn;
 	[m_returnButton retain];
 	[pBtn release];
@@ -158,7 +158,7 @@ static const BottombarItem g_FullScreenStatebuttons[] =
 
 - (void)onButtonClickEvent:(UIButton*)sender
 {
-    emitEvent(self, @selector(onButtonClickEvent:), sender);
+//    emitEvent(self, @selector(onButtonClickEvent:), sender);
 }
 
 

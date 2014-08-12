@@ -1,6 +1,6 @@
 
 #import <UIKit/UIKit.h>
-#import "ResManager.h"
+//#import "ResManager.h"
 #import "DemoViewCALayer.h"
 #import "DemoViewCATransform3D.h"
 #import "DemoViewCALayerMacroDefine.h"
@@ -182,7 +182,7 @@
 	imageLayer.cornerRadius = 10.0;
 	imageLayer.cornerRadius = m_nCornerRadius;
 	//imageLayer.contents = (id)[UIImage imageNamed:@"ucappstore_songshu.png"].CGImage;
-	imageLayer.contents = (id)resGetImage(@"HomePage/appCenter/ucappstore_songshu.png").CGImage;
+//	imageLayer.contents = (id)resGetImage(@"HomePage/appCenter/ucappstore_songshu.png").CGImage;
 	imageLayer.masksToBounds = YES;
 	[sublayer addSublayer:imageLayer];
 }
@@ -191,7 +191,7 @@
 {
 	m_imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
 	[m_imageView setFrame:CGRectMake(10, 10, 128, 128)];
-	m_imageView.image = resGetImage(@"HomePage/appCenter/ucappstore_songshu.png");
+//	m_imageView.image = resGetImage(@"HomePage/appCenter/ucappstore_songshu.png");
 	//m_imageView.image = (id)resGetImage(@"HomePage/appCenter/ucappstore_songshu.png").CGImage;
 	[self addSubview:m_imageView];
 }

@@ -20,7 +20,7 @@
 #define UC_DEF_BTNBAR_VERT_HEIGHT		40.0f
 #define UC_DEF_BTNBAR_HORIZ_HEIGHT		32.0f  //anthzhu modifies for bottom height stretched at horizontal level at 2011-05-04
 
-USES_CATEGORY(Hook_presentModalViewController)
+//USES_CATEGORY(Hook_presentModalViewController)
 
 //UIView * g_rootView = nil;
 //UIView * g_mainView = nil;
@@ -101,7 +101,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 		// 当点击页面链接的时候，点击焦点会跳到下面一行，使用延时0.2秒可解决大多数问题
 		// 由于现在半全屏动画过程中对页面做了特殊处理，让页面保持不动，从而避开了该问题，不用再延时0.2秒
 		//[self performSelector:@selector(delayPostTouchesEvent) withObject:self afterDelay:0.2];
-		emitEventLater(self, @selector(onPageRegionTouchesBegin));
+//		emitEventLater(self, @selector(onPageRegionTouchesBegin));
 	}
 	
 	return NO;
@@ -109,7 +109,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 
 - (void)delayPostTouchesEvent
 {
-	emitEvent(self, @selector(onPageRegionTouchesBegin));
+//	emitEvent(self, @selector(onPageRegionTouchesBegin));
 }
 
 @end
@@ -337,7 +337,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 	
 	if (m_lastScreenMode != m_screenMode)
 	{
-		emitEvent(self, @selector(screenModeChanged:), m_lastScreenMode);
+//		emitEvent(self, @selector(screenModeChanged:), m_lastScreenMode);
 		m_lastScreenMode = m_screenMode;
 	}
 }
@@ -363,7 +363,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 
 		[self adgustMainFrameViews:isIncludeRoot];
 	
-		emitEvent(self, @selector(beginFullScreenAnimation));
+//		emitEvent(self, @selector(beginFullScreenAnimation));
 		[UIView commitAnimations];
 	}
 	else
@@ -525,7 +525,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 	{
 		m_pointInsideView = [[PointInsideView alloc] init];
 		[g_mainView addSubview:m_pointInsideView];
-		createEventConnection(m_pointInsideView, @selector(onPageRegionTouchesBegin), self, @selector(onPageRegionTouchesBegin));
+//		createEventConnection(m_pointInsideView, @selector(onPageRegionTouchesBegin), self, @selector(onPageRegionTouchesBegin));
 	}
 	
 	m_screenMode = SM_HalfFullScreen;
@@ -620,7 +620,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 	//[[NSNotificationCenter defaultCenter] postNotificationName:UCWEB_ENABLE_ADDRESSBAR object:nil];
 	[self restoreLastScreenModeAnimated:animated];
 	
-	[[UIAppFullScreenController getInstance] exitAppFullScreen];
+//	[[UIAppFullScreenController getInstance] exitAppFullScreen];
 }
 
 
@@ -641,7 +641,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 		}
 		
 		m_isDoingAnimation = NO;
-		emitEvent(self, @selector(endFullScreenAnimation));
+//		emitEvent(self, @selector(endFullScreenAnimation));
 		
 		// 从半全屏直接退出全屏，由于执行restoreAllWebViews而未修正g_webBackgroundView的frame
 		if (!m_isWebViewsHasShifted)
@@ -723,7 +723,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 			[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 		}
 		
-		emitEvent(nil, @selector(hiddenNavigationBar));
+//		emitEvent(nil, @selector(hiddenNavigationBar));
 	}
 }
 
@@ -739,7 +739,7 @@ static IMP g_imp_presentModalViewController_original = nil;
 		{
 			[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 		}
-		emitEvent(nil, @selector(showNavigationBar));
+//		emitEvent(nil, @selector(showNavigationBar));
 	}
 }
 

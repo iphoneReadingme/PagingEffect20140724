@@ -14,7 +14,7 @@
 
 
 // 2014-01-07
-#import "DemoUIDeviceVIewController.h"
+//#import "DemoUIDeviceVIewController.h"
 
 // 2013-12-16
 #import "PageAppViewController.h"
@@ -24,11 +24,11 @@
 // 2013-06-06
 #import "DemoViewCALayerController.h"
 
-#import "WebViewController.h"
-#import "iUCFlashViewController.h"
+//#import "WebViewController.h"
+//#import "iUCFlashViewController.h"
 #import "AnimationViewController.h"
-#import "MapKitViewController.h"
+//#import "MapKitViewController.h"
 
 // 百度输入法
-#import "BaiduInputDemoViewController.h"
+//#import "BaiduInputDemoViewController.h"
 

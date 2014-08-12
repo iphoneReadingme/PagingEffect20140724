@@ -64,7 +64,7 @@
 		[self addTitleView:@"MainFrame View"];
 		
 		//createGlobalEventConnection( @selector(didThemeChange), self, @selector(didThemeChange));///<监听全局切换主题的事件
-		createGlobalEventConnection( @selector(willAnimateRotationToInterfaceOrientation:duration:), self, @selector(willAnimateRotationToInterfaceOrientation));
+//		createGlobalEventConnection( @selector(willAnimateRotationToInterfaceOrientation:duration:), self, @selector(willAnimateRotationToInterfaceOrientation));
     }
     return self;
 }
@@ -72,7 +72,7 @@
 - (void)dealloc
 {
 	// 释放资源
-	delResource();
+//	delResource();
 	
 	[self releaseObject];
     

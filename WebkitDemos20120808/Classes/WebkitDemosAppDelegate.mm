@@ -52,7 +52,7 @@
 	
 	// 捕捉崩溃日志
 	//[[CrashCaptureController shareInstance] registerCallBack];
-	UC_START_CAPTURE_CRASH_LOG  // 捕捉UCWEB崩溃日志
+//	UC_START_CAPTURE_CRASH_LOG  // 捕捉UCWEB崩溃日志
 	
     return YES;
 }

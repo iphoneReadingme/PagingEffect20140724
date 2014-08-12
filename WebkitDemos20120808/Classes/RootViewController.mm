@@ -12,8 +12,17 @@
 #import "FullScreenController.h"
 #import "RootViewController.h"
 #import "MainFrameView.h"
-#import "NSObject_Event.h"
+//#import "NSObject_Event.h"
 #import "UIGlobal.h"
+
+
+//UIView * g_rootView = nil;
+//UIView * g_mainView = nil;
+//UIView * g_webBackgroundView = nil;
+//
+//extern UIView * g_rootView;
+//extern UIView * g_mainView;
+//extern UIView * g_webBackgroundView;
 
 @interface UCTableViewCell : UITableViewCell
 
@@ -175,32 +184,32 @@
 	//=====================================================================
 	// 2012-02-06
 	// 添加Flash播放功能
-	NSMutableArray *flashList = [NSMutableArray array];
-	[flashList addObject:[iUCFlashViewController class]];
+//	NSMutableArray *flashList = [NSMutableArray array];
+//	[flashList addObject:[iUCFlashViewController class]];
 	//[flashList addObject:[WebViewController class]];
 	
-	NSDictionary *flashDic = [NSDictionary dictionaryWithObject:flashList forKey:@"Flash播放"];
-	[items addObject:flashDic];
+//	NSDictionary *flashDic = [NSDictionary dictionaryWithObject:flashList forKey:@"Flash播放"];
+//	[items addObject:flashDic];
 	
 	NSMutableArray *webkitList = [NSMutableArray array];
-	[webkitList addObject:[WebViewController class]];
+//	[webkitList addObject:[WebViewController class]];
 	[webkitList addObject:[AnimationViewController class]];
-	[webkitList addObject:[MapKitViewController class]];
+//	[webkitList addObject:[MapKitViewController class]];
 	[webkitList addObject:[DemoViewCALayerController class]];
 	[webkitList addObject:[DemoCoreTextDrawController class]];
 //	[webkitList addObject:[DemoUIPageViewController class]];
 	[webkitList addObject:[PageAppViewController class]];
-	[webkitList addObject:[DemoUIDeviceVIewController class]];
+//	[webkitList addObject:[DemoUIDeviceVIewController class]];
 	
 	// 百度输入法
-	[webkitList addObject:[BaiduInputDemoViewController class]];
+//	[webkitList addObject:[BaiduInputDemoViewController class]];
 	
 	NSDictionary *webkitDic = [NSDictionary dictionaryWithObject:webkitList forKey:@"WebkitDemo20120418"];
 	[items addObject:webkitDic];
 	//=====================================================================
-	createGlobalEventConnection( @selector(popViewController), self, @selector(popViewController));
-	createGlobalEventConnection( @selector(hiddenNavigationBar), self, @selector(hiddenNavigationBar));
-	createGlobalEventConnection( @selector(showNavigationBar), self, @selector(showNavigationBar));
+//	createGlobalEventConnection( @selector(popViewController), self, @selector(popViewController));
+//	createGlobalEventConnection( @selector(hiddenNavigationBar), self, @selector(hiddenNavigationBar));
+//	createGlobalEventConnection( @selector(showNavigationBar), self, @selector(showNavigationBar));
 	
 	BOOL bwantsFullScreenLayout = self.wantsFullScreenLayout;
 	NSLog(@"bwantsFullScreenLayout=%d", bwantsFullScreenLayout);
@@ -295,7 +304,7 @@
 	//m_curInterfaceOrientation = interfaceOrientation;
 	//[(id)[FullScreenController shareInstance] willAnimateRotation:interfaceOrientation duration:duration];
 	
-	emitEvent(nil, @selector(willAnimateRotationToInterfaceOrientation:duration:), interfaceOrientation, duration);
+//	emitEvent(nil, @selector(willAnimateRotationToInterfaceOrientation:duration:), interfaceOrientation, duration);
 }
 
 // 屏幕旋转完毕

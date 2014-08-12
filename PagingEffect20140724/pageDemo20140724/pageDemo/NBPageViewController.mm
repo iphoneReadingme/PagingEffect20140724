@@ -134,7 +134,7 @@ ContentViewControllerDelegate
 	self.chapterText = [self getTestDataContent];
 	
 	///< 添加字体
-	[self getFontFilePath];
+	//[self getFontFilePath];
 	
 	self.fontObj = [self loadCustomFont];
 	
@@ -352,31 +352,33 @@ ContentViewControllerDelegate
 - (UIFont*)loadCustomFont
 {
 	static UIFont* fontObj = nil;
-	
-	fontObj = [self dynamicLoadFont2];
 	if (fontObj == nil)
 	{
-		//fontObj = [self dynamicLoadFont];
-	}
-	if (fontObj == nil)
-	{
-		fontObj = [UIFont systemFontOfSize:17];  ///< 系统字体;
+		fontObj = [self dynamicLoadFont2];
+		if (fontObj == nil)
+		{
+			fontObj = [UIFont systemFontOfSize:17];  ///< 系统字体;
+		}
 	}
 	
 	return fontObj;
 }
 
--  (NSString*)getFontFilePath2
+- (NSString*)getFontFilePath2
 {
 	NSString* filePath = [NSString stringWithFormat:@"%@/Documents/huawenxingkai.ttf", NSHomeDirectory()];
 	//filePath = [NSString stringWithFormat:@"%@/Documents/STxingkai_Normal.ttf", NSHomeDirectory()];
 	
 	BOOL bExist = NO;
 	bExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+	if (bExist != YES)
+	{
+		filePath = [NSString stringWithFormat:@"%@/Library/Application Support/others/huawenxingkai.ttf", NSHomeDirectory()];
+		bExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+	}
 	
 	if (bExist != YES)
 	{
-		//		[self printfFonts];
 		filePath = nil;
 	}
 	
@@ -386,9 +388,9 @@ ContentViewControllerDelegate
 - (UIFont*)dynamicLoadFont2
 {
 	UIFont* fontObj = nil;
-    
-    //加载字体
-    CFErrorRef error;
+	
+	//加载字体
+	CFErrorRef error;
 	NSString *fontPath = [self getFontFilePath2]; // a TTF file in iPhone Documents folder //字体文件所在路径
 	if ([fontPath length] < 1)
 	{
@@ -400,14 +402,14 @@ ContentViewControllerDelegate
 	
 	bool bRegister = CTFontManagerRegisterGraphicsFont(customFont, &error);
 	
-    if (!bRegister)
-    {
+	if (!bRegister)
+	{
 		//如果注册失败，则不使用
 		CFStringRef errorDescription = CFErrorCopyDescription(error);
 		NSLog(@"Failed to load font: %@", errorDescription);
 		CFRelease(errorDescription);
-    }
-    //else
+	}
+	else
 	{
 		//字体名
 		NSString *fontName = (__bridge NSString *)CGFontCopyFullName(customFont);
@@ -415,7 +417,7 @@ ContentViewControllerDelegate
 		fontObj = [UIFont fontWithName:fontName size:25];
 	}
 	
-    CFRelease(customFont);
+	CFRelease(customFont);
 	CGDataProviderRelease(fontDataProvider);
 	
 	return fontObj;

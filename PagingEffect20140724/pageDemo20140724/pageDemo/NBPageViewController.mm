@@ -136,24 +136,9 @@ ContentViewControllerDelegate
 	///< 添加字体
 	[self getFontFilePath];
 	
-	[self loadCustomFont];
+	self.fontObj = [self loadCustomFont];
 	
 	[self addFirstPage];
-}
-
-- (void)loadCustomFont
-{
-	UIFont* fontObj = [self dynamicLoadFont2];
-	if (fontObj == nil)
-	{
-		fontObj = [self dynamicLoadFont];
-	}
-	if (fontObj == nil)
-	{
-		fontObj = [UIFont systemFontOfSize:17];  ///< 系统字体;
-	}
-	
-	self.fontObj = fontObj;
 }
 
 - (void)addFirstPage
@@ -364,63 +349,34 @@ ContentViewControllerDelegate
 	}
 }
 
-- (NSString*)getFontFilePath
+- (UIFont*)loadCustomFont
 {
-	NSString* filePath = [NSString stringWithFormat:@"%@/pageDemo.app/huawenxingkai.ttf", NSHomeDirectory()];
+	static UIFont* fontObj = nil;
 	
-	BOOL bExist = NO;
-	bExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
-	bExist = NO;
-	if (bExist)
+	fontObj = [self dynamicLoadFont2];
+	if (fontObj == nil)
 	{
-		[self printfFonts];
+		//fontObj = [self dynamicLoadFont];
 	}
-	
-	return filePath;
-}
-
-- (UIFont*)dynamicLoadFont
-{
-	UIFont* fontObj = nil;
-    //字体文件所在路径
-    NSString *URL_FONT = [self getFontFilePath];
-	
-    //字体名
-    NSString *fontName = @"STXingkai";
-	
-    //下载字体
-    //NSData *dynamicFontData = [NSData dataWithContentsOfURL:[NSURL URLWithString:URL_FONT]];
-	NSData* dynamicFontData = [NSData dataWithContentsOfFile:URL_FONT];
-	
-    if (!dynamicFontData)
-        return fontObj;
-    CFErrorRef error;
-    CGDataProviderRef providerRef = CGDataProviderCreateWithCFData((CFDataRef)dynamicFontData);
-    CGFontRef font = CGFontCreateWithDataProvider(providerRef);
-    if (! CTFontManagerRegisterGraphicsFont(font, &error))
-    {
-        //如果注册失败，则不使用
-        CFStringRef errorDescription = CFErrorCopyDescription(error);
-        NSLog(@"Failed to load font: %@", errorDescription);
-        CFRelease(errorDescription);
-    }
-    else
-        fontObj = [UIFont fontWithName:fontName size:50];
-    CFRelease(font);
-    CFRelease(providerRef);
+	if (fontObj == nil)
+	{
+		fontObj = [UIFont systemFontOfSize:17];  ///< 系统字体;
+	}
 	
 	return fontObj;
 }
 
-- (NSString*)getFontFilePath2
+-  (NSString*)getFontFilePath2
 {
 	NSString* filePath = [NSString stringWithFormat:@"%@/Documents/huawenxingkai.ttf", NSHomeDirectory()];
 	//filePath = [NSString stringWithFormat:@"%@/Documents/STxingkai_Normal.ttf", NSHomeDirectory()];
 	
 	BOOL bExist = NO;
 	bExist = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
-	if (!bExist)
+	
+	if (bExist != YES)
 	{
+		//		[self printfFonts];
 		filePath = nil;
 	}
 	

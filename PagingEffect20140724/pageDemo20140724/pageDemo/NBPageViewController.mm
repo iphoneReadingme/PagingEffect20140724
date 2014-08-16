@@ -12,6 +12,8 @@
 #import "NBPageViewController.h"
 
 
+#define kMaxPageCount     14
+
 ///< 文件和路径
 //#define kNBSMNWUnitTestData_PATH                        @"/Library"
 #define kNBSMNWUnitTestData_PATH                        @"/Library/Application Support/others"
@@ -139,6 +141,8 @@ ContentViewControllerDelegate
 	self.fontObj = [self loadCustomFont:22];
 	
 	[self addFirstPage];
+	
+	//[self printfFonts];
 }
 
 - (void)addFirstPage
@@ -268,8 +272,56 @@ ContentViewControllerDelegate
 	return rect;
 }
 
+- (UIFont*)getFontObj:(int)index
+{
+	NSArray* fontNameArray =
+	@[
+#if !TARGET_IPHONE_SIMULATOR
+	  ///< 真机才有的字体
+	  @"Snell Roundhand",
+	  @"Academy Engraved LET",
+	  @"Bradley Hand",
+	  @"Papyrus",
+	  @"Avenir Next Condensed",
+	  @"HoeflerText-Italic",
+	  @"Savoye LET",
+	  @"Zapfino",
+	  @"Bradley Hand",
+#endif
+		@"Arial",
+		@"Marion",
+		@"STXingkai",
+		@"Courier",
+		@"Helvetica",
+		
+		@"STHeitiSC-Light",
+		@"Symbol",
+		@"Marion",
+		@"Menlo",
+		@"Georgia",
+		
+		@"Verdana",
+		@"Cochin",
+		@"Geeza Pro"
+	];
+	
+	UIFont* font = nil;
+//	int i = 0;
+//	for (NSString* fontName in fontNameArray)
+//	{
+//		font = [UIFont fontWithName:fontName size:20];
+//		NSLog(@"i = %d, fontname = %@, font=%@", i++, fontName, font);
+//	}
+	if (index < [fontNameArray count])
+	{
+		NSString* fontName = fontNameArray[index];
+		font = [UIFont fontWithName:fontName size:20];
+		NSLog(@"i = %d, fontname = %@, font=%@", index, fontName, font);
+	}
+	
+	return font;
+}
 
-#define kMaxPageCount     14
 - (int)getMaxPageCount
 {
 	return kMaxPageCount;
@@ -277,7 +329,7 @@ ContentViewControllerDelegate
 
 - (UIViewController *)getCurrentPageViewController:(int)index with:(BOOL)isBackPage
 {
-	UIColor* bgColor[kMaxPageCount] =
+	static UIColor* bgColor[kMaxPageCount] =
 	{
 		[UIColor blueColor],
 		[UIColor darkGrayColor],
@@ -325,6 +377,7 @@ ContentViewControllerDelegate
 	//viewObj.font = [UIFont fontWithName:@"Jxixinkai" size:25]; ///< 自字义字体
 	//viewObj.font = [UIFont fontWithName:@"SingKaiEG-Bold-GB" size:25]; ///< 自字义字体
 	viewObj.font = self.fontObj;
+	viewObj.font = [self getFontObj:index];
 	
 	viewObj.userInteractionEnabled = NO;
 	//textViewObj.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
@@ -340,7 +393,7 @@ ContentViewControllerDelegate
 
 - (void)printfFonts
 {
-	NSArray *familyNames = [NSArray arrayWithObject:[UIFont familyNames]];
+	NSArray *familyNames = [NSArray arrayWithArray:[UIFont familyNames]];
 	NSString* fontName = @"Helvetica";
 	for (NSString* nameItem in familyNames)
 	{
@@ -360,7 +413,7 @@ ContentViewControllerDelegate
 			fontName = nameItem;
 		}
 		
-		NSArray* fontNames =[NSArray arrayWithObject:[UIFont fontNamesForFamilyName:fontName]];
+		NSArray* fontNames =[NSArray arrayWithArray:[UIFont fontNamesForFamilyName:fontName]];
 		
 		int indFont = 0;
 		for(indFont=0; indFont<[fontNames count]; ++indFont)
@@ -375,7 +428,7 @@ ContentViewControllerDelegate
 	static UIFont* fontObj = nil;
 	if (fontObj == nil)
 	{
-		fontObj = [self dynamicLoadFont2:fontSize];
+		fontObj = [self dynamicLoadFont:fontSize];
 		if (fontObj == nil)
 		{
 			fontObj = [UIFont systemFontOfSize:fontSize];  ///< 系统字体;
@@ -385,7 +438,7 @@ ContentViewControllerDelegate
 	return fontObj;
 }
 
-- (NSString*)getFontFilePath2
+- (NSString*)getFontFilePath
 {
 	NSString* filePath = [NSString stringWithFormat:@"%@/Documents/huawenxingkai.ttf", NSHomeDirectory()];
 	//filePath = [NSString stringWithFormat:@"%@/Documents/STxingkai_Normal.ttf", NSHomeDirectory()];
@@ -406,13 +459,14 @@ ContentViewControllerDelegate
 	return filePath;
 }
 
-- (UIFont*)dynamicLoadFont2:(int)fontSize
+- (UIFont*)dynamicLoadFont:(int)fontSize
 {
 	UIFont* fontObj = nil;
 	
 	//加载字体
 	CFErrorRef error;
-	NSString *fontPath = [self getFontFilePath2]; // a TTF file in iPhone Documents folder //字体文件所在路径
+	NSString *fontPath = [self getFontFilePath]; // a TTF file in iPhone Documents folder //字体文件所在路径
+	//fontPath = [NSString stringWithFormat:@"%@/Documents/huawenxingkai.ttf", NSHomeDirectory()];
 	if ([fontPath length] < 1)
 	{
 		return fontObj;
@@ -480,13 +534,13 @@ ContentViewControllerDelegate
 			newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex with:YES];
 			newViewController.isBackPage = NO;
 			newViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
-			NSLog(@"背面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
+			//NSLog(@"背面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
 			//[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 		}
 		else
 		{
 			newViewController = (ContentViewController*)[self turnToNextPage];
-			NSLog(@"正面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
+			//NSLog(@"正面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
 		}
 	}
     
@@ -517,14 +571,14 @@ ContentViewControllerDelegate
 		newViewController.isBackPage = NO;
 		newViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
 		
-		NSLog(@"背面，cur=%d, Before viewController = %@", _currentPageIndex, viewController);
+		//NSLog(@"背面，cur=%d, Before viewController = %@", _currentPageIndex, viewController);
 		//[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	}
 	else
 	{
 		newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex with:NO];
 		
-		NSLog(@"正面，cur=%d, Before viewController = %@", _currentPageIndex, viewController);
+		//NSLog(@"正面，cur=%d, Before viewController = %@", _currentPageIndex, viewController);
 	}
     
 	return newViewController;

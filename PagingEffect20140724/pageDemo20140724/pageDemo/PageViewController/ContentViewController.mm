@@ -166,12 +166,18 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [_delegate releaseGesture];
+	if (_delegate && [_delegate respondsToSelector:@selector(releaseGesture)])
+	{
+		[_delegate releaseGesture];
+	}
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [_delegate releaseGesture];
+	if (_delegate && [_delegate respondsToSelector:@selector(releaseGesture)])
+	{
+		[_delegate releaseGesture];
+	}
 }
 
 #pragma mark - theme change

@@ -151,9 +151,9 @@ ContentViewControllerDelegate
 	_currentPageIndex = 0;
 	
     UIViewController *startCtrl = nil;
-    UIViewController *secondCtrl = nil;
+    //UIViewController *secondCtrl = nil;
 	startCtrl = [self getCurrentPageViewController:0 with:NO]; ///< 初始化当前UIViewController
-	secondCtrl = [self getCurrentPageViewController:1 with:NO];
+	//secondCtrl = [self getCurrentPageViewController:1 with:NO];
 	
     NSArray *viewControllers = nil;
 	viewControllers = [NSArray arrayWithObject:startCtrl];
@@ -197,9 +197,9 @@ ContentViewControllerDelegate
 {
     UIViewController* nextViewController = nil;;
 	_currentPageIndex++;
-	if (_currentPageIndex > 13)
+	if (_currentPageIndex > [self getMaxPageCount] - 1)
 	{
-		_currentPageIndex = 0;
+		_currentPageIndex = [self getMaxPageCount];
 	}
 	else
 	{
@@ -231,7 +231,16 @@ ContentViewControllerDelegate
 	int nTextLen = [self.chapterText length];
 	int nOffset = nTextLen/14;
 	
+	if (index >= [self getMaxPageCount]
+		//&& (index*nOffset + nOffset) > nTextLen)
+		)
+	{
+		index--;
+		//nOffset = nTextLen - index*nOffset;
+	}
+	
 	NSRange rangeText = NSMakeRange(index*nOffset, nOffset);
+	
 	NSString* text = [_chapterText substringWithRange:rangeText];
 	if (isBackPage)
 	{
@@ -259,9 +268,16 @@ ContentViewControllerDelegate
 	return rect;
 }
 
+
+#define kMaxPageCount     14
+- (int)getMaxPageCount
+{
+	return kMaxPageCount;
+}
+
 - (UIViewController *)getCurrentPageViewController:(int)index with:(BOOL)isBackPage
 {
-	UIColor* bgColor[14] =
+	UIColor* bgColor[kMaxPageCount] =
 	{
 		[UIColor blueColor],
 		[UIColor darkGrayColor],
@@ -281,9 +297,14 @@ ContentViewControllerDelegate
 		[UIColor brownColor]
 	};
 	
+	if (index >= [self getMaxPageCount])
+	{
+		index--;
+	}
 	
     ContentViewController *viewCtrl = [[[ContentViewController alloc] init] autorelease];
 	viewCtrl.isBackPage = YES;
+	viewCtrl.pageIndex = index;
 	
 	CGRect rect = [self getPageViewBounds:self.spineLocation];
 	
@@ -319,7 +340,7 @@ ContentViewControllerDelegate
 
 - (void)printfFonts
 {
-	NSArray *familyNames = [[NSArray alloc] initWithArray:[UIFont familyNames]];
+	NSArray *familyNames = [NSArray arrayWithObject:[UIFont familyNames]];
 	NSString* fontName = @"Helvetica";
 	for (NSString* nameItem in familyNames)
 	{
@@ -339,7 +360,7 @@ ContentViewControllerDelegate
 			fontName = nameItem;
 		}
 		
-		NSArray* fontNames =[[NSArray alloc]initWithArray:[UIFont fontNamesForFamilyName:fontName]];
+		NSArray* fontNames =[NSArray arrayWithObject:[UIFont fontNamesForFamilyName:fontName]];
 		
 		int indFont = 0;
 		for(indFont=0; indFont<[fontNames count]; ++indFont)
@@ -417,6 +438,7 @@ ContentViewControllerDelegate
 		NSString *fontName = (__bridge NSString *)CGFontCopyFullName(customFont);
 		NSLog(@"fontName=%@", fontName);
 		fontObj = [UIFont fontWithName:fontName size:fontSize];
+		CFRelease(fontName);
 	}
 	
 	CFRelease(customFont);
@@ -450,20 +472,22 @@ ContentViewControllerDelegate
 	}
 	
 	ContentViewController *newViewController =nil;
-	
-    ContentViewController* curViewController = (ContentViewController*)viewController;
-	if (curViewController.isBackPage)
+	if (_currentPageIndex < [self getMaxPageCount]-1)
 	{
-		newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex with:YES];
-		newViewController.isBackPage = NO;
-		newViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
-		NSLog(@"背面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
-		//[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	}
-	else
-	{
-		newViewController = (ContentViewController*)[self turnToNextPage];
-		NSLog(@"正面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
+		ContentViewController* curViewController = (ContentViewController*)viewController;
+		if (curViewController.isBackPage)
+		{
+			newViewController = (ContentViewController*)[self getCurrentPageViewController:_currentPageIndex with:YES];
+			newViewController.isBackPage = NO;
+			newViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
+			NSLog(@"背面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
+			//[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+		}
+		else
+		{
+			newViewController = (ContentViewController*)[self turnToNextPage];
+			NSLog(@"正面，cur=%d, After viewController = %@", _currentPageIndex, viewController);
+		}
 	}
     
 	return newViewController;
@@ -475,8 +499,8 @@ ContentViewControllerDelegate
 	if (_touchType == touchevent_nextpage)
 	{
 		_bException = YES;
-		NSLog(@"[gestureRecognizers]=%@", [pageViewController gestureRecognizers]);
-		NSLog(@"异常消息，cur=%d, Before ==", _currentPageIndex);
+		//NSLog(@"[gestureRecognizers]=%@", [pageViewController gestureRecognizers]);
+		//NSLog(@"异常消息，cur=%d, Before ==", _currentPageIndex);
 		return nil;
 	}
 	
@@ -510,7 +534,7 @@ ContentViewControllerDelegate
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
-	NSLog(@"===翻页动画 【开始】====");
+	//NSLog(@"===翻页动画 【开始】====");
 	//[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 }
 
@@ -520,15 +544,18 @@ ContentViewControllerDelegate
 	_bException = NO;
 }
 
-- (void)pageViewController:(UIPageViewController*)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray*)previousViewControllers transitionCompleted:(BOOL)completed
+- (void)pageViewController:(UIPageViewController*)pageViewController
+		didFinishAnimating:(BOOL)finished
+   previousViewControllers:(NSArray*)previousViewControllers
+	   transitionCompleted:(BOOL)completed
 {
-	NSLog(@"===翻页动画==completed==%d=", completed);
+	//NSLog(@"===翻页动画==completed==%d=", completed);
 	if (completed)
 	{
 		//NSLog(@"===翻页动画结束====");
 		[self didFinishAnimatingPagingViewController];
 	}
-	//[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 }
 
 ///< 由于spineLocation属性是只读的，所以只能在这个方法中设置书脊位置，该方法可以根据屏幕旋转方向的不同来动态设定书脊的位置
@@ -598,9 +625,9 @@ ContentViewControllerDelegate
 	currentViewController.view.transform = CGAffineTransformMakeScale(-1, 1);
 	
 	_currentPageIndex++;
-	if (_currentPageIndex > 13)
+	if (_currentPageIndex > [self getMaxPageCount] - 1)
 	{
-		_currentPageIndex = 0;
+		_currentPageIndex = [self getMaxPageCount];
 	}
 	else
 	{
@@ -707,6 +734,8 @@ ContentViewControllerDelegate
     return ignore;
 }
 
+#define Enable_xxxx
+#ifdef Enable_xxxx
 - (BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch
 {
 	if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]])
@@ -718,6 +747,7 @@ ContentViewControllerDelegate
     return YES;
 }
 
+#ifdef Enable_xxxx
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer*)gestureRecognizer
 {
     BOOL shouldBegin = YES;
@@ -812,6 +842,9 @@ ContentViewControllerDelegate
     
     return shouldBegin;
 }
+#endif
+
+#endif
 
 #pragma mark - ContentViewControllerDelegate
 - (void)beginTouch:(CGPoint)begin

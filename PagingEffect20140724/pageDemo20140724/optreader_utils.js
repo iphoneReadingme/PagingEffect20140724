@@ -155,7 +155,7 @@
 
         var getDirData = function(_novel_type){
             var resultJSON = {
-                uc_novel_type:3,
+                uc_novel_type:'3',
                 uc_novel_dir:'',
                 uc_novel_next:'',
                 uc_novel_prev:'',
@@ -181,7 +181,7 @@
         }
         var getDetailData = function(_novel_type){
             var resultJSON = {
-                uc_novel_type:_novel_type,
+                uc_novel_type:_novel_type.toString(),
                 uc_novel_title:'',
                 uc_novel_cont:'',
                 uc_novel_url:'',
@@ -239,7 +239,7 @@
             resultJSON.uc_novel_dir = $id("ucweb_readmode_contents").href;
             resultJSON.uc_novel_next = $id("ucweb_readmode_next") ? $id("ucweb_readmode_next").href : "";
             resultJSON.uc_novel_prev = $id("ucweb_readmode_prev") ? $id("ucweb_readmode_prev").href : "";
-            resultJSON.uc_novel_fail_type = -1;
+            resultJSON.uc_novel_fail_type = '-1';
 
             return resultJSON;
         }
@@ -252,12 +252,12 @@
         if($qs('meta[name="customizetype"]') && $qs('meta[name="customizetype"]').getAttribute('noveltype') ) {
             novel_type = $qs('meta[name="customizetype"]').getAttribute('noveltype');
         }else{
-            novel_type = -1;        //定制失败
+            novel_type = '-1';        //定制失败
         }
 
-        if(novel_type == 3 && UC_MODE){
+        if(novel_type == '3' && UC_MODE){
             json = getDirData(novel_type);
-        }else if(novel_type>0 && UC_MODE){
+        }else if(parseInt(novel_type)>0 && UC_MODE){
             json = getDetailData(novel_type);
         }else{//定制失败
             json = {};
@@ -265,13 +265,13 @@
             switch (pagetype)
             {
                 case 'VIP':
-                    json.uc_novel_fail_type = 1;        //VIP页或需付费
+                    json.uc_novel_fail_type = '1';        //VIP页或需付费
                     break;
                 case "LOGIN":
-                    json.uc_novel_fail_type = 2;        //需要登录
+                    json.uc_novel_fail_type = '2';        //需要登录
                     break;
                 default:
-                    json.uc_novel_fail_type = 0;        //其他
+                    json.uc_novel_fail_type = '0';        //其他
                     break;
             }
         }
@@ -345,7 +345,7 @@
             //这是Android版的代码
 //            document.addEventListener('DOMContentLoaded',main , false);
             //这里针对iOS平台的代码
-            document.addEventListener('UCBrowserReady', eventHanlder, false);
+            document.addEventListener('UCBrowserReady', main, false);
         }
     }
 })();

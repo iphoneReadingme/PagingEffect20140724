@@ -13,20 +13,20 @@
 
 #import <CoreText/CoreText.h>
 #import "PageSplitRender.h"
-#import "NBDataProviderDefine.h"
-#import "NovelBoxConfig.h"
-#import "iUCCommon.h"
-#import "DDLog.h"
-#import "NSArray+ExceptionSafe.h"
+//#import "NBDataProviderDefine.h"
+//#import "NovelBoxConfig.h"
+//#import "iUCCommon.h"
+//#import "DDLog.h"
+//#import "NSArray+ExceptionSafe.h"
 
 //#define USE_HTIME_DUMP
-#import "HTime.h"
+//#import "HTime.h"
 
-#ifdef NDEBUG
-static const int ddLogLevel = LOG_LEVEL_OFF;
-#else
-static const int ddLogLevel = LOG_LEVEL_WARN;
-#endif
+//#ifdef NDEBUG
+//static const int ddLogLevel = LOG_LEVEL_OFF;
+//#else
+//static const int ddLogLevel = LOG_LEVEL_WARN;
+//#endif
 
 #if ! __has_feature(objc_arc)
 //[super dealloc];
@@ -62,9 +62,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     CTFramesetterRef  m_frameSetter;
 }
+
 @property (nonatomic, retain) BookLayoutConfig * layoutConfig;
-@property (nonatomic, retain) id<NBChapterItemProtocol> chapterItem;
-@property (nonatomic, retain) NBChapterPagesInfo * pagesInfo;
+//@property (nonatomic, retain) id<NBChapterItemProtocol> chapterItem;
+//@property (nonatomic, retain) NBChapterPagesInfo * pagesInfo;
 @property (nonatomic, retain) NSString * chapterTextContent;
 
 @end
@@ -89,25 +90,26 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	return bRet;
 }
 
-+ (NSString*)getChapterContentStr:(NSString*)content withChapterItem:(id<NBChapterItemProtocol>)chapterItem
++ (NSString*)getChapterContentStr:(NSString*)content// withChapterItem:(id<NBChapterItemProtocol>)chapterItem
 {
 	NSString *contentStr = content;
     
     if ((nil == contentStr) || (0 == [contentStr length]))
     {
-        if (iUCCommon::is4inchDisplay())
+//        if (iUCCommon::is4inchDisplay())
         {
             contentStr = [NSString stringWithFormat:@"　　\n\n\n\n\n\n\n\n                     本章内容为空"];
         }
-        else
-        {
-            contentStr = [NSString stringWithFormat:@"　　\n\n\n\n\n\n\n               本章内容为空"];
-        }
+//        else
+//        {
+//            contentStr = [NSString stringWithFormat:@"　　\n\n\n\n\n\n\n               本章内容为空"];
+//        }
     }
 	
 	return contentStr;
 }
 
+#ifdef PageSplitRender_memober
 + (NBChapterPagesInfo*)splittingPagesForString:(NSString*)content withChapterItem:(id<NBChapterItemProtocol>)chapterItem andLayoutConfig:(BookLayoutConfig*)config
 {
     NBChapterPagesInfo * pagesInfo = [[[NBChapterPagesInfo alloc] init] autorelease];
@@ -194,6 +196,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
     return pageArray;
 }
+#endif // PageSplitRender_memober
 
 ///< 返回当前章节显示的文本内容（上下翻页时第一页面带章节标题名）
 + (NSString*)getShowTextOfChapter:(NSString *)contentStr withChapterName:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
@@ -210,7 +213,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 }
 
 /*格式化绘画样式*/
-+ (CTFramesetterRef)formatString:(NSString *)contentStr withChapterItem:(id<NBChapterItemProtocol>)chapterItem andLayoutConfig:(BookLayoutConfig*)config
++ (CTFramesetterRef)formatString:(NSString *)contentStr withChapterName:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
 {
 	if (config == nil || ([contentStr length] < 1))
 	{
@@ -218,14 +221,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	}
 	//HTIME_DUMP_IF("PageSplitRender: formatString", 20);
 	
-	BOOL bShowTitle = (config.showBigTitle && [chapterItem.chapterName length] > 0);   ///< 文字排版时是否显示标题
+	BOOL bShowTitle = (config.showBigTitle && [chapterName length] > 0);   ///< 文字排版时是否显示标题
 	int nStart = 0;
 	int nTextLength = [contentStr length];  ///< 章节内容文字长度（不含标题文字）
 	
-	NSString* curChapterText = [PageSplitRender getShowTextOfChapter:contentStr withChapterName:[chapterItem chapterName] andLayoutConfig:config];
+	NSString* curChapterText = [PageSplitRender getShowTextOfChapter:contentStr withChapterName:chapterName andLayoutConfig:config];
 	if (bShowTitle)
 	{
-		nStart = [chapterItem.chapterName length] + 2; ///< 补充2个换行符:　1.'\n',章节标题与章节内容之间换行; 2. '\n',标题与章节内容之间的间距（以一个空行来实现）
+		nStart = [chapterName length] + 2; ///< 补充2个换行符:　1.'\n',章节标题与章节内容之间换行; 2. '\n',标题与章节内容之间的间距（以一个空行来实现）
 		//chapterText = [NSString stringWithFormat:@"%@\n\n%@", chapterItem.chapterName, contentStr];
 	}
 	
@@ -234,27 +237,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	if (bShowTitle)
 	{
 		///< 格式化标题
-		[PageSplitRender formatChapterTitle:attributedString withChapterItem:chapterItem andLayoutConfig:config];
+		[PageSplitRender formatChapterTitle:attributedString withChapterName:chapterName andLayoutConfig:config];
 	}
 	
 	// ucnovel离线小说首行没缩进，需要特殊处理
-	CGFloat fontSize = config.fontSize;
-	config.firstLineHeadIndent = 0;
-	if (chapterItem && [chapterItem isKindOfClass:[NBSMChapterItem class]])
-	{
-		NBSMChapterItem* smItem = (NBSMChapterItem*)chapterItem;
-		if (smItem.state == NBChapterStateOffline && smItem.shouldIndent)
-		{
-			for (NSInteger i = 0; i < kCountFontSizeOption; i++)
-			{
-				if (g_fontAndRowSpace[i].fontSize == fontSize)
-				{
-					config.firstLineHeadIndent = g_fontAndRowSpace[i].headIndent;
-					break;
-				}
-			}
-		}
-	}
+	config.firstLineHeadIndent = 32;
 	
 	///< 格式化章节内容
 	NSRange range = NSMakeRange(nStart, nTextLength);
@@ -266,9 +253,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     return framesetter;
 }
 
-+ (void)formatChapterTitle:(NSMutableAttributedString*)attributedString withChapterItem:(id<NBChapterItemProtocol>)chapterItem andLayoutConfig:(BookLayoutConfig*)config
++ (void)formatChapterTitle:(NSMutableAttributedString*)attributedString withChapterName:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
 {
-	int nTitleLength = [chapterItem.chapterName length];
+	int nTitleLength = [chapterName length];
 	NSRange range = NSMakeRange(0, nTitleLength);
 	
 	///< 1. 标题颜色
@@ -546,7 +533,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     NSMutableArray *newArray = [[[NSMutableArray alloc] initWithArray:array] autorelease];
     
     for (int i = newArray.count-1; i >= 0; i--) {
-        NSString *paraStr = [newArray safe_ObjectAtIndex:i];
+        NSString *paraStr = [newArray objectAtIndex:i];
         paraStr = [paraStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if ([paraStr isEqualToString:@""]) {
             [newArray removeObjectAtIndex:i];
@@ -563,6 +550,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     return newContentStr;
 }
 
+#ifdef PageSplitRender_memober
 - (id)initWithLayoutConfig:(BookLayoutConfig*)config andChapterItem:(id<NBChapterItemProtocol>)chapterItem andPagesInfo:(NBChapterPagesInfo*)pagesInfo andChapterContent:(NSString*)content
 {
     assert(config && chapterItem && pagesInfo);
@@ -677,6 +665,22 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
     return YES;
 }
+#else
+- (void)dealloc
+{
+    self.layoutConfig = nil;
+    
+    self.chapterTextContent = nil;
+    if (m_frameSetter)
+    {
+        CFRelease(m_frameSetter);
+        m_frameSetter = nil;
+    }
+    
+    [super dealloc];
+}
+
+#endif
 
 ///< 测试接口
 #pragma mark -==页面文字排版测试

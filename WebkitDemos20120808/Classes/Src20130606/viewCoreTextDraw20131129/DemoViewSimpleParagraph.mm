@@ -5,6 +5,7 @@
 #import "BookLayoutConfig.h"
 #import "DemoViewSimpleParagraph.h"
 #import "DemoViewCoreTextDrawMacroDefine.h"
+#import "PageSplitRender.h"
 
 
 #define			FONTNAME			@"STHeitiSC-Light"
@@ -133,6 +134,7 @@
 	}
 }
 
+#define kChapterNameText  @"第一章节　章节标题名"
 - (void)drawRect:(CGRect)rect
 {
 	NSString* pageText = @"2013-11-29 绘制文字 \
@@ -169,103 +171,31 @@
 	return lineSpace;
 }
 
+///< 返回当前章节显示的文本内容（上下翻页时第一页面带章节标题名）
+- (NSString*)getShowTextOfChapter:(NSString *)contentStr withChapterItem:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
+{
+	BOOL bShowTitle = (config.showBigTitle && [chapterName length] > 0);   ///< 文字排版时是否显示标题
+	
+	NSString* chapterText = contentStr;
+	if (bShowTitle)
+	{
+		chapterText = [NSString stringWithFormat:@"%@\n\n%@", chapterName, contentStr];
+	}
+	
+	return chapterText;
+}
+
 /*格式化绘画样式*/
-//- (CTFramesetterRef)formatString:(NSString *)contentStr size:(CGFloat)fontSize color:(UIColor *)color chapName:(NSString *)chapName chapNameColor:(UIColor *)chapNameColor isShow:(NSInteger)_isShow
 - (CTFramesetterRef)formatString:(NSString *)contentStr size:(CGFloat)fontSize chapName:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
 {
-	if ([contentStr length] < 1)
+	if (config == nil || ([contentStr length] < 1))
 	{
 		return nil;
 	}
+	CTFramesetterRef framesetter = nil;
+	framesetter = [PageSplitRender formatString:contentStr withChapterName:chapterName andLayoutConfig:self.layoutConfig];
 	
-    NSMutableAttributedString *attributedString = [[[NSMutableAttributedString alloc] initWithString:contentStr] autorelease];
-    
-    //设置字体
-	NSString* fontName = FONTNAME;
-	if ([[config fontName] length] > 0)
-	{
-		fontName = [config fontName];
-	}
-    CTFontRef font = CTFontCreateWithName(( CFStringRef)[UIFont fontWithName:fontName size:fontSize].fontName, fontSize, NULL);
-    [attributedString addAttribute:(NSString *)kCTFontAttributeName value:( id)font range:NSMakeRange(0, contentStr.length)];
-	UIColor* colorText = [UIColor blackColor];
-	if (config != nil && config.pageTextColor != nil)
-	{
-		colorText = config.pageTextColor;
-	}
-    [attributedString addAttribute:(id)kCTForegroundColorAttributeName value:(id)colorText.CGColor range:NSMakeRange(0, contentStr.length)];
-    CFRelease(font);
-    
-    //章节名字体
-    if ([chapterName length] > 0)
-	{
-        int titleOffset = 0;
-        int titleLength = [chapterName length];
-        if (config != nil && config.titleTextColor != nil)
-		{
-			colorText = config.titleTextColor;
-		}
-		
-        CTFontRef fontChapName = CTFontCreateWithName(( CFStringRef)[UIFont fontWithName:FONTNAME size:fontSize].fontName, (int)(fontSize * 1.2 + 0.5), NULL);
-        [attributedString addAttribute:(NSString *)kCTFontAttributeName value:( id)fontChapName range:NSMakeRange(titleOffset, titleLength)];
-        [attributedString addAttribute:(id)kCTForegroundColorAttributeName value:(id)colorText.CGColor range:NSMakeRange(titleOffset, titleLength)];
-        CFRelease(fontChapName);
-    }
-    
-    //设置对齐方式、行间距、首行缩进
-    CTTextAlignment textAlignment = kCTJustifiedTextAlignment;//这种对齐方式会自动调整，使左右始终对齐
-	textAlignment = kCTLeftTextAlignment;
-    CGFloat lineSpace = 4.0f;
-    CGFloat paragraphSpacing = 10.0f;
-    CGFloat headIndent = 0.0f;
-    if (fontSize == 16) {
-        headIndent = 32;
-    } else if (fontSize == 18) {
-        headIndent = 36;
-    } else if (fontSize == 20) {
-        headIndent = 42;
-    } else if (fontSize == 25) {
-        headIndent = 50;
-    } else if (fontSize == 30) {
-        headIndent = 64;
-    } else if (fontSize == 35) {
-        headIndent = 72;
-    }
-	
-    // 设置文本对齐方式
-    textAlignment = (CTTextAlignment)config.textAlignment;
-    
-    // 设置文本行间距
-	lineSpace = config.lineSpace;
-    
-    // 设置文本段间距
-	paragraphSpacing = config.paragraphSpacing;
-	
-	// 设置首行缩进
-    headIndent = 0.0f;
-	
-    //创建设置数组
-	CTParagraphStyleSetting settings[] = {
-		// 设置文本对齐方式
-        { kCTParagraphStyleSpecifierAlignment, sizeof(textAlignment), &textAlignment },
-		// 设置文本行间距
-        { kCTParagraphStyleSpecifierLineSpacingAdjustment, sizeof(lineSpace), &lineSpace },
-		// 设置文本段间距
-        { kCTParagraphStyleSpecifierParagraphSpacing, sizeof(paragraphSpacing), &paragraphSpacing },
-		// 设置段前间距
-        { kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(paragraphSpacing), &paragraphSpacing },
-		// 设置首行缩进
-        { kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(headIndent), &headIndent }
-	};
-	
-	// 通过设置项产生段落样式对象
-    CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings , sizeof(settings)/sizeof(CTParagraphStyleSetting));
-	CFAttributedStringSetAttribute((CFMutableAttributedStringRef)attributedString, CFRangeMake(0, [contentStr length]), kCTParagraphStyleAttributeName, paragraphStyle);
-	CFRelease(paragraphStyle);
-    
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(( CFAttributedStringRef)attributedString);
-    return framesetter;
-	
+	return 	framesetter;
 }
 
 - (void)drawInContext:(CGContextRef)context withRect:(CGRect)rect font:(int)fontSize withText:(NSString*)pageContent
@@ -303,7 +233,7 @@
     CGPathAddRect(framePath, &CGAffineTransformIdentity, columnFrame);
 	
     CTFramesetterRef framesetter = nil;
-	framesetter = [self formatString:pageContent size:fontSize chapName:@"name" andLayoutConfig:_layoutConfig];
+	framesetter = [self formatString:pageContent size:fontSize chapName:kChapterNameText andLayoutConfig:_layoutConfig];
 	
     CTFrameRef contentFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), framePath, NULL);
     CTFrameDraw(contentFrame, context);
@@ -312,6 +242,8 @@
 	CFRelease(framesetter);
     CFRelease(framePath);
 }
+
+CTFrameRef contentFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), framePath, NULL);
 
 - (void)drawRect:(CGContextRef)context withRect:(CGRect)rect
 {

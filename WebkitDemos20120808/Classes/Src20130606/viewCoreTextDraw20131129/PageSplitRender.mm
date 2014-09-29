@@ -630,9 +630,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     CGMutablePathRef framePath = CGPathCreateMutable();
     CGPathAddRect(framePath, &CGAffineTransformIdentity, columnFrame);
     CTFrameRef pageFrame = CTFramesetterCreateFrame(framesetter, textRange, framePath, NULL);
-    CTFrameDraw(pageFrame, context);
+//    CTFrameDraw(pageFrame, context);
+	[self CTLinesDraw:pageFrame with:context withRect:columnFrame];
 	
-	[self drawLineOfTextLine:context withRect:columnFrame withFrame:pageFrame];
 	if (pageFrame)
 	{
 		CFRelease(pageFrame);
@@ -643,6 +643,53 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	}
     
     return YES;
+}
+
+#define kMaxLineOfFrame     30
+- (void)CTLinesDraw:(CTFrameRef)pageFrame with:(CGContextRef)context withRect:(CGRect)columnFrame
+{
+	CGFloat fHeight = 0;
+	
+	CGFloat x = 0;
+	CGFloat y = 0;
+	CGPoint lineOrigins[kMaxLineOfFrame];
+	//计算这一栏，有几行文字。
+	NSArray *lines = (NSArray*)CTFrameGetLines(pageFrame);
+	
+	int nLineCount = [lines count];
+	if (nLineCount > 0 && nLineCount < kMaxLineOfFrame)
+	{
+		CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
+		
+		CGFloat fLineHeight = 0;
+		if (nLineCount >= 2)
+		{
+			fLineHeight = (lineOrigins[0].y - lineOrigins[1].y);
+		}
+		
+		if (nLineCount < 2 || (lineOrigins[nLineCount-1].y > fLineHeight+10))
+		{
+			///< 章节的最后一页留有多于一行的空白，则不调整行间距
+			CTFrameDraw(pageFrame, context);
+		}
+		else
+		{
+			fHeight = (lineOrigins[nLineCount-1].y - 1)/nLineCount;
+			
+			int i = 0;
+			for (id lineObj in lines)
+			{
+				CTLineRef line = (CTLineRef)lineObj;
+				
+				x = columnFrame.origin.x;
+				y = lineOrigins[i].y + fHeight;
+				CGContextSetTextPosition(context, x, y);
+				CTLineDraw(line, context);
+				
+				i++;
+			}
+		}
+	}
 }
 
 ///< 测试接口
@@ -723,18 +770,19 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	//计算这一栏，有几行文字。
 	NSArray *lines = (NSArray*)CTFrameGetLines(pageFrame);
 	
-//	int lineCount = [lines count];
-	CGPoint lineOrigins[21];
+	CGPoint lineOrigins[kMaxLineOfFrame];
 	CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
 	
-	int i = 0;
-	CGRect aBounsRect[21];
-	CGRect imageBounsRect[21];
-	
-	if ([lines count] >= 21)
+	if ([lines count] >= kMaxLineOfFrame)
 	{
 		return;
 	}
+	
+	CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
+	return;
+	int i = 0;
+	CGRect aBounsRect[kMaxLineOfFrame];
+	CGRect imageBounsRect[kMaxLineOfFrame];
 	
 	for (id lineObj in lines)
 	{

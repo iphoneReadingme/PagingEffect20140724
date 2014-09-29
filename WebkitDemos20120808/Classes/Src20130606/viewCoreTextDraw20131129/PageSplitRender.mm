@@ -610,8 +610,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	//翻转坐标系统（文本原来是倒的要翻转下）
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-//	CGContextTranslateCTM(context, 0, rect.size.height);
-//	CGContextScaleCTM(context, 1.0, -1.0);
+	CGContextTranslateCTM(context, 0, rect.size.height);
+	CGContextScaleCTM(context, 1.0, -1.0);
 	
     CTFramesetterRef framesetter = m_frameSetter;
 	
@@ -653,11 +653,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 #define kMaxLineOfFrame     30
 - (void)CTLinesDraw:(CTFrameRef)pageFrame with:(CGContextRef)context withRect:(CGRect)columnFrame
 {
-	CGFloat fHeight = 0;
-	
 	CGFloat x = 0;
 	CGFloat y = 0;
 	CGPoint lineOrigins[kMaxLineOfFrame];
+	CGPoint linePtOrigins[kMaxLineOfFrame];
+	
 	//计算这一栏，有几行文字。
 	NSArray *lines = (NSArray*)CTFrameGetLines(pageFrame);
 	
@@ -679,15 +679,16 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		}
 		else
 		{
-			fHeight = (lineOrigins[nLineCount-1].y - 1)/nLineCount;
-			
+			[self getLineNewOrigins:pageFrame withRect:columnFrame withOut:linePtOrigins];
 			int i = 0;
 			for (id lineObj in lines)
 			{
 				CTLineRef line = (CTLineRef)lineObj;
 				
 				x = columnFrame.origin.x;
-				y = lineOrigins[i].y - fHeight*i;
+				//y = lineOrigins[i].y - fHeight*i;
+				y = linePtOrigins[i].y;
+				
 				CGContextSetTextPosition(context, x, y);
 				CTLineDraw(line, context);
 				
@@ -697,8 +698,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	}
 }
 
-- (void)getLineNewOrigins:(CTFrameRef)pageFrame withRect:(CGRect)columnFrame withOut:(CGPoint*)linePtOrigins
+- (BOOL)getLineNewOrigins:(CTFrameRef)pageFrame withRect:(CGRect)columnFrame withOut:(CGPoint*)linePtOrigins
 {
+	BOOL bRet = NO;
 	CGPoint lineOrigins[kMaxLineOfFrame];
 	
 	//计算这一栏，有几行文字。
@@ -707,7 +709,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	int nLineCount = [lines count];
 	if (nLineCount > 0 && nLineCount < kMaxLineOfFrame)
 	{
-		CGFloat fHeight = 0;
+		CGFloat fYOffset = 0;
 		
 		CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
 		
@@ -717,24 +719,40 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 			fLineHeight = (lineOrigins[0].y - lineOrigins[1].y);
 		}
 		
-		if (nLineCount < 2 || (lineOrigins[nLineCount-1].y > fLineHeight+10))
+		CGFloat lineSpace = self.layoutConfig.lineSpace;
+		CGFloat y = lineOrigins[nLineCount-1].y - 3;
+		if (nLineCount < 2 ||
+			((lineSpace - 3) < y && y < (lineSpace + 1)) || ///< 底部间距与lineSpace相差很小
+			(y > fLineHeight+3.0) ///< 底部间距超过一行，一般是最后一页，空白较多的情况
+			)
 		{
 			///< 章节的最后一页留有多于一行的空白，则不调整行间距
+			fYOffset = 0;
 		}
 		else
 		{
-			fHeight = (lineOrigins[nLineCount-1].y - 1)/nLineCount;
-			
-			int i = 0;
-			for (id lineObj in lines)
+			if (y < lineSpace)
 			{
-				linePtOrigins[i].x = columnFrame.origin.x;
-				linePtOrigins[i].y = lineOrigins[i].y - fHeight*i;
-				
-				i++;
+				fYOffset = (y - lineSpace)/(nLineCount - 1);
 			}
+			else
+			{
+				fYOffset = (y - self.layoutConfig.lineSpace)/(nLineCount);
+			}
+			bRet = YES;
+		}
+		
+		int i = 0;
+		for (id lineObj in lines)
+		{
+			linePtOrigins[i].x = columnFrame.origin.x;
+			linePtOrigins[i].y = lineOrigins[i].y - fYOffset*i; ///< 向下偏移fYOffset
+			
+			i++;
 		}
 	}
+	
+	return bRet;
 }
 
 ///< 测试接口
@@ -795,16 +813,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	///< 当前页面排版矩形
 	[self drawRect:context with:columnFrame];
 	
-	///< 在（0, 0)点绘制一个表示顶部的矩形
-	CGRect rectTest = columnFrame;
-	rectTest.origin.x = 0;
-	rectTest.origin.y = 0;
-	rectTest.size.width = columnFrame.origin.x;
-	rectTest.size.height = 100;
-	[self drawRect:context with:rectTest];
-	
 	// 每行文字绘制下边缘线, 查看文字绘制是否正常
-	
 	// Drawing lines with a white stroke color
 	CGContextSetRGBStrokeColor(context, 1.0, 0, 0, 1.0);
 	// Draw them with a 2.0 stroke width so they are a bit more visible.
@@ -817,9 +826,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	CGFloat y = columnFrame.origin.y;
 	//计算这一栏，有几行文字。
 	NSArray *lines = (NSArray*)CTFrameGetLines(pageFrame);
-	
 	CGPoint lineOrigins[kMaxLineOfFrame];
-	CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
 	
 	if ([lines count] >= kMaxLineOfFrame)
 	{
@@ -827,10 +834,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	}
 	
 	CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
-	return;
+	//return;
 	int i = 0;
 	CGRect aBounsRect[kMaxLineOfFrame];
 	CGRect imageBounsRect[kMaxLineOfFrame];
+	CGRect rectTest;
 	
 	for (id lineObj in lines)
 	{
@@ -839,6 +847,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		imageBounsRect[i] = CTLineGetImageBounds(line, context);///< 但是在iOS(iPhone/iPad)上这个函数的结果略有不同。
 		i++;
 	}
+	
+	CGPoint linePtOrigins[kMaxLineOfFrame];
+	BOOL bRet = [self getLineNewOrigins:pageFrame withRect:columnFrame withOut:linePtOrigins];
 	
 	NSString* frameShowText = [PageSplitRender getShowTextOfChapter:self.chapterTextContent withChapterName:self.chapterName andLayoutConfig:self.layoutConfig];
 	//查看每一行文字的起始位置，和包含几个文字。并提取某行文字内容
@@ -866,7 +877,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		
 //		lineRect.origin.x += lineOrigins[i].x;
 //		lineRect.origin.y += lineOrigins[i].y;
-		NSLog(@"CTLine ImageBounds:%@, %@", NSStringFromCGRect(lineRect), NSStringFromCGRect(aBounsRect[i]));
+//		NSLog(@"CTLine ImageBounds:%@, %@", NSStringFromCGRect(lineRect), NSStringFromCGRect(aBounsRect[i]));
+		NSLog(@"CTLine :%@, %@", NSStringFromCGPoint(lineOrigins[i]), NSStringFromCGRect(aBounsRect[i]));
 //		x = lineRect.origin.x;
 //		y = lineRect.origin.y;
 		
@@ -878,10 +890,16 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		rectTest = CGRectMake(x, y, 0, 0);
 		rectTest.size = lineRect.size;
 		///< 本行的文字矩形
-		[self drawRect:context with:rectTest];
+		//[self drawRect:context with:rectTest];
 		
 		///< 行文字的下边线
 		x = columnFrame.origin.x;
+		y = linePtOrigins[i].y;
+		if (bRet)
+		{
+			y -= 2; ///< 下移2px
+		}
+		
 		CGContextSetRGBStrokeColor(context, 1.0, 0, 0, 1.0);
 		// Draw a single line from left to right
 		CGContextMoveToPoint(context, x, y);
@@ -891,7 +909,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		CGContextStrokePath(context);
 		
 		///< 行号
-		NSString* text = [NSString stringWithFormat:@"%d", i];
+		x = columnFrame.origin.x;
+		NSString* text = [NSString stringWithFormat:@"%d,(%.1f, %.1f)", i, x, y];
 		[self drawString:context withText:text with:CGPointMake(columnFrame.origin.x, y)];
 		
 		CGContextStrokePath(context);

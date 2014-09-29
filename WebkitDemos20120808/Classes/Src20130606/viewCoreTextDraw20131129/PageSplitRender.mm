@@ -610,8 +610,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	//翻转坐标系统（文本原来是倒的要翻转下）
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-	CGContextTranslateCTM(context, 0, rect.size.height);
-	CGContextScaleCTM(context, 1.0, -1.0);
+//	CGContextTranslateCTM(context, 0, rect.size.height);
+//	CGContextScaleCTM(context, 1.0, -1.0);
 	
     CTFramesetterRef framesetter = m_frameSetter;
 	
@@ -631,7 +631,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     CGPathAddRect(framePath, &CGAffineTransformIdentity, columnFrame);
     CTFrameRef pageFrame = CTFramesetterCreateFrame(framesetter, textRange, framePath, NULL);
 //    CTFrameDraw(pageFrame, context);
+	
+	[self showPageEveryLineText:pageFrame with:frameShowText withChapterName:self.chapterName];
+	
 	[self CTLinesDraw:pageFrame with:context withRect:columnFrame];
+	
+	[self drawLineOfTextLine:context withRect:columnFrame withFrame:pageFrame];
 	
 	if (pageFrame)
 	{
@@ -682,9 +687,49 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 				CTLineRef line = (CTLineRef)lineObj;
 				
 				x = columnFrame.origin.x;
-				y = lineOrigins[i].y + fHeight;
+				y = lineOrigins[i].y - fHeight*i;
 				CGContextSetTextPosition(context, x, y);
 				CTLineDraw(line, context);
+				
+				i++;
+			}
+		}
+	}
+}
+
+- (void)getLineNewOrigins:(CTFrameRef)pageFrame withRect:(CGRect)columnFrame withOut:(CGPoint*)linePtOrigins
+{
+	CGPoint lineOrigins[kMaxLineOfFrame];
+	
+	//计算这一栏，有几行文字。
+	NSArray *lines = (NSArray*)CTFrameGetLines(pageFrame);
+	
+	int nLineCount = [lines count];
+	if (nLineCount > 0 && nLineCount < kMaxLineOfFrame)
+	{
+		CGFloat fHeight = 0;
+		
+		CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
+		
+		CGFloat fLineHeight = 0;
+		if (nLineCount >= 2)
+		{
+			fLineHeight = (lineOrigins[0].y - lineOrigins[1].y);
+		}
+		
+		if (nLineCount < 2 || (lineOrigins[nLineCount-1].y > fLineHeight+10))
+		{
+			///< 章节的最后一页留有多于一行的空白，则不调整行间距
+		}
+		else
+		{
+			fHeight = (lineOrigins[nLineCount-1].y - 1)/nLineCount;
+			
+			int i = 0;
+			for (id lineObj in lines)
+			{
+				linePtOrigins[i].x = columnFrame.origin.x;
+				linePtOrigins[i].y = lineOrigins[i].y - fHeight*i;
 				
 				i++;
 			}
@@ -702,7 +747,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 #ifdef ENABLE_Check_Page_Param
 
 ///< 打印当前页面各行文字的排版
-- (void)showPageEveryLineText:(CTFrameRef)frame with:(NSString*)curChapterText withChapterName:(NSString*)chapterName
+- (NSMutableString*)showPageEveryLineText:(CTFrameRef)frame with:(NSString*)curChapterText withChapterName:(NSString*)chapterName
 {
 	///< CTFrameRef frame = CTFramesetterCreateFrame(framesetter, textRange, framePath, NULL);
 	///< (int)CFArrayGetCount((CFArrayRef)CTFrameGetLines(frame));
@@ -719,7 +764,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		NSRange range = NSMakeRange(singleRange.location, singleRange.length);
 		range.length = singleRange.length;
 		//取得單行文字的起始位置，和包含幾個文字。
-		NSLog(@"lineNumber[%d], %ld,%ld", i, singleRange.location, singleRange.length);
+		//NSLog(@"lineNumber[%d], %ld,%ld", i, singleRange.location, singleRange.length);
 		i++;
 		
 		NSString* lineText = [curChapterText substringWithRange:range];
@@ -736,7 +781,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	//印出單行文字的起始位置，和包含幾個文字。
 	NSLog(@"\n%@\nchapter[%d], page[%d], 字[%d]\n %@", chapterName, 0, 0, [chapterLineStrs length], chapterLineStrs);
+	
+	return chapterLineStrs;
 }
+
 #endif
 
 #ifdef ENABLE_Check_Page_Param

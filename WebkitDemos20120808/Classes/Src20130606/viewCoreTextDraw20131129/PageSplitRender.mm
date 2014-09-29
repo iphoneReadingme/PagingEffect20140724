@@ -13,20 +13,20 @@
 
 #import <CoreText/CoreText.h>
 #import "PageSplitRender.h"
-//#import "NBDataProviderDefine.h"
-//#import "NovelBoxConfig.h"
-//#import "iUCCommon.h"
-//#import "DDLog.h"
-//#import "NSArray+ExceptionSafe.h"
+#import "NBDataProviderDefine.h"
+#import "NovelBoxConfig.h"
+#import "iUCCommon.h"
+#import "DDLog.h"
+#import "NSArray+ExceptionSafe.h"
 
 //#define USE_HTIME_DUMP
-//#import "HTime.h"
+#import "HTime.h"
 
-//#ifdef NDEBUG
-//static const int ddLogLevel = LOG_LEVEL_OFF;
-//#else
-//static const int ddLogLevel = LOG_LEVEL_WARN;
-//#endif
+#ifdef NDEBUG
+static const int ddLogLevel = LOG_LEVEL_OFF;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
 
 #if ! __has_feature(objc_arc)
 //[super dealloc];
@@ -50,8 +50,8 @@
 @property (nonatomic, assign)CTTextAlignment textAlignment;
 @property (nonatomic, assign)CGFloat fristlineindent;
 @property (nonatomic, assign)CGFloat lineSpace;
-@property (nonatomic, assign)CGFloat paragraphSpace;
-@property (nonatomic, assign)CGFloat paragraphSpaceBefore;
+@property (nonatomic, assign)CGFloat paragraphSpacing;
+@property (nonatomic, assign)CGFloat paragraphSpacingBefore;
 @end
 
 @implementation NBFTCoreTextStyle
@@ -62,11 +62,9 @@
 {
     CTFramesetterRef  m_frameSetter;
 }
-
 @property (nonatomic, retain) BookLayoutConfig * layoutConfig;
-//@property (nonatomic, retain) id<NBChapterItemProtocol> chapterItem;
-//@property (nonatomic, retain) NBChapterPagesInfo * pagesInfo;
 @property (nonatomic, retain) NSString * chapterTextContent;
+@property (nonatomic, retain) NSString * chapterName;
 
 @end
 
@@ -90,40 +88,39 @@
 	return bRet;
 }
 
-+ (NSString*)getChapterContentStr:(NSString*)content// withChapterItem:(id<NBChapterItemProtocol>)chapterItem
++ (NSString*)getChapterContentStr:(NSString*)content
 {
 	NSString *contentStr = content;
     
     if ((nil == contentStr) || (0 == [contentStr length]))
     {
-//        if (iUCCommon::is4inchDisplay())
+        if (iUCCommon::is4inchDisplay())
         {
             contentStr = [NSString stringWithFormat:@"　　\n\n\n\n\n\n\n\n                     本章内容为空"];
         }
-//        else
-//        {
-//            contentStr = [NSString stringWithFormat:@"　　\n\n\n\n\n\n\n               本章内容为空"];
-//        }
+        else
+        {
+            contentStr = [NSString stringWithFormat:@"　　\n\n\n\n\n\n\n               本章内容为空"];
+        }
     }
 	
 	return contentStr;
 }
 
-#ifdef PageSplitRender_memober
-+ (NBChapterPagesInfo*)splittingPagesForString:(NSString*)content withChapterItem:(id<NBChapterItemProtocol>)chapterItem andLayoutConfig:(BookLayoutConfig*)config
++ (NBChapterPagesInfo*)splittingPagesForString:(NSString*)content withChapterName:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
 {
     NBChapterPagesInfo * pagesInfo = [[[NBChapterPagesInfo alloc] init] autorelease];
     if (content && ([content length] > 0))
     {
-        NSString *contentStr = [PageSplitRender getChapterContentStr:content withChapterItem:chapterItem];
-        pagesInfo.pageItems = [self _splittingPagesForString:contentStr withChapterItem:chapterItem andLayoutConfig:config];
+        NSString *contentStr = [PageSplitRender getChapterContentStr:content];
+        pagesInfo.pageItems = [self _splittingPagesForString:contentStr withChapterName:chapterName andLayoutConfig:config];
     }
     
     if ((nil == pagesInfo.pageItems) || (0 == [pagesInfo.pageItems count]))
     {
         pagesInfo.isSplitError = YES;
         pagesInfo.errorSubstitute = SPLIT_ERROR_SUBTITUTE;
-        pagesInfo.pageItems = [self _splittingPagesForString:pagesInfo.errorSubstitute withChapterItem:chapterItem andLayoutConfig:config];
+        pagesInfo.pageItems = [self _splittingPagesForString:pagesInfo.errorSubstitute withChapterName:chapterName andLayoutConfig:config];
         assert([pagesInfo.pageItems count]);
     }
     
@@ -131,22 +128,24 @@
 }
 
 // 返回 NBPageItem array
-+ (NSMutableArray*)_splittingPagesForString:(NSString*)content withChapterItem:(id<NBChapterItemProtocol>)chapterItem andLayoutConfig:(BookLayoutConfig*)config
++ (NSMutableArray*)_splittingPagesForString:(NSString*)content withChapterName:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
 {
     NSMutableArray *pageArray = nil;
 	if ([content length] > 0)
 	{
 		//HTIME_DUMP_IF("splittingPagesForString", 50);
 		pageArray = [[[NSMutableArray alloc] init] autorelease];
-		NSString* curChapterText = [PageSplitRender getShowTextOfChapter:content withChapterName:[chapterItem chapterName] andLayoutConfig:config];
 		
-		CTFramesetterRef framesetter = [PageSplitRender formatString:content withChapterItem:chapterItem andLayoutConfig:config];
+		NSString* frameShowText = [PageSplitRender getShowTextOfChapter:content withChapterName:chapterName andLayoutConfig:config];
+		UIEdgeInsets contentInset = config.contentInset;
+		
+		CTFramesetterRef framesetter = [PageSplitRender formatString:content withChapterName:chapterName andLayoutConfig:config];
 		CFIndex textRangeStart = 0;
 		BOOL bBreak = NO;
 		for(size_t i = 0; i < INT16_MAX; i++)
 		{
 			CGRect columnFrame = CGRectMake(i*config.pageWidth, 0, config.pageWidth, config.pageHeight);
-			columnFrame = UIEdgeInsetsInsetRect(columnFrame, config.contentInset);
+			columnFrame = UIEdgeInsetsInsetRect(columnFrame, contentInset);
 			CGMutablePathRef framePath = CGPathCreateMutable();
 			CGPathAddRect(framePath, &CGAffineTransformIdentity, columnFrame);
 			CFRange textRange = CFRangeMake(textRangeStart, 0);
@@ -160,9 +159,9 @@
 			[pageArray addObject:item];
 			textRangeStart += visibleRange.length;
 			
-			if(textRangeStart >= [curChapterText length]) ///< 删除最后一个全空页
+			if(textRangeStart >= [frameShowText length]) ///< 删除最后一个全空页
 			{
-				NSString* strEnd = [curChapterText substringFromIndex:visibleRange.location];
+				NSString* strEnd = [frameShowText substringFromIndex:visibleRange.location];
 				strEnd = [strEnd stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 				DDLogVerbose(@"最后一页面[%d]", (int)i);
 				if ((0 == [strEnd length]) || ![PageSplitRender isVisibleString:strEnd])
@@ -196,7 +195,6 @@
 	
     return pageArray;
 }
-#endif // PageSplitRender_memober
 
 ///< 返回当前章节显示的文本内容（上下翻页时第一页面带章节标题名）
 + (NSString*)getShowTextOfChapter:(NSString *)contentStr withChapterName:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
@@ -219,44 +217,41 @@
 	{
 		return nil;
 	}
-	//HTIME_DUMP_IF("PageSplitRender: formatString", 20);
 	
 	BOOL bShowTitle = (config.showBigTitle && [chapterName length] > 0);   ///< 文字排版时是否显示标题
 	int nStart = 0;
 	int nTextLength = [contentStr length];  ///< 章节内容文字长度（不含标题文字）
 	
-	NSString* curChapterText = [PageSplitRender getShowTextOfChapter:contentStr withChapterName:chapterName andLayoutConfig:config];
-	if (bShowTitle)
-	{
-		nStart = [chapterName length] + 2; ///< 补充2个换行符:　1.'\n',章节标题与章节内容之间换行; 2. '\n',标题与章节内容之间的间距（以一个空行来实现）
-		//chapterText = [NSString stringWithFormat:@"%@\n\n%@", chapterItem.chapterName, contentStr];
-	}
-	
-    NSMutableAttributedString *attributedString = [[[NSMutableAttributedString alloc] initWithString:curChapterText] autorelease];
+	NSString* frameShowText = [PageSplitRender getShowTextOfChapter:contentStr withChapterName:chapterName andLayoutConfig:config];
+    NSMutableAttributedString *attributedString = [[[NSMutableAttributedString alloc] initWithString:frameShowText] autorelease];
     
 	if (bShowTitle)
 	{
 		///< 格式化标题
-		[PageSplitRender formatChapterTitle:attributedString withChapterName:chapterName andLayoutConfig:config];
+		NSRange range = NSMakeRange(0, [chapterName length]);
+		[PageSplitRender formatChapterTitle:attributedString with:range andLayoutConfig:config];
 	}
 	
-	// ucnovel离线小说首行没缩进，需要特殊处理
-	config.firstLineHeadIndent = 32;
-	
 	///< 格式化章节内容
+	if (bShowTitle)
+	{
+		///< 补充2个换行符:　1.'\n',章节标题与章节内容之间换行; 2. '\n',标题与章节内容之间的间距（以一个空行来实现）
+		nStart = [chapterName length] + 2;
+	}
 	NSRange range = NSMakeRange(nStart, nTextLength);
 	[PageSplitRender formatChapterContent:attributedString with:range andLayoutConfig:config];
-	config.firstLineHeadIndent = 0;
 	
 	///< 创建framesetter
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((DTCFAttributedStringRef)attributedString);
     return framesetter;
 }
 
-+ (void)formatChapterTitle:(NSMutableAttributedString*)attributedString withChapterName:(NSString*)chapterName andLayoutConfig:(BookLayoutConfig*)config
++ (void)formatChapterTitle:(NSMutableAttributedString*)attributedString with:(NSRange)range andLayoutConfig:(BookLayoutConfig*)config
 {
-	int nTitleLength = [chapterName length];
-	NSRange range = NSMakeRange(0, nTitleLength);
+	if (range.length < 1)
+	{
+		return;
+	}
 	
 	///< 1. 标题颜色
 	UIColor* colorText = [UIColor blueColor];
@@ -287,8 +282,8 @@
 		stype.textAlignment = kCTLeftTextAlignment;
 		stype.fristlineindent = 0.0f;
 		stype.lineSpace = config.lineSpace;
-		stype.paragraphSpace = config.paragraphSpacing;
-		stype.paragraphSpaceBefore = config.paragraphSpacing;
+		stype.paragraphSpacing = config.paragraphSpacing;
+		stype.paragraphSpacingBefore = config.paragraphSpacingBefore;
 		
 		//设置对齐方式、行间距、首行缩进
 		[PageSplitRender formatTextAttributes:attributedString with:range withStyle:stype];
@@ -325,8 +320,8 @@
 		stype.textAlignment = kCTLeftTextAlignment;
 		stype.fristlineindent = config.firstLineHeadIndent;
 		stype.lineSpace = config.lineSpace;
-		stype.paragraphSpace = config.paragraphSpacing;
-		stype.paragraphSpaceBefore = config.paragraphSpacing;
+		stype.paragraphSpacing = config.paragraphSpacing;
+		stype.paragraphSpacingBefore = config.paragraphSpacingBefore;
 		
 		//设置对齐方式、行间距、首行缩进
 		[PageSplitRender formatTextAttributes:attributedString with:range withStyle:stype];
@@ -486,18 +481,18 @@
     lineSpacingSet.valueSize = sizeof(lineSpace);
 	
 	///< 6. 设置文本段间距
-    CGFloat paragraphSpace = textStyle.paragraphSpace;
+    CGFloat paragraphSpacing = textStyle.paragraphSpacing;
     CTParagraphStyleSetting paragraphSpacingSet;
     paragraphSpacingSet.spec = kCTParagraphStyleSpecifierParagraphSpacing;
-    paragraphSpacingSet.value = &paragraphSpace;
-    paragraphSpacingSet.valueSize = sizeof(paragraphSpace);
+    paragraphSpacingSet.value = &paragraphSpacing;
+    paragraphSpacingSet.valueSize = sizeof(paragraphSpacing);
 	
 	///< 7. 设置段前间距
-    CGFloat paragraphSpaceBefore = textStyle.paragraphSpaceBefore;
+    CGFloat paragraphSpacingBefore = textStyle.paragraphSpacingBefore;
     CTParagraphStyleSetting paragraphSpacingBeforeSet;
     paragraphSpacingBeforeSet.spec = kCTParagraphStyleSpecifierParagraphSpacingBefore;
-    paragraphSpacingBeforeSet.value = &paragraphSpaceBefore;
-    paragraphSpacingBeforeSet.valueSize = sizeof(paragraphSpaceBefore);
+    paragraphSpacingBeforeSet.value = &paragraphSpacingBefore;
+    paragraphSpacingBeforeSet.valueSize = sizeof(paragraphSpacingBefore);
 	
     //组合设置
     CTParagraphStyleSetting settings[] = {
@@ -533,7 +528,7 @@
     NSMutableArray *newArray = [[[NSMutableArray alloc] initWithArray:array] autorelease];
     
     for (int i = newArray.count-1; i >= 0; i--) {
-        NSString *paraStr = [newArray objectAtIndex:i];
+        NSString *paraStr = [newArray safe_ObjectAtIndex:i];
         paraStr = [paraStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if ([paraStr isEqualToString:@""]) {
             [newArray removeObjectAtIndex:i];
@@ -550,34 +545,25 @@
     return newContentStr;
 }
 
-#ifdef PageSplitRender_memober
-- (id)initWithLayoutConfig:(BookLayoutConfig*)config andChapterItem:(id<NBChapterItemProtocol>)chapterItem andPagesInfo:(NBChapterPagesInfo*)pagesInfo andChapterContent:(NSString*)content
+- (id)initWithLayoutConfig:(BookLayoutConfig*)config chapterName:(NSString*)chapterName chapterText:(NSString*)chapterText
 {
-    assert(config && chapterItem && pagesInfo);
+    assert(config && chapterName);
     self = [super init];
     if (self)
     {
         self.layoutConfig = config;
-        self.chapterItem = chapterItem;
-        self.pagesInfo = pagesInfo;
+		self.chapterName = chapterName;
         
 		NSString * contentStr = nil;
-        if (pagesInfo.isSplitError)
-        {
-            contentStr = pagesInfo.errorSubstitute;
-        }
-        else
-        {
-            if (content && [content length])
-            {
-                contentStr = [PageSplitRender getChapterContentStr:content withChapterItem:chapterItem];
-            }
-        }
-        
+		if (chapterText && [chapterText length])
+		{
+			contentStr = [PageSplitRender getChapterContentStr:chapterText];
+		}
+		
         if (contentStr)
         {
             self.chapterTextContent = contentStr;
-//            m_frameSetter = [PageSplitRender formatString:contentStr withChapterItem:chapterItem andLayoutConfig:config];
+			m_frameSetter = [PageSplitRender formatString:contentStr withChapterName:chapterName andLayoutConfig:config];
         }
     }
     
@@ -587,8 +573,7 @@
 - (void)dealloc
 {
     self.layoutConfig = nil;
-    self.chapterItem = nil;
-    self.pagesInfo = nil;
+	self.chapterName = nil;
     self.chapterTextContent = nil;
     if (m_frameSetter)
     {
@@ -599,45 +584,42 @@
     [super dealloc];
 }
 
-- (BOOL)drawInContext:(CGContextRef)context withRect:(CGRect)rect andPageIndex:(int)pageIndex
+- (BOOL)drawInContext:(CGContextRef)context withRect:(CGRect)rect withStart:(int)nTextStartLocation withLength:(int)nPageTextLength
 {
-    assert((pageIndex >= 0) && (pageIndex < [self.pagesInfo getPagesCount]));
-    
-    NBPageItem* pageItem = [self.pagesInfo getPageItem:pageIndex];
-    assert(pageItem);
-    if ((nil == pageItem))
+    //HTIME_DUMP_IF("PageSplitRender:drawInContext", 20);
+	if (nil == m_frameSetter)
+	{
+		return NO;
+	}
+	
+	NSString* frameShowText = [PageSplitRender getShowTextOfChapter:self.chapterTextContent withChapterName:self.chapterName andLayoutConfig:self.layoutConfig];
+    if (nTextStartLocation >= [frameShowText length])
     {
+        DDLogError(@"!!!drawInContext，绘制文本超界。");
+		assert(0);
+		
         return NO;
     }
 	
-	HTIME_DUMP_IF("PageSplitRender:drawInContext", 20);
+	if (nTextStartLocation + nPageTextLength >= [frameShowText length])
+	{
+		nPageTextLength = [frameShowText length] - nTextStartLocation;
+	}
 	
-    CTFramesetterRef framesetter = m_frameSetter;
-	framesetter = [PageSplitRender formatString:self.chapterTextContent withChapterItem:self.chapterItem andLayoutConfig:self.layoutConfig];
-	if ((nil == framesetter))
-    {
-        return NO;
-    }
-    
-	NSString* curChapterText = [PageSplitRender getShowTextOfChapter:self.chapterTextContent withChapterName:[self.chapterItem chapterName] andLayoutConfig:self.layoutConfig];
+	CFRange textRange = CFRangeMake(nTextStartLocation, nPageTextLength);
 	
-    CFIndex textRangeStart = pageItem.startInChapter;
-    CFRange textRange = CFRangeMake(textRangeStart, 0);
-    if (textRangeStart >= [curChapterText length])
-    {
-        DDLogVerbose(@"!!!drawInContext，绘制文本超界。");
-        return NO;
-    }
-    
 	//翻转坐标系统（文本原来是倒的要翻转下）
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
 	CGContextTranslateCTM(context, 0, rect.size.height);
 	CGContextScaleCTM(context, 1.0, -1.0);
-    
+	
+    CTFramesetterRef framesetter = m_frameSetter;
+	
+	UIEdgeInsets contentInset = self.layoutConfig.contentInset;
 	// 由于在绘制文字时, 坐标系会沿X轴发生翻转, 故Y方向需要调换
-	UIEdgeInsets edgeInsets = self.layoutConfig.contentInset;
-	edgeInsets.top = self.layoutConfig.contentInset.bottom;
-	edgeInsets.bottom = self.layoutConfig.contentInset.top;
+	UIEdgeInsets edgeInsets = contentInset;
+	edgeInsets.top = contentInset.bottom;
+	edgeInsets.bottom = contentInset.top;
 	
     CGRect columnFrame = rect;
     columnFrame.size = CGSizeMake(self.layoutConfig.pageWidth, self.layoutConfig.pageHeight);
@@ -647,73 +629,33 @@
 	
     CGMutablePathRef framePath = CGPathCreateMutable();
     CGPathAddRect(framePath, &CGAffineTransformIdentity, columnFrame);
-    CTFrameRef contentFrame = CTFramesetterCreateFrame(framesetter, textRange, framePath, NULL);
-    CTFrameDraw(contentFrame, context);
+    CTFrameRef pageFrame = CTFramesetterCreateFrame(framesetter, textRange, framePath, NULL);
+    CTFrameDraw(pageFrame, context);
 	
-	if (contentFrame)
+	[self drawLineOfTextLine:context withRect:columnFrame withFrame:pageFrame];
+	if (pageFrame)
 	{
-		CFRelease(contentFrame);
+		CFRelease(pageFrame);
 	}
 	if (framePath)
 	{
 		CFRelease(framePath);
 	}
-    if (framesetter)
-    {
-//        CFRelease(framesetter);
-    }
-	
+    
     return YES;
 }
-#else
-- (void)dealloc
-{
-    self.layoutConfig = nil;
-    
-    self.chapterTextContent = nil;
-    if (m_frameSetter)
-    {
-        CFRelease(m_frameSetter);
-        m_frameSetter = nil;
-    }
-    
-    [super dealloc];
-}
-
-#endif
 
 ///< 测试接口
 #pragma mark -==页面文字排版测试
-//#define ENABLE_Check_Page_Param   // 启用页面参数查看宏
+#define ENABLE_Check_Page_Param   // 启用页面参数查看宏
 ///< 测试代码：(显示当前页面的排版文字)
-///< [self showPageEveryLineText:contentFrame with:curChapterText withChapterItem:self.chapterItem andPageIndex:pageIndex];
-///< 绘制文字时格式化：	framesetter = [PageSplitRender formatString:self.chapterTextContent withChapterItem:self.chapterItem andLayoutConfig:self.layoutConfig];
+///< [self showPageEveryLineText:contentFrame with:curChapterText withChapterName:chapterName];
+///< 绘制文字时格式化：	framesetter = [PageSplitRender formatString:self.chapterTextContent withChapterName:chapterName andLayoutConfig:self.layoutConfig];
 
 #ifdef ENABLE_Check_Page_Param
-- (void)testPageFrame:(NSString*)curChapterText andPageIndex:(int)pageIndex
-{
-    NBPageItem* pageItem = [self.pagesInfo getPageItem:pageIndex];
-	
-	int length = 20;
-	NSRange range = NSMakeRange(pageItem.startInChapter, length);
-	NSLog(@"\n\n\n");
-	if (pageItem.length < 160)
-	{
-		length = [curChapterText length] - pageItem.startInChapter;
-	}
-	
-	range = NSMakeRange(pageItem.startInChapter, length);
-	NSLog(@"==[pageItem.chapterIndex=%d], pageIndex=%d==", pageItem.chapterIndex, pageItem.pageIndex);
-	NSLog(@"==[pageItem.startInChapter=%d], length=%d==", pageItem.startInChapter, pageItem.length);
-	NSLog(@"\n%@\n %@\n.....\n", [self.chapterItem chapterName], [curChapterText substringWithRange:range]);
-	if (pageItem.pageIndex == [self.pagesInfo getPagesCount] - 1)
-	{
-		NSLog(@"self.chapterText curChapterText=\n%@", curChapterText);
-	}
-}
 
 ///< 打印当前页面各行文字的排版
-- (void)showPageEveryLineText:(CTFrameRef)frame with:(NSString*)curChapterText withChapterItem:(id<NBChapterItemProtocol>)chapterItem andPageIndex:(int)pageIndex
+- (void)showPageEveryLineText:(CTFrameRef)frame with:(NSString*)curChapterText withChapterName:(NSString*)chapterName
 {
 	///< CTFrameRef frame = CTFramesetterCreateFrame(framesetter, textRange, framePath, NULL);
 	///< (int)CFArrayGetCount((CFArrayRef)CTFrameGetLines(frame));
@@ -746,12 +688,177 @@
 	}
 	
 	//印出單行文字的起始位置，和包含幾個文字。
-	NBPageItem* pageItem = [self.pagesInfo getPageItem:pageIndex];
-	NSLog(@"\n%@\nchapter[%d], page[%d], 字[%d]\n %@", [chapterItem chapterName], pageItem.chapterIndex, pageItem.pageIndex, [chapterLineStrs length], chapterLineStrs);
+	NSLog(@"\n%@\nchapter[%d], page[%d], 字[%d]\n %@", chapterName, 0, 0, [chapterLineStrs length], chapterLineStrs);
 }
 #endif
 
-#ifdef ENABLE_Check_Page_Param_XX
+#ifdef ENABLE_Check_Page_Param
+
+///< [self drawLineOfTextLine:context withRect:columnFrame withFrame:pageFrame];
+- (void)drawLineOfTextLine:(CGContextRef)context withRect:(CGRect)columnFrame withFrame:(CTFrameRef)pageFrame
+{
+	///< 当前页面排版矩形
+	[self drawRect:context with:columnFrame];
+	
+	///< 在（0, 0)点绘制一个表示顶部的矩形
+	CGRect rectTest = columnFrame;
+	rectTest.origin.x = 0;
+	rectTest.origin.y = 0;
+	rectTest.size.width = columnFrame.origin.x;
+	rectTest.size.height = 100;
+	[self drawRect:context with:rectTest];
+	
+	// 每行文字绘制下边缘线, 查看文字绘制是否正常
+	
+	// Drawing lines with a white stroke color
+	CGContextSetRGBStrokeColor(context, 1.0, 0, 0, 1.0);
+	// Draw them with a 2.0 stroke width so they are a bit more visible.
+	CGContextSetLineWidth(context, 1.0);
+	
+	// Restore the previous drawing state, and save it again.
+	CGContextSaveGState(context);
+	
+	CGFloat x = 0;
+	CGFloat y = columnFrame.origin.y;
+	//计算这一栏，有几行文字。
+	NSArray *lines = (NSArray*)CTFrameGetLines(pageFrame);
+	
+//	int lineCount = [lines count];
+	CGPoint lineOrigins[21];
+	CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
+	
+	int i = 0;
+	CGRect aBounsRect[21];
+	CGRect imageBounsRect[21];
+	
+	if ([lines count] >= 21)
+	{
+		return;
+	}
+	
+	for (id lineObj in lines)
+	{
+		CTLineRef line = (CTLineRef)lineObj;
+		aBounsRect[i]= CTLineGetBoundsWithOptions(line, kCTLineBoundsUseOpticalBounds);
+		imageBounsRect[i] = CTLineGetImageBounds(line, context);///< 但是在iOS(iPhone/iPad)上这个函数的结果略有不同。
+		i++;
+	}
+	
+	NSString* frameShowText = [PageSplitRender getShowTextOfChapter:self.chapterTextContent withChapterName:self.chapterName andLayoutConfig:self.layoutConfig];
+	//查看每一行文字的起始位置，和包含几个文字。并提取某行文字内容
+	i = 0;
+	for (id lineObj in lines)
+	{
+		CTLineRef line = (CTLineRef)lineObj;
+		
+		CFRange singleRange=CTLineGetStringRange(line);
+		NSRange range = NSMakeRange(singleRange.location, singleRange.length);
+		range.length = singleRange.length;
+		//取得單行文字的起始位置，和包含幾個文字。
+		//NSLog(@"lineNumber[%d], %ld,%ld", i, singleRange.location, singleRange.length);
+		NSString* lineText = nil;
+		if (range.location >= [frameShowText length] || range.location + range.length > [frameShowText length])
+		{
+			assert(0);
+		}
+		
+		lineText = [frameShowText substringWithRange:range];
+		NSLog(@"lineNumber[%d], %ld,%ld, %@", i, singleRange.location, singleRange.length, lineText);
+		
+		CGRect lineRect = aBounsRect[i];
+		lineRect = imageBounsRect[i];
+		
+//		lineRect.origin.x += lineOrigins[i].x;
+//		lineRect.origin.y += lineOrigins[i].y;
+		NSLog(@"CTLine ImageBounds:%@, %@", NSStringFromCGRect(lineRect), NSStringFromCGRect(aBounsRect[i]));
+//		x = lineRect.origin.x;
+//		y = lineRect.origin.y;
+		
+//		x = lineOrigins[i].x;
+		y = lineOrigins[i].y;
+		x = columnFrame.origin.x;
+		
+		lineRect = aBounsRect[i];
+		rectTest = CGRectMake(x, y, 0, 0);
+		rectTest.size = lineRect.size;
+		///< 本行的文字矩形
+		[self drawRect:context with:rectTest];
+		
+		///< 行文字的下边线
+		x = columnFrame.origin.x;
+		CGContextSetRGBStrokeColor(context, 1.0, 0, 0, 1.0);
+		// Draw a single line from left to right
+		CGContextMoveToPoint(context, x, y);
+		
+		x += columnFrame.size.width;
+		CGContextAddLineToPoint(context, x, y);
+		CGContextStrokePath(context);
+		
+		///< 行号
+		NSString* text = [NSString stringWithFormat:@"%d", i];
+		[self drawString:context withText:text with:CGPointMake(columnFrame.origin.x, y)];
+		
+		CGContextStrokePath(context);
+		
+		i++;
+	}
+	
+	// Restore the previous drawing state, and save it again.
+	CGContextSaveGState(context);
+	
+}
+
+/*
+ 
+ //CTLineGetImageBounds的应用，
+ 获取一行文字的范围， 就是指把这一行文字点有的像素矩阵作为一个image图片， 来得到整个矩形区域
+ //相对于每一行基线原点的偏移量和宽高（例如：{{1.2， -2.57227}, {208.025, 19.2523}}，
+ 就是相对于本身的基线原点向右偏移1.2个单位，向下偏移2.57227个单位，后面是宽高）
+ CGRect lineBounds = CTLineGetImageBounds((CTLineRef)oneLine, context);
+ 
+ //获取一行文字最佳可视范围（会把所有文字都包含进去）
+ //    CGRect lineRect = CTLineGetImageBounds(firstLine, context);
+ //    NSLog(@"整行的范围:%@",NSStringFromCGRect(lineRect));
+ 
+ //获取一行中上行高(ascent)，下行高(descent)，行距(leading),整行高为(ascent+|descent|+leading) 返回值为整行字符串长度占有的像素宽度。
+ //    CGFloat asc,des,lead;
+ //    double lineWidth = CTLineGetTypographicBounds(firstLine, &asc, &des, &lead);
+ //    NSLog(@"ascent = %f,descent = %f,leading = %f,lineWidth = %f",asc,des,lead,lineWidth);
+ 
+ 
+ */
+- (void)drawRect:(CGContextRef)context with:(CGRect)columnFrame
+{
+	// Restore the previous drawing state, and save it again.
+	CGContextSaveGState(context);
+	
+	///< 排版区域的边界矩形
+	CGContextSetRGBStrokeColor(context, 0, 0, 1.0, 1.0);
+	
+	CGContextMoveToPoint(context, columnFrame.origin.x, columnFrame.origin.y);
+	CGContextAddRect(context, columnFrame);
+	
+	CGContextStrokePath(context);
+	// Restore the previous drawing state, and save it again.
+	CGContextSaveGState(context);
+}
+
+- (void)drawString:(CGContextRef)context withText:(NSString*)text with:(CGPoint)pt
+{
+	// Restore the previous drawing state, and save it again.
+	CGContextSaveGState(context);
+	
+	CGContextSelectFont(context, "Helvetica", 12.0, kCGEncodingMacRoman);
+	///< 排版区域的边界矩形
+	
+	CGContextSetRGBFillColor(context, 1.0, 0, 0, 1.0);
+	CGContextSetTextDrawingMode(context, kCGTextFill);
+	CGContextShowTextAtPoint(context, pt.x, pt.y, [text UTF8String], [text length]);
+	
+	// Restore the previous drawing state, and save it again.
+	CGContextSaveGState(context);
+}
+
 - (void)drawScaleLine:(CGContextRef)context withRect:(CGRect)rect
 {
 	// 绘制刻度线, 查看文字绘制是否正常

@@ -458,6 +458,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 + (void)formatTextAttributes:(NSMutableAttributedString*)attributedString with:(NSRange &)range withStyle:(NBFTCoreTextStyle*)textStyle
 {
+	///< 2. 换行模式
+    CTParagraphStyleSetting lineBreakMode;
+    CTLineBreakMode lineBreak = kCTLineBreakByWordWrapping; //出现在单词边界时起作用，如果该单词不在能在一行里显示时，整体换行。此为段的默认值。
+    lineBreakMode.spec = kCTParagraphStyleSpecifierLineBreakMode;
+    lineBreakMode.valueSize = sizeof(CTLineBreakMode);
+    lineBreakMode.value = &lineBreak;
+	
     ///< 3. 创建文本对齐方式
     CTTextAlignment textAlignment = kCTJustifiedTextAlignment;//这种对齐方式会自动调整，使左右始终对齐
 	textAlignment = textStyle.textAlignment;
@@ -632,11 +639,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     CTFrameRef pageFrame = CTFramesetterCreateFrame(framesetter, textRange, framePath, NULL);
 //    CTFrameDraw(pageFrame, context);
 	
-	[self showPageEveryLineText:pageFrame with:frameShowText withChapterName:self.chapterName];
-	
 	[self CTLinesDraw:pageFrame with:context withRect:columnFrame];
-	
-	[self drawLineOfTextLine:context withRect:columnFrame withFrame:pageFrame];
 	
 	if (pageFrame)
 	{
@@ -666,27 +669,20 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	{
 		CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
 		
-		CGFloat fLineHeight = 0;
-		if (nLineCount >= 2)
+		BOOL bRet = [self getLineNewOrigins:pageFrame withRect:columnFrame withOut:linePtOrigins];
+		if (!bRet)
 		{
-			fLineHeight = (lineOrigins[0].y - lineOrigins[1].y);
-		}
-		
-		if (nLineCount < 2 || (lineOrigins[nLineCount-1].y > fLineHeight+10))
-		{
-			///< 章节的最后一页留有多于一行的空白，则不调整行间距
+			///< 不需要调整行间距时，直接绘制
 			CTFrameDraw(pageFrame, context);
 		}
 		else
 		{
-			[self getLineNewOrigins:pageFrame withRect:columnFrame withOut:linePtOrigins];
 			int i = 0;
 			for (id lineObj in lines)
 			{
 				CTLineRef line = (CTLineRef)lineObj;
 				
 				x = columnFrame.origin.x;
-				//y = lineOrigins[i].y - fHeight*i;
 				y = linePtOrigins[i].y;
 				
 				CGContextSetTextPosition(context, x, y);
@@ -720,7 +716,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 		}
 		
 		CGFloat lineSpace = self.layoutConfig.lineSpace;
-		CGFloat y = lineOrigins[nLineCount-1].y - 3;
+		CGFloat y = lineOrigins[nLineCount-1].y - 2.5;
 		if (nLineCount < 2 ||
 			((lineSpace - 3) < y && y < (lineSpace + 1)) || ///< 底部间距与lineSpace相差很小
 			(y > fLineHeight+3.0) ///< 底部间距超过一行，一般是最后一页，空白较多的情况
@@ -757,7 +753,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 ///< 测试接口
 #pragma mark -==页面文字排版测试
-#define ENABLE_Check_Page_Param   // 启用页面参数查看宏
+//#define ENABLE_Check_Page_Param   // 启用页面参数查看宏
 ///< 测试代码：(显示当前页面的排版文字)
 ///< [self showPageEveryLineText:contentFrame with:curChapterText withChapterName:chapterName];
 ///< 绘制文字时格式化：	framesetter = [PageSplitRender formatString:self.chapterTextContent withChapterName:chapterName andLayoutConfig:self.layoutConfig];
@@ -812,7 +808,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
 	///< 当前页面排版矩形
 	[self drawRect:context with:columnFrame];
-	
+	return;
 	// 每行文字绘制下边缘线, 查看文字绘制是否正常
 	// Drawing lines with a white stroke color
 	CGContextSetRGBStrokeColor(context, 1.0, 0, 0, 1.0);

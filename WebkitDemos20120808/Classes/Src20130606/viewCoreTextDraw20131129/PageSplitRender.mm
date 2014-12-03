@@ -11,9 +11,11 @@
  ***************************************************************************************
  **/
 
+#ifdef  Enable_test
+
 #import <CoreText/CoreText.h>
 #import "PageSplitRender.h"
-#import "NBDataProviderDefine.h"
+//#import "NBDataProviderDefine.h"
 #import "NovelBoxConfig.h"
 #import "iUCCommon.h"
 #import "DDLog.h"
@@ -1023,3 +1025,4 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @end
 
+#endif

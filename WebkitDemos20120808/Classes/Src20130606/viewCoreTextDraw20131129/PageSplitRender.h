@@ -11,6 +11,7 @@
  ***************************************************************************************
  **/
 
+#ifdef  Enable_test
 //#define PageSplitRender_memober
 
 #import "BookLayoutConfig.h"
@@ -38,4 +39,4 @@
 
 @end
 
-
+#endif

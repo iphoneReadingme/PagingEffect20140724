@@ -10,7 +10,9 @@
 #define kIconViewHideing   @""
 
 ///< 私有方法
-@interface DemoViewCALayer (DemoViewCALayer_Private)
+@interface DemoViewCALayer()// (DemoViewCALayer_Private)
+
+@property (nonatomic, retain) UIImageView *leftIcon;
 
 - (void)addSubViews:(CGRect)frame;
 - (void)addBgView:(CGRect)frame;
@@ -70,9 +72,37 @@
 	m_pImgView = nil;
 }
 
+- (void)addSubViews:(CGRect)frame
+{
+	CGSize size = frame.size;
+	size.height = 2048;
+	self.contentSize = size;
+	
+	[self addSubLayer];
+	[self addImagelayer];
+	[self addImageView];
+	
+	[self addLabel];
+	[self addUISlider];
+	[self addButtons];
+	
+	[self addBgView:frame];
+}
+
 - (void)addBgView:(CGRect)frame
 {
+	CGRect rect = CGRectMake(0, 60, 80, 60);
+	UIView* pView = [[[UIView alloc] initWithFrame:rect] autorelease];
+	pView.backgroundColor = [UIColor whiteColor];
+	[self addSubview:pView];
 	
+	CGRect imgRect = CGRectMake(10, 10, 30, 30);
+	imgRect.origin.x = (rect.size.width - imgRect.size.width)*0.5;
+	imgRect.origin.y = (rect.size.height - imgRect.size.height)*0.5;
+	UIImageView* imgView = [[[UIImageView alloc] initWithFrame:imgRect] autorelease];
+	imgView.backgroundColor = [UIColor grayColor];
+	[pView addSubview:imgView];
+	self.leftIcon = imgView;
 }
 
 // =================================================================
@@ -197,22 +227,6 @@
 }
 
 
-- (void)addSubViews:(CGRect)frame
-{
-	CGSize size = frame.size;
-	size.height = 2048;
-	self.contentSize = size;
-	
-	[self addBgView:frame];
-	[self addSubLayer];
-	[self addImagelayer];
-	[self addImageView];
-	
-	[self addLabel];
-	[self addUISlider];
-	[self addButtons];
-}
-
 
 // =================================================================
 #pragma mark-
@@ -271,9 +285,10 @@
 
 - (void)onButtonClickEvent:(UIButton*)sender
 {
+	[self executeAnimation:self.leftIcon];
 	
-	self.backgroundColor = [UIColor clearColor];
-	[self add3DTransformView];
+//	self.backgroundColor = [UIColor clearColor];
+//	[self add3DTransformView];
 }
 
 #pragma mark -== 3D动画
@@ -293,6 +308,53 @@
 - (void)onButtonBack
 {
 	[self remove3DTransformView];
+}
+
+/*
+ Keyframe Animation 关键帧动画
+ 关键帧动画（CAKeyframeAnimation）是一种可以替代基本动画的动画（CABasicAnimation）;它们都是CAPropertyAnimation的子类，它们都以相同的方式使用。不同的是，关键帧动画，除了可以指定起点和终点的值，也可以规定该动画的各个阶段（帧）的值。这相当于设置动画的属性值（一个NSArray）那么简单。
+ 
+ */
+#pragma mark - == Keyframe Animation 关键帧动画
+- (void)startAnimation
+{
+#ifdef _DEBUG
+	///< 测试动画调用接口
+	[self executeAnimation:self.leftIcon];
+#endif
+}
+
+- (void)executeAnimation:(UIView*)pView
+{
+	//	pView.enabled = NO;
+	[UIView animateWithDuration:0.15 animations:^{
+		pView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+	} completion:^(BOOL finished) {
+		[UIView animateWithDuration:0.15 animations:^{
+			pView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+		} completion:^(BOOL finished) {
+			//[self setAddBtnState:NO];
+			[UIView animateWithDuration:0.02 animations:^{
+				pView.transform = CGAffineTransformMakeScale(1.09, 1.09);
+			} completion:^(BOOL finished) {
+				//[self.addToBookShelfBtn startAnimation];
+				[UIView animateWithDuration:0.1 animations:^{
+					pView.transform = CGAffineTransformMakeScale(0.97, 0.97);
+				} completion:^(BOOL finished) {
+					[UIView animateWithDuration:0.2 animations:^{
+						pView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+					} completion:^(BOOL finished) {
+						//						pView.enabled = YES;
+					}];
+				}];
+			}];
+		}];
+	}];
+}
+
+- (void)executeAnimation2:(UIView*)pView
+{
+	
 }
 
 @end

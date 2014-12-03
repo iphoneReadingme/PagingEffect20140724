@@ -193,7 +193,7 @@
 		return nil;
 	}
 	CTFramesetterRef framesetter = nil;
-	framesetter = [PageSplitRender formatString:contentStr withChapterName:chapterName andLayoutConfig:self.layoutConfig];
+//	framesetter = [PageSplitRender formatString:contentStr withChapterName:chapterName andLayoutConfig:self.layoutConfig];
 	
 	return 	framesetter;
 }
@@ -243,7 +243,7 @@
     CFRelease(framePath);
 }
 
-CTFrameRef contentFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), framePath, NULL);
+//CTFrameRef contentFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), framePath, NULL);
 
 - (void)drawRect:(CGContextRef)context withRect:(CGRect)rect
 {

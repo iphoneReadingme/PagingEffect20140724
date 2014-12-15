@@ -14,13 +14,11 @@
  * 3.下一章包含VIP或者vip关键字
  *
  * author: LinWenLong
- * time: 20140429
+ * time: 20140807
  */
 (function(){
     var DEBUG = false;           //用于控制是否打印日志。开发时，设置true；生产部署时，设置为false
     var UC_MODE = false;        //为true时表示定制成功，false表示定制失败
-
-    var URL = location.href.replace('http://','');
 
     //公共函数
     var $id = function(id){
@@ -33,6 +31,10 @@
         return document.querySelectorAll(str);
     }
     //END
+
+    var PLATFORM = $qs('meta[name="customizetype"]') && $qs('meta[name="customizetype"]').getAttribute('platform') ? $qs('meta[name="customizetype"]').getAttribute('platform') : 'android';
+    var URL = location.href.replace('http://','');
+
 
 
     //工具类
@@ -58,15 +60,14 @@
         },
         chkTxt:function(keys,boxs){
             var i, j, k;
-            for(j in boxs) {
-                if(boxs[j]){
-                    for(i in keys) {
-                        var $obj = document.querySelectorAll(boxs[j]);
-                        if($obj.length){
-                            for(k in $obj){
-                                if( $obj[k] && $obj[k].textContent && $obj[k].textContent.indexOf(keys[i])!=-1 ) {
-                                    return true;
-                                }
+
+            for(j=0;j<boxs.length;j++) {
+                for(i=0;i<keys.length;i++) {
+                    var $obj = document.querySelectorAll(boxs[j]);
+                    if($obj.length){
+                        for(k=0;k<$obj.length;k++){
+                            if( $obj[k] && $obj[k].textContent && $obj[k].textContent.indexOf(keys[i])!=-1 ) {
+                                return true;
                             }
                         }
                     }
@@ -155,40 +156,69 @@
 
         var getDirData = function(_novel_type){
             var resultJSON = {
-                uc_novel_type:'3',
-                uc_novel_dir:'',
-                uc_novel_next:'',
-                uc_novel_prev:'',
-                uc_novel_bookname:'',
-                uc_novel_url:[]
+                status:'0',             //为了保持与正文页数据一致性。因目录页本质上没有成功或失败状态
+                info:{
+                    uc_novel_type:'3',
+                    uc_novel_dir:'',
+                    uc_novel_next:'',
+                    uc_novel_prev:'',
+                    uc_novel_bookname:''
+                },
+                data:[]
             };
-            resultJSON.uc_novel_dir = location.href;
-            resultJSON.uc_novel_next = $id("ucweb_readmode_next") ? $id("ucweb_readmode_next").href : "";
-            resultJSON.uc_novel_prev = $id("ucweb_readmode_prev") ? $id("ucweb_readmode_prev").href : "";
-            resultJSON.uc_novel_bookname = $qs('h1') ? $qs('h1').textContent
+            resultJSON.info.uc_novel_dir = location.href;
+            resultJSON.info.uc_novel_next = $id("ucweb_readmode_next") ? $id("ucweb_readmode_next").href : "";
+            resultJSON.info.uc_novel_prev = $id("ucweb_readmode_prev") ? $id("ucweb_readmode_prev").href : "";
+            resultJSON.info.uc_novel_bookname = $qs('h1') ? $qs('h1').textContent
                                                      : ($id('ucweb_readmode_bookname') ? $id('ucweb_readmode_bookname').textContent : "");
-            var urls = $qa("[ucmode='readmode']");
+            var urls = Array.prototype.slice.call($qa("a[ucmode='readmode']"));
             var i;
-            for(i in urls){
-                if(urls[i].text && urls[i].href){
-                    var _url_arr = {};
-                    _url_arr.title = urls[i].text;
-                    _url_arr.url = urls[i].href;
-                    resultJSON.uc_novel_url.push(_url_arr);
-                }
+            var count_arr_ = [];
+
+            //android平台下，目录数据需要分段
+            if(PLATFORM=='android'){
+                var skipNum = 0;
+                urls.forEach(function(urlObj,index){
+                    if(urlObj.text){
+                        var _url_arr = {};
+                        _url_arr.title = urlObj.text.replace(/(^\s*)|(\s*$)/g, "");
+                        _url_arr.url = urlObj.href ? urlObj.href.replace(/%20/g,'') : urlObj.rel.replace(/%20/g,'');       //rel属性兼容jjwxc.net网站的VIP章节
+                        count_arr_.push(_url_arr);
+                    }else{
+                        skipNum++;      //跳过不正常的链接
+                    }
+
+                    //TODO:测试是2为整除数，生产环境是100
+                    if(count_arr_.length % 100 == 0 || index == urls.length-skipNum-1){             //这里需要再减去skipNum，用于处理最后一段数据
+//                        if(count_arr_.length % 2 == 0 || index == urls.length-skipNum-1){
+                        resultJSON.data.push(count_arr_);
+                        count_arr_ = [];
+                    }
+                });
+            }else{      //iOS平台下不分段，直接添加data数组中
+                urls.forEach(function(urlObj){
+                    if(urlObj.text){
+                        var _url_arr = {};
+                        _url_arr.title = urlObj.text.replace(/(^\s*)|(\s*$)/g, "");
+                        _url_arr.url = urlObj.href ? urlObj.href.replace(/%20/g,'') : urlObj.rel.replace(/%20/g,'');       //rel属性兼容jjwxc.net网站的VIP章节
+                        resultJSON.data.push(_url_arr);
+                    }
+                });
             }
             return resultJSON;
         }
         var getDetailData = function(_novel_type){
             var resultJSON = {
-                uc_novel_type:_novel_type.toString(),
-                uc_novel_title:'',
-                uc_novel_cont:'',
-                uc_novel_url:'',
-                uc_novel_dir:'',
-                uc_novel_next:'',
-                uc_novel_prev:'',
-                uc_novel_fail_type:''
+                status:'0',
+                info:{
+                    uc_novel_type:_novel_type.toString(),
+                    uc_novel_title:'',
+                    uc_novel_cont:'',
+                    uc_novel_url:'',
+                    uc_novel_dir:'',
+                    uc_novel_next:'',
+                    uc_novel_prev:''
+                }
             };
             //清理正文
             var uc_novel_cont="";
@@ -231,54 +261,64 @@
             }
             //END
 
-            resultJSON.uc_novel_title = $qs("h1")
+            resultJSON.info.uc_novel_title = $qs("h1")
                 ? $qs("h1").textContent
-                : ( $id('ucweb_readmode_bookname') ? $id('ucweb_readmode_bookname').textContent : '');
-            resultJSON.uc_novel_cont = uc_novel_cont;
-            resultJSON.uc_novel_url = location.href;
-            resultJSON.uc_novel_dir = $id("ucweb_readmode_contents").href;
-            resultJSON.uc_novel_next = $id("ucweb_readmode_next") ? $id("ucweb_readmode_next").href : "";
-            resultJSON.uc_novel_prev = $id("ucweb_readmode_prev") ? $id("ucweb_readmode_prev").href : "";
-            resultJSON.uc_novel_fail_type = '-1';
+                : ( $id('ucweb_readmode_chaptername') ? $id('ucweb_readmode_chaptername').textContent : '');
+            resultJSON.info.uc_novel_title = resultJSON.info.uc_novel_title.replace(/(^\s*)|(\s*$)/g, "");
+            resultJSON.info.uc_novel_cont = uc_novel_cont;
+            resultJSON.info.uc_novel_url = location.href;
+            resultJSON.info.uc_novel_dir = $id("ucweb_readmode_contents").href;
+            resultJSON.info.uc_novel_next = $id("ucweb_readmode_next") ? $id("ucweb_readmode_next").href : "";
+            resultJSON.info.uc_novel_prev = $id("ucweb_readmode_prev") ? $id("ucweb_readmode_prev").href : "";
+            resultJSON.status = '0';
 
             return resultJSON;
         }
 
         //判断页面类型
-//        if ( $id('ucweb_readmode_next') || $id('ucweb_readmode_prev') ){
-//            novel_type = ($qa("img[ucmode='readmode']").length || $qa('img[id^=ucreader_content_image_]').length>0 )? 2 : 1;
-//        }else if( $id('ucweb_readmode_bookname') ) {
-//            novel_type = 3;
         if($qs('meta[name="customizetype"]') && $qs('meta[name="customizetype"]').getAttribute('noveltype') ) {
             novel_type = $qs('meta[name="customizetype"]').getAttribute('noveltype');
         }else{
-            novel_type = '-1';        //定制失败
+            novel_type = '-1';        //定制失败，无法判定是哪种类型页面时，返回-1
         }
 
         if(novel_type == '3' && UC_MODE){
             json = getDirData(novel_type);
         }else if(parseInt(novel_type)>0 && UC_MODE){
             json = getDetailData(novel_type);
-        }else{//定制失败
+        }else{                               //定制失败
             json = {};
             var pagetype = chkPage();
             switch (pagetype)
             {
                 case 'VIP':
-                    json.uc_novel_fail_type = '1';        //VIP页或需付费
+                    json.status = '2';        //VIP页或需付费
                     break;
                 case "LOGIN":
-                    json.uc_novel_fail_type = '2';        //需要登录
+                    json.status = '3';        //需要登录
                     break;
                 default:
-                    json.uc_novel_fail_type = '0';        //其他
+                    json.status = '1';        //其他
                     break;
             }
         }
 
         return json;
     }
+    var processAndroidResult = function(json){
+        if(!json.info || json.info.uc_novel_type != '3') {       //非目录页直接返回数据
+            return '[\''+ JSON.stringify(json) +'\']';
+        }
 
+        var datas = json.data;
+        delete json['data'];
+        var result_str = [];
+        result_str.push( "'"+ JSON.stringify(json) +"'" );
+        datas.forEach(function(ele){
+            result_str.push( '\'{"data":'+ JSON.stringify(ele) +'}\'' );
+        });
+        return '['+ result_str.join(',') +']';
+    }
     var main = function(){
         if($qs('meta[name="customizetype"][content="reader"]')){        //表示定制成功
             UC_MODE = true;
@@ -287,7 +327,13 @@
         }
 
         var result = getData();
-        var result_json_txt = JSON.stringify(result);
+        var result_json_txt = '';
+        if(PLATFORM=='android'){
+            result_json_txt = processAndroidResult(result);
+        }else{
+            result_json_txt = JSON.stringify(result);
+        }
+
         //转义处理
         result_json_txt = result_json_txt.replace(/\\/g,'\\\\');
         result_json_txt = result_json_txt.replace(/\\"/g,'\\\\"');
@@ -295,17 +341,18 @@
 
         var script_txt="";
         var script= document.createElement("script");
-//        var script_txt = 'var uc_novel_data='+ JSON.stringify(result)+";";        //改为使用接口传参
-
-        //Android的接口. LinWinLong on 20140717 暂时注释掉，改为iOS平台的调用接口
-        //script_txt = 'UCShellJava.invoke("", "novel", "novel_mode", \''+ result_json_txt +'\', ""); ';
-        //iOS接口
-        script_txt = 'ucbrowser.novelGetReaderData(\''+ result_json_txt +'\');';
+        if(PLATFORM=='android') {
+            script_txt = 'UCShellJava.invoke("", "novel", "extracted_novel", ' + result_json_txt + ', ext);';
+        }else{ //iOS接口
+            script_txt = 'ucbrowser.novelGetReaderData(\''+ result_json_txt +'\');';
+        }
+        script_txt = 'function getExtractedNovelData(ext){' + script_txt +'}';
+        script_txt += 'getExtractedNovelData("");';
 
         var tn = document.createTextNode(script_txt);
         script.setAttribute('name','uc_script');        //必须name=uc_script，JS才能在中间件被保留下来
         script.appendChild(tn);
-//        script.textContent = 'var uc_novel_data='+ result_json_txt;      //注意：这个语法不兼容中间件
+//        script.textContent = 'var uc_novel_data='+ result_json_txt;      //注意：这个语法不兼容中间件，不能使用。留在这里是保留一个警示。
 
         //在服务器端运行时，清空原DOM的操作
         if($qs('script[name="uc_script"]')
@@ -313,7 +360,7 @@
         {
             var _html = '<head>';
             if(UC_MODE){
-                _html += '<meta name="customizetype" content="reader" noveltype="'+ $qs('meta[name="customizetype"]').getAttribute('noveltype') +'">';
+                _html += '<meta name="customizetype" content="reader" platform="'+ PLATFORM +'" noveltype="'+ $qs('meta[name="customizetype"]').getAttribute('noveltype') +'">';
             }
             _html += '</head><body></body>';
             document.querySelector('html').innerHTML = _html;
@@ -322,8 +369,8 @@
 
         if( DEBUG ){
 //            console.info(result,script);
-            console.log(result_json_txt);
-            console.info(script_txt);
+//            console.log(result_json_txt);
+//            console.info(script_txt);
 
             if(typeof exports === 'object') {
                 exports.novelData =  result;
@@ -335,17 +382,32 @@
     }
 
     if(typeof exports === 'object'){
-        exports.novelPage = main;
+        exports.novelPage = main;           //用于在NodeJS环境下的测试程序运行
     }else{
         //在服务器端运行时，清空原DOM的操作
         if($qs('script[name="uc_script"]')
             && /\?__onserver$/g.test($qs('script[name="uc_script"]').getAttribute('src')) ) {
             main();
         }else{
-            //这是Android版的代码
-//            document.addEventListener('DOMContentLoaded',main , false);
-            //这里针对iOS平台的代码
-            document.addEventListener('UCBrowserReady', main, false);
+            if(DEBUG){
+                main();     //为了便于本地注入浏览器调试
+            }else{
+                if(PLATFORM=='android') {
+                    //这是Android版的代码
+                    document.addEventListener('DOMContentLoaded', main, false);
+                }else{
+                    if(navigator.userAgent.indexOf("Chrome")>0){
+                        console.log('iOS-DOMContentLoaded');
+
+                        //本地在chrome下调试iOS平台下的逻辑，为了方便开发调试
+                        document.addEventListener('DOMContentLoaded', main, false);
+                    }else{
+                        //这里针对iOS平台的代码
+                        document.addEventListener('UCBrowserReady', main, false);
+                    }
+                }
+            }
+
         }
     }
 })();

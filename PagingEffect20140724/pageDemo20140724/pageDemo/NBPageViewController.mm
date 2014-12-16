@@ -10,15 +10,9 @@
 #import <CoreText/CoreText.h>
 #import "ContentViewController.h"
 #import "NBPageViewController.h"
-
+#import "NBMockChapterContent.h"
 
 #define kMaxPageCount     14
-
-///< 文件和路径
-//#define kNBSMNWUnitTestData_PATH                        @"/Library"
-#define kNBSMNWUnitTestData_PATH                        @"/Library/Application Support/others"
-#define kNBSMNWUnitTestData_SRCPATH                     @"/HardCodeData"
-#define kNBSMNWUnitTestData_JSON_FileName               @"/testData.txt"
 
 typedef enum
 {
@@ -85,45 +79,12 @@ ContentViewControllerDelegate
 }
 
 #pragma mark - == 加载测试数据
-- (NSString*)getUnitTestDataPath
-{
-	NSString* folderPath = [NSHomeDirectory() stringByAppendingString:kNBSMNWUnitTestData_PATH];
-    NSString* plistPath = [NSString stringWithFormat:@"%@%@", folderPath, kNBSMNWUnitTestData_JSON_FileName];
-	
-	[[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
-	// 删除
-	[[NSFileManager defaultManager] removeItemAtPath:plistPath error:nil];
-	
-	if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-	{
-		// 如果配置文件不存在, 从资源目录下复制一份
-		NSString* srcPlist = [NSString stringWithFormat:@"%@%@%@", [[NSBundle mainBundle] bundlePath], kNBSMNWUnitTestData_SRCPATH, kNBSMNWUnitTestData_JSON_FileName];
-		[[NSFileManager defaultManager] copyItemAtPath:srcPlist toPath:plistPath error:nil];
-	}
-	
-	NSString* fullPath = nil;
-	
-	if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-	{
-		fullPath = plistPath;
-	}
-	
-	return fullPath;
-}
 
-- (NSString*)getTestDataContent
+- (NSString*)getChapterContent
 {
-	NSString* testData = nil;
-	NSString* filePath = [self getUnitTestDataPath];
+	NBMockChapterContent* mockObj = [[[NBMockChapterContent alloc] init] autorelease];
 	
-	if ([filePath length] > 0)
-	{
-		NSData* data = [NSData dataWithContentsOfFile:filePath];
-		
-        testData = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-	}
-	
-	return testData;
+	return [mockObj getChapterContent];
 }
 
 #pragma mark -== View lifecycle
@@ -133,7 +94,7 @@ ContentViewControllerDelegate
     [super viewDidLoad];
 	
     self.isTurnPage = YES;
-	self.chapterText = [self getTestDataContent];
+	self.chapterText = [self getChapterContent];
 	
 	///< 添加字体
 	//[self getFontFilePath];
@@ -370,6 +331,10 @@ ContentViewControllerDelegate
 	viewObj.numberOfLines = 0;
 	
 	viewObj.backgroundColor = [UIColor grayColor];
+	viewObj.layer.borderColor = [UIColor redColor].CGColor;
+	viewObj.layer.borderWidth = 2;
+//	viewObj.backgroundColor = [UIColor blueColor];
+	
 	viewObj.text = [self getCurChapterText:index with:isBackPage];
 	
 	//[UIFont fontNamesForFamilyName:[familyNames objectAtIndex:indFamily]]

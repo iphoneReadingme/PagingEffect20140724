@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5B195F0C1999B39B009562C3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B195F0B1999B39B009562C3 /* CoreText.framework */; };
+		5B60422F1A400424002B0A81 /* PageSplitRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B60422E1A400424002B0A81 /* PageSplitRender.mm */; };
+		5B6042331A400460002B0A81 /* NBBookLayoutConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B6042321A400460002B0A81 /* NBBookLayoutConfig.mm */; };
+		5B6042371A400554002B0A81 /* NBPageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6042361A400554002B0A81 /* NBPageItem.m */; };
 		5B94F1F9198A3735003ABA9A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B94F1F8198A3735003ABA9A /* Default-568h@2x.png */; };
 		5B94F1FD198A3774003ABA9A /* HardCodeData in Resources */ = {isa = PBXBuildFile; fileRef = 5B94F1FC198A3774003ABA9A /* HardCodeData */; };
 		5B9E3D291980E8CB00572FA1 /* ContentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E3D281980E8CB00572FA1 /* ContentViewController.mm */; };
@@ -39,6 +42,12 @@
 
 /* Begin PBXFileReference section */
 		5B195F0B1999B39B009562C3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		5B60422D1A400424002B0A81 /* PageSplitRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageSplitRender.h; sourceTree = "<group>"; };
+		5B60422E1A400424002B0A81 /* PageSplitRender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PageSplitRender.mm; sourceTree = "<group>"; };
+		5B6042311A400460002B0A81 /* NBBookLayoutConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBBookLayoutConfig.h; sourceTree = "<group>"; };
+		5B6042321A400460002B0A81 /* NBBookLayoutConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NBBookLayoutConfig.mm; sourceTree = "<group>"; };
+		5B6042351A400554002B0A81 /* NBPageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPageItem.h; sourceTree = "<group>"; };
+		5B6042361A400554002B0A81 /* NBPageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPageItem.m; sourceTree = "<group>"; };
 		5B94F1F8198A3735003ABA9A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5B94F1FC198A3774003ABA9A /* HardCodeData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HardCodeData; sourceTree = "<group>"; };
 		5B9E3D271980E8CB00572FA1 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -92,6 +101,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B6042301A400460002B0A81 /* NBBookLayoutConfig */ = {
+			isa = PBXGroup;
+			children = (
+				5B6042311A400460002B0A81 /* NBBookLayoutConfig.h */,
+				5B6042321A400460002B0A81 /* NBBookLayoutConfig.mm */,
+			);
+			path = NBBookLayoutConfig;
+			sourceTree = "<group>";
+		};
+		5B6042341A400554002B0A81 /* NBPageInfo */ = {
+			isa = PBXGroup;
+			children = (
+				5B6042351A400554002B0A81 /* NBPageItem.h */,
+				5B6042361A400554002B0A81 /* NBPageItem.m */,
+			);
+			path = NBPageInfo;
+			sourceTree = "<group>";
+		};
 		5B9E3D261980E8CB00572FA1 /* PageViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +128,10 @@
 				5B9E3D2B1980EB9400572FA1 /* PageView.m */,
 				5B9E3D2C1980EB9400572FA1 /* PageViewCache.h */,
 				5B9E3D2D1980EB9400572FA1 /* PageViewCache.m */,
+				5B60422D1A400424002B0A81 /* PageSplitRender.h */,
+				5B60422E1A400424002B0A81 /* PageSplitRender.mm */,
+				5B6042341A400554002B0A81 /* NBPageInfo */,
+				5B6042301A400460002B0A81 /* NBBookLayoutConfig */,
 			);
 			path = PageViewController;
 			sourceTree = "<group>";
@@ -218,7 +249,7 @@
 			name = pageDemoTests;
 			productName = pageDemoTests;
 			productReference = CB9B18DF14A9D2B600C15033 /* pageDemoTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -292,6 +323,9 @@
 				CB9B18CF14A9D2B600C15033 /* main.m in Sources */,
 				CB9B18D314A9D2B600C15033 /* AppDelegate.m in Sources */,
 				5B9E3D291980E8CB00572FA1 /* ContentViewController.mm in Sources */,
+				5B6042371A400554002B0A81 /* NBPageItem.m in Sources */,
+				5B60422F1A400424002B0A81 /* PageSplitRender.mm in Sources */,
+				5B6042331A400460002B0A81 /* NBBookLayoutConfig.mm in Sources */,
 				CB9B18D614A9D2B600C15033 /* NBPageViewController.mm in Sources */,
 				5B9E3D2F1980EB9400572FA1 /* PageViewCache.m in Sources */,
 				5B9E3D2E1980EB9400572FA1 /* PageView.m in Sources */,

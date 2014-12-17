@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TapViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate, UIPickerViewAccessibilityDelegate>
-@property (weak, nonatomic) IBOutlet UISlider *slider;
-@property (weak, nonatomic) IBOutlet UILabel *memoryWarningLabel;
+@property (nonatomic) IBOutlet UISlider *slider;
+@property (nonatomic) IBOutlet UILabel *memoryWarningLabel;
 @end
 
 @implementation TapViewController

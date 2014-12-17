@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface GestureViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *lastSwipeDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bottomRightLabel;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic) IBOutlet UILabel *lastSwipeDescriptionLabel;
+@property (nonatomic) IBOutlet UILabel *bottomRightLabel;
+@property (nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 

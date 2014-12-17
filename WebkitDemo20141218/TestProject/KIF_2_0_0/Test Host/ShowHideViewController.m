@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface ShowHideViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *aButton;
-@property (weak, nonatomic) IBOutlet UIButton *bButton;
-@property (weak, nonatomic) IBOutlet UIView *obscuringView;
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (nonatomic, assign) IBOutlet UIButton *aButton;
+@property (nonatomic, assign) IBOutlet UIButton *bButton;
+@property (nonatomic, assign) IBOutlet UIView *obscuringView;
+@property (nonatomic, assign) IBOutlet UILabel *contentLabel;
 @end
 
 @implementation ShowHideViewController

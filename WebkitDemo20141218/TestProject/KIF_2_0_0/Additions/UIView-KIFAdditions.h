@@ -49,7 +49,9 @@ typedef CGPoint KIFDisplacement;
 - (void)dragFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint steps:(NSUInteger)stepCount;
 - (void)dragFromPoint:(CGPoint)startPoint displacement:(KIFDisplacement)displacement steps:(NSUInteger)stepCount;
 - (void)dragAlongPathWithPoints:(CGPoint *)points count:(NSInteger)count;
-
+- (void)twoFingerPanFromPoint:(CGPoint)startPoint toPoint:(CGPoint)toPoint steps:(NSUInteger)stepCount;
+- (void)pinchAtPoint:(CGPoint)centerPoint distance:(CGFloat)distance steps:(NSUInteger)stepCount;
+- (void)zoomAtPoint:(CGPoint)centerPoint distance:(CGFloat)distance steps:(NSUInteger)stepCount;
 /*!
  @method isTappableWithHitTestResultView:
  @abstract Easy hook to override whether a hit test result makes a view tappable.
@@ -77,9 +79,16 @@ typedef CGPoint KIFDisplacement;
  */
 - (CGPoint)tappablePointInRect:(CGRect)rect;
 
+- (UIEvent *)eventWithTouch:(UITouch *)touch;
+
 /*!
  @abstract Evaluates if user interaction is enabled including edge cases.
  */
 - (BOOL)isUserInteractionActuallyEnabled;
+
+/*!
+ @abstract Returns either the current window or another window if a transform is applied.  Returns `nil` if all windows in the application have transforms.
+ */
+@property (nonatomic, readonly) UIWindow *windowOrIdentityWindow;
 
 @end

@@ -14,23 +14,8 @@
 		5B5FA2711A41708E00890021 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FA2701A41708E00890021 /* Images.xcassets */; };
 		5B5FA2741A41708E00890021 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FA2721A41708E00890021 /* LaunchScreen.xib */; };
 		5B5FA2801A41708E00890021 /* WebkitDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FA27F1A41708E00890021 /* WebkitDemoTests.m */; };
-		5B5FAC831A41A3D300890021 /* KIF.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC241A41A3D300890021 /* KIF.podspec */; };
-		5B5FAC841A41A3D300890021 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC281A41A3D300890021 /* LICENSE */; };
-		5B5FAC851A41A3D300890021 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FAC291A41A3D300890021 /* README.md */; };
-		5B5FAC861A41A3D300890021 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC2A1A41A3D300890021 /* readme.txt */; };
-		5B5FAC871A41A3D300890021 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FAC2C1A41A3D300890021 /* AppDelegate.m */; };
-		5B5FAC881A41A3D300890021 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC2D1A41A3D300890021 /* Default-568h@2x.png */; };
-		5B5FAC891A41A3D300890021 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC2E1A41A3D300890021 /* Default.png */; };
-		5B5FAC8A1A41A3D300890021 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC2F1A41A3D300890021 /* Default@2x.png */; };
-		5B5FAC8B1A41A3D300890021 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC301A41A3D300890021 /* InfoPlist.strings */; };
-		5B5FAC8C1A41A3D300890021 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC321A41A3D300890021 /* MainStoryboard.storyboard */; };
-		5B5FAC8D1A41A3D300890021 /* GestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FAC341A41A3D300890021 /* GestureViewController.m */; };
-		5B5FAC8E1A41A3D300890021 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FAC351A41A3D300890021 /* main.m */; };
-		5B5FAC8F1A41A3D300890021 /* ShowHideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FAC361A41A3D300890021 /* ShowHideViewController.m */; };
-		5B5FAC901A41A3D300890021 /* TapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FAC371A41A3D300890021 /* TapViewController.m */; };
-		5B5FAC911A41A3D300890021 /* Test Host-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FAC381A41A3D300890021 /* Test Host-Info.plist */; };
-		5B5FAC921A41A3D300890021 /* TestSuiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FAC3A1A41A3D300890021 /* TestSuiteViewController.m */; };
-		5B5FACAB1A41AB1500890021 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5FAC9E1A41A3D400890021 /* libKIF.a */; };
+		5B5FB0CD1A41B0C700890021 /* UITests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FB0581A41B0C700890021 /* UITests.mm */; };
+		5B5FB0F01A41B0ED00890021 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5FAF851A41B0B600890021 /* libKIF.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,32 +26,46 @@
 			remoteGlobalIDString = 5B5FA25F1A41708E00890021;
 			remoteInfo = WebkitDemo;
 		};
-		5B5FAC9D1A41A3D400890021 /* PBXContainerItemProxy */ = {
+		5B5FAF841A41B0B600890021 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAC251A41A3D300890021 /* KIF.xcodeproj */;
+			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EB72047C1680DDAD00278DA2;
+			remoteGlobalIDString = EABD46AA1857A0C700A5F081;
 			remoteInfo = KIF;
 		};
-		5B5FAC9F1A41A3D400890021 /* PBXContainerItemProxy */ = {
+		5B5FAF861A41B0B600890021 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAC251A41A3D300890021 /* KIF.xcodeproj */;
+			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB72047C1680DDAD00278DA2;
+			remoteInfo = "KIF-OCUnit";
+		};
+		5B5FAF881A41B0B600890021 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB60ECC1177F8C83005A041A;
 			remoteInfo = "Test Host";
 		};
-		5B5FACA11A41A3D400890021 /* PBXContainerItemProxy */ = {
+		5B5FAF8A1A41B0B600890021 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAC251A41A3D300890021 /* KIF.xcodeproj */;
+			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
+			remoteGlobalIDString = EABD46CD1857A0F300A5F081;
 			remoteInfo = "KIF Tests";
 		};
-		5B5FACA91A41AB0300890021 /* PBXContainerItemProxy */ = {
+		5B5FAF8C1A41B0B600890021 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAC251A41A3D300890021 /* KIF.xcodeproj */;
+			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
+			remoteInfo = "KIF Tests-OCUnit";
+		};
+		5B5FB0F11A41B0F500890021 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = EB72043E1680DDAD00278DA2;
+			remoteGlobalIDString = EABD46791857A0C700A5F081;
 			remoteInfo = KIF;
 		};
 /* End PBXContainerItemProxy section */
@@ -85,24 +84,11 @@
 		5B5FA2791A41708E00890021 /* WebkitDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebkitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B5FA27E1A41708E00890021 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B5FA27F1A41708E00890021 /* WebkitDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebkitDemoTests.m; sourceTree = "<group>"; };
-		5B5FAC241A41A3D300890021 /* KIF.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KIF.podspec; sourceTree = "<group>"; };
-		5B5FAC251A41A3D300890021 /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = KIF.xcodeproj; sourceTree = "<group>"; };
-		5B5FAC281A41A3D300890021 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		5B5FAC291A41A3D300890021 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		5B5FAC2A1A41A3D300890021 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		5B5FAC2C1A41A3D300890021 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5B5FAC2D1A41A3D300890021 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		5B5FAC2E1A41A3D300890021 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		5B5FAC2F1A41A3D300890021 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		5B5FAC311A41A3D300890021 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5B5FAC331A41A3D300890021 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		5B5FAC341A41A3D300890021 /* GestureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureViewController.m; sourceTree = "<group>"; };
-		5B5FAC351A41A3D300890021 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5B5FAC361A41A3D300890021 /* ShowHideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowHideViewController.m; sourceTree = "<group>"; };
-		5B5FAC371A41A3D300890021 /* TapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapViewController.m; sourceTree = "<group>"; };
-		5B5FAC381A41A3D300890021 /* Test Host-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Test Host-Info.plist"; sourceTree = "<group>"; };
-		5B5FAC391A41A3D300890021 /* Test Host-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Test Host-Prefix.pch"; sourceTree = "<group>"; };
-		5B5FAC3A1A41A3D300890021 /* TestSuiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSuiteViewController.m; sourceTree = "<group>"; };
+		5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = KIF.xcodeproj; sourceTree = "<group>"; };
+		5B5FB0561A41B0C700890021 /* NBAccessibilityNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBAccessibilityNames.h; sourceTree = "<group>"; };
+		5B5FB0571A41B0C700890021 /* UITests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITests.h; sourceTree = "<group>"; };
+		5B5FB0581A41B0C700890021 /* UITests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UITests.mm; sourceTree = "<group>"; };
+		5B5FB0591A41B0C700890021 /* UITestsLabelNameMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITestsLabelNameMacroDefine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B5FACAB1A41AB1500890021 /* libKIF.a in Frameworks */,
+				5B5FB0F01A41B0ED00890021 /* libKIF.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				5B5FA8101A418F7600890021 /* SourceProjects */,
-				5B5FA4F21A418A1E00890021 /* TestProject */,
 				5B5FA2621A41708E00890021 /* WebkitDemo */,
 				5B5FA27C1A41708E00890021 /* WebkitDemoTests */,
 				5B5FA2611A41708E00890021 /* Products */,
@@ -171,6 +156,7 @@
 		5B5FA27C1A41708E00890021 /* WebkitDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				5B5FAF8E1A41B0C600890021 /* TestProject */,
 				5B5FA27F1A41708E00890021 /* WebkitDemoTests.m */,
 				5B5FA27D1A41708E00890021 /* Supporting Files */,
 			);
@@ -185,14 +171,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5B5FA4F21A418A1E00890021 /* TestProject */ = {
-			isa = PBXGroup;
-			children = (
-				5B5FABA01A41A3D300890021 /* KIF_2_0_0 */,
-			);
-			path = TestProject;
-			sourceTree = "<group>";
-		};
 		5B5FA8101A418F7600890021 /* SourceProjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,47 +178,45 @@
 			path = SourceProjects;
 			sourceTree = "<group>";
 		};
-		5B5FABA01A41A3D300890021 /* KIF_2_0_0 */ = {
+		5B5FAE201A41B0AB00890021 /* KIF_2_0_0 */ = {
 			isa = PBXGroup;
 			children = (
-				5B5FAC241A41A3D300890021 /* KIF.podspec */,
-				5B5FAC251A41A3D300890021 /* KIF.xcodeproj */,
-				5B5FAC281A41A3D300890021 /* LICENSE */,
-				5B5FAC291A41A3D300890021 /* README.md */,
-				5B5FAC2A1A41A3D300890021 /* readme.txt */,
-				5B5FAC2B1A41A3D300890021 /* Test Host */,
+				5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */,
 			);
-			path = KIF_2_0_0;
-			sourceTree = "<group>";
+			name = KIF_2_0_0;
+			path = TestProject/KIF_2_0_0;
+			sourceTree = SOURCE_ROOT;
 		};
-		5B5FAC261A41A3D300890021 /* Products */ = {
+		5B5FAF7C1A41B0B500890021 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5B5FAC9E1A41A3D400890021 /* libKIF.a */,
-				5B5FACA01A41A3D400890021 /* Test Host.app */,
-				5B5FACA21A41A3D400890021 /* KIF Tests.octest */,
+				5B5FAF851A41B0B600890021 /* libKIF.a */,
+				5B5FAF871A41B0B600890021 /* libKIF-OCUnit.a */,
+				5B5FAF891A41B0B600890021 /* Test Host.app */,
+				5B5FAF8B1A41B0B600890021 /* KIF Tests - XCTest.xctest */,
+				5B5FAF8D1A41B0B600890021 /* KIF Tests-OCUnit.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5B5FAC2B1A41A3D300890021 /* Test Host */ = {
+		5B5FAF8E1A41B0C600890021 /* TestProject */ = {
 			isa = PBXGroup;
 			children = (
-				5B5FAC2C1A41A3D300890021 /* AppDelegate.m */,
-				5B5FAC2D1A41A3D300890021 /* Default-568h@2x.png */,
-				5B5FAC2E1A41A3D300890021 /* Default.png */,
-				5B5FAC2F1A41A3D300890021 /* Default@2x.png */,
-				5B5FAC301A41A3D300890021 /* InfoPlist.strings */,
-				5B5FAC321A41A3D300890021 /* MainStoryboard.storyboard */,
-				5B5FAC341A41A3D300890021 /* GestureViewController.m */,
-				5B5FAC351A41A3D300890021 /* main.m */,
-				5B5FAC361A41A3D300890021 /* ShowHideViewController.m */,
-				5B5FAC371A41A3D300890021 /* TapViewController.m */,
-				5B5FAC381A41A3D300890021 /* Test Host-Info.plist */,
-				5B5FAC391A41A3D300890021 /* Test Host-Prefix.pch */,
-				5B5FAC3A1A41A3D300890021 /* TestSuiteViewController.m */,
+				5B5FAE201A41B0AB00890021 /* KIF_2_0_0 */,
+				5B5FB0551A41B0C700890021 /* UITests */,
 			);
-			path = "Test Host";
+			path = TestProject;
+			sourceTree = SOURCE_ROOT;
+		};
+		5B5FB0551A41B0C700890021 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				5B5FB0561A41B0C700890021 /* NBAccessibilityNames.h */,
+				5B5FB0571A41B0C700890021 /* UITests.h */,
+				5B5FB0581A41B0C700890021 /* UITests.mm */,
+				5B5FB0591A41B0C700890021 /* UITestsLabelNameMacroDefine.h */,
+			);
+			path = UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,7 +250,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				5B5FACAA1A41AB0300890021 /* PBXTargetDependency */,
+				5B5FB0F21A41B0F500890021 /* PBXTargetDependency */,
 				5B5FA27B1A41708E00890021 /* PBXTargetDependency */,
 			);
 			name = WebkitDemoTests;
@@ -313,8 +289,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5B5FAC261A41A3D300890021 /* Products */;
-					ProjectRef = 5B5FAC251A41A3D300890021 /* KIF.xcodeproj */;
+					ProductGroup = 5B5FAF7C1A41B0B500890021 /* Products */;
+					ProjectRef = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -326,25 +302,39 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5B5FAC9E1A41A3D400890021 /* libKIF.a */ = {
+		5B5FAF851A41B0B600890021 /* libKIF.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libKIF.a;
-			remoteRef = 5B5FAC9D1A41A3D400890021 /* PBXContainerItemProxy */;
+			remoteRef = 5B5FAF841A41B0B600890021 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5B5FACA01A41A3D400890021 /* Test Host.app */ = {
+		5B5FAF871A41B0B600890021 /* libKIF-OCUnit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libKIF-OCUnit.a";
+			remoteRef = 5B5FAF861A41B0B600890021 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5B5FAF891A41B0B600890021 /* Test Host.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = "Test Host.app";
-			remoteRef = 5B5FAC9F1A41A3D400890021 /* PBXContainerItemProxy */;
+			remoteRef = 5B5FAF881A41B0B600890021 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5B5FACA21A41A3D400890021 /* KIF Tests.octest */ = {
+		5B5FAF8B1A41B0B600890021 /* KIF Tests - XCTest.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "KIF Tests.octest";
-			remoteRef = 5B5FACA11A41A3D400890021 /* PBXContainerItemProxy */;
+			path = "KIF Tests - XCTest.xctest";
+			remoteRef = 5B5FAF8A1A41B0B600890021 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5B5FAF8D1A41B0B600890021 /* KIF Tests-OCUnit.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "KIF Tests-OCUnit.octest";
+			remoteRef = 5B5FAF8C1A41B0B600890021 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -364,15 +354,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B5FAC891A41A3D300890021 /* Default.png in Resources */,
-				5B5FAC8B1A41A3D300890021 /* InfoPlist.strings in Resources */,
-				5B5FAC841A41A3D300890021 /* LICENSE in Resources */,
-				5B5FAC8A1A41A3D300890021 /* Default@2x.png in Resources */,
-				5B5FAC861A41A3D300890021 /* readme.txt in Resources */,
-				5B5FAC911A41A3D300890021 /* Test Host-Info.plist in Resources */,
-				5B5FAC8C1A41A3D300890021 /* MainStoryboard.storyboard in Resources */,
-				5B5FAC881A41A3D300890021 /* Default-568h@2x.png in Resources */,
-				5B5FAC831A41A3D300890021 /* KIF.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,14 +374,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B5FAC8E1A41A3D300890021 /* main.m in Sources */,
-				5B5FAC901A41A3D300890021 /* TapViewController.m in Sources */,
+				5B5FB0CD1A41B0C700890021 /* UITests.mm in Sources */,
 				5B5FA2801A41708E00890021 /* WebkitDemoTests.m in Sources */,
-				5B5FAC871A41A3D300890021 /* AppDelegate.m in Sources */,
-				5B5FAC8D1A41A3D300890021 /* GestureViewController.m in Sources */,
-				5B5FAC921A41A3D300890021 /* TestSuiteViewController.m in Sources */,
-				5B5FAC8F1A41A3D300890021 /* ShowHideViewController.m in Sources */,
-				5B5FAC851A41A3D300890021 /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,10 +387,10 @@
 			target = 5B5FA25F1A41708E00890021 /* WebkitDemo */;
 			targetProxy = 5B5FA27A1A41708E00890021 /* PBXContainerItemProxy */;
 		};
-		5B5FACAA1A41AB0300890021 /* PBXTargetDependency */ = {
+		5B5FB0F21A41B0F500890021 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KIF;
-			targetProxy = 5B5FACA91A41AB0300890021 /* PBXContainerItemProxy */;
+			targetProxy = 5B5FB0F11A41B0F500890021 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -434,22 +409,6 @@
 				5B5FA2731A41708E00890021 /* Base */,
 			);
 			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		5B5FAC301A41A3D300890021 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5B5FAC311A41A3D300890021 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		5B5FAC321A41A3D300890021 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5B5FAC331A41A3D300890021 /* en */,
-			);
-			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

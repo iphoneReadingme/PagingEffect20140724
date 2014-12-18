@@ -1,0 +1,12 @@
+//
+//  AllBuildConfig.xcconfig
+//  UCWEB7
+//
+//  Created by JinHackintosh on 12-10-12.
+//
+//
+
+BUILD_CPU_ARCHITECTURES = armv7
+
+ARCHS = $(BUILD_CPU_ARCHITECTURES)
+VALID_BUILD_CPU_ARCHITECUTRES = armv6 armv7 armv7s i386

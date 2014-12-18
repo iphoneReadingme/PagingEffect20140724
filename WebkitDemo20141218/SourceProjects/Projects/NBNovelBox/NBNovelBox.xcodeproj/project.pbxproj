@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5B5FB1311A41B91300890021 /* libNBNovelBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5FB1251A41B91300890021 /* libNBNovelBox.a */; };
+		5BA140DB1A42B0D200216ACB /* NBNovelBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BA140DA1A42B0D200216ACB /* NBNovelBox.mm */; };
+		5BA141011A42BF2100216ACB /* NBDataMockInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BA140FE1A42BF2100216ACB /* NBDataMockInterface.mm */; };
+		5BA141021A42BF2100216ACB /* NBMockChapterContent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BA141001A42BF2100216ACB /* NBMockChapterContent.mm */; };
+		5BA141431A42CE9400216ACB /* NBPageViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BA141331A42CE9400216ACB /* NBPageViewController.mm */; };
+		5BA141441A42CE9400216ACB /* ContentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BA141361A42CE9400216ACB /* ContentViewController.mm */; };
+		5BA141451A42CE9400216ACB /* NBBookLayoutConfig.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BA141391A42CE9400216ACB /* NBBookLayoutConfig.mm */; };
+		5BA141461A42CE9400216ACB /* NBPageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA1413C1A42CE9400216ACB /* NBPageItem.m */; };
+		5BA141471A42CE9400216ACB /* PageSplitRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BA1413E1A42CE9400216ACB /* PageSplitRender.mm */; };
+		5BA141481A42CE9400216ACB /* PageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA141401A42CE9400216ACB /* PageView.m */; };
+		5BA141491A42CE9400216ACB /* PageViewCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA141421A42CE9400216ACB /* PageViewCache.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5B5FB1321A41B91300890021 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B5FB11D1A41B91300890021 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B5FB1241A41B91300890021;
+			remoteInfo = NBNovelBox;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5B5FB1231A41B91300890021 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5B5FB1251A41B91300890021 /* libNBNovelBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNBNovelBox.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B5FB1301A41B91300890021 /* NBNovelBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NBNovelBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B5FB1361A41B91300890021 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BA140D91A42B0D200216ACB /* NBNovelBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNovelBox.h; sourceTree = "<group>"; };
+		5BA140DA1A42B0D200216ACB /* NBNovelBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NBNovelBox.mm; sourceTree = "<group>"; };
+		5BA140FD1A42BF2100216ACB /* NBDataMockInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBDataMockInterface.h; sourceTree = "<group>"; };
+		5BA140FE1A42BF2100216ACB /* NBDataMockInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NBDataMockInterface.mm; sourceTree = "<group>"; };
+		5BA140FF1A42BF2100216ACB /* NBMockChapterContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBMockChapterContent.h; sourceTree = "<group>"; };
+		5BA141001A42BF2100216ACB /* NBMockChapterContent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NBMockChapterContent.mm; sourceTree = "<group>"; };
+		5BA141321A42CE9400216ACB /* NBPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPageViewController.h; sourceTree = "<group>"; };
+		5BA141331A42CE9400216ACB /* NBPageViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NBPageViewController.mm; sourceTree = "<group>"; };
+		5BA141351A42CE9400216ACB /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		5BA141361A42CE9400216ACB /* ContentViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContentViewController.mm; sourceTree = "<group>"; };
+		5BA141381A42CE9400216ACB /* NBBookLayoutConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBBookLayoutConfig.h; sourceTree = "<group>"; };
+		5BA141391A42CE9400216ACB /* NBBookLayoutConfig.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NBBookLayoutConfig.mm; sourceTree = "<group>"; };
+		5BA1413B1A42CE9400216ACB /* NBPageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPageItem.h; sourceTree = "<group>"; };
+		5BA1413C1A42CE9400216ACB /* NBPageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPageItem.m; sourceTree = "<group>"; };
+		5BA1413D1A42CE9400216ACB /* PageSplitRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageSplitRender.h; sourceTree = "<group>"; };
+		5BA1413E1A42CE9400216ACB /* PageSplitRender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PageSplitRender.mm; sourceTree = "<group>"; };
+		5BA1413F1A42CE9400216ACB /* PageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageView.h; sourceTree = "<group>"; };
+		5BA141401A42CE9400216ACB /* PageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageView.m; sourceTree = "<group>"; };
+		5BA141411A42CE9400216ACB /* PageViewCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewCache.h; sourceTree = "<group>"; };
+		5BA141421A42CE9400216ACB /* PageViewCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewCache.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5B5FB1221A41B91300890021 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B5FB12D1A41B91300890021 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B5FB1311A41B91300890021 /* libNBNovelBox.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5B5FB11C1A41B91300890021 = {
+			isa = PBXGroup;
+			children = (
+				5B5FB1271A41B91300890021 /* NBNovelBox */,
+				5B5FB1341A41B91300890021 /* NBNovelBoxTests */,
+				5B5FB1261A41B91300890021 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5B5FB1261A41B91300890021 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5B5FB1251A41B91300890021 /* libNBNovelBox.a */,
+				5B5FB1301A41B91300890021 /* NBNovelBoxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5B5FB1271A41B91300890021 /* NBNovelBox */ = {
+			isa = PBXGroup;
+			children = (
+				5BA140D81A42B0D200216ACB /* Include */,
+				5BA140DA1A42B0D200216ACB /* NBNovelBox.mm */,
+				5BA141311A42CE9400216ACB /* NBPageViewController */,
+			);
+			path = NBNovelBox;
+			sourceTree = "<group>";
+		};
+		5B5FB1341A41B91300890021 /* NBNovelBoxTests */ = {
+			isa = PBXGroup;
+			children = (
+				5BA140FB1A42BF2100216ACB /* TestSource */,
+				5B5FB1351A41B91300890021 /* Supporting Files */,
+			);
+			path = NBNovelBoxTests;
+			sourceTree = "<group>";
+		};
+		5B5FB1351A41B91300890021 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5B5FB1361A41B91300890021 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5BA140D81A42B0D200216ACB /* Include */ = {
+			isa = PBXGroup;
+			children = (
+				5BA140D91A42B0D200216ACB /* NBNovelBox.h */,
+			);
+			path = Include;
+			sourceTree = "<group>";
+		};
+		5BA140FB1A42BF2100216ACB /* TestSource */ = {
+			isa = PBXGroup;
+			children = (
+				5BA140FC1A42BF2100216ACB /* NBDataModelMocks */,
+			);
+			path = TestSource;
+			sourceTree = "<group>";
+		};
+		5BA140FC1A42BF2100216ACB /* NBDataModelMocks */ = {
+			isa = PBXGroup;
+			children = (
+				5BA140FD1A42BF2100216ACB /* NBDataMockInterface.h */,
+				5BA140FE1A42BF2100216ACB /* NBDataMockInterface.mm */,
+				5BA140FF1A42BF2100216ACB /* NBMockChapterContent.h */,
+				5BA141001A42BF2100216ACB /* NBMockChapterContent.mm */,
+			);
+			path = NBDataModelMocks;
+			sourceTree = "<group>";
+		};
+		5BA141311A42CE9400216ACB /* NBPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5BA141321A42CE9400216ACB /* NBPageViewController.h */,
+				5BA141331A42CE9400216ACB /* NBPageViewController.mm */,
+				5BA141341A42CE9400216ACB /* PageViewController */,
+			);
+			path = NBPageViewController;
+			sourceTree = "<group>";
+		};
+		5BA141341A42CE9400216ACB /* PageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5BA141351A42CE9400216ACB /* ContentViewController.h */,
+				5BA141361A42CE9400216ACB /* ContentViewController.mm */,
+				5BA141371A42CE9400216ACB /* NBBookLayoutConfig */,
+				5BA1413A1A42CE9400216ACB /* NBPageInfo */,
+				5BA1413D1A42CE9400216ACB /* PageSplitRender.h */,
+				5BA1413E1A42CE9400216ACB /* PageSplitRender.mm */,
+				5BA1413F1A42CE9400216ACB /* PageView.h */,
+				5BA141401A42CE9400216ACB /* PageView.m */,
+				5BA141411A42CE9400216ACB /* PageViewCache.h */,
+				5BA141421A42CE9400216ACB /* PageViewCache.m */,
+			);
+			path = PageViewController;
+			sourceTree = "<group>";
+		};
+		5BA141371A42CE9400216ACB /* NBBookLayoutConfig */ = {
+			isa = PBXGroup;
+			children = (
+				5BA141381A42CE9400216ACB /* NBBookLayoutConfig.h */,
+				5BA141391A42CE9400216ACB /* NBBookLayoutConfig.mm */,
+			);
+			path = NBBookLayoutConfig;
+			sourceTree = "<group>";
+		};
+		5BA1413A1A42CE9400216ACB /* NBPageInfo */ = {
+			isa = PBXGroup;
+			children = (
+				5BA1413B1A42CE9400216ACB /* NBPageItem.h */,
+				5BA1413C1A42CE9400216ACB /* NBPageItem.m */,
+			);
+			path = NBPageInfo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5B5FB1241A41B91300890021 /* NBNovelBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B5FB1391A41B91300890021 /* Build configuration list for PBXNativeTarget "NBNovelBox" */;
+			buildPhases = (
+				5B5FB1211A41B91300890021 /* Sources */,
+				5B5FB1221A41B91300890021 /* Frameworks */,
+				5B5FB1231A41B91300890021 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NBNovelBox;
+			productName = NBNovelBox;
+			productReference = 5B5FB1251A41B91300890021 /* libNBNovelBox.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		5B5FB12F1A41B91300890021 /* NBNovelBoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B5FB13C1A41B91300890021 /* Build configuration list for PBXNativeTarget "NBNovelBoxTests" */;
+			buildPhases = (
+				5B5FB12C1A41B91300890021 /* Sources */,
+				5B5FB12D1A41B91300890021 /* Frameworks */,
+				5B5FB12E1A41B91300890021 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B5FB1331A41B91300890021 /* PBXTargetDependency */,
+			);
+			name = NBNovelBoxTests;
+			productName = NBNovelBoxTests;
+			productReference = 5B5FB1301A41B91300890021 /* NBNovelBoxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5B5FB11D1A41B91300890021 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = yangfs;
+				TargetAttributes = {
+					5B5FB1241A41B91300890021 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					5B5FB12F1A41B91300890021 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 5B5FB1201A41B91300890021 /* Build configuration list for PBXProject "NBNovelBox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5B5FB11C1A41B91300890021;
+			productRefGroup = 5B5FB1261A41B91300890021 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5B5FB1241A41B91300890021 /* NBNovelBox */,
+				5B5FB12F1A41B91300890021 /* NBNovelBoxTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5B5FB12E1A41B91300890021 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5B5FB1211A41B91300890021 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BA141441A42CE9400216ACB /* ContentViewController.mm in Sources */,
+				5BA141481A42CE9400216ACB /* PageView.m in Sources */,
+				5BA141021A42BF2100216ACB /* NBMockChapterContent.mm in Sources */,
+				5BA141461A42CE9400216ACB /* NBPageItem.m in Sources */,
+				5BA141491A42CE9400216ACB /* PageViewCache.m in Sources */,
+				5BA141471A42CE9400216ACB /* PageSplitRender.mm in Sources */,
+				5BA141451A42CE9400216ACB /* NBBookLayoutConfig.mm in Sources */,
+				5BA140DB1A42B0D200216ACB /* NBNovelBox.mm in Sources */,
+				5BA141011A42BF2100216ACB /* NBDataMockInterface.mm in Sources */,
+				5BA141431A42CE9400216ACB /* NBPageViewController.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B5FB12C1A41B91300890021 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5B5FB1331A41B91300890021 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B5FB1241A41B91300890021 /* NBNovelBox */;
+			targetProxy = 5B5FB1321A41B91300890021 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5B5FB1371A41B91300890021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
+			};
+			name = Debug;
+		};
+		5B5FB1381A41B91300890021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
+			};
+			name = Release;
+		};
+		5B5FB13A1A41B91300890021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
+			};
+			name = Debug;
+		};
+		5B5FB13B1A41B91300890021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
+			};
+			name = Release;
+		};
+		5B5FB13D1A41B91300890021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NBNovelBoxTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+			};
+			name = Debug;
+		};
+		5B5FB13E1A41B91300890021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NBNovelBoxTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5B5FB1201A41B91300890021 /* Build configuration list for PBXProject "NBNovelBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B5FB1371A41B91300890021 /* Debug */,
+				5B5FB1381A41B91300890021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B5FB1391A41B91300890021 /* Build configuration list for PBXNativeTarget "NBNovelBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B5FB13A1A41B91300890021 /* Debug */,
+				5B5FB13B1A41B91300890021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B5FB13C1A41B91300890021 /* Build configuration list for PBXNativeTarget "NBNovelBoxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B5FB13D1A41B91300890021 /* Debug */,
+				5B5FB13E1A41B91300890021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5B5FB11D1A41B91300890021 /* Project object */;
+}

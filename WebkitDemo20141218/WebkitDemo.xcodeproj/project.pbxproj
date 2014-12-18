@@ -14,8 +14,12 @@
 		5B5FA2711A41708E00890021 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FA2701A41708E00890021 /* Images.xcassets */; };
 		5B5FA2741A41708E00890021 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FA2721A41708E00890021 /* LaunchScreen.xib */; };
 		5B5FA2801A41708E00890021 /* WebkitDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FA27F1A41708E00890021 /* WebkitDemoTests.m */; };
-		5B5FB0CD1A41B0C700890021 /* UITests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FB0581A41B0C700890021 /* UITests.mm */; };
-		5B5FB0F01A41B0ED00890021 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5FAF851A41B0B600890021 /* libKIF.a */; };
+		5B5FB0FC1A41B2F400890021 /* HardCodeData in Resources */ = {isa = PBXBuildFile; fileRef = 5B5FB0FB1A41B2F400890021 /* HardCodeData */; };
+		5B5FB1001A41B6D100890021 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5FB0FF1A41B6D100890021 /* MainViewController.m */; };
+		5BA140D41A42A90C00216ACB /* WebkitMainPath.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5BA140D31A42A90C00216ACB /* WebkitMainPath.xcconfig */; };
+		5BA1414A1A42CF5000216ACB /* libNBNovelBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA1412B1A42CCF200216ACB /* libNBNovelBox.a */; };
+		5BA141501A42D27600216ACB /* UITests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BA1414E1A42D27600216ACB /* UITests.mm */; };
+		5BA141641A42D2C000216ACB /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA1415B1A42D2B200216ACB /* libKIF.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,47 +30,61 @@
 			remoteGlobalIDString = 5B5FA25F1A41708E00890021;
 			remoteInfo = WebkitDemo;
 		};
-		5B5FAF841A41B0B600890021 /* PBXContainerItemProxy */ = {
+		5BA1412A1A42CCF200216ACB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
+			containerPortal = 5BA141251A42CCF200216ACB /* NBNovelBox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5B5FB1251A41B91300890021;
+			remoteInfo = NBNovelBox;
+		};
+		5BA1412C1A42CCF200216ACB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BA141251A42CCF200216ACB /* NBNovelBox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5B5FB1301A41B91300890021;
+			remoteInfo = NBNovelBoxTests;
+		};
+		5BA1412F1A42CD2C00216ACB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BA141251A42CCF200216ACB /* NBNovelBox.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B5FB1241A41B91300890021;
+			remoteInfo = NBNovelBox;
+		};
+		5BA1415A1A42D2B200216ACB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BA141511A42D2B200216ACB /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EABD46AA1857A0C700A5F081;
 			remoteInfo = KIF;
 		};
-		5B5FAF861A41B0B600890021 /* PBXContainerItemProxy */ = {
+		5BA1415C1A42D2B200216ACB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
+			containerPortal = 5BA141511A42D2B200216ACB /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB72047C1680DDAD00278DA2;
 			remoteInfo = "KIF-OCUnit";
 		};
-		5B5FAF881A41B0B600890021 /* PBXContainerItemProxy */ = {
+		5BA1415E1A42D2B200216ACB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
+			containerPortal = 5BA141511A42D2B200216ACB /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB60ECC1177F8C83005A041A;
 			remoteInfo = "Test Host";
 		};
-		5B5FAF8A1A41B0B600890021 /* PBXContainerItemProxy */ = {
+		5BA141601A42D2B200216ACB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
+			containerPortal = 5BA141511A42D2B200216ACB /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EABD46CD1857A0F300A5F081;
 			remoteInfo = "KIF Tests";
 		};
-		5B5FAF8C1A41B0B600890021 /* PBXContainerItemProxy */ = {
+		5BA141621A42D2B200216ACB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
+			containerPortal = 5BA141511A42D2B200216ACB /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
 			remoteInfo = "KIF Tests-OCUnit";
-		};
-		5B5FB0F11A41B0F500890021 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = EABD46791857A0C700A5F081;
-			remoteInfo = KIF;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -84,11 +102,17 @@
 		5B5FA2791A41708E00890021 /* WebkitDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebkitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B5FA27E1A41708E00890021 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B5FA27F1A41708E00890021 /* WebkitDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebkitDemoTests.m; sourceTree = "<group>"; };
-		5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = KIF.xcodeproj; sourceTree = "<group>"; };
-		5B5FB0561A41B0C700890021 /* NBAccessibilityNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBAccessibilityNames.h; sourceTree = "<group>"; };
-		5B5FB0571A41B0C700890021 /* UITests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITests.h; sourceTree = "<group>"; };
-		5B5FB0581A41B0C700890021 /* UITests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UITests.mm; sourceTree = "<group>"; };
-		5B5FB0591A41B0C700890021 /* UITestsLabelNameMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITestsLabelNameMacroDefine.h; sourceTree = "<group>"; };
+		5B5FB0FB1A41B2F400890021 /* HardCodeData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HardCodeData; sourceTree = "<group>"; };
+		5B5FB0FE1A41B6D100890021 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		5B5FB0FF1A41B6D100890021 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		5BA140D31A42A90C00216ACB /* WebkitMainPath.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = WebkitMainPath.xcconfig; sourceTree = "<group>"; };
+		5BA140DD1A42B12100216ACB /* NBNovelBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBNovelBox.h; path = ../SourceProjects/Projects/NBNovelBox/NBNovelBox/Include/NBNovelBox.h; sourceTree = "<group>"; };
+		5BA141251A42CCF200216ACB /* NBNovelBox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = NBNovelBox.xcodeproj; sourceTree = "<group>"; };
+		5BA1414C1A42D27600216ACB /* NBAccessibilityNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBAccessibilityNames.h; sourceTree = "<group>"; };
+		5BA1414D1A42D27600216ACB /* UITests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITests.h; sourceTree = "<group>"; };
+		5BA1414E1A42D27600216ACB /* UITests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UITests.mm; sourceTree = "<group>"; };
+		5BA1414F1A42D27600216ACB /* UITestsLabelNameMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITestsLabelNameMacroDefine.h; sourceTree = "<group>"; };
+		5BA141511A42D2B200216ACB /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = KIF.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BA1414A1A42CF5000216ACB /* libNBNovelBox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B5FB0F01A41B0ED00890021 /* libKIF.a in Frameworks */,
+				5BA141641A42D2C000216ACB /* libKIF.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,8 +138,9 @@
 		5B5FA2571A41708E00890021 = {
 			isa = PBXGroup;
 			children = (
-				5B5FA8101A418F7600890021 /* SourceProjects */,
 				5B5FA2621A41708E00890021 /* WebkitDemo */,
+				5BA140B91A42A7DA00216ACB /* ProjectConfig */,
+				5B5FA8101A418F7600890021 /* SourceProjects */,
 				5B5FA27C1A41708E00890021 /* WebkitDemoTests */,
 				5B5FA2611A41708E00890021 /* Products */,
 			);
@@ -132,6 +158,7 @@
 		5B5FA2621A41708E00890021 /* WebkitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				5BA140D61A42AFB100216ACB /* Dependency */,
 				5B5FA2671A41708E00890021 /* AppDelegate.h */,
 				5B5FA2681A41708E00890021 /* AppDelegate.m */,
 				5B5FA26A1A41708E00890021 /* ViewController.h */,
@@ -149,6 +176,7 @@
 			children = (
 				5B5FA2641A41708E00890021 /* Info.plist */,
 				5B5FA2651A41708E00890021 /* main.m */,
+				5B5FB0FB1A41B2F400890021 /* HardCodeData */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -174,6 +202,8 @@
 		5B5FA8101A418F7600890021 /* SourceProjects */ = {
 			isa = PBXGroup;
 			children = (
+				5B5FB13F1A41B9C000890021 /* Projects */,
+				5B5FB0FD1A41B6D100890021 /* MainViewController */,
 			);
 			path = SourceProjects;
 			sourceTree = "<group>";
@@ -181,42 +211,101 @@
 		5B5FAE201A41B0AB00890021 /* KIF_2_0_0 */ = {
 			isa = PBXGroup;
 			children = (
-				5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */,
+				5BA141511A42D2B200216ACB /* KIF.xcodeproj */,
 			);
 			name = KIF_2_0_0;
 			path = TestProject/KIF_2_0_0;
 			sourceTree = SOURCE_ROOT;
 		};
-		5B5FAF7C1A41B0B500890021 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5B5FAF851A41B0B600890021 /* libKIF.a */,
-				5B5FAF871A41B0B600890021 /* libKIF-OCUnit.a */,
-				5B5FAF891A41B0B600890021 /* Test Host.app */,
-				5B5FAF8B1A41B0B600890021 /* KIF Tests - XCTest.xctest */,
-				5B5FAF8D1A41B0B600890021 /* KIF Tests-OCUnit.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5B5FAF8E1A41B0C600890021 /* TestProject */ = {
 			isa = PBXGroup;
 			children = (
+				5BA1414B1A42D27600216ACB /* UITests */,
 				5B5FAE201A41B0AB00890021 /* KIF_2_0_0 */,
-				5B5FB0551A41B0C700890021 /* UITests */,
 			);
 			path = TestProject;
 			sourceTree = SOURCE_ROOT;
 		};
-		5B5FB0551A41B0C700890021 /* UITests */ = {
+		5B5FB0FD1A41B6D100890021 /* MainViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5B5FB0561A41B0C700890021 /* NBAccessibilityNames.h */,
-				5B5FB0571A41B0C700890021 /* UITests.h */,
-				5B5FB0581A41B0C700890021 /* UITests.mm */,
-				5B5FB0591A41B0C700890021 /* UITestsLabelNameMacroDefine.h */,
+				5B5FB0FE1A41B6D100890021 /* MainViewController.h */,
+				5B5FB0FF1A41B6D100890021 /* MainViewController.m */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		5B5FB13F1A41B9C000890021 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				5B5FB1401A41B9C000890021 /* NBNovelBox */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		5B5FB1401A41B9C000890021 /* NBNovelBox */ = {
+			isa = PBXGroup;
+			children = (
+				5BA141251A42CCF200216ACB /* NBNovelBox.xcodeproj */,
+			);
+			path = NBNovelBox;
+			sourceTree = "<group>";
+		};
+		5BA140B91A42A7DA00216ACB /* ProjectConfig */ = {
+			isa = PBXGroup;
+			children = (
+				5BA140D31A42A90C00216ACB /* WebkitMainPath.xcconfig */,
+			);
+			name = ProjectConfig;
+			path = SourceProjects/ProjectConfig;
+			sourceTree = "<group>";
+		};
+		5BA140D61A42AFB100216ACB /* Dependency */ = {
+			isa = PBXGroup;
+			children = (
+				5BA140DC1A42B10600216ACB /* NBNovelBox */,
+			);
+			name = Dependency;
+			sourceTree = "<group>";
+		};
+		5BA140DC1A42B10600216ACB /* NBNovelBox */ = {
+			isa = PBXGroup;
+			children = (
+				5BA140DD1A42B12100216ACB /* NBNovelBox.h */,
+			);
+			name = NBNovelBox;
+			sourceTree = "<group>";
+		};
+		5BA141261A42CCF200216ACB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5BA1412B1A42CCF200216ACB /* libNBNovelBox.a */,
+				5BA1412D1A42CCF200216ACB /* NBNovelBoxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5BA1414B1A42D27600216ACB /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				5BA1414C1A42D27600216ACB /* NBAccessibilityNames.h */,
+				5BA1414D1A42D27600216ACB /* UITests.h */,
+				5BA1414E1A42D27600216ACB /* UITests.mm */,
+				5BA1414F1A42D27600216ACB /* UITestsLabelNameMacroDefine.h */,
 			);
 			path = UITests;
+			sourceTree = "<group>";
+		};
+		5BA141521A42D2B200216ACB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5BA1415B1A42D2B200216ACB /* libKIF.a */,
+				5BA1415D1A42D2B200216ACB /* libKIF-OCUnit.a */,
+				5BA1415F1A42D2B200216ACB /* Test Host.app */,
+				5BA141611A42D2B200216ACB /* KIF Tests - XCTest.xctest */,
+				5BA141631A42D2B200216ACB /* KIF Tests-OCUnit.octest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +322,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5BA141301A42CD2C00216ACB /* PBXTargetDependency */,
 			);
 			name = WebkitDemo;
 			productName = WebkitDemo;
@@ -250,7 +340,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5B5FB0F21A41B0F500890021 /* PBXTargetDependency */,
 				5B5FA27B1A41708E00890021 /* PBXTargetDependency */,
 			);
 			name = WebkitDemoTests;
@@ -289,8 +378,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5B5FAF7C1A41B0B500890021 /* Products */;
-					ProjectRef = 5B5FAF7B1A41B0B500890021 /* KIF.xcodeproj */;
+					ProductGroup = 5BA141521A42D2B200216ACB /* Products */;
+					ProjectRef = 5BA141511A42D2B200216ACB /* KIF.xcodeproj */;
+				},
+				{
+					ProductGroup = 5BA141261A42CCF200216ACB /* Products */;
+					ProjectRef = 5BA141251A42CCF200216ACB /* NBNovelBox.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -302,39 +395,53 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5B5FAF851A41B0B600890021 /* libKIF.a */ = {
+		5BA1412B1A42CCF200216ACB /* libNBNovelBox.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libNBNovelBox.a;
+			remoteRef = 5BA1412A1A42CCF200216ACB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5BA1412D1A42CCF200216ACB /* NBNovelBoxTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NBNovelBoxTests.xctest;
+			remoteRef = 5BA1412C1A42CCF200216ACB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5BA1415B1A42D2B200216ACB /* libKIF.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libKIF.a;
-			remoteRef = 5B5FAF841A41B0B600890021 /* PBXContainerItemProxy */;
+			remoteRef = 5BA1415A1A42D2B200216ACB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5B5FAF871A41B0B600890021 /* libKIF-OCUnit.a */ = {
+		5BA1415D1A42D2B200216ACB /* libKIF-OCUnit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libKIF-OCUnit.a";
-			remoteRef = 5B5FAF861A41B0B600890021 /* PBXContainerItemProxy */;
+			remoteRef = 5BA1415C1A42D2B200216ACB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5B5FAF891A41B0B600890021 /* Test Host.app */ = {
+		5BA1415F1A42D2B200216ACB /* Test Host.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = "Test Host.app";
-			remoteRef = 5B5FAF881A41B0B600890021 /* PBXContainerItemProxy */;
+			remoteRef = 5BA1415E1A42D2B200216ACB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5B5FAF8B1A41B0B600890021 /* KIF Tests - XCTest.xctest */ = {
+		5BA141611A42D2B200216ACB /* KIF Tests - XCTest.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KIF Tests - XCTest.xctest";
-			remoteRef = 5B5FAF8A1A41B0B600890021 /* PBXContainerItemProxy */;
+			remoteRef = 5BA141601A42D2B200216ACB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5B5FAF8D1A41B0B600890021 /* KIF Tests-OCUnit.octest */ = {
+		5BA141631A42D2B200216ACB /* KIF Tests-OCUnit.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KIF Tests-OCUnit.octest";
-			remoteRef = 5B5FAF8C1A41B0B600890021 /* PBXContainerItemProxy */;
+			remoteRef = 5BA141621A42D2B200216ACB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -344,6 +451,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B5FB0FC1A41B2F400890021 /* HardCodeData in Resources */,
+				5BA140D41A42A90C00216ACB /* WebkitMainPath.xcconfig in Resources */,
 				5B5FA26F1A41708E00890021 /* Main.storyboard in Resources */,
 				5B5FA2741A41708E00890021 /* LaunchScreen.xib in Resources */,
 				5B5FA2711A41708E00890021 /* Images.xcassets in Resources */,
@@ -367,6 +476,7 @@
 				5B5FA26C1A41708E00890021 /* ViewController.m in Sources */,
 				5B5FA2691A41708E00890021 /* AppDelegate.m in Sources */,
 				5B5FA2661A41708E00890021 /* main.m in Sources */,
+				5B5FB1001A41B6D100890021 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,8 +484,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B5FB0CD1A41B0C700890021 /* UITests.mm in Sources */,
 				5B5FA2801A41708E00890021 /* WebkitDemoTests.m in Sources */,
+				5BA141501A42D27600216ACB /* UITests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,10 +497,10 @@
 			target = 5B5FA25F1A41708E00890021 /* WebkitDemo */;
 			targetProxy = 5B5FA27A1A41708E00890021 /* PBXContainerItemProxy */;
 		};
-		5B5FB0F21A41B0F500890021 /* PBXTargetDependency */ = {
+		5BA141301A42CD2C00216ACB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = KIF;
-			targetProxy = 5B5FB0F11A41B0F500890021 /* PBXContainerItemProxy */;
+			name = NBNovelBox;
+			targetProxy = 5BA1412F1A42CD2C00216ACB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -449,11 +559,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(WD_HEADER_SEARCH_PATHS)",
+					"$(WD_NOVELBOX_Inclue_HEADER_PATH)",
+					"$(WD_NBPageViewController_HEADER_PATH)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -486,11 +604,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(WD_HEADER_SEARCH_PATHS)",
+					"$(WD_NOVELBOX_Inclue_HEADER_PATH)",
+					"$(WD_NBPageViewController_HEADER_PATH)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Release;
 		};
@@ -500,10 +627,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(WD_HEADER_SEARCH_PATHS)",
+					"$(WD_NOVELBOX_Inclue_HEADER_PATH)",
+					"$(WD_NBPageViewController_HEADER_PATH)",
+				);
 				INFOPLIST_FILE = WebkitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OBJC_ALLOAD = "-all_load";
+				OBJC_LIB = "-lobjc";
+				OBJC_LIBRARY = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
 			};
 			name = Debug;
 		};
@@ -513,10 +652,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(WD_HEADER_SEARCH_PATHS)",
+					"$(WD_NOVELBOX_Inclue_HEADER_PATH)",
+					"$(WD_NBPageViewController_HEADER_PATH)",
+				);
 				INFOPLIST_FILE = WebkitDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OBJC_ALLOAD = "-all_load";
+				OBJC_LIB = "-lobjc";
+				OBJC_LIBRARY = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
 			};
 			name = Release;
 		};
@@ -536,6 +687,9 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../TestProject/KIF_2_0_0,
+					"$(WD_HEADER_SEARCH_PATHS)",
+					"$(WD_NOVELBOX_Inclue_HEADER_PATH)",
+					"$(WD_NBPageViewController_HEADER_PATH)",
 				);
 				INFOPLIST_FILE = WebkitDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -562,6 +716,9 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../TestProject/KIF_2_0_0,
+					"$(WD_HEADER_SEARCH_PATHS)",
+					"$(WD_NOVELBOX_Inclue_HEADER_PATH)",
+					"$(WD_NBPageViewController_HEADER_PATH)",
 				);
 				INFOPLIST_FILE = WebkitDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

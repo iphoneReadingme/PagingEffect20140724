@@ -1,0 +1,14 @@
+//
+//  BasicReleaseConfig.xcconfig
+//  UCWEB7
+//
+//  Created by _ivanC on 14-09-28.
+//
+//
+
+#include "AllBuildConfig.xcconfig"
+
+GCC_PREPROCESSOR_DEFINITIONS = NDEBUG=1 NS_BLOCK_ASSERTIONS=1
+
+GCC_SYMBOLS_PRIVATE_EXTERN = YES
+GCC_INLINES_ARE_PRIVATE_EXTERN = YES

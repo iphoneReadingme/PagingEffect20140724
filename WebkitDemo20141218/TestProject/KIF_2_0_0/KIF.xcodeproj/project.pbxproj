@@ -650,7 +650,7 @@
 			name = "KIF Tests";
 			productName = "KIF Tests";
 			productReference = EABD46CD1857A0F300A5F081 /* KIF Tests - XCTest.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		EB60ECC0177F8C83005A041A /* Test Host */ = {
 			isa = PBXNativeTarget;
@@ -686,7 +686,7 @@
 			name = "KIF Tests-OCUnit";
 			productName = "KIF Tests";
 			productReference = EB60ECEB177F8DB3005A041A /* KIF Tests-OCUnit.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		EB72043E1680DDAD00278DA2 /* KIF-OCUnit */ = {
 			isa = PBXNativeTarget;
@@ -711,7 +711,7 @@
 		AAB0725F139719AC008AF393 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0610;
 				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = AAB07262139719AC008AF393 /* Build configuration list for PBXProject "KIF" */;
@@ -989,6 +989,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -1011,12 +1012,14 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Release;
 		};
 		AAB07270139719AC008AF393 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1028,17 +1031,20 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				ONLY_ACTIVE_ARCH = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Debug;
 		};
 		AAB07271139719AC008AF393 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREFIX_HEADER = "Classes/KIF-Prefix.pch";
@@ -1047,10 +1053,13 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Release;
 		};
@@ -1069,6 +1078,7 @@
 					DEBUG,
 					"KIF_XCTEST=1",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = KIF;
 			};
@@ -1089,6 +1099,7 @@
 					DEBUG,
 					"KIF_XCTEST=1",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = KIF;
 			};
@@ -1105,6 +1116,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PREFIX_HEADER = "Classes/KIF-XCTestPrefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = KIF;
 			};
@@ -1117,7 +1129,7 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -1137,7 +1149,7 @@
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "KIF Tests/KIF Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "KIF Tests - XCTest";
@@ -1153,7 +1165,7 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -1174,7 +1186,7 @@
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "KIF Tests/KIF Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "KIF Tests - XCTest";
@@ -1190,7 +1202,7 @@
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -1205,7 +1217,8 @@
 				GCC_PREFIX_HEADER = "KIF Tests/KIF XCTests-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "KIF Tests/KIF Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "KIF Tests - XCTest";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1296,7 +1309,7 @@
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "KIF Tests/KIF Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1324,7 +1337,8 @@
 				GCC_PREFIX_HEADER = "KIF Tests/KIF Tests-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "KIF Tests/KIF Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1366,6 +1380,7 @@
 		EBAE48FF17A5B1380005EE19 /* Coverage */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
@@ -1379,10 +1394,13 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Coverage;
 		};
@@ -1430,6 +1448,7 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Coverage;
 		};
@@ -1489,7 +1508,7 @@
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "KIF Tests/KIF Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

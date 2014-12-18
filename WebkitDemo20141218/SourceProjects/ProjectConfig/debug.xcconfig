@@ -1,0 +1,29 @@
+//
+//  debug.xcconfig
+//  UCWEB7
+//
+//  Created by zds on 10-7-12.
+//  Copyright 2010 UCWEB. All rights reserved.
+//
+MAIN_PATH		  = $(SRCROOT)/../..
+
+#include "BasicDebugConfig.xcconfig"
+
+#include "share.xcconfig"
+
+// ================Paths================
+REPO_ROOT_PATH    = $(SRCROOT)/../..
+//ROOT_SOURCE_PATH  = $(REPO_ROOT_PATH)/src
+
+OBJROOT = $(REPO_ROOT_PATH)/Build
+SYMROOT = $(OBJROOT)/Products
+
+// Linker Flags
+//UC_FRAMEWORKS		= $(FOUNDATION_FX) $(COREFOUNDATION_FX) $(SYSTEMCONFIGURATION_FX) $(COREGRAPHICS_FX) $(CFNETWORK_FX) $(QUARTZCORE_FX) $(ADDRESSBOOK_FX) $(ADDRESSBOOKUI_FX) $(AUDIOTOOLBOX_FX)  $(MEDIAPLAYER_FX)
+
+//OTHER_LDFLAGS        = $(OBJC_LIBRARY)
+//OTHER_LDFLAGS        = $(OBJC_LIBRARY) $(OBJC_ALLLOAD) $(FOUNDATION_FX)
+//OTHER_LDFLAGS		 = $(UC_FRAMEWORKS)
+OTHER_CFLAGS         = $(UC_DEFINE_FLAG) -D_DEBUG 
+OTHER_CPLUSPLUSFLAGS = $(UC_DEFINE_FLAG) -D_DEBUG 
+

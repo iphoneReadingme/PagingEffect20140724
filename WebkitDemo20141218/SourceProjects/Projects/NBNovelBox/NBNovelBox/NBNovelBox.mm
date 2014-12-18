@@ -7,12 +7,18 @@
 //
 
 #import "NBNovelBox.h"
+#import "NBPageViewController.h"
 
 @implementation NBNovelBox
 
 - (NSString*)getTestString
 {
 	return @"===NBNoveBox object create test===";
+}
+
++ (UIViewController*)createPageViewController
+{
+	return [NBPageViewController createPageViewController];
 }
 
 @end

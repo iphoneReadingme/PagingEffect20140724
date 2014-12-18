@@ -8,8 +8,8 @@
 
 
 #import <CoreText/CoreText.h>
-#import "ContentViewController.h"
 #import "NBPageViewController.h"
+#import "ContentViewController.h"
 #import "NBMockChapterContent.h"
 
 #define kMaxPageCount     14
@@ -85,6 +85,7 @@ ContentViewControllerDelegate
 	NBMockChapterContent* mockObj = [[[NBMockChapterContent alloc] init] autorelease];
 	
 	return [mockObj getChapterContent];
+	return nil;
 }
 
 #pragma mark -== View lifecycle

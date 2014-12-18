@@ -54,10 +54,12 @@
 
 - (void)initWindow
 {
-	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+	UIWindow* window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	[window autorelease];
+	self.window = window;
 	// Override point for customization after application launch.
 	
-	self.viewController = [NBPageViewController createPageViewController];
+	self.viewController = [NBNovelBox createPageViewController];
 	
 	[self test];
 	
@@ -67,7 +69,8 @@
 
 - (void)test
 {
-	NBNovelBox* nbObj = [[[NBNovelBox alloc] init] autorelease];
+	NBNovelBox* nbObj = [[NBNovelBox alloc] init];
+	[nbObj autorelease];
 	NSLog(@"%@", [nbObj getTestString]);
 	nbObj = nil;
 }

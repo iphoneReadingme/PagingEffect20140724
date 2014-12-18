@@ -9,17 +9,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-//#import "NBPageViewController.h"
-//#import "../NBPageViewController/NBPageViewController.h"
-//#import "NBMockChapterContent.h"
-//#import "../../NBNovelBoxTests/TestSource/NBDataModelMocks/NBMockChapterContent.h"
-
 
 @interface NBNovelBox : NSObject
 
 - (NSString*)getTestString;
 
 + (UIViewController*)createPageViewController;
+
++ (NSString*)getChapterContent;
 
 @end
 

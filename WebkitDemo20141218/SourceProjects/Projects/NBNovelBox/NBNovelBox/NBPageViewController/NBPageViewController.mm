@@ -80,7 +80,7 @@ ContentViewControllerDelegate
 
 #pragma mark - == 加载测试数据
 
-- (NSString*)getChapterContent
++ (NSString*)getChapterContent
 {
 	NBMockChapterContent* mockObj = [[[NBMockChapterContent alloc] init] autorelease];
 	
@@ -95,7 +95,7 @@ ContentViewControllerDelegate
     [super viewDidLoad];
 	
     self.isTurnPage = YES;
-	self.chapterText = [self getChapterContent];
+	self.chapterText = [NBPageViewController getChapterContent];
 	
 	///< 添加字体
 	//[self getFontFilePath];

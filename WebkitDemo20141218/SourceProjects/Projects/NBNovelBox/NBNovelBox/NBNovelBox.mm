@@ -21,4 +21,11 @@
 	return [NBPageViewController createPageViewController];
 }
 
+#pragma mark - == 加载测试数据
+
++ (NSString*)getChapterContent
+{
+	return [NBPageViewController getChapterContent];
+}
+
 @end

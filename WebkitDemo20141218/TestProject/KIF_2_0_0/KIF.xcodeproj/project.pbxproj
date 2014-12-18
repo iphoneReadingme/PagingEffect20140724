@@ -12,6 +12,7 @@
 		2EE12710198991920031D347 /* MultiFingerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE1270F198991920031D347 /* MultiFingerTests.m */; };
 		2EE12711198991920031D347 /* MultiFingerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE1270F198991920031D347 /* MultiFingerTests.m */; };
 		4A48107B19708CAB0003A32E /* ExistTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A48107A19708CAB0003A32E /* ExistTests.m */; };
+		5BA977291A4304C4000DC873 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA977281A4304C4000DC873 /* XCTest.framework */; };
 		A88930121685098E00FC7C63 /* KIF.h in Headers */ = {isa = PBXBuildFile; fileRef = A88930111685098E00FC7C63 /* KIF.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D927B9DC18F9DF2D00DAD036 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D927B9DB18F9DF2D00DAD036 /* TableViewController.m */; };
 		D927B9DF18F9E46400DAD036 /* UITableView-KIFAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = D927B9DD18F9E46400DAD036 /* UITableView-KIFAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -81,8 +82,6 @@
 		EABD46C41857A0F300A5F081 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB0726B139719AC008AF393 /* Foundation.framework */; };
 		EABD46C51857A0F300A5F081 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB60ECC4177F8C83005A041A /* CoreGraphics.framework */; };
 		EABD46C71857A0F300A5F081 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB60ECF2177F8DB3005A041A /* InfoPlist.strings */; };
-		EABD46CF1857A15400A5F081 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABD46AB1857A0EB00A5F081 /* XCTest.framework */; };
-		EABD46D21857A24E00A5F081 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABD46AB1857A0EB00A5F081 /* XCTest.framework */; };
 		EABD46D51857C54500A5F081 /* KIF-XCTestPrefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = EABD46D31857BE8600A5F081 /* KIF-XCTestPrefix.pch */; };
 		EABD46D61858C8ED00A5F081 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EABD46AA1857A0C700A5F081 /* libKIF.a */; };
 		EABD474B185F509E00A5F081 /* SenTestCase-KIFAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = EABD4749185F509E00A5F081 /* SenTestCase-KIFAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -189,6 +188,7 @@
 		2EE1270F198991920031D347 /* MultiFingerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiFingerTests.m; sourceTree = "<group>"; };
 		39160B1013D1E6BB00311E38 /* LoadableCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadableCategory.h; sourceTree = "<group>"; };
 		4A48107A19708CAB0003A32E /* ExistTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistTests.m; sourceTree = "<group>"; };
+		5BA977281A4304C4000DC873 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		A88930111685098E00FC7C63 /* KIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = KIF.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AAB0726B139719AC008AF393 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAB0728113971A63008AF393 /* KIF-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "KIF-Prefix.pch"; path = "Classes/KIF-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -222,7 +222,6 @@
 		EABD46751857A07600A5F081 /* XCTestCase-KIFAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase-KIFAdditions.h"; sourceTree = "<group>"; };
 		EABD46761857A07600A5F081 /* XCTestCase-KIFAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestCase-KIFAdditions.m"; sourceTree = "<group>"; };
 		EABD46AA1857A0C700A5F081 /* libKIF.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKIF.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EABD46AB1857A0EB00A5F081 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EABD46CD1857A0F300A5F081 /* KIF Tests - XCTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KIF Tests - XCTest.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EABD46D01857A18900A5F081 /* KIF XCTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KIF XCTests-Prefix.pch"; sourceTree = "<group>"; };
 		EABD46D31857BE8600A5F081 /* KIF-XCTestPrefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KIF-XCTestPrefix.pch"; sourceTree = "<group>"; };
@@ -289,8 +288,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EABD46D21857A24E00A5F081 /* XCTest.framework in Frameworks */,
 				EABD468E1857A0C700A5F081 /* Foundation.framework in Frameworks */,
+				5BA977291A4304C4000DC873 /* XCTest.framework in Frameworks */,
 				EABD468F1857A0C700A5F081 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,7 +299,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EABD46D61858C8ED00A5F081 /* libKIF.a in Frameworks */,
-				EABD46CF1857A15400A5F081 /* XCTest.framework in Frameworks */,
 				EABD46C31857A0F300A5F081 /* UIKit.framework in Frameworks */,
 				EABD46C41857A0F300A5F081 /* Foundation.framework in Frameworks */,
 				EABD46C51857A0F300A5F081 /* CoreGraphics.framework in Frameworks */,
@@ -368,7 +366,7 @@
 		AAB0726A139719AC008AF393 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EABD46AB1857A0EB00A5F081 /* XCTest.framework */,
+				5BA977281A4304C4000DC873 /* XCTest.framework */,
 				EB4C3138167BA3D200E31109 /* SenTestingKit.framework */,
 				AAB072B413971AEA008AF393 /* UIKit.framework */,
 				AAB0726B139719AC008AF393 /* Foundation.framework */,
@@ -598,23 +596,6 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
-/* Begin PBXLegacyTarget section */
-		A88930091685088F00FC7C63 /* KIF Documentation */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "--exit-threshold 2 --logformat xcode --output /tmp/kif-docs --project-name KIF --project-version 2.0 --project-company \"Square, Inc.\" --company-id com.squareup --no-repeat-first-par --no-search-undocumented-doc Classes/ Additions/";
-			buildConfigurationList = A889300A1685088F00FC7C63 /* Build configuration list for PBXLegacyTarget "KIF Documentation" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/local/bin/appledoc;
-			buildWorkingDirectory = "";
-			dependencies = (
-			);
-			name = "KIF Documentation";
-			passBuildSettingsInEnvironment = 1;
-			productName = "KIF Documentation";
-		};
-/* End PBXLegacyTarget section */
-
 /* Begin PBXNativeTarget section */
 		EABD46791857A0C700A5F081 /* KIF */ = {
 			isa = PBXNativeTarget;
@@ -712,7 +693,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0610;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 			};
 			buildConfigurationList = AAB07262139719AC008AF393 /* Build configuration list for PBXProject "KIF" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -728,7 +709,6 @@
 			targets = (
 				EABD46791857A0C700A5F081 /* KIF */,
 				EB72043E1680DDAD00278DA2 /* KIF-OCUnit */,
-				A88930091685088F00FC7C63 /* KIF Documentation */,
 				EB60ECC0177F8C83005A041A /* Test Host */,
 				EABD46AD1857A0F300A5F081 /* KIF Tests */,
 				EB60ECEA177F8DB3005A041A /* KIF Tests-OCUnit */,
@@ -962,65 +942,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A889300B1685088F00FC7C63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
-			};
-			name = Debug;
-		};
-		A889300C1685088F00FC7C63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
-			};
-			name = Release;
-		};
 		AAB07270139719AC008AF393 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "Classes/KIF-Prefix.pch";
@@ -1036,16 +961,14 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
-				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
+				VALID_ARCHS = "armv64 armv7 armv7s";
 			};
 			name = Debug;
 		};
 		AAB07271139719AC008AF393 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREFIX_HEADER = "Classes/KIF-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1058,8 +981,7 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
-				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
+				VALID_ARCHS = "armv64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -1072,6 +994,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks",
 				);
 				GCC_PREFIX_HEADER = "Classes/KIF-XCTestPrefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1081,6 +1004,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = KIF;
+				VALID_ARCHS = "armv64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1093,6 +1017,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks",
 				);
 				GCC_PREFIX_HEADER = "Classes/KIF-XCTestPrefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1102,6 +1027,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = KIF;
+				VALID_ARCHS = "armv64 armv7 armv7s";
 			};
 			name = Coverage;
 		};
@@ -1114,11 +1040,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks",
 				);
 				GCC_PREFIX_HEADER = "Classes/KIF-XCTestPrefix.pch";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = KIF;
+				VALID_ARCHS = "armv64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -1277,6 +1205,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "Test Host/Test Host-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1380,8 +1309,7 @@
 		EBAE48FF17A5B1380005EE19 /* Coverage */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(BUILD_CPU_ARCHITECTURES)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
@@ -1399,8 +1327,7 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "$(VALID_BUILD_CPU_ARCHITECUTRES)";
-				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
+				VALID_ARCHS = "armv64 armv7 armv7s";
 			};
 			name = Coverage;
 		};
@@ -1418,37 +1345,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "KIF-OCUnit";
-			};
-			name = Coverage;
-		};
-		EBAE490117A5B1380005EE19 /* Coverage */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUGGING_SYMBOLS = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				VALID_BUILD_CPU_ARCHITECUTRES = "armv6 armv7 armv7s i386";
 			};
 			name = Coverage;
 		};
@@ -1520,16 +1416,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A889300A1685088F00FC7C63 /* Build configuration list for PBXLegacyTarget "KIF Documentation" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A889300B1685088F00FC7C63 /* Debug */,
-				EBAE490117A5B1380005EE19 /* Coverage */,
-				A889300C1685088F00FC7C63 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AAB07262139719AC008AF393 /* Build configuration list for PBXProject "KIF" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -41,9 +41,7 @@
 
 - (NSString*)getChapterContent
 {
-	NBMockChapterContent* mockObj = [[[NBMockChapterContent alloc] init] autorelease];
-	
-	return [mockObj getChapterContent];
+	return [NBNovelBox getChapterContent];
 }
 
 - (void)test0001

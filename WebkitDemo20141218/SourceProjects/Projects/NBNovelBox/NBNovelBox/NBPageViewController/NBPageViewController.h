@@ -15,4 +15,6 @@
 
 + (UIViewController*)createPageViewController;
 
++ (NSString*)getChapterContent;
+
 @end

@@ -40,7 +40,15 @@
 		5B37C0CA1A64F17E003FE853 /* FEEmojiParameterInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0C31A64F17E003FE853 /* FEEmojiParameterInfo.mm */; };
 		5B37C0CB1A64F17E003FE853 /* FEEmojiView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0C51A64F17E003FE853 /* FEEmojiView.mm */; };
 		5B37C0CC1A64F17E003FE853 /* FEEmojiViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0C71A64F17E003FE853 /* FEEmojiViewController.mm */; };
-		5B37C0D01A64F2A3003FE853 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0CF1A64F2A3003FE853 /* JSONKit.m */; };
+		5B37C82F1A650805003FE853 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5331A650804003FE853 /* JSONKit.m */; };
+		5B37C8301A650805003FE853 /* NSArray+ExceptionSafe.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5361A650804003FE853 /* NSArray+ExceptionSafe.mm */; };
+		5B37C8311A650805003FE853 /* NSDictionary+ExceptionSafe.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5381A650804003FE853 /* NSDictionary+ExceptionSafe.mm */; };
+		5B37C8321A650806003FE853 /* NSHTTPCookieStorage+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C53A1A650804003FE853 /* NSHTTPCookieStorage+ExceptionSafe.m */; };
+		5B37C8331A650806003FE853 /* NSMutableArray+ExceptionSafe.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C53C1A650804003FE853 /* NSMutableArray+ExceptionSafe.mm */; };
+		5B37C8341A650806003FE853 /* NSMutableDictionary+ExceptionSafe.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C53E1A650804003FE853 /* NSMutableDictionary+ExceptionSafe.mm */; };
+		5B37C8351A650806003FE853 /* NSMutableString+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5401A650804003FE853 /* NSMutableString+ExceptionSafe.m */; };
+		5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */; };
+		5B37C8371A650806003FE853 /* UCFNDCollection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5441A650804003FE853 /* UCFNDCollection.mm */; };
 		5B38700B17CF40250076514D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B38700A17CF40250076514D /* CoreData.framework */; };
 		5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */; };
 		5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */; };
@@ -131,8 +139,24 @@
 		5B37C0C61A64F17E003FE853 /* FEEmojiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiViewController.h; sourceTree = "<group>"; };
 		5B37C0C71A64F17E003FE853 /* FEEmojiViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiViewController.mm; sourceTree = "<group>"; };
 		5B37C0C81A64F17E003FE853 /* FEEmojiViewMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiViewMacroDefine.h; sourceTree = "<group>"; };
-		5B37C0CE1A64F2A3003FE853 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		5B37C0CF1A64F2A3003FE853 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		5B37C5321A650804003FE853 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		5B37C5331A650804003FE853 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		5B37C5351A650804003FE853 /* NSArray+ExceptionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ExceptionSafe.h"; sourceTree = "<group>"; };
+		5B37C5361A650804003FE853 /* NSArray+ExceptionSafe.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSArray+ExceptionSafe.mm"; sourceTree = "<group>"; };
+		5B37C5371A650804003FE853 /* NSDictionary+ExceptionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ExceptionSafe.h"; sourceTree = "<group>"; };
+		5B37C5381A650804003FE853 /* NSDictionary+ExceptionSafe.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSDictionary+ExceptionSafe.mm"; sourceTree = "<group>"; };
+		5B37C5391A650804003FE853 /* NSHTTPCookieStorage+ExceptionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSHTTPCookieStorage+ExceptionSafe.h"; sourceTree = "<group>"; };
+		5B37C53A1A650804003FE853 /* NSHTTPCookieStorage+ExceptionSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSHTTPCookieStorage+ExceptionSafe.m"; sourceTree = "<group>"; };
+		5B37C53B1A650804003FE853 /* NSMutableArray+ExceptionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+ExceptionSafe.h"; sourceTree = "<group>"; };
+		5B37C53C1A650804003FE853 /* NSMutableArray+ExceptionSafe.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSMutableArray+ExceptionSafe.mm"; sourceTree = "<group>"; };
+		5B37C53D1A650804003FE853 /* NSMutableDictionary+ExceptionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+ExceptionSafe.h"; sourceTree = "<group>"; };
+		5B37C53E1A650804003FE853 /* NSMutableDictionary+ExceptionSafe.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSMutableDictionary+ExceptionSafe.mm"; sourceTree = "<group>"; };
+		5B37C53F1A650804003FE853 /* NSMutableString+ExceptionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+ExceptionSafe.h"; sourceTree = "<group>"; };
+		5B37C5401A650804003FE853 /* NSMutableString+ExceptionSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+ExceptionSafe.m"; sourceTree = "<group>"; };
+		5B37C5411A650804003FE853 /* NSString+ExceptionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ExceptionSafe.h"; sourceTree = "<group>"; };
+		5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ExceptionSafe.m"; sourceTree = "<group>"; };
+		5B37C5431A650804003FE853 /* UCFNDCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFNDCollection.h; sourceTree = "<group>"; };
+		5B37C5441A650804003FE853 /* UCFNDCollection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UCFNDCollection.mm; sourceTree = "<group>"; };
 		5B38700A17CF40250076514D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5B38702F17CF4EEB0076514D /* DemoViewCATransform3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewCATransform3D.h; sourceTree = "<group>"; };
 		5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoViewCATransform3D.mm; sourceTree = "<group>"; };
@@ -367,7 +391,7 @@
 		5B37C0621A64EC00003FE853 /* Src20150113 */ = {
 			isa = PBXGroup;
 			children = (
-				5B37C0CD1A64F2A3003FE853 /* JSONKit */,
+				5B37C5301A650804003FE853 /* UCWeb */,
 				5B37C0631A64EC00003FE853 /* DemoViewCAKeyAnimation */,
 			);
 			path = Src20150113;
@@ -409,13 +433,45 @@
 			path = FEEmojiView;
 			sourceTree = "<group>";
 		};
-		5B37C0CD1A64F2A3003FE853 /* JSONKit */ = {
+		5B37C5301A650804003FE853 /* UCWeb */ = {
 			isa = PBXGroup;
 			children = (
-				5B37C0CE1A64F2A3003FE853 /* JSONKit.h */,
-				5B37C0CF1A64F2A3003FE853 /* JSONKit.m */,
+				5B37C5311A650804003FE853 /* JSONKit */,
+				5B37C5341A650804003FE853 /* UCCollections */,
+			);
+			path = UCWeb;
+			sourceTree = "<group>";
+		};
+		5B37C5311A650804003FE853 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				5B37C5321A650804003FE853 /* JSONKit.h */,
+				5B37C5331A650804003FE853 /* JSONKit.m */,
 			);
 			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		5B37C5341A650804003FE853 /* UCCollections */ = {
+			isa = PBXGroup;
+			children = (
+				5B37C5351A650804003FE853 /* NSArray+ExceptionSafe.h */,
+				5B37C5361A650804003FE853 /* NSArray+ExceptionSafe.mm */,
+				5B37C5371A650804003FE853 /* NSDictionary+ExceptionSafe.h */,
+				5B37C5381A650804003FE853 /* NSDictionary+ExceptionSafe.mm */,
+				5B37C5391A650804003FE853 /* NSHTTPCookieStorage+ExceptionSafe.h */,
+				5B37C53A1A650804003FE853 /* NSHTTPCookieStorage+ExceptionSafe.m */,
+				5B37C53B1A650804003FE853 /* NSMutableArray+ExceptionSafe.h */,
+				5B37C53C1A650804003FE853 /* NSMutableArray+ExceptionSafe.mm */,
+				5B37C53D1A650804003FE853 /* NSMutableDictionary+ExceptionSafe.h */,
+				5B37C53E1A650804003FE853 /* NSMutableDictionary+ExceptionSafe.mm */,
+				5B37C53F1A650804003FE853 /* NSMutableString+ExceptionSafe.h */,
+				5B37C5401A650804003FE853 /* NSMutableString+ExceptionSafe.m */,
+				5B37C5411A650804003FE853 /* NSString+ExceptionSafe.h */,
+				5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */,
+				5B37C5431A650804003FE853 /* UCFNDCollection.h */,
+				5B37C5441A650804003FE853 /* UCFNDCollection.mm */,
+			);
+			path = UCCollections;
 			sourceTree = "<group>";
 		};
 		5B427039187C0153003D3810 /* DemoUIDeviceVIewController20140107 */ = {
@@ -529,8 +585,10 @@
 			files = (
 				5B17BF79185ECF990037A7BA /* PageAppViewController.mm in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				5B37C82F1A650805003FE853 /* JSONKit.m in Sources */,
 				5B195F3D199A4BAB009562C3 /* UIGlobal.mm in Sources */,
 				5B37C0C91A64F17E003FE853 /* FEEmojiIconDataFactory.mm in Sources */,
+				5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */,
 				5B1837B1184861B200E22AF4 /* DemoViewCoreTextDraw.mm in Sources */,
 				5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */,
 				5B1837B2184861B200E22AF4 /* DemoViewSimpleParagraph.mm in Sources */,
@@ -543,14 +601,17 @@
 				5B17BF5D185E9C810037A7BA /* DemoUIPageViewController.mm in Sources */,
 				5B04785C184EBC66007D4A10 /* DemoSettingView.mm in Sources */,
 				5B195F3A199A4BAB009562C3 /* BottomBarViewController.mm in Sources */,
+				5B37C8311A650805003FE853 /* NSDictionary+ExceptionSafe.mm in Sources */,
+				5B37C8301A650805003FE853 /* NSArray+ExceptionSafe.mm in Sources */,
 				5B195F3B199A4BAB009562C3 /* CommonToolBarView.mm in Sources */,
 				5B195F38199A4BAB009562C3 /* iUIAppFrame.mm in Sources */,
 				5B195F3C199A4BAB009562C3 /* InterfaceToolBarView.mm in Sources */,
-				5B37C0D01A64F2A3003FE853 /* JSONKit.m in Sources */,
 				5B195F39199A4BAB009562C3 /* MainFrameView.mm in Sources */,
 				5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */,
 				5B37C0691A64EC00003FE853 /* DemoViewCAKeyAnimationController.mm in Sources */,
+				5B37C8331A650806003FE853 /* NSMutableArray+ExceptionSafe.mm in Sources */,
 				5B17BF78185ECF990037A7BA /* TextPageViewController.mm in Sources */,
+				5B37C8341A650806003FE853 /* NSMutableDictionary+ExceptionSafe.mm in Sources */,
 				5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */,
 				5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */,
 				5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */,
@@ -559,8 +620,11 @@
 				5B17BF5C185E9C810037A7BA /* DemoPageView.mm in Sources */,
 				5B1837B0184861B200E22AF4 /* DemoCoreTextDrawController.mm in Sources */,
 				5BE835051760406300532011 /* DemoViewCALayer.mm in Sources */,
+				5B37C8371A650806003FE853 /* UCFNDCollection.mm in Sources */,
+				5B37C8351A650806003FE853 /* NSMutableString+ExceptionSafe.m in Sources */,
 				5B04785F184EBDDA007D4A10 /* BookLayoutConfig.mm in Sources */,
 				5B37C0CC1A64F17E003FE853 /* FEEmojiViewController.mm in Sources */,
+				5B37C8321A650806003FE853 /* NSHTTPCookieStorage+ExceptionSafe.m in Sources */,
 				5BE835061760406300532011 /* DemoViewCALayerController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -585,8 +649,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 					"\"$(SRCROOT)/Library\"",
+					"$(PROJECT_DIR)/Classes/Src20150113/UCWeb/UCFoundations/UCFoundations/3rdParty/LevelDb/leveldbLib",
+					"$(PROJECT_DIR)/Classes/Src20150113/UCWeb/UCWeb/UCFoundations/UCFoundations/3rdParty/LevelDb/leveldbLib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
@@ -613,8 +679,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 					"\"$(SRCROOT)/Library\"",
+					"$(PROJECT_DIR)/Classes/Src20150113/UCWeb/UCFoundations/UCFoundations/3rdParty/LevelDb/leveldbLib",
+					"$(PROJECT_DIR)/Classes/Src20150113/UCWeb/UCWeb/UCFoundations/UCFoundations/3rdParty/LevelDb/leveldbLib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";

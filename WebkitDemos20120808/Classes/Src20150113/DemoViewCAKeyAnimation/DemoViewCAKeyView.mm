@@ -94,6 +94,7 @@
 - (void)addButtons
 {
 	CGRect frame = [self bounds];
+	frame.origin = CGPointZero;
 	CGRect btnRect = CGRectMake(0, 0, 140, 64);
 //	btnRect.origin.x = frame.size.width - btnRect.size.width;
 	int nIndex = 0;
@@ -170,23 +171,7 @@
 
 - (void)onExtEmojiAnimation
 {
-	static FEEmojiViewController* controller = nil;
-	static int nType = 0;
-	
-	if (controller == nil)
-	{
-		nType++;
-		if (nType >= FEEITypeMaxCount)
-		{
-			nType = 1;
-		}
-		controller = [[FEEmojiViewController alloc] initWithParentView:self WithType:nType];
-	}
-	else
-	{
-		[controller release];
-		controller = nil;
-	}
+	[FEEmojiViewController showFEEmojiView];
 }
 
 @end

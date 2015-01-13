@@ -18,7 +18,7 @@
 #import <UIKit/UIKit.h>
 #import "FEEmojiIconDataFactory.h"
 #import "FEEmojiParameterInfo.h"
-//#import "NSMutableArray+ExceptionSafe.h"
+#import "NSMutableArray+ExceptionSafe.h"
 #import "JSONKit.h"
 
 
@@ -167,8 +167,7 @@
 			rect.size = iconSize;
 			rect = [self getRectWith:rect with:0.5f];
 			temp = NSStringFromCGRect(rect);
-//			[coordinateInfoArray safe_AddObject:temp];
-			[coordinateInfoArray addObject:temp];
+			[coordinateInfoArray safe_AddObject:temp];
 		}
 		
 		
@@ -269,8 +268,7 @@
 			continue;
 		}
 		
-//		[coordinateInfoArray safe_AddObject:pointStr];
-		[coordinateInfoArray addObject:pointStr];
+		[coordinateInfoArray safe_AddObject:pointStr];
 	}
 	
 	if ([coordinateInfoArray count] < 1)

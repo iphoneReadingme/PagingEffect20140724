@@ -31,6 +31,26 @@
 
 @implementation FEEmojiViewController
 
++ (void)showFEEmojiView
+{
+	static FEEmojiViewController* controller = nil;
+	static int nType = 0;
+	
+	if (controller == nil)
+	{
+		nType++;
+		if (nType >= FEEITypeMaxCount)
+		{
+			nType = 1;
+		}
+		controller = [[FEEmojiViewController alloc] initWithParentView:self WithType:nType];
+	}
+	else
+	{
+		[controller release];
+		controller = nil;
+	}
+}
 
 - (id)initWithParentView:(UIView*)parentView WithType:(FEServerCmdType)type;
 {
@@ -63,7 +83,10 @@
 {
 	FEEmojiView* view = [FEEmojiIconDataFactory buildEmojiViewWithType:type withFrame:[parentView bounds]];
 	[parentView addSubview:view];
+	view.alpha = 0.0f;
 	self.emojiView = view;
+	
+	[self startAnimation];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -84,6 +107,58 @@
 	[_emojiView didThemeChange];
 }
 
+///< 显示动画
+- (void)startAnimation
+{
+	[self performSelector:@selector(delayStartAnimation) withObject:nil afterDelay:0.05f];
+}
+
+- (void)delayStartAnimation
+{
+	self.emojiView.alpha = 1.0f;
+	[self executeAnimation:self.emojiView];
+}
+
+- (void)executeAnimation:(UIView*)pView
+{
+	CGPoint pt = pView.center;
+	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:5];
+	
+	NSValue* value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	
+	[animationValues addObject:value];
+	
+	pt.y -= 8/2.0f;
+	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	[animationValues addObject:value];
+	pt.y += 14/2.0f;
+	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	[animationValues addObject:value];
+	pt.y -= 10/2.0f;
+	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	[animationValues addObject:value];
+	pt.y += 4/2.0f;
+	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	[animationValues addObject:value];
+	
+	// 创建关键帧动画
+	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+	animation.keyPath = @"position";
+	animation.duration = 50.0f/60;
+	animation.delegate = self;
+	animation.values = animationValues;
+	
+	animation.timingFunctions = @[
+								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut],
+								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut],
+								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut],
+								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut],
+								  ];
+	
+	animation.keyTimes = @[@0.0, @(10.0f/60), @(23.0f/60), @(33.0f/60), @(50.0f/60)];
+	// 应用动画
+	[pView.layer addAnimation:animation forKey:nil];
+}
 
 @end
 

@@ -192,6 +192,11 @@
 //	[items addObject:flashDic];
 	
 	NSMutableArray *webkitList = [NSMutableArray array];
+	
+	///< 2015-01-13 关键帧动画测试demo
+	[webkitList addObject:[DemoViewCAKeyAnimationController class]];
+	
+	
 //	[webkitList addObject:[WebViewController class]];
 	[webkitList addObject:[AnimationViewController class]];
 //	[webkitList addObject:[MapKitViewController class]];

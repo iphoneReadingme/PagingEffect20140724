@@ -13,6 +13,9 @@
 
 
 
+///< 2015-01-13 关键帧动画测试
+#import "DemoViewCAKeyAnimationController.h"
+
 // 2014-01-07
 //#import "DemoUIDeviceVIewController.h"
 

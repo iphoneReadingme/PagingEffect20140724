@@ -336,8 +336,10 @@
 //	[self executeAnimation4:self.bgAnimationView];
 //	[self executeAnimation5:self.bgAnimationView];
 	//	[self executeAnimation6:self.bgAnimationView];
-	[self executeAnimation7:self.leftIcon];
+//	[self executeAnimation7:self.leftIcon];
+
 //	[self executeAnimation8:self.leftIcon];
+	[self executeAnimation9:self.leftIcon];
 }
 
 
@@ -776,6 +778,46 @@ float bounceEaseOut(float t)
 	}];
 }
 
+- (void)executeAnimation9:(UIView*)pView
+{
+	CGPoint pt = pView.center;
+	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:5];
+	
+	NSValue* value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	
+	[animationValues addObject:value];
+	
+	pt.y -= 8/2.0f;
+	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	[animationValues addObject:value];
+	pt.y += 14/2.0f;
+	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	[animationValues addObject:value];
+	pt.y -= 10/2.0f;
+	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	[animationValues addObject:value];
+	pt.y += 4/2.0f;
+	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
+	[animationValues addObject:value];
+	
+	// 创建关键帧动画
+	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+	animation.keyPath = @"position";
+	animation.duration = 50.0f/60;
+	animation.delegate = self;
+	animation.values = animationValues;
+	
+	animation.timingFunctions = @[
+								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut],
+								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut],
+								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut],
+								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut],
+								  ];
+	
+	animation.keyTimes = @[@0.0, @(10.0f/60), @(23.0f/60), @(33.0f/60), @(50.0f/60)];
+	// 应用动画
+	[pView.layer addAnimation:animation forKey:nil];
+}
 
 @end
 

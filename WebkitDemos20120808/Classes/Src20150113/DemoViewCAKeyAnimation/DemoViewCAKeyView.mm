@@ -1,6 +1,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DemoViewCAKeyView.h"
+#import "FEEmojiViewController.h"
 
 
 
@@ -93,8 +94,8 @@
 - (void)addButtons
 {
 	CGRect frame = [self bounds];
-	CGRect btnRect = CGRectMake(0, 0, 100, 64);
-	btnRect.origin.x = frame.size.width - btnRect.size.width;
+	CGRect btnRect = CGRectMake(0, 0, 140, 64);
+//	btnRect.origin.x = frame.size.width - btnRect.size.width;
 	int nIndex = 0;
 	UIButton* pBtn = nil;
 	
@@ -112,11 +113,6 @@
 // =================================================================
 #pragma mark - ==动画结束
 
-- (void)onButtonBack
-{
-//	[self remove3DTransformView];
-}
-
 /*
  Keyframe Animation 关键帧动画
  关键帧动画（CAKeyframeAnimation）是一种可以替代基本动画的动画（CABasicAnimation）;它们都是CAPropertyAnimation的子类，它们都以相同的方式使用。不同的是，关键帧动画，除了可以指定起点和终点的值，也可以规定该动画的各个阶段（帧）的值。这相当于设置动画的属性值（一个NSArray）那么简单。
@@ -126,7 +122,8 @@
 - (void)startAnimation
 {
 	///< 测试动画调用接口
-	[self executeAnimation9:self];
+//	[self executeAnimation9:self];
+	[self onExtEmojiAnimation];
 }
 
 - (void)executeAnimation9:(UIView*)pView
@@ -168,6 +165,28 @@
 	animation.keyTimes = @[@0.0, @(10.0f/60), @(23.0f/60), @(33.0f/60), @(50.0f/60)];
 	// 应用动画
 	[pView.layer addAnimation:animation forKey:nil];
+}
+
+
+- (void)onExtEmojiAnimation
+{
+	static FEEmojiViewController* controller = nil;
+	static int nType = 0;
+	
+	if (controller == nil)
+	{
+		nType++;
+		if (nType >= FEEITypeMaxCount)
+		{
+			nType = 1;
+		}
+		controller = [[FEEmojiViewController alloc] initWithParentView:self WithType:nType];
+	}
+	else
+	{
+		[controller release];
+		controller = nil;
+	}
 }
 
 @end

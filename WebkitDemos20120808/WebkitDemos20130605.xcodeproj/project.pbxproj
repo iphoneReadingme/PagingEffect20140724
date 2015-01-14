@@ -49,6 +49,7 @@
 		5B37C8351A650806003FE853 /* NSMutableString+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5401A650804003FE853 /* NSMutableString+ExceptionSafe.m */; };
 		5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */; };
 		5B37C8371A650806003FE853 /* UCFNDCollection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5441A650804003FE853 /* UCFNDCollection.mm */; };
+		5B37CB201A664882003FE853 /* FEEmojiLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB1F1A664882003FE853 /* FEEmojiLabel.mm */; };
 		5B38700B17CF40250076514D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B38700A17CF40250076514D /* CoreData.framework */; };
 		5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */; };
 		5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */; };
@@ -157,6 +158,8 @@
 		5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ExceptionSafe.m"; sourceTree = "<group>"; };
 		5B37C5431A650804003FE853 /* UCFNDCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFNDCollection.h; sourceTree = "<group>"; };
 		5B37C5441A650804003FE853 /* UCFNDCollection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UCFNDCollection.mm; sourceTree = "<group>"; };
+		5B37CB1E1A664882003FE853 /* FEEmojiLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiLabel.h; sourceTree = "<group>"; };
+		5B37CB1F1A664882003FE853 /* FEEmojiLabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiLabel.mm; sourceTree = "<group>"; };
 		5B38700A17CF40250076514D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5B38702F17CF4EEB0076514D /* DemoViewCATransform3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewCATransform3D.h; sourceTree = "<group>"; };
 		5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoViewCATransform3D.mm; sourceTree = "<group>"; };
@@ -429,6 +432,8 @@
 				5B37C0C31A64F17E003FE853 /* FEEmojiParameterInfo.mm */,
 				5B37C0C41A64F17E003FE853 /* FEEmojiView.h */,
 				5B37C0C51A64F17E003FE853 /* FEEmojiView.mm */,
+				5B37CB1E1A664882003FE853 /* FEEmojiLabel.h */,
+				5B37CB1F1A664882003FE853 /* FEEmojiLabel.mm */,
 			);
 			path = FEEmojiView;
 			sourceTree = "<group>";
@@ -593,6 +598,7 @@
 				5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */,
 				5B1837B2184861B200E22AF4 /* DemoViewSimpleParagraph.mm in Sources */,
 				5B047872184F0FB0007D4A10 /* ColorPickerView.mm in Sources */,
+				5B37CB201A664882003FE853 /* FEEmojiLabel.mm in Sources */,
 				5B05BA19156A6ABB00D72781 /* AnimationDemoView.mm in Sources */,
 				5B37C0681A64EC00003FE853 /* DemoViewCAKeyView.mm in Sources */,
 				5B05BA1B156A6AD400D72781 /* AnimationViewController.mm in Sources */,

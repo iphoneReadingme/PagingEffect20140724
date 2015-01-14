@@ -17,18 +17,9 @@
 
 
 #import <UIKit/UIKit.h>
-#import "FEEmojiParameterInfo.h"
-#import "FEEmojiViewMacroDefine.h"
 
-@interface FEEmojiView : UIView
+@interface FEEmojiLabel : UILabel
 
-- (id)initWithFrame:(CGRect)frame withData:(FEEmojiParameterInfo*)parameterInfo;
-
-- (void)onChangeFrame;
-
-- (void)didThemeChange;
-
-- (void)executeHidden3DAnimation;
 
 @end
 

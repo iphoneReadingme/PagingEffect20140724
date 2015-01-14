@@ -2,7 +2,7 @@
 /*
  *****************************************************************************
  * Copyright (C) 2005-2014 UC Mobile Limited. All Rights Reserved
- * File			: FEEmojiView.h
+ * File			: FEEmojiView.mm
  *
  * Description  : 节日表情图标视图
  *
@@ -15,20 +15,21 @@
  **/
 
 
-
-#import <UIKit/UIKit.h>
-#import "FEEmojiParameterInfo.h"
+#import "FEEmojiLabel.h"
 #import "FEEmojiViewMacroDefine.h"
 
-@interface FEEmojiView : UIView
 
-- (id)initWithFrame:(CGRect)frame withData:(FEEmojiParameterInfo*)parameterInfo;
 
-- (void)onChangeFrame;
-
-- (void)didThemeChange;
-
-- (void)executeHidden3DAnimation;
+@interface FEEmojiLabel ()
 
 @end
 
+
+@implementation FEEmojiLabel
+
+- (void)dealloc
+{
+	[super dealloc];
+}
+
+@end

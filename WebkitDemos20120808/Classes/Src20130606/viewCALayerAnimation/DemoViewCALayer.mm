@@ -588,7 +588,7 @@ float interpolate(float from, float to, float time)
 	// 创建关键帧动画
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
 	animation.keyPath = @"position";
-	animation.duration = 1.0;
+	animation.duration = duration;
 	animation.delegate = self;
 	animation.values = frames;
 	// 应用动画

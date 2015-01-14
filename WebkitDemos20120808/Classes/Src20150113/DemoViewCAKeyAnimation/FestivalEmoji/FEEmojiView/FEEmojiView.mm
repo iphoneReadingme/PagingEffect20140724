@@ -16,6 +16,7 @@
 
 
 //#import "UCUIKit/UCUIKit.h"
+#import "FEEmojiLabel.h"
 #import "FEEmojiView.h"
 #import "FEEmojiViewMacroDefine.h"
 
@@ -49,8 +50,8 @@
 	
     if (self = [super initWithFrame:frame])
 	{
-		[self forTest];
-//		self.backgroundColor = [UIColor grayColor];
+		self.backgroundColor = [UIColor clearColor];
+//		[self forTest];
 		self.parameterInfo = parameterInfo;
 		
 		[self addLabels:parameterInfo];
@@ -80,7 +81,7 @@
 
 - (void)addLabelView:(FEEmojiParameterInfo*)parameterInfo with:(CGRect)frame
 {
-	UILabel* titleLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
+	UILabel* titleLabel = [[[FEEmojiLabel alloc] initWithFrame:frame] autorelease];
 	titleLabel.font = [UIFont systemFontOfSize:parameterInfo.fontSize*[self getUIScale]];
 	titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
 	titleLabel.backgroundColor = [UIColor clearColor];
@@ -155,10 +156,10 @@
 	
 }
 
-- (UIColor*)resGetColor:(NSString*)shortName
-{
+//- (UIColor*)resGetColor:(NSString*)shortName
+//{
 //	return resGetColor(shortName);
-}
+//}
 
 - (void)didThemeChange
 {
@@ -166,6 +167,11 @@
 	
 //	color = [self resGetColor:@"NovelBox/NovelReaderBackground"];
 //	self.backgroundColor = color;
+}
+
+- (void)executeHidden3DAnimation
+{
+	
 }
 
 @end

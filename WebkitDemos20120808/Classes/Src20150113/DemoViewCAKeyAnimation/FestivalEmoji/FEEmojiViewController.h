@@ -23,7 +23,7 @@
 
 
 //@property (nonatomic, assign) id<NBSourceAdditionalPageViewControllerDelegate> delegate;
-+ (void)showFEEmojiView;
++ (void)showFEEmojiView:(UIView*)parentView;
 
 - (id)initWithParentView:(UIView*)parentView WithType:(FEServerCmdType)type;
 

@@ -108,7 +108,6 @@
 - (void)onButtonClickEvent:(UIButton*)sender
 {
 	[self startAnimation];
-	
 }
 
 // =================================================================
@@ -139,12 +138,15 @@
 	pt.y -= 8/2.0f;
 	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
 	[animationValues addObject:value];
+	
 	pt.y += 14/2.0f;
 	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
 	[animationValues addObject:value];
+	
 	pt.y -= 10/2.0f;
 	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
 	[animationValues addObject:value];
+	
 	pt.y += 4/2.0f;
 	value = [NSValue valueWithCGPoint:CGPointMake(pt.x, pt.y)];
 	[animationValues addObject:value];
@@ -171,7 +173,7 @@
 
 - (void)onExtEmojiAnimation
 {
-	[FEEmojiViewController showFEEmojiView];
+	[FEEmojiViewController showFEEmojiView:self];
 }
 
 @end

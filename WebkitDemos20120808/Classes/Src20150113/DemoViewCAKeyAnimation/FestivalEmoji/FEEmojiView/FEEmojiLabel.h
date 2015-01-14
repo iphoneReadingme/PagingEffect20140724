@@ -21,5 +21,7 @@
 @interface FEEmojiLabel : UILabel
 
 
+- (void)executeHiddenAnimation:(NSTimeInterval)duration;
+
 @end
 

@@ -28,7 +28,7 @@
 
 - (void)didThemeChange;
 
-- (void)executeHidden3DAnimation;
+- (void)executeHidden3DAnimation:(NSTimeInterval)duration;
 
 @end
 

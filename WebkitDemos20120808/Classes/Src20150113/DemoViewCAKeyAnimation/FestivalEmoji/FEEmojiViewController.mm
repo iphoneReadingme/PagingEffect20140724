@@ -21,7 +21,8 @@
 #import "NSMutableArray+ExceptionSafe.h"
 
 
-#define kAnimationKeyShowView                 @"kAnimationKeyShowView"
+#define kkeyTimes       2
+//#define kAnimationKeyShowView                 @"kAnimationKeyShowView"
 #define kAnimationKeyShowView                 @"kAnimationKeyShowView"
 #define kAnimationKeyHiddenView               @"kAnimationKeyHiddenView"
 
@@ -34,6 +35,7 @@ static FEEmojiViewController* g_emojiViewController = nil;
 
 
 @property (nonatomic, retain) FEEmojiView *emojiView;
+@property (nonatomic, assign) BOOL bDidHidden;
 
 @end
 
@@ -62,12 +64,20 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	}
 	else
 	{
-		[g_emojiViewController hiddenAnimation];
+		if (!g_emojiViewController.bDidHidden)
+		{
+			[g_emojiViewController hiddenAnimation];
+		}
+		else
+		{
+			[FEEmojiViewController hiddenFEEmojiView];
+		}
 	}
 }
 
 + (void)hiddenFEEmojiView
 {
+	g_bAnimation = NO;
 	[g_emojiViewController performSelector:@selector(removeSelf) withObject:nil afterDelay:0.0f];
 	g_emojiViewController = nil;
 }
@@ -91,6 +101,7 @@ static FEEmojiViewController* g_emojiViewController = nil;
 
 - (void)dealloc
 {
+	g_bAnimation = NO;
 	[self releaseEmojiView];
 	
 	[super dealloc];
@@ -167,6 +178,12 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	if ([animKeyName isKindOfClass:[CAKeyframeAnimation class]])
 	{
 		keyPath = [(CAKeyframeAnimation*)animKeyName keyPath];
+		if ([keyPath isEqualToString:kAnimationKeyHiddenView])
+		{
+			self.bDidHidden = YES;
+			self.emojiView.alpha = 0.0f;
+			self.emojiView.hidden = YES;
+		}
 	}
 	
 	g_bAnimation = NO;
@@ -176,8 +193,8 @@ static FEEmojiViewController* g_emojiViewController = nil;
 
 - (void)executeShow3DAnimation:(UIView*)pView
 {
-	CAKeyframeAnimation *scaleAnimation = [self buildSizeScaleAnimation:0.8f];
-	CAKeyframeAnimation *alphaAnimation = [self buildAlphaAnimateWith:0.0f maxAlpha:1.0f];
+	CAKeyframeAnimation *scaleAnimation = [self buildSizeScaleAnimation:1.0f*kkeyTimes];
+	CAKeyframeAnimation *alphaAnimation = [self buildAlphaAnimate:0.2f*kkeyTimes];
 	//CABasicAnimation *opacityAnimation = [self buildAlphaAnimateWith2];
 	
 	// Create an animation group to combine the keyframe and basic animations
@@ -187,36 +204,30 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	theGroup.delegate = self;
 	theGroup.duration = scaleAnimation.duration;
 	theGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-	theGroup.animations = @[alphaAnimation];
 	theGroup.animations = @[scaleAnimation, alphaAnimation];
-//	theGroup.animations = @[scaleAnimation, opacityAnimation];
 	
 	///< 插入动画
 	// Add the animation group to the layer
 	[pView.layer addAnimation:theGroup forKey:@"theGroupAnimation"];
 }
 
-
-#define kkeyTime   1
-
-- (CAKeyframeAnimation *)buildAlphaAnimateWith:(float)startAlpha maxAlpha:(float)maxAlpha
+- (CAKeyframeAnimation *)buildAlphaAnimate:(NSTimeInterval)duration
 {
 	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:2];
 	NSValue* value = nil;
 	
 	///< 全透明 0
-	value = [NSNumber numberWithFloat:startAlpha];
+	value = [NSNumber numberWithFloat:0.0f];
 	[animationValues safe_AddObject:value];
 	
 	///< 不透明 1
-	value = [NSNumber numberWithFloat:maxAlpha];
+	value = [NSNumber numberWithFloat:1.0f];
 	[animationValues safe_AddObject:value];
 	
-	int nOffset = kkeyTime;
 	// 创建关键帧动画
 	CAKeyframeAnimation *alphaAnimate = [CAKeyframeAnimation animation];
 	alphaAnimate.keyPath = @"opacity";
-	alphaAnimate.duration = nOffset*30.0f/60;
+	alphaAnimate.duration = duration;
 	alphaAnimate.delegate = self;
 	alphaAnimate.values = animationValues;
 	
@@ -227,18 +238,7 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	return alphaAnimate;
 }
 
-- (CABasicAnimation*)buildAlphaAnimateWith2
-{
-	CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-	opacityAnimation.fromValue = [NSNumber numberWithFloat:0.0];
-	opacityAnimation.toValue = [NSNumber numberWithFloat:1.0f];
-	opacityAnimation.duration = 0.9f;
-	opacityAnimation.beginTime = 0.0;
-	
-	return opacityAnimation;
-}
-
-- (CAKeyframeAnimation*)buildSizeScaleAnimation:(float)startScale
+- (CAKeyframeAnimation*)buildSizeScaleAnimation:(NSTimeInterval)duration
 {
 	NSValue* value = nil;
 	CGFloat fScale = 1.0f;
@@ -278,11 +278,10 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	value = [NSValue valueWithCATransform3D:tempTransform];
 	[animationValues addObject:value];
 	
-	int nOffset = kkeyTime;
 	// 创建关键帧动画
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
 	animation.keyPath = @"transform";
-	animation.duration = nOffset*60.0f/60;
+	animation.duration = duration;
 	animation.delegate = self;
 	animation.values = animationValues;
 	
@@ -296,7 +295,7 @@ static FEEmojiViewController* g_emojiViewController = nil;
 //								  ];
 	
 	///< 这里是时间段的比率，第一个动画时间占总时间的比值
-	animation.keyTimes = @[@0.0, @(20.0f/60), @(40.0f/60), @(50.0f/60), @(60.0f/60)];
+	animation.keyTimes = @[@(0.0), @(20.0f/60), @(40.0f/60), @(50.0f/60), @(60.0f/60)];
 	
 	return animation;
 }
@@ -307,15 +306,14 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	BOOL animated = YES;
 	if (animated)
 	{
-		[UIView animateWithDuration:0.3 animations:^{
-			
-//			[self lp_explode:pView];
+		NSTimeInterval duration = kkeyTimes*1.0f;
+		[UIView animateWithDuration:duration animations:^{
 			
 			///< 隐藏视图动画
-			[pView.layer addAnimation:[self buildSizeScaleInAnimation2] forKey:@"opacity"];
+			[pView.layer addAnimation:[self buildNothingAnimation:duration] forKey:kAnimationKeyHiddenView];
+			[[self emojiView] executeHidden3DAnimation:duration];
 			
 			} completion:^(BOOL finished) {
-			[FEEmojiViewController hiddenFEEmojiView];
 		}];
 	}
 	else
@@ -324,7 +322,7 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	}
 }
 
-- (CAKeyframeAnimation*)buildSizeScaleInAnimation2
+- (CAKeyframeAnimation*)buildSizeScaleInAnimation2:(NSTimeInterval)duration
 {
 	NSValue* value = nil;
 	CGFloat fScale = 1.0f;
@@ -352,21 +350,49 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	value = [NSValue valueWithCATransform3D:tempTransform];
 	[animationValues addObject:value];
 	
-	int nOffset = 1;
 	// 创建关键帧动画
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
 	animation.keyPath = @"transform";
-	animation.duration = nOffset*60.0f/60;
+	animation.duration = duration;
 	animation.delegate = self;
 	animation.values = animationValues;
 	
 	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
 	
 	///< 这里是时间段的比率，第一个动画时间占总时间的比值
-	animation.keyTimes = @[@0.0, @(0.15), @(1.0)];
+	animation.keyTimes = @[@(0.0), @(0.15), @(1.0)];
 	
 	return animation;
 }
+
+///< 没有实际的效果
+- (CAKeyframeAnimation*)buildNothingAnimation:(NSTimeInterval)duration
+{
+	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:2];
+	NSValue* value = nil;
+	
+	///< 不透明 1
+	value = [NSNumber numberWithFloat:1.0f];
+	[animationValues safe_AddObject:value];
+	
+	///< 不透明 1
+	value = [NSNumber numberWithFloat:1.0f];
+	[animationValues safe_AddObject:value];
+	
+	// 创建关键帧动画
+	CAKeyframeAnimation *alphaAnimate = [CAKeyframeAnimation animation];
+	alphaAnimate.keyPath = kAnimationKeyHiddenView;
+	alphaAnimate.duration = duration;
+	alphaAnimate.delegate = self;
+	alphaAnimate.values = animationValues;
+	
+	alphaAnimate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	
+	alphaAnimate.keyTimes = @[@0.0, @(1.0f)];
+	
+	return alphaAnimate;
+}
+
 /*
  keyTimes
  

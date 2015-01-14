@@ -169,9 +169,15 @@
 //	self.backgroundColor = color;
 }
 
-- (void)executeHidden3DAnimation
+- (void)executeHidden3DAnimation:(NSTimeInterval)duration
 {
-	
+	for (FEEmojiLabel* subLabel in [self subviews])
+	{
+		if ([subLabel isKindOfClass:[FEEmojiLabel class]])
+		{
+			[subLabel executeHiddenAnimation:duration];
+		}
+	}
 }
 
 @end

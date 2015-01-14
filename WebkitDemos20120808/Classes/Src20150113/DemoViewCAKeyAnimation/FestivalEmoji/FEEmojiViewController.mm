@@ -15,14 +15,14 @@
  **/
 
 
-#import "FEEmojiIconDataFactory.h"
+//#import "FEEmojiIconDataFactory.h"
 #import "FEEmojiView.h"
 #import "FEEmojiViewController.h"
 #import "NSMutableArray+ExceptionSafe.h"
+#import "FEParameterDataProvider.h"
 
 
 #define kkeyTimes       2
-//#define kAnimationKeyShowView                 @"kAnimationKeyShowView"
 #define kAnimationKeyShowView                 @"kAnimationKeyShowView"
 #define kAnimationKeyHiddenView               @"kAnimationKeyHiddenView"
 
@@ -34,7 +34,10 @@ static FEEmojiViewController* g_emojiViewController = nil;
 @interface FEEmojiViewController ()
 
 
+@property (nonatomic, retain) FEParameterDataProvider *dataProvider;
+@property (nonatomic, retain) FEEmojiParameterInfo *emojiInfo;
 @property (nonatomic, retain) FEEmojiView *emojiView;
+
 @property (nonatomic, assign) BOOL bDidHidden;
 
 @end
@@ -91,9 +94,8 @@ static FEEmojiViewController* g_emojiViewController = nil;
 {
 	if (self = [super init])
 	{
-		[self addEmojiView:parentView WithType:type];
-		
-		[self showAnimation];
+		[self loadEmojiInfoWithFestivalType:@"3" withShapeType:@"3"];
+		[self showEmojiView:parentView];
 	}
 	
 	return self;
@@ -103,6 +105,9 @@ static FEEmojiViewController* g_emojiViewController = nil;
 {
 	g_bAnimation = NO;
 	[self releaseEmojiView];
+	[self releaseDataProvider];
+	
+	[self releaseEmojiInfo];
 	
 	[super dealloc];
 }
@@ -117,12 +122,53 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	_emojiView = nil;
 }
 
-- (void)addEmojiView:(UIView*)parentView WithType:(FEServerCmdType)type
+- (void)releaseEmojiInfo
 {
-	FEEmojiView* view = [FEEmojiIconDataFactory buildEmojiViewWithType:type withFrame:[parentView bounds]];
-	[parentView addSubview:view];
-	view.alpha = 0.0f;
-	self.emojiView = view;
+	[_emojiInfo release];
+	_emojiInfo = nil;
+}
+
+- (void)releaseDataProvider
+{
+	[_dataProvider release];
+	_dataProvider = nil;
+}
+
+///< 加载数据
+- (void)loadEmojiInfoWithFestivalType:(NSString*)festivalType withShapeType:(NSString*)shapeType
+{
+	if (_dataProvider == nil)
+	{
+		_dataProvider = [[FEParameterDataProvider alloc] init];
+	}
+	_emojiInfo = [_dataProvider getFestivalParameterInfo:festivalType with:shapeType];
+}
+
+- (void)showEmojiView:(UIView*)parentView
+{
+	[self addEmojiView:parentView With:_emojiInfo];
+	
+	if (_emojiView != nil)
+	{
+		[self showAnimation];
+	}
+	else
+	{
+		g_bAnimation = NO;
+	}
+}
+
+- (void)addEmojiView:(UIView*)parentView With:(FEEmojiParameterInfo*)emojiInfo
+{
+	if (emojiInfo != nil)
+	{
+		FEEmojiView* viewObj = [[FEEmojiView alloc] initWithFrame:[parentView bounds] withData:_emojiInfo];
+		[viewObj autorelease];
+		
+		[parentView addSubview:viewObj];
+		viewObj.alpha = 0.0f;
+		self.emojiView = viewObj;
+	}
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -153,7 +199,7 @@ static FEEmojiViewController* g_emojiViewController = nil;
 - (void)delayShowAnimation
 {
 	self.emojiView.alpha = 1.0f;
-	[self executeShow3DAnimation:self.emojiView];
+	[self executeShow3DAnimation:_emojiView];
 }
 
 ///< 隐藏
@@ -164,7 +210,7 @@ static FEEmojiViewController* g_emojiViewController = nil;
 
 - (void)delayHiddenAnimation
 {
-	[self executeHidden3DAnimation:self.emojiView];
+	[self executeHidden3DAnimation:_emojiView];
 }
 
 - (void)animationDidStop:(CAAnimation *)animKeyName finished:(BOOL)flag;
@@ -304,7 +350,7 @@ static FEEmojiViewController* g_emojiViewController = nil;
 - (void)executeHidden3DAnimation:(UIView*)pView
 {
 	BOOL animated = YES;
-	if (animated)
+	if (animated && pView != nil)
 	{
 		NSTimeInterval duration = kkeyTimes*1.0f;
 		[UIView animateWithDuration:duration animations:^{

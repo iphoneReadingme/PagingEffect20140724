@@ -19,9 +19,11 @@
 #import "FEEmojiView.h"
 
 
+@class FEParameterDataProvider;
+
 @interface FEEmojiIconDataFactory : NSObject
 
-+ (FEEmojiView*)buildEmojiViewWithType:(FEServerCmdType)type withFrame:(CGRect)rect;
++ (FEEmojiView*)buildEmojiViewWithType:(FEServerCmdType)type  withFrame:(CGRect)rect withData:(FEParameterDataProvider*)dataProvider;
 
 @end
 

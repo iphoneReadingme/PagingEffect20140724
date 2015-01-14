@@ -36,9 +36,6 @@
 		5B195F3E199A4BAB009562C3 /* UITestView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B195F36199A4BAB009562C3 /* UITestView.mm */; };
 		5B37C0681A64EC00003FE853 /* DemoViewCAKeyView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0651A64EC00003FE853 /* DemoViewCAKeyView.mm */; };
 		5B37C0691A64EC00003FE853 /* DemoViewCAKeyAnimationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0671A64EC00003FE853 /* DemoViewCAKeyAnimationController.mm */; };
-		5B37C0C91A64F17E003FE853 /* FEEmojiIconDataFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0C11A64F17E003FE853 /* FEEmojiIconDataFactory.mm */; };
-		5B37C0CA1A64F17E003FE853 /* FEEmojiParameterInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0C31A64F17E003FE853 /* FEEmojiParameterInfo.mm */; };
-		5B37C0CB1A64F17E003FE853 /* FEEmojiView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0C51A64F17E003FE853 /* FEEmojiView.mm */; };
 		5B37C0CC1A64F17E003FE853 /* FEEmojiViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C0C71A64F17E003FE853 /* FEEmojiViewController.mm */; };
 		5B37C82F1A650805003FE853 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5331A650804003FE853 /* JSONKit.m */; };
 		5B37C8301A650805003FE853 /* NSArray+ExceptionSafe.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5361A650804003FE853 /* NSArray+ExceptionSafe.mm */; };
@@ -49,7 +46,13 @@
 		5B37C8351A650806003FE853 /* NSMutableString+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5401A650804003FE853 /* NSMutableString+ExceptionSafe.m */; };
 		5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */; };
 		5B37C8371A650806003FE853 /* UCFNDCollection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5441A650804003FE853 /* UCFNDCollection.mm */; };
-		5B37CB201A664882003FE853 /* FEEmojiLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB1F1A664882003FE853 /* FEEmojiLabel.mm */; };
+		5B37CB2E1A667BFD003FE853 /* FEEmojiIconDataFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB291A667BFD003FE853 /* FEEmojiIconDataFactory.mm */; };
+		5B37CB2F1A667BFD003FE853 /* FEEmojiLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB2B1A667BFD003FE853 /* FEEmojiLabel.mm */; };
+		5B37CB301A667BFD003FE853 /* FEEmojiView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB2D1A667BFD003FE853 /* FEEmojiView.mm */; };
+		5B37CB381A667C01003FE853 /* FEFestivalParameterInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB331A667C01003FE853 /* FEFestivalParameterInfo.mm */; };
+		5B37CB391A667C01003FE853 /* FEParameterDataProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB351A667C01003FE853 /* FEParameterDataProvider.mm */; };
+		5B37CB3A1A667C01003FE853 /* FEShapeParameterInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB371A667C01003FE853 /* FEShapeParameterInfo.mm */; };
+		5B37CB3D1A66967F003FE853 /* FEEmojiParameterInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB3C1A66967F003FE853 /* FEEmojiParameterInfo.mm */; };
 		5B38700B17CF40250076514D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B38700A17CF40250076514D /* CoreData.framework */; };
 		5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */; };
 		5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */; };
@@ -131,12 +134,6 @@
 		5B37C0651A64EC00003FE853 /* DemoViewCAKeyView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoViewCAKeyView.mm; sourceTree = "<group>"; };
 		5B37C0661A64EC00003FE853 /* DemoViewCAKeyAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewCAKeyAnimationController.h; sourceTree = "<group>"; };
 		5B37C0671A64EC00003FE853 /* DemoViewCAKeyAnimationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoViewCAKeyAnimationController.mm; sourceTree = "<group>"; };
-		5B37C0C01A64F17E003FE853 /* FEEmojiIconDataFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiIconDataFactory.h; sourceTree = "<group>"; };
-		5B37C0C11A64F17E003FE853 /* FEEmojiIconDataFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiIconDataFactory.mm; sourceTree = "<group>"; };
-		5B37C0C21A64F17E003FE853 /* FEEmojiParameterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiParameterInfo.h; sourceTree = "<group>"; };
-		5B37C0C31A64F17E003FE853 /* FEEmojiParameterInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiParameterInfo.mm; sourceTree = "<group>"; };
-		5B37C0C41A64F17E003FE853 /* FEEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiView.h; sourceTree = "<group>"; };
-		5B37C0C51A64F17E003FE853 /* FEEmojiView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiView.mm; sourceTree = "<group>"; };
 		5B37C0C61A64F17E003FE853 /* FEEmojiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiViewController.h; sourceTree = "<group>"; };
 		5B37C0C71A64F17E003FE853 /* FEEmojiViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiViewController.mm; sourceTree = "<group>"; };
 		5B37C0C81A64F17E003FE853 /* FEEmojiViewMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiViewMacroDefine.h; sourceTree = "<group>"; };
@@ -158,8 +155,20 @@
 		5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ExceptionSafe.m"; sourceTree = "<group>"; };
 		5B37C5431A650804003FE853 /* UCFNDCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFNDCollection.h; sourceTree = "<group>"; };
 		5B37C5441A650804003FE853 /* UCFNDCollection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UCFNDCollection.mm; sourceTree = "<group>"; };
-		5B37CB1E1A664882003FE853 /* FEEmojiLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiLabel.h; sourceTree = "<group>"; };
-		5B37CB1F1A664882003FE853 /* FEEmojiLabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiLabel.mm; sourceTree = "<group>"; };
+		5B37CB281A667BFD003FE853 /* FEEmojiIconDataFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiIconDataFactory.h; sourceTree = "<group>"; };
+		5B37CB291A667BFD003FE853 /* FEEmojiIconDataFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiIconDataFactory.mm; sourceTree = "<group>"; };
+		5B37CB2A1A667BFD003FE853 /* FEEmojiLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiLabel.h; sourceTree = "<group>"; };
+		5B37CB2B1A667BFD003FE853 /* FEEmojiLabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiLabel.mm; sourceTree = "<group>"; };
+		5B37CB2C1A667BFD003FE853 /* FEEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiView.h; sourceTree = "<group>"; };
+		5B37CB2D1A667BFD003FE853 /* FEEmojiView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiView.mm; sourceTree = "<group>"; };
+		5B37CB321A667C01003FE853 /* FEFestivalParameterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEFestivalParameterInfo.h; sourceTree = "<group>"; };
+		5B37CB331A667C01003FE853 /* FEFestivalParameterInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEFestivalParameterInfo.mm; sourceTree = "<group>"; };
+		5B37CB341A667C01003FE853 /* FEParameterDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEParameterDataProvider.h; sourceTree = "<group>"; };
+		5B37CB351A667C01003FE853 /* FEParameterDataProvider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEParameterDataProvider.mm; sourceTree = "<group>"; };
+		5B37CB361A667C01003FE853 /* FEShapeParameterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEShapeParameterInfo.h; sourceTree = "<group>"; };
+		5B37CB371A667C01003FE853 /* FEShapeParameterInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEShapeParameterInfo.mm; sourceTree = "<group>"; };
+		5B37CB3B1A66967F003FE853 /* FEEmojiParameterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiParameterInfo.h; sourceTree = "<group>"; };
+		5B37CB3C1A66967F003FE853 /* FEEmojiParameterInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiParameterInfo.mm; sourceTree = "<group>"; };
 		5B38700A17CF40250076514D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5B38702F17CF4EEB0076514D /* DemoViewCATransform3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewCATransform3D.h; sourceTree = "<group>"; };
 		5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoViewCATransform3D.mm; sourceTree = "<group>"; };
@@ -415,27 +424,13 @@
 		5B37C0BE1A64F17E003FE853 /* FestivalEmoji */ = {
 			isa = PBXGroup;
 			children = (
-				5B37C0BF1A64F17E003FE853 /* FEEmojiView */,
+				5B37CB271A667BFD003FE853 /* FEEmojiView */,
 				5B37C0C61A64F17E003FE853 /* FEEmojiViewController.h */,
 				5B37C0C71A64F17E003FE853 /* FEEmojiViewController.mm */,
 				5B37C0C81A64F17E003FE853 /* FEEmojiViewMacroDefine.h */,
+				5B37CB311A667C01003FE853 /* FEParameterDataProvider */,
 			);
 			path = FestivalEmoji;
-			sourceTree = "<group>";
-		};
-		5B37C0BF1A64F17E003FE853 /* FEEmojiView */ = {
-			isa = PBXGroup;
-			children = (
-				5B37C0C01A64F17E003FE853 /* FEEmojiIconDataFactory.h */,
-				5B37C0C11A64F17E003FE853 /* FEEmojiIconDataFactory.mm */,
-				5B37C0C21A64F17E003FE853 /* FEEmojiParameterInfo.h */,
-				5B37C0C31A64F17E003FE853 /* FEEmojiParameterInfo.mm */,
-				5B37C0C41A64F17E003FE853 /* FEEmojiView.h */,
-				5B37C0C51A64F17E003FE853 /* FEEmojiView.mm */,
-				5B37CB1E1A664882003FE853 /* FEEmojiLabel.h */,
-				5B37CB1F1A664882003FE853 /* FEEmojiLabel.mm */,
-			);
-			path = FEEmojiView;
 			sourceTree = "<group>";
 		};
 		5B37C5301A650804003FE853 /* UCWeb */ = {
@@ -477,6 +472,34 @@
 				5B37C5441A650804003FE853 /* UCFNDCollection.mm */,
 			);
 			path = UCCollections;
+			sourceTree = "<group>";
+		};
+		5B37CB271A667BFD003FE853 /* FEEmojiView */ = {
+			isa = PBXGroup;
+			children = (
+				5B37CB281A667BFD003FE853 /* FEEmojiIconDataFactory.h */,
+				5B37CB291A667BFD003FE853 /* FEEmojiIconDataFactory.mm */,
+				5B37CB2A1A667BFD003FE853 /* FEEmojiLabel.h */,
+				5B37CB2B1A667BFD003FE853 /* FEEmojiLabel.mm */,
+				5B37CB2C1A667BFD003FE853 /* FEEmojiView.h */,
+				5B37CB2D1A667BFD003FE853 /* FEEmojiView.mm */,
+			);
+			path = FEEmojiView;
+			sourceTree = "<group>";
+		};
+		5B37CB311A667C01003FE853 /* FEParameterDataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				5B37CB3B1A66967F003FE853 /* FEEmojiParameterInfo.h */,
+				5B37CB3C1A66967F003FE853 /* FEEmojiParameterInfo.mm */,
+				5B37CB321A667C01003FE853 /* FEFestivalParameterInfo.h */,
+				5B37CB331A667C01003FE853 /* FEFestivalParameterInfo.mm */,
+				5B37CB341A667C01003FE853 /* FEParameterDataProvider.h */,
+				5B37CB351A667C01003FE853 /* FEParameterDataProvider.mm */,
+				5B37CB361A667C01003FE853 /* FEShapeParameterInfo.h */,
+				5B37CB371A667C01003FE853 /* FEShapeParameterInfo.mm */,
+			);
+			path = FEParameterDataProvider;
 			sourceTree = "<group>";
 		};
 		5B427039187C0153003D3810 /* DemoUIDeviceVIewController20140107 */ = {
@@ -592,22 +615,23 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				5B37C82F1A650805003FE853 /* JSONKit.m in Sources */,
 				5B195F3D199A4BAB009562C3 /* UIGlobal.mm in Sources */,
-				5B37C0C91A64F17E003FE853 /* FEEmojiIconDataFactory.mm in Sources */,
 				5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */,
 				5B1837B1184861B200E22AF4 /* DemoViewCoreTextDraw.mm in Sources */,
+				5B37CB2E1A667BFD003FE853 /* FEEmojiIconDataFactory.mm in Sources */,
 				5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */,
 				5B1837B2184861B200E22AF4 /* DemoViewSimpleParagraph.mm in Sources */,
 				5B047872184F0FB0007D4A10 /* ColorPickerView.mm in Sources */,
-				5B37CB201A664882003FE853 /* FEEmojiLabel.mm in Sources */,
 				5B05BA19156A6ABB00D72781 /* AnimationDemoView.mm in Sources */,
 				5B37C0681A64EC00003FE853 /* DemoViewCAKeyView.mm in Sources */,
+				5B37CB3A1A667C01003FE853 /* FEShapeParameterInfo.mm in Sources */,
+				5B37CB3D1A66967F003FE853 /* FEEmojiParameterInfo.mm in Sources */,
 				5B05BA1B156A6AD400D72781 /* AnimationViewController.mm in Sources */,
-				5B37C0CA1A64F17E003FE853 /* FEEmojiParameterInfo.mm in Sources */,
 				5B195F37199A4BAB009562C3 /* FullScreenController.mm in Sources */,
 				5B17BF5D185E9C810037A7BA /* DemoUIPageViewController.mm in Sources */,
 				5B04785C184EBC66007D4A10 /* DemoSettingView.mm in Sources */,
 				5B195F3A199A4BAB009562C3 /* BottomBarViewController.mm in Sources */,
 				5B37C8311A650805003FE853 /* NSDictionary+ExceptionSafe.mm in Sources */,
+				5B37CB2F1A667BFD003FE853 /* FEEmojiLabel.mm in Sources */,
 				5B37C8301A650805003FE853 /* NSArray+ExceptionSafe.mm in Sources */,
 				5B195F3B199A4BAB009562C3 /* CommonToolBarView.mm in Sources */,
 				5B195F38199A4BAB009562C3 /* iUIAppFrame.mm in Sources */,
@@ -617,11 +641,13 @@
 				5B37C0691A64EC00003FE853 /* DemoViewCAKeyAnimationController.mm in Sources */,
 				5B37C8331A650806003FE853 /* NSMutableArray+ExceptionSafe.mm in Sources */,
 				5B17BF78185ECF990037A7BA /* TextPageViewController.mm in Sources */,
+				5B37CB301A667BFD003FE853 /* FEEmojiView.mm in Sources */,
+				5B37CB391A667C01003FE853 /* FEParameterDataProvider.mm in Sources */,
 				5B37C8341A650806003FE853 /* NSMutableDictionary+ExceptionSafe.mm in Sources */,
 				5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */,
 				5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */,
+				5B37CB381A667C01003FE853 /* FEFestivalParameterInfo.mm in Sources */,
 				5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */,
-				5B37C0CB1A64F17E003FE853 /* FEEmojiView.mm in Sources */,
 				5B195F3E199A4BAB009562C3 /* UITestView.mm in Sources */,
 				5B17BF5C185E9C810037A7BA /* DemoPageView.mm in Sources */,
 				5B1837B0184861B200E22AF4 /* DemoCoreTextDrawController.mm in Sources */,

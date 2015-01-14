@@ -21,9 +21,9 @@
 
 @interface FEEmojiParameterInfo : NSObject
 
-@property (nonatomic, retain) NSString*          emojiChar;             ///< 表情字符
+@property (nonatomic, copy) NSString*          emojiChar;             ///< 表情字符
 @property (nonatomic, retain) NSMutableArray*    coordinateArray;       ///< 表情图标显示坐标和大小（CGRect String)
-@property (nonatomic, assign) CGSize             viewSize;              ///< 界面视图大小
+
 @property (nonatomic, assign) NSInteger          fontSize;              ///< 界面视图大小
 
 @end

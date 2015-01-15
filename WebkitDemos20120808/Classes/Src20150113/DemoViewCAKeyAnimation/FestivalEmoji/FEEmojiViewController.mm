@@ -15,10 +15,8 @@
  **/
 
 
-//#import "FEEmojiIconDataFactory.h"
 #import "FEEmojiView.h"
 #import "FEEmojiViewController.h"
-#import "NSMutableArray+ExceptionSafe.h"
 #import "FEParameterDataProvider.h"
 
 
@@ -52,8 +50,6 @@ static FEEmojiViewController* g_emojiViewController = nil;
 		return;
 	}
 	
-	g_bAnimation = YES;
-	
 	static int nType = 0;
 	
 	if (g_emojiViewController == nil)
@@ -63,12 +59,36 @@ static FEEmojiViewController* g_emojiViewController = nil;
 		{
 			nType = 1;
 		}
-		g_emojiViewController = [[FEEmojiViewController alloc] initWithParentView:parentView WithType:nType];
+		NSString* keyWord = nil;
+		if (FESCTypeOne == nType)
+		{
+			keyWord = @"春节";
+		}
+		else if (FESCTypeTwo == nType)
+		{
+			keyWord = @"情人节";
+		}
+		else if (FESCTypeThree == nType)
+		{
+			keyWord = @"元宵";
+		}
+		
+		if ([keyWord length] > 0)
+		{
+			g_bAnimation = YES;
+			
+			g_emojiViewController = [[FEEmojiViewController alloc] init];
+			
+			[g_emojiViewController matchFestivalByKeyWord:keyWord];
+			[g_emojiViewController showEmojiView:parentView];
+		}
 	}
 	else
 	{
 		if (!g_emojiViewController.bDidHidden)
 		{
+			g_bAnimation = YES;
+			
 			[g_emojiViewController hiddenAnimation];
 		}
 		else
@@ -90,12 +110,11 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	[self autorelease];
 }
 
-- (id)initWithParentView:(UIView*)parentView WithType:(FEServerCmdType)type;
+- (id)init
 {
 	if (self = [super init])
 	{
-		[self loadEmojiInfoWithFestivalType:@"3" withShapeType:@"3"];
-		[self showEmojiView:parentView];
+		[self loadData];
 	}
 	
 	return self;
@@ -134,23 +153,35 @@ static FEEmojiViewController* g_emojiViewController = nil;
 	_dataProvider = nil;
 }
 
-///< 加载数据
-- (void)loadEmojiInfoWithFestivalType:(NSString*)festivalType withShapeType:(NSString*)shapeType
+///< 节日匹配
+- (void)matchFestivalByKeyWord:(NSString*)keyWord
+{
+	_emojiInfo = [_dataProvider getFestivalEmojiParameterInfoByKeyWord:keyWord];
+	[_emojiInfo retain];
+}
+
+- (void)loadData
 {
 	if (_dataProvider == nil)
 	{
 		_dataProvider = [[FEParameterDataProvider alloc] init];
 	}
-	_emojiInfo = [_dataProvider getFestivalParameterInfo:festivalType with:shapeType];
 }
 
 - (void)showEmojiView:(UIView*)parentView
 {
-	[self addEmojiView:parentView With:_emojiInfo];
-	
-	if (_emojiView != nil)
+	if (_emojiInfo != nil)
 	{
-		[self showAnimation];
+		[self addEmojiView:parentView With:_emojiInfo];
+		
+		if (_emojiView != nil)
+		{
+			[self showAnimation];
+		}
+		else
+		{
+			g_bAnimation = NO;
+		}
 	}
 	else
 	{

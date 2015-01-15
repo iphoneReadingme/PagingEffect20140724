@@ -2,9 +2,9 @@
 /*
  *****************************************************************************
  * Copyright (C) 2005-2014 UC Mobile Limited. All Rights Reserved
- * File			: FEParameterDataProvider.h
+ * File			: FEJSONParameterAnalyzer.h
  *
- * Description  : 参数信息数据解释
+ * Description  : JSON数据参数解释器
  *
  * Author		: yangfs@ucweb.com
  *
@@ -19,14 +19,13 @@
 #import <Foundation/Foundation.h>
 
 
-@class FEEmojiParameterInfo;
+@interface FEJSONParameterAnalyzer : NSObject
 
-@interface FEParameterDataProvider : NSObject
++ (NSDictionary*)readJSONDataFromFile;
 
-///< 通过搜索关键获取节日信息
-- (FEEmojiParameterInfo*)getFestivalEmojiParameterInfoByKeyWord:(NSString*)keyWord;
++ (NSMutableArray*)parseShapeJSONData:(NSDictionary*)paramDict;
++ (NSMutableArray*)parseFestivalJSONData:(NSDictionary*)paramDict;
 
-//- (FEEmojiParameterInfo*)getFestivalParameterInfo:(NSString*)festivalType with:(NSString*)shapeType;
 
 @end
 

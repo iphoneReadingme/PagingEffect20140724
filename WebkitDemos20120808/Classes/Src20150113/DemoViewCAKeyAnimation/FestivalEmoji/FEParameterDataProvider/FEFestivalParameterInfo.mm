@@ -20,7 +20,7 @@
 
 
 ///< 是否使用默认数据
-#define  _Enable_Default_Data
+//#define  _Enable_Default_Data
 
 
 @implementation FEFestivalParameterInfo
@@ -72,6 +72,16 @@
 	if (bValid)
 	{
 		bValid = _days > 0;
+	}
+	
+	if (bValid)
+	{
+		bValid = _fontSize > 10;
+	}
+	
+	if (bValid)
+	{
+		bValid = [_emojiChar length] > 0;
 	}
 	
 	return bValid;

@@ -2,9 +2,9 @@
 /*
  *****************************************************************************
  * Copyright (C) 2005-2014 UC Mobile Limited. All Rights Reserved
- * File			: FEParameterDataProvider.h
+ * File			: FECDParmFetcher.h
  *
- * Description  : 参数信息数据解释
+ * Description  : CD参数管理器
  *
  * Author		: yangfs@ucweb.com
  *
@@ -19,14 +19,14 @@
 #import <Foundation/Foundation.h>
 
 
-@class FEEmojiParameterInfo;
+@interface FECDParmFetcher : NSObject
 
-@interface FEParameterDataProvider : NSObject
+///< 节日图形类型
++ (NSString*)getShapeType;
 
-///< 通过搜索关键获取节日信息
-- (FEEmojiParameterInfo*)getFestivalEmojiParameterInfoByKeyWord:(NSString*)keyWord;
+///< 表情字符
++ (NSString*)getEmojiChar;
 
-//- (FEEmojiParameterInfo*)getFestivalParameterInfo:(NSString*)festivalType with:(NSString*)shapeType;
 
 @end
 

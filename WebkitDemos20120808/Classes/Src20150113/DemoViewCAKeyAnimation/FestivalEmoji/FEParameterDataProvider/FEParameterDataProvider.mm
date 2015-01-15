@@ -18,30 +18,15 @@
 #import "FEEmojiParameterInfo.h"
 #import "FEShapeParameterInfo.h"
 #import "FEFestivalParameterInfo.h"
+#import "FEJSONParameterAnalyzer.h"
+//#import "FECDParmFetcher.h"
 #import "FEParameterDataProvider.h"
-#import "NSMutableArray+ExceptionSafe.h"
-#import "JSONKit.h"
 
-
-///< 数据文件路径
-#define kHardcodeFestivalEmojiDataPath           @"res/LocalFiles/FestivalEmoji/FestivalEmojiData"
-
-
-///< 图形和坐标
-#define kKeyJSONShapeData                        @"shapeData"
-#define kKeyJSONShapeType                        @"shapetype"
-#define kKeyJSONCoordinates                      @"coordinates"
-#define kKeyJSONPoint                            @"point"
-
-///< 节日
-#define kKeyJSONSestivalData                     @"festivalData"
-#define kKeyJSONFestivalType                     @"festivalType"
-#define kKeyJSONSearchHotWords                   @"searchHotWords"
-#define kKeyJSONWord                             @"word"
 
 
 @interface FEParameterDataProvider()
 
+//@property (nonatomic, copy) NSString*          emojiChar;             ///< 表情字符
 @property (nonatomic, retain) NSMutableArray*    shapeInfoArray;        ///< 图形列表 list<FEShapeParameterInfo*>
 @property (nonatomic, retain) NSMutableArray*    festivalInfoArray;        ///< 图形列表 list<FEShapeParameterInfo*>
 
@@ -66,405 +51,182 @@
 {
 	if (self = [super init])
 	{
-		
 		NSDictionary* paramDict = [self readJSONDataFromFile];
-		[self parseShapeJSONData:paramDict];
-		[self parseFestivalJSONData:paramDict];
+		self.festivalInfoArray = [FEJSONParameterAnalyzer parseFestivalJSONData:paramDict];
+		if ([_festivalInfoArray count] > 1)
+		{
+			self.shapeInfoArray = [FEJSONParameterAnalyzer parseShapeJSONData:paramDict];
+		}
 	}
 	
 	return self;
 }
 
-- (FEEmojiParameterInfo*)getFestivalParameterInfo:(NSString*)festivalType with:(NSString*)shapeType
+#pragma mark - == 读取文件数据
+
+- (NSDictionary*)readJSONDataFromFile
 {
-	FEFestivalParameterInfo* festivalInfo = nil;
-	
-	for (FEFestivalParameterInfo* item in _festivalInfoArray)
-	{
-		if (![item isKindOfClass:[FEFestivalParameterInfo class]])
-		{
-			assert(0);
-			continue;
-		}
-		
-		if ([item.festivalType isEqualToString:festivalType])
-		{
-			festivalInfo = item;
-			break;
-		}
-	}
+	return [FEJSONParameterAnalyzer readJSONDataFromFile];
+}
+
+///< 通过搜索关键获取节日信息
+- (FEEmojiParameterInfo*)getFestivalEmojiParameterInfoByKeyWord:(NSString*)keyWord
+{
+	FEFestivalParameterInfo* festivalObj = [self getFestivalParameterInfoByKeyWord:keyWord];
 	
 	FEShapeParameterInfo* shapeInfo = nil;
-	for (FEShapeParameterInfo* item in _shapeInfoArray)
+	if (festivalObj != nil && [festivalObj isValid])
 	{
-		if (![item isKindOfClass:[FEShapeParameterInfo class]])
-		{
-			assert(0);
-			continue;
-		}
-		
-		if ([item.shapeType isEqualToString:shapeType])
-		{
-			shapeInfo = item;
-			break;
-		}
+		shapeInfo = [self getShapeParameterInfoBy:festivalObj.shapeType];
 	}
-	
 	
 	FEEmojiParameterInfo* emojiInfo = nil;
 	
-	if ([festivalInfo isValid] && [shapeInfo isValid])
+	if ([shapeInfo isValid])
 	{
-		emojiInfo = [[FEEmojiParameterInfo alloc] init];
-		emojiInfo.emojiChar = festivalInfo.emojiChar;
-		emojiInfo.fontSize = festivalInfo.fontSize;
+		emojiInfo = [[[FEEmojiParameterInfo alloc] init] autorelease];
+		emojiInfo.emojiChar = [festivalObj emojiChar];
+		emojiInfo.fontSize = festivalObj.fontSize;
 		emojiInfo.coordinateArray = shapeInfo.coordinateArray;
 	}
 	
 	return emojiInfo;
 }
 
-
-#pragma mark - ==解释图形坐标数据信息
-- (void)parseShapeJSONData:(NSDictionary*)paramDict
+- (FEFestivalParameterInfo*)getFestivalParameterInfoByKeyWord:(NSString*)keyWord
 {
+	FEFestivalParameterInfo* festivalObj = nil;
+	
 	do
 	{
-		if (![paramDict isKindOfClass:[NSDictionary class]] || [paramDict count] < 1)
+		if ([keyWord length] < 1)
 		{
 			break;
 		}
 		
-		NSMutableArray* pArray = [NSMutableArray arrayWithCapacity:[paramDict count]];
-		FEShapeParameterInfo* parameterInfo = nil;
-		
-		NSArray*  sourceList= [FEParameterDataProvider getNSArrayFromDiction:paramDict withKey:kKeyJSONShapeData];
-		
-		for (NSDictionary* itemDict in sourceList)
+		for (FEFestivalParameterInfo* item in _festivalInfoArray)
 		{
-			parameterInfo = [FEParameterDataProvider getShapeParameterInfo:itemDict];
+			if (![item isKindOfClass:[FEFestivalParameterInfo class]])
+			{
+				assert(0);
+				continue;
+			}
 			
-			[pArray safe_AddObject:parameterInfo];
-		}
-		
-		if ([pArray count])
-		{
-			_shapeInfoArray = [pArray retain];
+			BOOL bRet = [self findKeyWordFrom:item withKeyWord:keyWord];
+			if (bRet)
+			{
+				festivalObj = item;
+				break;
+			}
 		}
 		
 	}while (0);
+	
+	return festivalObj;
 }
 
-///< 提取单条记录信息
-+ (FEShapeParameterInfo*)getShapeParameterInfo:(NSDictionary*)recordDict
+- (BOOL)findKeyWordFrom:(FEFestivalParameterInfo*)item withKeyWord:(NSString*)keyWord
 {
-	FEShapeParameterInfo* parameterInfo = nil;
+	BOOL bRet = NO;
+	
+	for (NSString* word in [item searchHotWords])
+	{
+		NSRange rang = [keyWord rangeOfString:word];
+		//if ([keyWord isEqualToString:festivalType])
+		if (rang.location != NSNotFound)
+		{
+			bRet = YES;
+			break;
+		}
+	}
+	
+	return bRet;
+}
+
+- (FEEmojiParameterInfo*)getEmojiParameterInfo:(NSString*)festivalType with:(NSString*)shapeType
+{
+	FEFestivalParameterInfo* festivalObj = [self getFestivalParameterInfoBy:festivalType];
+	
+	FEShapeParameterInfo* shapeInfo = nil;
+	
+	if ([festivalObj isValid])
+	{
+		shapeInfo = [self getShapeParameterInfoBy:festivalObj.shapeType];
+	}
+	
+	FEEmojiParameterInfo* emojiInfo = nil;
+	
+	if ([shapeInfo isValid])
+	{
+		emojiInfo = [[FEEmojiParameterInfo alloc] init];
+		emojiInfo.emojiChar = festivalObj.emojiChar;
+		emojiInfo.fontSize = festivalObj.fontSize;
+		emojiInfo.coordinateArray = shapeInfo.coordinateArray;
+	}
+	
+	return emojiInfo;
+}
+
+- (FEFestivalParameterInfo*)getFestivalParameterInfoBy:(NSString*)festivalType
+{
+	FEFestivalParameterInfo* festivalObj = nil;
 	
 	do
 	{
-		if (![recordDict isKindOfClass:[NSDictionary class]] || [recordDict count] < 1)
+		if ([festivalType length] < 1)
 		{
 			break;
 		}
 		
-		NSString* shape = [self getNSStringFromDiction:recordDict withKey:kKeyJSONShapeType];
-		if ([shape length] < 1)
+		for (FEFestivalParameterInfo* item in _festivalInfoArray)
 		{
-			break;
-		}
-		
-		NSMutableArray* coordinateArray = [self getCoordinatesInfo:
-										   [self getNSArrayFromDiction:recordDict withKey:kKeyJSONCoordinates]];
-		if ([coordinateArray count] < 1)
-		{
-			break;
-		}
-		
-		parameterInfo = [[[FEShapeParameterInfo alloc] init] autorelease];
-		parameterInfo.shapeType = shape;
-		parameterInfo.coordinateArray = coordinateArray;
-		
-	}while (0);
-	
-	return parameterInfo;
-}
-
-+ (NSMutableArray*)getCoordinatesInfo:(NSArray*)coordinateArray
-{
-	if ([coordinateArray count] < 1)
-	{
-		return nil;
-	}
-	
-	NSMutableArray* coordinateInfoArray = [NSMutableArray array];
-	
-	for (NSDictionary* itemDict in coordinateArray)
-	{
-		if (![itemDict isKindOfClass:[NSDictionary class]])
-		{
-			continue;
-		}
-		if ([itemDict count] < 1)
-		{
-			continue;
-		}
-		
-		NSString* pointStr = [self getNSStringFromDiction:itemDict withKey:@"point"];
-		if ([pointStr length] < 5)
-		{
-			continue;
-		}
-		
-		[coordinateInfoArray safe_AddObject:pointStr];
-	}
-	
-	if ([coordinateInfoArray count] < 1)
-	{
-		coordinateInfoArray = nil;
-	}
-	
-	return coordinateInfoArray;
-}
-
-#pragma mark - ==解释节日数据信息
-- (void)parseFestivalJSONData:(NSDictionary*)paramDict
-{
-	do
-	{
-		if (![paramDict isKindOfClass:[NSDictionary class]] || [paramDict count] < 1)
-		{
-			break;
-		}
-		
-		NSMutableArray* pArray = [NSMutableArray arrayWithCapacity:[paramDict count]];
-		FEFestivalParameterInfo* parameterInfo = nil;
-		
-		NSArray*  sourceList= [FEParameterDataProvider getNSArrayFromDiction:paramDict withKey:kKeyJSONSestivalData];
-		
-		for (NSDictionary* itemDict in sourceList)
-		{
-			parameterInfo = [FEParameterDataProvider parseFestivalParameter:itemDict];
+			if (![item isKindOfClass:[FEFestivalParameterInfo class]])
+			{
+				assert(0);
+				continue;
+			}
 			
-			[pArray safe_AddObject:parameterInfo];
-		}
-		
-		if ([pArray count])
-		{
-			_festivalInfoArray = [pArray retain];
+			if ([item.festivalType isEqualToString:festivalType])
+			{
+				festivalObj = item;
+				break;
+			}
 		}
 		
 	}while (0);
+	
+	return festivalObj;
 }
 
-///< 提取单条记录信息
-+ (FEFestivalParameterInfo*)parseFestivalParameter:(NSDictionary*)recordDict
+- (FEShapeParameterInfo*)getShapeParameterInfoBy:(NSString*)shapeType
 {
-	FEFestivalParameterInfo* parameterInfo = nil;
+	FEShapeParameterInfo* shapeInfo = nil;
 	
 	do
 	{
-		if (![recordDict isKindOfClass:[NSDictionary class]] || [recordDict count] < 1)
+		if ([shapeType length] < 1)
 		{
 			break;
 		}
 		
-		NSString* type = [self getNSStringFromDiction:recordDict withKey:kKeyJSONFestivalType];
-		if ([type length] < 1)
+		for (FEShapeParameterInfo* item in _shapeInfoArray)
 		{
-			break;
-		}
-		
-		NSMutableArray* searchHotWordsArray = [self getSearchHotWordsInfo:
-										   [self getNSArrayFromDiction:recordDict withKey:kKeyJSONSearchHotWords]];
-		if ([searchHotWordsArray count] < 1)
-		{
-			break;
-		}
-		
-		///< 找到节日动画图形后，提取相关参数，数据异常时终止
-		NSString* emojiChar = [FEParameterDataProvider getNSStringFromDiction:recordDict withKey:@"emojiChar"];
-		if ([emojiChar length] < 1)
-		{
-			break;
-		}
-		
-		NSString* value = [FEParameterDataProvider getNSStringFromDiction:recordDict withKey:@"fontSize"];
-		if ([value length] < 1)
-		{
-			break;
-		}
-		
-		int fontSize = [value intValue];
-		if (fontSize < 5)
-		{
-			///< 表情图标太小
-			break;
-		}
-		
-		value = [FEParameterDataProvider getNSStringFromDiction:recordDict withKey:@"days"];
-		
-		int days = [value intValue];
-		if (days < 1)
-		{
-			break;
-		}
-		
-		parameterInfo.festivalType = type;
-		parameterInfo.searchHotWords = [NSMutableArray arrayWithCapacity:5];
-		[parameterInfo.searchHotWords addObjectsFromArray:searchHotWordsArray];
-		parameterInfo = [[[FEFestivalParameterInfo alloc] init] autorelease];
-		parameterInfo.year = [FEParameterDataProvider getNSStringFromDiction:recordDict withKey:@"year"];
-		parameterInfo.month = [FEParameterDataProvider getNSStringFromDiction:recordDict withKey:@"month"];
-		parameterInfo.day = [FEParameterDataProvider getNSStringFromDiction:recordDict withKey:@"day"];
-		
-	}while (0);
-	
-	return parameterInfo;
-}
-
-+ (NSMutableArray*)getSearchHotWordsInfo:(NSArray*)searchHotWordArray
-{
-	if ([searchHotWordArray count] < 1)
-	{
-		return nil;
-	}
-	
-	NSMutableArray* searchHotWordInfoArray = [NSMutableArray array];
-	
-	for (NSDictionary* itemDict in searchHotWordArray)
-	{
-		if (![itemDict isKindOfClass:[NSDictionary class]])
-		{
-			continue;
-		}
-		if ([itemDict count] < 1)
-		{
-			continue;
-		}
-		
-		NSString* word = [self getNSStringFromDiction:itemDict withKey:@"word"];
-		if ([word length] < 1)
-		{
-			continue;
-		}
-		
-		[searchHotWordInfoArray safe_AddObject:word];
-	}
-	
-	if ([searchHotWordInfoArray count] < 1)
-	{
-		searchHotWordInfoArray = nil;
-	}
-	
-	return searchHotWordInfoArray;
-}
-
-#pragma mark - ==JSON数据相关
-+ (id)getValueFromDiction:(NSDictionary*)dict withKey:(id)key
-{
-	id value = nil;
-	if ([dict isKindOfClass:[NSDictionary class]])
-	{
-		value = [dict objectForKey:key];
-		
-		if (value == [NSNull null])
-		{
-			value = nil;
+			if (![item isKindOfClass:[FEShapeParameterInfo class]])
+			{
+				assert(0);
+				continue;
+			}
 			
-			NSLog(@"== NBDataAnalyze [key] = [%@]; value = NSNull; \n\n\n", key);
-		}
-	}
-	
-	return value;
-}
-
-///< 通过key关键字，从dict对象中获取JSON数据NSString对象
-+ (NSString*)getNSStringFromDiction:(NSDictionary*)dict withKey:(id)key
-{
-	NSString* obj = nil;
-	
-	id value = [self getValueFromDiction:dict withKey:key];
-	if ([value isKindOfClass:[NSString class]] && [value length] > 0)
-	{
-		obj = value;
-	}
-	
-	return obj;
-}
-
-///< 通过key关键字，从dict对象中获取JSON数据NSArray对象
-+ (NSArray*)getNSArrayFromDiction:(NSDictionary*)dict withKey:(id)key
-{
-	NSArray* obj = nil;
-	
-	id value = [self getValueFromDiction:dict withKey:key];
-	if ([value isKindOfClass:[NSArray class]])
-	{
-		obj = value;
-	}
-	
-	return obj;
-}
-
-///< 通过key关键字，从dict对象中获取JSON数据NSDictionary对象
-+ (NSDictionary*)getNSDictionaryFromDiction:(NSDictionary*)dict withKey:(id)key
-{
-	NSDictionary* obj = nil;
-	
-	id value = [self getValueFromDiction:dict withKey:key];
-	if ([value isKindOfClass:[NSDictionary class]])
-	{
-		obj = value;
-	}
-	
-	return obj;
-}
-
-#pragma mark - == 读取文件数据
-
-- (NSString *)filePath
-{
-#ifdef _DEBUG
-	NSString* filename = @"FestivalEmojiData";
-	NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-	NSString *pathSub = [path stringByAppendingPathComponent:@"Profile"];
-	BOOL bRet = [[NSFileManager defaultManager] createDirectoryAtPath:pathSub withIntermediateDirectories:YES attributes:nil error:nil];
-	if (bRet)
-	{
-		path = pathSub;
-	}
-	
-	NSString* fileNameTxt = [NSString stringWithFormat:@"%@.txt", fileName];
-	path = [path stringByAppendingPathComponent:fileNameTxt];
-#else
-	NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kHardcodeFestivalEmojiDataPath];
-#endif
-	return path;
-}
-
-- (NSDictionary*)readJSONDataFromFile
-{
-	NSDictionary* jsonDict = nil;
-	
-	do
-	{
-		NSString *filePath = [self filePath];
-		NSData* fileData = [NSData dataWithContentsOfFile:filePath];
-		if ([fileData length] < 1)
-		{
-			break;
+			if ([item.shapeType isEqualToString:shapeType])
+			{
+				shapeInfo = item;
+				break;
+			}
 		}
 		
-		NSString* result = [[[NSString alloc] initWithData:fileData encoding:NSUTF8StringEncoding] autorelease];
-		if ([result length] < 1)
-		{
-			break;
-		}
-		
-		jsonDict = (NSDictionary*)[result objectFromJSONString];
 	}while (0);
 	
-	return jsonDict;
+	return shapeInfo;
 }
 
 @end

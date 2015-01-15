@@ -3,6 +3,7 @@
 [
 {
 "shapetype":"2",
+"nameType":"心形",
 "name":"爱心",
 "emojiChar":"💘",
 "fontSize":"32",
@@ -30,6 +31,7 @@
 },
 {
 "shapetype":"3",
+"nameType":"圆圈",
 "name":"圆",
 "emojiChar":"😘",
 "fontSize":"32",
@@ -57,6 +59,7 @@
 },
 {
 "shapetype":"1",
+"nameType":"星形",
 "name":"星星",
 "emojiChar":"🌟",
 "fontSize":"32",
@@ -81,13 +84,17 @@
 {"point":"{435,500}"}
 ]
 }
+
 ],
 
 "festivalData":
 [
 {
+"festivalName":"情人节",
 "festivalType":"1",
-"name":"爱心",
+"shapetype":"2",
+"nameType":"心形",
+"nameEmoji":"爱心",
 "emojiChar":"💘",
 "fontSize":"32",
 "year":"2015",
@@ -97,15 +104,18 @@
 "searchHotWords":
 [
 	{"word":"情人节"},
-	{"word":"爱心"},
-	{"word":"节日"},
+	{"word":"我爱你"},
+	{"word":"214"},
 	{"word":"情人"}
 ]
 },
 {
+"festivalName":"春节",
 "festivalType":"2",
-"name":"圆",
-"emojiChar":"😘",
+"shapetype":"3",
+"nameType":"圆圈",
+"nameEmoji":"灯笼",
+"emojiChar":"🏮",
 "fontSize":"32",
 "year":"2015",
 "month":"2",
@@ -113,10 +123,28 @@
 "days":"2",
 "searchHotWords":
 [
-	{"word":"情人节2"},
-	{"word":"爱心2"},
-	{"word":"节日2"},
-	{"word":"情人2"}
+	{"word":"春节"},
+	{"word":"新春"},
+	{"word":"除夕"},
+	{"word":"过年"}
+]
+},
+{
+"festivalName":"元宵",
+"festivalType":"3",
+"shapetype":"1",
+"nameType":"圆圈",
+"nameEmoji":"灯笼",
+"emojiChar":"🏮",
+"fontSize":"32",
+"year":"2015",
+"month":"2",
+"day":"14",
+"days":"2",
+"searchHotWords":
+[
+{"word":"元宵"},
+{"word":"灯笼"}
 ]
 }
 

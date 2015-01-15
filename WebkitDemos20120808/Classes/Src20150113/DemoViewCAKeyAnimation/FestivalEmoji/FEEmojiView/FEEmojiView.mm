@@ -51,7 +51,7 @@
     if (self = [super initWithFrame:frame])
 	{
 		self.backgroundColor = [UIColor clearColor];
-		[self forTest];
+//		[self forTest];
 		self.parameterInfo = parameterInfo;
 		
 		[self addLabels:parameterInfo];

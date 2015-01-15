@@ -86,7 +86,6 @@
 	return [FEFestivalAdaptor isNeedReloadFestivalData];
 }
 
-
 #pragma mark - == 读取文件数据
 
 - (NSDictionary*)readJSONDataFromFile

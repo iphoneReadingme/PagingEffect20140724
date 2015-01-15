@@ -54,6 +54,9 @@
 		5B37CB3A1A667C01003FE853 /* FEShapeParameterInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB371A667C01003FE853 /* FEShapeParameterInfo.mm */; };
 		5B37CB3D1A66967F003FE853 /* FEEmojiParameterInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB3C1A66967F003FE853 /* FEEmojiParameterInfo.mm */; };
 		5B37CB4B1A674E5F003FE853 /* FEJSONParameterAnalyzer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB491A674E5F003FE853 /* FEJSONParameterAnalyzer.mm */; };
+		5B37CC7A1A67EA88003FE853 /* FEFestivalAdaptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CC791A67EA88003FE853 /* FEFestivalAdaptor.mm */; };
+		5B37CC801A67F38C003FE853 /* NSDate+String.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CC7D1A67F38C003FE853 /* NSDate+String.m */; };
+		5B37CC811A67F38C003FE853 /* NSDateUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CC7F1A67F38C003FE853 /* NSDateUtility.m */; };
 		5B38700B17CF40250076514D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B38700A17CF40250076514D /* CoreData.framework */; };
 		5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */; };
 		5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */; };
@@ -172,6 +175,12 @@
 		5B37CB3C1A66967F003FE853 /* FEEmojiParameterInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiParameterInfo.mm; sourceTree = "<group>"; };
 		5B37CB481A674E5F003FE853 /* FEJSONParameterAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEJSONParameterAnalyzer.h; sourceTree = "<group>"; };
 		5B37CB491A674E5F003FE853 /* FEJSONParameterAnalyzer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEJSONParameterAnalyzer.mm; sourceTree = "<group>"; };
+		5B37CC781A67EA88003FE853 /* FEFestivalAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEFestivalAdaptor.h; sourceTree = "<group>"; };
+		5B37CC791A67EA88003FE853 /* FEFestivalAdaptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEFestivalAdaptor.mm; sourceTree = "<group>"; };
+		5B37CC7C1A67F38C003FE853 /* NSDate+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+String.h"; sourceTree = "<group>"; };
+		5B37CC7D1A67F38C003FE853 /* NSDate+String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+String.m"; sourceTree = "<group>"; };
+		5B37CC7E1A67F38C003FE853 /* NSDateUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateUtility.h; sourceTree = "<group>"; };
+		5B37CC7F1A67F38C003FE853 /* NSDateUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateUtility.m; sourceTree = "<group>"; };
 		5B38700A17CF40250076514D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5B38702F17CF4EEB0076514D /* DemoViewCATransform3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewCATransform3D.h; sourceTree = "<group>"; };
 		5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoViewCATransform3D.mm; sourceTree = "<group>"; };
@@ -439,6 +448,7 @@
 		5B37C5301A650804003FE853 /* UCWeb */ = {
 			isa = PBXGroup;
 			children = (
+				5B37CC7B1A67F38C003FE853 /* NSDateUtil */,
 				5B37C5311A650804003FE853 /* JSONKit */,
 				5B37C5341A650804003FE853 /* UCCollections */,
 			);
@@ -496,6 +506,8 @@
 				5B37CB451A674E5F003FE853 /* FEParmFetcher */,
 				5B37CB3B1A66967F003FE853 /* FEEmojiParameterInfo.h */,
 				5B37CB3C1A66967F003FE853 /* FEEmojiParameterInfo.mm */,
+				5B37CC781A67EA88003FE853 /* FEFestivalAdaptor.h */,
+				5B37CC791A67EA88003FE853 /* FEFestivalAdaptor.mm */,
 				5B37CB321A667C01003FE853 /* FEFestivalParameterInfo.h */,
 				5B37CB331A667C01003FE853 /* FEFestivalParameterInfo.mm */,
 				5B37CB341A667C01003FE853 /* FEParameterDataProvider.h */,
@@ -513,6 +525,17 @@
 				5B37CB491A674E5F003FE853 /* FEJSONParameterAnalyzer.mm */,
 			);
 			path = FEParmFetcher;
+			sourceTree = "<group>";
+		};
+		5B37CC7B1A67F38C003FE853 /* NSDateUtil */ = {
+			isa = PBXGroup;
+			children = (
+				5B37CC7C1A67F38C003FE853 /* NSDate+String.h */,
+				5B37CC7D1A67F38C003FE853 /* NSDate+String.m */,
+				5B37CC7E1A67F38C003FE853 /* NSDateUtility.h */,
+				5B37CC7F1A67F38C003FE853 /* NSDateUtility.m */,
+			);
+			path = NSDateUtil;
 			sourceTree = "<group>";
 		};
 		5B427039187C0153003D3810 /* DemoUIDeviceVIewController20140107 */ = {
@@ -627,6 +650,7 @@
 				5B17BF79185ECF990037A7BA /* PageAppViewController.mm in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				5B37C82F1A650805003FE853 /* JSONKit.m in Sources */,
+				5B37CC801A67F38C003FE853 /* NSDate+String.m in Sources */,
 				5B195F3D199A4BAB009562C3 /* UIGlobal.mm in Sources */,
 				5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */,
 				5B1837B1184861B200E22AF4 /* DemoViewCoreTextDraw.mm in Sources */,
@@ -670,7 +694,9 @@
 				5B37C8351A650806003FE853 /* NSMutableString+ExceptionSafe.m in Sources */,
 				5B04785F184EBDDA007D4A10 /* BookLayoutConfig.mm in Sources */,
 				5B37C0CC1A64F17E003FE853 /* FEEmojiViewController.mm in Sources */,
+				5B37CC811A67F38C003FE853 /* NSDateUtility.m in Sources */,
 				5B37C8321A650806003FE853 /* NSHTTPCookieStorage+ExceptionSafe.m in Sources */,
+				5B37CC7A1A67EA88003FE853 /* FEFestivalAdaptor.mm in Sources */,
 				5BE835061760406300532011 /* DemoViewCALayerController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

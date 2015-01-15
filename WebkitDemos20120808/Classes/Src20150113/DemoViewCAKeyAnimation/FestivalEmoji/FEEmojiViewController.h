@@ -24,7 +24,6 @@
 
 + (FEEmojiViewController*)sharedInstance;
 
-//@property (nonatomic, assign) id<NBSourceAdditionalPageViewControllerDelegate> delegate;
 - (void)showEmojiView:(UIView*)parentView;
 
 ///< 节日匹配

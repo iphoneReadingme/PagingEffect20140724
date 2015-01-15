@@ -22,7 +22,7 @@
 
 
 ///< for test
-//#define _Enable_Hardcode_keyword
+#define _Enable_Hardcode_keyword
 
 
 @interface FEEmojiViewController ()<FEEmojiViewDelegate>
@@ -31,7 +31,6 @@
 @property (nonatomic, retain) FEEmojiParameterInfo *emojiInfo;
 @property (nonatomic, retain) FEEmojiView *emojiView;
 
-//@property (nonatomic, assign) BOOL bDidHiddenEmojiView;
 @property (nonatomic, assign) BOOL isAnimation;    ///< 正在执行动画
 @property (nonatomic, assign) BOOL bNeedsShowEmojiView;    ///< 只有通过搜索词触发，才可以显示
 

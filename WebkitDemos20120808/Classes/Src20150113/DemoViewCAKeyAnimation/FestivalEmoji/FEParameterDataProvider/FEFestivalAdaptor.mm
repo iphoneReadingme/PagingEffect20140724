@@ -16,7 +16,7 @@
 
 
 
-//#import "NSDateUtility.h"
+#import "NSDateUtility.h"
 #import "FEFestivalAdaptor.h"
 
 
@@ -59,10 +59,43 @@
 
 + (BOOL)isTodayWithDate:(NSDate*)dateObject
 {
-//	return [dateObject isToday];
-	return NO;
+	return [dateObject isToday];
 }
 
++ (NSDate*)buildDate:(NSString*)year m:(NSString*)month d:(NSString*)day;
+{
+	NSDate *date = nil;
+	if ([year length] > 0 && [month length] > 0 && [day length] > 0)
+	{
+		NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+		[dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
+		[dateFormat setLocale:[NSLocale systemLocale]];
+		[dateFormat setDateFormat:@"yyyy-MM-dd"];
+		[dateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
+		
+		NSString* dateText = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
+		date = [dateFormat dateFromString:dateText];
+	}
+	
+	return date;
+}
+
++ (BOOL)isValidDate:(NSString*)year m:(NSString*)month d:(NSString*)day days:(NSUInteger)nDays
+{
+	BOOL bRet = NO;
+	
+	NSDate* date = [NSDate date];
+	
+	NSDate *festivalDate = [self buildDate:year m:month d:day];
+	
+	NSUInteger nDayTemp = [date daysAfterDate:festivalDate];
+	if (nDayTemp < nDays)
+	{
+		bRet = YES;
+	}
+	
+	return bRet;
+}
 
 @end
 

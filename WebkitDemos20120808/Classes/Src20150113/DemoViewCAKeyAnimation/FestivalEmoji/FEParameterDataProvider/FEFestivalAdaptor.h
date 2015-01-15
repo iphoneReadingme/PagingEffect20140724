@@ -27,6 +27,11 @@
 
 + (BOOL)isNeedReloadFestivalData;
 
++ (NSDate*)buildDate:(NSString*)year m:(NSString*)month d:(NSString*)day;
+
+#pragma mark - ==时间检测
++ (BOOL)isValidDate:(NSString*)year m:(NSString*)month d:(NSString*)day days:(NSUInteger)nDays;
+
 @end
 
 

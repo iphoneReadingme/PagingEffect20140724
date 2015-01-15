@@ -20,6 +20,7 @@
 #import "FEFestivalParameterInfo.h"
 #import "NSMutableArray+ExceptionSafe.h"
 #import "JSONKit.h"
+#import "FEFestivalAdaptor.h"
 #import "FEJSONParameterAnalyzer.h"
 
 
@@ -260,9 +261,19 @@
 			break;
 		}
 		
-		NSMutableArray* searchHotWordsArray = [self getSearchHotWordsInfo:
-											   [self getNSArrayFromDiction:recordDict withKey:kKeyJSONSearchHotWords]];
-		if ([searchHotWordsArray count] < 1)
+		NSString* year = [self getNSStringFromDiction:recordDict withKey:@"year"];
+		NSString* month = [self getNSStringFromDiction:recordDict withKey:@"month"];
+		NSString* day = [self getNSStringFromDiction:recordDict withKey:@"day"];
+		
+		NSString* value = [self getNSStringFromDiction:recordDict withKey:@"days"];
+		
+		int days = [value intValue];
+		if (days < 1)
+		{
+			break;
+		}
+		
+		if (![FEFestivalAdaptor isValidDate:year m:month d:day days:days])
 		{
 			break;
 		}
@@ -274,7 +285,7 @@
 			break;
 		}
 		
-		NSString* value = [self getNSStringFromDiction:recordDict withKey:@"fontSize"];
+		value = [self getNSStringFromDiction:recordDict withKey:@"fontSize"];
 		if ([value length] < 1)
 		{
 			break;
@@ -287,10 +298,9 @@
 			break;
 		}
 		
-		value = [self getNSStringFromDiction:recordDict withKey:@"days"];
-		
-		int days = [value intValue];
-		if (days < 1)
+		NSMutableArray* searchHotWordsArray = [self getSearchHotWordsInfo:
+											   [self getNSArrayFromDiction:recordDict withKey:kKeyJSONSearchHotWords]];
+		if ([searchHotWordsArray count] < 1)
 		{
 			break;
 		}
@@ -309,9 +319,9 @@
 		parameterInfo.bRepeat = bRepeat;
 		parameterInfo.emojiChar = emojiChar;
 		parameterInfo.searchHotWords = [NSMutableArray arrayWithArray:searchHotWordsArray];
-		parameterInfo.year = [self getNSStringFromDiction:recordDict withKey:@"year"];
-		parameterInfo.month = [self getNSStringFromDiction:recordDict withKey:@"month"];
-		parameterInfo.day = [self getNSStringFromDiction:recordDict withKey:@"day"];
+		parameterInfo.year = year;
+		parameterInfo.month = month;
+		parameterInfo.day = day;
 		parameterInfo.days = days;
 		parameterInfo.fontSize = fontSize;
 		
@@ -417,7 +427,6 @@
 	
 	return obj;
 }
-
 
 @end
 

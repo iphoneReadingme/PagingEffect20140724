@@ -74,7 +74,7 @@
 		
 		NSDictionary* paramDict = [self readJSONDataFromFile];
 		self.festivalInfoArray = [FEJSONParameterAnalyzer parseFestivalJSONData:paramDict];
-		if ([_festivalInfoArray count] > 1)
+		if ([_festivalInfoArray count] > 0)
 		{
 			self.shapeInfoArray = [FEJSONParameterAnalyzer parseShapeJSONData:paramDict];
 		}

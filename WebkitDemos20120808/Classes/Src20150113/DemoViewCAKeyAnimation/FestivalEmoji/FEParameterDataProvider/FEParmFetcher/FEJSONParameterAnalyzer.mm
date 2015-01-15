@@ -52,21 +52,24 @@
 
 + (NSString *)filePath
 {
-#ifdef _DEBUG
-	NSString* filename = @"FestivalEmojiData";
-	NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-	NSString *pathSub = [path stringByAppendingPathComponent:@"Profile"];
-	BOOL bRet = [[NSFileManager defaultManager] createDirectoryAtPath:pathSub withIntermediateDirectories:YES attributes:nil error:nil];
-	if (bRet)
-	{
-		path = pathSub;
-	}
-	
-	NSString* fileNameTxt = [NSString stringWithFormat:@"%@.txt", fileName];
-	path = [path stringByAppendingPathComponent:fileNameTxt];
-#else
 	NSString* path = [FEJSONParameterAnalyzer getFilePath];
-#endif
+//#ifdef _DEBUG
+//	NSString* filename = @"FestivalEmojiData";
+//	NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//	NSString *pathSub = [path stringByAppendingPathComponent:@"Profile"];
+//	BOOL bRet = [[NSFileManager defaultManager] createDirectoryAtPath:pathSub withIntermediateDirectories:YES attributes:nil error:nil];
+//	if (bRet)
+//	{
+//		path = pathSub;
+//	}
+//	
+//	NSString* fileNameTxt = [NSString stringWithFormat:@"%@.txt", filename];
+//	path = [path stringByAppendingPathComponent:fileNameTxt];
+//	NSString* path = [FEJSONParameterAnalyzer getFilePath];
+//#else
+//	NSString* path = [FEJSONParameterAnalyzer getFilePath];
+////	[[FEEmojiViewController sharedInstance] matchFestivalByKeyWord:nil];
+//#endif
 	return path;
 }
 

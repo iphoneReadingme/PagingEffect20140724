@@ -23,6 +23,11 @@
 
 @interface FEParameterDataProvider : NSObject
 
+///< bForce: YES,强制加载新数据，防止用户不退出uc,第二天继续使用时出现时间判断不正确问题
+- (void)loadDataWith:(BOOL)bForce;
+
+- (BOOL)isNeedReloadFestivalData;
+
 ///< 通过搜索关键获取节日信息
 - (FEEmojiParameterInfo*)getFestivalEmojiParameterInfoByKeyWord:(NSString*)keyWord;
 

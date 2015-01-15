@@ -19,6 +19,7 @@
 #import "FEShapeParameterInfo.h"
 #import "FEFestivalParameterInfo.h"
 #import "FEJSONParameterAnalyzer.h"
+#import "FEFestivalAdaptor.h"
 #import "FEParameterDataProvider.h"
 
 
@@ -52,6 +53,25 @@
 {
 	if (self = [super init])
 	{
+		[self loadDataWith:NO];
+	}
+	
+	return self;
+}
+
+- (void)loadDataWith:(BOOL)bForce
+{
+	BOOL bLoadData = NO;
+	if (bForce || _festivalInfoArray == nil)
+	{
+		bLoadData = YES;
+	}
+	
+	if (bLoadData)
+	{
+		///< 更新本次统计时的日期
+		[FEFestivalAdaptor setLoadDataDate];
+		
 		NSDictionary* paramDict = [self readJSONDataFromFile];
 		self.festivalInfoArray = [FEJSONParameterAnalyzer parseFestivalJSONData:paramDict];
 		if ([_festivalInfoArray count] > 1)
@@ -59,9 +79,13 @@
 			self.shapeInfoArray = [FEJSONParameterAnalyzer parseShapeJSONData:paramDict];
 		}
 	}
-	
-	return self;
 }
+
+- (BOOL)isNeedReloadFestivalData
+{
+	return [FEFestivalAdaptor isNeedReloadFestivalData];
+}
+
 
 #pragma mark - == 读取文件数据
 

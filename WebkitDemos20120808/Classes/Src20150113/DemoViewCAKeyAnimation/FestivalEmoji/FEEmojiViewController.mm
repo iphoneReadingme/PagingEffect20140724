@@ -20,9 +20,9 @@
 #import "FEParameterDataProvider.h"
 
 
-///< for test
-#define _Enable_Hardcode_keyword
 
+///< for test
+//#define _Enable_Hardcode_keyword
 
 
 @interface FEEmojiViewController ()<FEEmojiViewDelegate>
@@ -31,8 +31,9 @@
 @property (nonatomic, retain) FEEmojiParameterInfo *emojiInfo;
 @property (nonatomic, retain) FEEmojiView *emojiView;
 
-@property (nonatomic, assign) BOOL bDidHiddenEmojiView;
+//@property (nonatomic, assign) BOOL bDidHiddenEmojiView;
 @property (nonatomic, assign) BOOL isAnimation;    ///< 正在执行动画
+@property (nonatomic, assign) BOOL bNeedsShowEmojiView;    ///< 只有通过搜索词触发，才可以显示
 
 @end
 
@@ -54,7 +55,7 @@
 {
 	if (self = [super init])
 	{
-		[self loadData];
+		_bNeedsShowEmojiView = NO;
 	}
 	
 	return self;
@@ -69,6 +70,7 @@
 	
 	[super dealloc];
 }
+
 
 - (void)releaseEmojiView
 {
@@ -91,14 +93,6 @@
 {
 	[_dataProvider release];
 	_dataProvider = nil;
-}
-
-- (void)loadData
-{
-	if (_dataProvider == nil)
-	{
-		_dataProvider = [[FEParameterDataProvider alloc] init];
-	}
 }
 
 ///< 节日匹配
@@ -129,17 +123,34 @@
 	
 	if ([keyWord length] > 0)
 	{
-		self.emojiInfo = [_dataProvider getFestivalEmojiParameterInfoByKeyWord:keyWord];
+		BOOL bFind = NO;
+		if (_emojiInfo != nil)
+		{
+			NSRange rang = [keyWord rangeOfString:[_emojiInfo searchKeyWord]];
+			
+			bFind = (rang.location != NSNotFound);
+		}
+		
+		if (!bFind)
+		{
+			[self releaseEmojiInfo];
+			[self loadData];
+			
+			self.emojiInfo = [_dataProvider getFestivalEmojiParameterInfoByKeyWord:keyWord];
+			self.emojiInfo.searchKeyWord = keyWord;
+		}
+		_bNeedsShowEmojiView = YES;
 	}
 }
 
 - (void)showEmojiView:(UIView*)parentView
 {
-	if (_isAnimation)
+	if (_isAnimation || !_bNeedsShowEmojiView)
 	{
 		return;
 	}
 	
+	_bNeedsShowEmojiView = NO;
 	if ([_emojiInfo bRepeat])
 	{
 		[self addEmojiView:parentView With:_emojiInfo];
@@ -193,12 +204,27 @@
 
 - (void)hiddenAnimationDidFinished
 {
-	_bDidHiddenEmojiView = YES;
-	_isAnimation = NO;
-	
-	[self releaseEmojiInfo];
+//	[self releaseEmojiInfo];
 	
 	[self performSelector:@selector(releaseEmojiView) withObject:nil afterDelay:0.0f];
+	
+	_isAnimation = NO;
+}
+
+- (void)loadData
+{
+	if (_dataProvider == nil)
+	{
+		_dataProvider = [[FEParameterDataProvider alloc] init];
+	}
+	else
+	{
+		if ([_dataProvider isNeedReloadFestivalData])
+		{
+			///< 判断时间，如果已经是隔天
+			[_dataProvider loadDataWith:YES];
+		}
+	}
 }
 
 @end

@@ -23,6 +23,8 @@
 - (void)dealloc
 {
 	NSLog(@"==[dealloc]==FEEmojiParameterInfo==");
+	[_searchKeyWord release];
+	_searchKeyWord = nil;
 	
 	[_emojiChar release];
 	_emojiChar = nil;
@@ -41,7 +43,6 @@
 	
 	return self;
 }
-
 
 @end
 

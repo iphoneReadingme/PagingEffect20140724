@@ -235,9 +235,6 @@
 
 - (void)hiddenAnimationDidFinished
 {
-	self.alpha = 0.0f;
-	self.hidden = YES;
-	
 	if (_delegate && [_delegate respondsToSelector:@selector(hiddenAnimationDidFinished)])
 	{
 		[_delegate hiddenAnimationDidFinished];
@@ -349,9 +346,9 @@
 #pragma mark - ==隐藏动画
 - (void)executeHidden3DAnimation:(UIView*)pView with:(NSTimeInterval)duration
 {
-	[self executeHiddenSubviews3DAnimation:duration];
 	///< 隐藏视图动画
 	[pView.layer addAnimation:[self buildNothingAnimation:duration] forKey:kAnimationKeyHiddenView];
+	[self executeHiddenSubviews3DAnimation:duration];
 }
 
 - (void)executeHiddenSubviews3DAnimation:(NSTimeInterval)duration

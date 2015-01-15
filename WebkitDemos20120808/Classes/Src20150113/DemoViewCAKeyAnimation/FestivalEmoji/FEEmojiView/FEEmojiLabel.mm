@@ -44,7 +44,11 @@
 {
 	if ([animKeyName isKindOfClass:[CAAnimationGroup class]])
 	{
-		self.alpha = 0.0f;
+		self.hidden = YES;
+		if ([self superview])
+		{
+			[self removeFromSuperview];
+		}
 	}
 }
 

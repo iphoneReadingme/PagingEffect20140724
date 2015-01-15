@@ -88,10 +88,25 @@
 	
 	NSDate *festivalDate = [self buildDate:year m:month d:day];
 	
-	NSUInteger nDayTemp = [date daysAfterDate:festivalDate];
-	if (nDayTemp < nDays)
+	NSInteger nDayTemp = [date daysAfterDate:festivalDate];
+	
+	if (0 <= nDayTemp)
 	{
-		bRet = YES;
+		///< 节日是今天或之前
+		
+		bRet = [date isEqualToDateIgnoringTime:festivalDate];
+		
+		if (!bRet)
+		{
+			///< 昨天是节日
+			///< 相差不足一天或一天时, 如果是昨天，并且nDays>1
+			bRet = (nDays > 1 && [festivalDate isYesterday]);
+		}
+		if (!bRet)
+		{
+			///< 节日在昨天之前
+			bRet = (0 < nDayTemp && nDayTemp < nDays);
+		}
 	}
 	
 	return bRet;

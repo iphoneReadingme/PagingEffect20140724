@@ -134,7 +134,7 @@
 {
 "festivalName":"元宵",
 "festivalType":"3",
-"shapetype":"1",
+"shapetype":"3",
 "nameType":"圆圈",
 "nameEmoji":"灯笼",
 "emojiChar":"🏮",
@@ -147,7 +147,9 @@
 "searchHotWords":
 [
 {"word":"元宵"},
-{"word":"灯笼"}
+{"word":"大年"},
+{"word":"正月"},
+{"word":"上元节"}
 ]
 }
 

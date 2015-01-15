@@ -46,7 +46,6 @@
 		5B37C8351A650806003FE853 /* NSMutableString+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5401A650804003FE853 /* NSMutableString+ExceptionSafe.m */; };
 		5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */; };
 		5B37C8371A650806003FE853 /* UCFNDCollection.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C5441A650804003FE853 /* UCFNDCollection.mm */; };
-		5B37CB2E1A667BFD003FE853 /* FEEmojiIconDataFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB291A667BFD003FE853 /* FEEmojiIconDataFactory.mm */; };
 		5B37CB2F1A667BFD003FE853 /* FEEmojiLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB2B1A667BFD003FE853 /* FEEmojiLabel.mm */; };
 		5B37CB301A667BFD003FE853 /* FEEmojiView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB2D1A667BFD003FE853 /* FEEmojiView.mm */; };
 		5B37CB381A667C01003FE853 /* FEFestivalParameterInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B37CB331A667C01003FE853 /* FEFestivalParameterInfo.mm */; };
@@ -159,8 +158,6 @@
 		5B37C5421A650804003FE853 /* NSString+ExceptionSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ExceptionSafe.m"; sourceTree = "<group>"; };
 		5B37C5431A650804003FE853 /* UCFNDCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCFNDCollection.h; sourceTree = "<group>"; };
 		5B37C5441A650804003FE853 /* UCFNDCollection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UCFNDCollection.mm; sourceTree = "<group>"; };
-		5B37CB281A667BFD003FE853 /* FEEmojiIconDataFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiIconDataFactory.h; sourceTree = "<group>"; };
-		5B37CB291A667BFD003FE853 /* FEEmojiIconDataFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiIconDataFactory.mm; sourceTree = "<group>"; };
 		5B37CB2A1A667BFD003FE853 /* FEEmojiLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiLabel.h; sourceTree = "<group>"; };
 		5B37CB2B1A667BFD003FE853 /* FEEmojiLabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FEEmojiLabel.mm; sourceTree = "<group>"; };
 		5B37CB2C1A667BFD003FE853 /* FEEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmojiView.h; sourceTree = "<group>"; };
@@ -490,8 +487,6 @@
 		5B37CB271A667BFD003FE853 /* FEEmojiView */ = {
 			isa = PBXGroup;
 			children = (
-				5B37CB281A667BFD003FE853 /* FEEmojiIconDataFactory.h */,
-				5B37CB291A667BFD003FE853 /* FEEmojiIconDataFactory.mm */,
 				5B37CB2A1A667BFD003FE853 /* FEEmojiLabel.h */,
 				5B37CB2B1A667BFD003FE853 /* FEEmojiLabel.mm */,
 				5B37CB2C1A667BFD003FE853 /* FEEmojiView.h */,
@@ -654,7 +649,6 @@
 				5B195F3D199A4BAB009562C3 /* UIGlobal.mm in Sources */,
 				5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */,
 				5B1837B1184861B200E22AF4 /* DemoViewCoreTextDraw.mm in Sources */,
-				5B37CB2E1A667BFD003FE853 /* FEEmojiIconDataFactory.mm in Sources */,
 				5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */,
 				5B1837B2184861B200E22AF4 /* DemoViewSimpleParagraph.mm in Sources */,
 				5B047872184F0FB0007D4A10 /* ColorPickerView.mm in Sources */,

@@ -18,8 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FEEmojiLabel : UILabel
 
+@interface FEEmojiLabel : UILabel
 
 - (void)executeHiddenAnimation:(NSTimeInterval)duration;
 

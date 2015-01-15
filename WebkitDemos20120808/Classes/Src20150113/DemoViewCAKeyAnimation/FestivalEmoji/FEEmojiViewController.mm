@@ -21,10 +21,6 @@
 
 
 
-///< for test
-#define _Enable_Hardcode_keyword
-
-
 @interface FEEmojiViewController ()<FEEmojiViewDelegate>
 
 @property (nonatomic, retain) FEParameterDataProvider *dataProvider;
@@ -69,7 +65,6 @@
 	
 	[super dealloc];
 }
-
 
 - (void)releaseEmojiView
 {

@@ -83,15 +83,24 @@
 	
 	///< 不透明 1
 	value = [NSNumber numberWithFloat:1.0f];
-	[animationValues safe_AddObject:value];
+	if (value)
+	{
+		[animationValues safe_AddObject:value];
+	}
 	
 	///< 不透明 1
 	value = [NSNumber numberWithFloat:1.0f];
-	[animationValues safe_AddObject:value];
+	if (value)
+	{
+		[animationValues safe_AddObject:value];
+	}
 	
 	///< 全透明 0
 	value = [NSNumber numberWithFloat:0.0f];
-	[animationValues safe_AddObject:value];
+	if (value)
+	{
+		[animationValues safe_AddObject:value];
+	}
 	
 	// 创建关键帧动画
 	CAKeyframeAnimation *alphaAnimate = [CAKeyframeAnimation animation];
@@ -121,19 +130,28 @@
 	fScale = 1.0f;
 	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
 	value = [NSValue valueWithCATransform3D:tempTransform];
-	[animationValues addObject:value];
+	if (value)
+	{
+		[animationValues safe_AddObject:value];
+	}
 	
 	// 缩小到 0.8
 	fScale = 0.8;
 	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
 	value = [NSValue valueWithCATransform3D:tempTransform];
-	[animationValues addObject:value];
+	if (value)
+	{
+		[animationValues safe_AddObject:value];
+	}
 	
 	// 放大 1.5f
 	fScale = 1.5f;
 	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
 	value = [NSValue valueWithCATransform3D:tempTransform];
-	[animationValues addObject:value];
+	if (value)
+	{
+		[animationValues safe_AddObject:value];
+	}
 	
 	// 创建关键帧动画
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];

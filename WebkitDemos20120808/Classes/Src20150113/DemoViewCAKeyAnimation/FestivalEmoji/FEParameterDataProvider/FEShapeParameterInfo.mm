@@ -22,7 +22,7 @@
 
 - (void)dealloc
 {
-	NSLog(@"==[dealloc]==FEShapeParameterInfo==");
+//	NSLog(@"==[dealloc]==FEShapeParameterInfo==");
 	
 	[_shapeType release];
 	_shapeType = nil;

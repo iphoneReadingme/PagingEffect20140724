@@ -16,6 +16,11 @@
 
 
 
+
+///< for test
+//#define _Enable_Hardcode_keyword
+
+#ifdef _Enable_Hardcode_keyword
 ///< 服务器下发的节日命令动画类型
 
 typedef NS_ENUM(NSInteger, FEServerCmdType)
@@ -30,23 +35,22 @@ typedef NS_ENUM(NSInteger, FEServerCmdType)
 	
 	FEEITypeMaxCount
 };
+#endif
+
+///< 数据文件路径
+#define kHardcodeFestivalEmojiDataPath           @"res/LocalFiles/FestivalEmoji/FestivalEmojiData"
 
 
+///< 图形和坐标
+#define kKeyJSONShapeData                        @"shapeData"
+#define kKeyJSONShapeType                        @"shapetype"
+#define kKeyJSONCoordinates                      @"coordinates"
+#define kKeyJSONPoint                            @"point"
 
-///< 章节标题文字
-#define kFontSizeOfTitle                              (32/2.0f)
-#define kFontSizeOfLastChapterLabelText               (28/2.0f)
-
-#define kFontSizeOfBtnTitle                           (32/2.0f)
-#define kWidthOfBtn                                   (352/2.0f)
-#define kHeightOfBtn                                  (82/2.0f)
-#define kCornerRadius                                 (10/2.0f)
-
-
-#define kLeftMarginOfChapterLabel                     (32/2.0f)
-///< 各个控件之间的间距（Y方向）
-#define kYSpaceOfViews1                               (30/2.0f)
-#define kYSpaceOfViews2                               (130/2.0f)
-#define kYSpaceOfViews3                               (40/2.0f)
+///< 节日
+#define kKeyJSONSestivalData                     @"festivalData"
+#define kKeyJSONFestivalType                     @"festivalType"
+#define kKeyJSONSearchHotWords                   @"searchHotWords"
+#define kKeyJSONWord                             @"word"
 
 

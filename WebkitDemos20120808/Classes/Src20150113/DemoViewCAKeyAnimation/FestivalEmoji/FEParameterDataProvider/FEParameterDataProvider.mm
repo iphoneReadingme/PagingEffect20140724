@@ -26,7 +26,6 @@
 
 @interface FEParameterDataProvider()
 
-//@property (nonatomic, copy) NSString*          emojiChar;             ///< 表情字符
 @property (nonatomic, retain) NSMutableArray*    shapeInfoArray;        ///< 图形列表 list<FEShapeParameterInfo*>
 @property (nonatomic, retain) NSMutableArray*    festivalInfoArray;        ///< 图形列表 list<FEShapeParameterInfo*>
 
@@ -38,7 +37,7 @@
 
 - (void)dealloc
 {
-	NSLog(@"==[dealloc]==FEParameterDataProvider==");
+//	NSLog(@"==[dealloc]==FEParameterDataProvider==");
 	
 	[_shapeInfoArray release];
 	_shapeInfoArray = nil;

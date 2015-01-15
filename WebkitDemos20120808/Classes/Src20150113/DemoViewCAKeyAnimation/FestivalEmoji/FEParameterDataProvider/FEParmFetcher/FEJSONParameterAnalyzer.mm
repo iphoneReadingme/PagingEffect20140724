@@ -22,23 +22,8 @@
 #import "JSONKit.h"
 #import "FEFestivalAdaptor.h"
 #import "FEJSONParameterAnalyzer.h"
+#import "FEEmojiViewMacroDefine.h"
 
-
-///< 数据文件路径
-#define kHardcodeFestivalEmojiDataPath           @"res/LocalFiles/FestivalEmoji/FestivalEmojiData"
-
-
-///< 图形和坐标
-#define kKeyJSONShapeData                        @"shapeData"
-#define kKeyJSONShapeType                        @"shapetype"
-#define kKeyJSONCoordinates                      @"coordinates"
-#define kKeyJSONPoint                            @"point"
-
-///< 节日
-#define kKeyJSONSestivalData                     @"festivalData"
-#define kKeyJSONFestivalType                     @"festivalType"
-#define kKeyJSONSearchHotWords                   @"searchHotWords"
-#define kKeyJSONWord                             @"word"
 
 
 @implementation FEJSONParameterAnalyzer
@@ -51,36 +36,13 @@
 	return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kHardcodeFestivalEmojiDataPath];
 }
 
-+ (NSString *)filePath
-{
-	NSString* path = [FEJSONParameterAnalyzer getFilePath];
-//#ifdef _DEBUG
-//	NSString* filename = @"FestivalEmojiData";
-//	NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//	NSString *pathSub = [path stringByAppendingPathComponent:@"Profile"];
-//	BOOL bRet = [[NSFileManager defaultManager] createDirectoryAtPath:pathSub withIntermediateDirectories:YES attributes:nil error:nil];
-//	if (bRet)
-//	{
-//		path = pathSub;
-//	}
-//	
-//	NSString* fileNameTxt = [NSString stringWithFormat:@"%@.txt", filename];
-//	path = [path stringByAppendingPathComponent:fileNameTxt];
-//	NSString* path = [FEJSONParameterAnalyzer getFilePath];
-//#else
-//	NSString* path = [FEJSONParameterAnalyzer getFilePath];
-////	[[FEEmojiViewController sharedInstance] matchFestivalByKeyWord:nil];
-//#endif
-	return path;
-}
-
 + (NSDictionary*)readJSONDataFromFile
 {
 	NSDictionary* jsonDict = nil;
 	
 	do
 	{
-		NSString *filePath = [self filePath];
+		NSString *filePath = [self getFilePath];
 		NSData* fileData = [NSData dataWithContentsOfFile:filePath];
 		if ([fileData length] < 1)
 		{
@@ -119,7 +81,10 @@
 		{
 			parameterInfo = [self getShapeParameterInfo:itemDict];
 			
-			[pArray safe_AddObject:parameterInfo];
+			if (parameterInfo)
+			{
+				[pArray safe_AddObject:parameterInfo];
+			}
 		}
 		
 		if ([pArray count])
@@ -192,7 +157,10 @@
 			continue;
 		}
 		
-		[coordinateInfoArray safe_AddObject:pointStr];
+		if (pointStr)
+		{
+			[coordinateInfoArray safe_AddObject:pointStr];
+		}
 	}
 	
 	if ([coordinateInfoArray count] < 1)
@@ -223,8 +191,10 @@
 		for (NSDictionary* itemDict in sourceList)
 		{
 			parameterInfo = [self parseFestivalParameter:itemDict];
-			
-			[pArray safe_AddObject:parameterInfo];
+			if (parameterInfo)
+			{
+				[pArray safe_AddObject:parameterInfo];
+			}
 		}
 		
 		if ([pArray count])
@@ -356,7 +326,10 @@
 			continue;
 		}
 		
-		[searchHotWordInfoArray safe_AddObject:word];
+		if (word)
+		{
+			[searchHotWordInfoArray safe_AddObject:word];
+		}
 	}
 	
 	if ([searchHotWordInfoArray count] < 1)

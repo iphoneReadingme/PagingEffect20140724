@@ -27,7 +27,7 @@
 
 - (void)dealloc
 {
-	NSLog(@"==[dealloc]==FEFestivalParameterInfo==");
+//	NSLog(@"==[dealloc]==FEFestivalParameterInfo==");
 	
 	[_festivalType release];
 	_festivalType = nil;

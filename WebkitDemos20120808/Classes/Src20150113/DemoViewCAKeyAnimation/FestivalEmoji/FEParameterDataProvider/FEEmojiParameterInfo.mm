@@ -22,7 +22,7 @@
 
 - (void)dealloc
 {
-	NSLog(@"==[dealloc]==FEEmojiParameterInfo==");
+//	NSLog(@"==[dealloc]==FEEmojiParameterInfo==");
 	[_searchKeyWord release];
 	_searchKeyWord = nil;
 	

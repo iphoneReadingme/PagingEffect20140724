@@ -18,14 +18,16 @@
 #import "FEEmojiLabel.h"
 #import "FEEmojiView.h"
 #import "NSMutableArray+ExceptionSafe.h"
-//#import "FEEmojiViewMacroDefine.h"
 
 
 
 #define kkeyTimes                             2
 
+#define kkeyShowEmojiViewTime                 0.5f*kkeyTimes
+#define kkeyHiddenEmojiViewTime               0.5f*kkeyTimes
+
 ///< 0.5f 之后隐藏
-#define kkeyHiddenEmojiViewTime              1.5f
+#define kkeyBeforeHiddenWaitTime              0.5f
 
 
 #define kAnimationKeyShowView                 @"kAnimationKeyShowView"
@@ -192,7 +194,7 @@
 - (void)show3DAnimation
 {
 	self.alpha = 1.0f;
-	[self executeShow3DAnimation:_emojiContentView];
+	[self executeShow3DAnimation:_emojiContentView with:kkeyShowEmojiViewTime];
 }
 
 #pragma mark - ==动画执行完成
@@ -205,7 +207,7 @@
 		self.alpha = 1.0f;
 		
 		///< 自动隐藏
-		[self performSelector:@selector(hiddenFestivalEmojiView) withObject:nil afterDelay:kkeyHiddenEmojiViewTime];
+		[self performSelector:@selector(hiddenFestivalEmojiView) withObject:nil afterDelay:kkeyBeforeHiddenWaitTime];
 	}
 	
 	if ([animKeyName isKindOfClass:[CAKeyframeAnimation class]])
@@ -222,7 +224,7 @@
 - (void)hidden3DAnimation
 {
 	NSLog(@"=执行隐藏emoji视图动画==delayHiddenAnimation===");
-	[self executeHidden3DAnimation:_emojiContentView];
+	[self executeHidden3DAnimation:_emojiContentView with:kkeyHiddenEmojiViewTime];
 }
 
 ///< 隐藏
@@ -244,11 +246,10 @@
 
 #pragma mark - ==显示动画
 
-- (void)executeShow3DAnimation:(UIView*)pView
+- (void)executeShow3DAnimation:(UIView*)pView with:(NSTimeInterval)duration
 {
-	CAKeyframeAnimation *scaleAnimation = [self buildSizeScaleAnimation:1.0f*kkeyTimes];
-	CAKeyframeAnimation *alphaAnimation = [self buildAlphaAnimate:0.2f*kkeyTimes];
-	//CABasicAnimation *opacityAnimation = [self buildAlphaAnimateWith2];
+	CAKeyframeAnimation *scaleAnimation = [self buildSizeScaleAnimation:duration];
+	CAKeyframeAnimation *alphaAnimation = [self buildAlphaAnimate:duration/6];
 	
 	// Create an animation group to combine the keyframe and basic animations
 	CAAnimationGroup *theGroup = [CAAnimationGroup animation];
@@ -308,19 +309,13 @@
 	[animationValues addObject:value];
 	
 	// 放大 1.0f
-	fScale = 1.0f;
+	fScale = 1.1f;
 	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
 	value = [NSValue valueWithCATransform3D:tempTransform];
 	[animationValues addObject:value];
 	
-	// 放大 1.2f
-	fScale = 1.2f;
-	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
-	value = [NSValue valueWithCATransform3D:tempTransform];
-	[animationValues addObject:value];
-	
-	// 缩小到 0.9
-	fScale = 0.9f;
+	// 缩小到 0.96
+	fScale = 0.96f;
 	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
 	value = [NSValue valueWithCATransform3D:tempTransform];
 	[animationValues addObject:value];
@@ -338,26 +333,22 @@
 	animation.delegate = self;
 	animation.values = animationValues;
 	
-	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-	//	animation.timingFunctions = @[
-	////								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
-	//								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
-	//								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
-	//								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
-	//								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
-	//								  ];
+//	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	animation.timingFunctions = @[
+								  [CAMediaTimingFunction functionWithControlPoints:0.29 :0.00 :0.15 :1.00],
+								  [CAMediaTimingFunction functionWithControlPoints:0.29 :0.00 :0.15 :1.00],
+								  [CAMediaTimingFunction functionWithControlPoints:0.29 :0.00 :0.15 :1.00]
+								  ];
 	
 	///< 这里是时间段的比率，第一个动画时间占总时间的比值
-	animation.keyTimes = @[@(0.0), @(20.0f/60), @(40.0f/60), @(50.0f/60), @(60.0f/60)];
+	animation.keyTimes = @[@(0.0), @(2.0f/6), @(4.0f/6), @(6.0f/6)];
 	
 	return animation;
 }
 
 #pragma mark - ==隐藏动画
-- (void)executeHidden3DAnimation:(UIView*)pView
+- (void)executeHidden3DAnimation:(UIView*)pView with:(NSTimeInterval)duration
 {
-	NSTimeInterval duration = kkeyTimes*1.0f;
-	
 	[self executeHiddenSubviews3DAnimation:duration];
 	///< 隐藏视图动画
 	[pView.layer addAnimation:[self buildNothingAnimation:duration] forKey:kAnimationKeyHiddenView];

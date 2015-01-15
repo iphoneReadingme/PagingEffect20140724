@@ -16,7 +16,7 @@
 
 
 
-#import "NSDateUtility.h"
+//#import "NSDateUtility.h"
 #import "FEFestivalAdaptor.h"
 
 
@@ -59,7 +59,8 @@
 
 + (BOOL)isTodayWithDate:(NSDate*)dateObject
 {
-	return [dateObject isToday];
+//	return [dateObject isToday];
+	return NO;
 }
 
 

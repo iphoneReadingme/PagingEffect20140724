@@ -30,6 +30,7 @@
 
 - (void)dealloc
 {
+//	NSLog(@"==[dealloc]==FEEmojiLabel==");
 	[super dealloc];
 }
 
@@ -38,6 +39,14 @@
 	[self hiddenAnimation:self duration:duration];
 }
 
+#pragma mark - ==动画执行完成
+- (void)animationDidStop:(CAAnimation *)animKeyName finished:(BOOL)flag;
+{
+	if ([animKeyName isKindOfClass:[CAAnimationGroup class]])
+	{
+		self.alpha = 0.0f;
+	}
+}
 
 /*
  大小缩放： 100% -> 80% -> 150%    (正常->缩小->放大)

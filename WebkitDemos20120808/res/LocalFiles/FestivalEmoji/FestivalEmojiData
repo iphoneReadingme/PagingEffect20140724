@@ -101,6 +101,7 @@
 "month":"2",
 "day":"14",
 "days":"1",
+"repeat":"1",
 "searchHotWords":
 [
 	{"word":"情人节"},
@@ -121,6 +122,7 @@
 "month":"2",
 "day":"14",
 "days":"2",
+"repeat":"1",
 "searchHotWords":
 [
 	{"word":"春节"},
@@ -141,6 +143,7 @@
 "month":"2",
 "day":"14",
 "days":"2",
+"repeat":"1",
 "searchHotWords":
 [
 {"word":"元宵"},

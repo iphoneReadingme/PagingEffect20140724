@@ -292,7 +292,7 @@
 			break;
 		}
 		
-		value = [self getNSStringFromDiction:recordDict withKey:@"fontSize"];
+		value = [self getNSStringFromDiction:recordDict withKey:@"repeat"];
 		if ([value length] < 1)
 		{
 			break;

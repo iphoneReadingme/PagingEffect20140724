@@ -22,19 +22,18 @@
 @interface FEEmojiViewController : NSObject
 
 
++ (FEEmojiViewController*)sharedInstance;
+
 //@property (nonatomic, assign) id<NBSourceAdditionalPageViewControllerDelegate> delegate;
-+ (void)showFEEmojiView:(UIView*)parentView;
+- (void)showEmojiView:(UIView*)parentView;
 
-//- (id)initWithParentView:(UIView*)parentView WithType:(FEServerCmdType)type;
-
+///< 节日匹配
+- (void)matchFestivalByKeyWord:(NSString*)keyWord;
 
 - (void)didThemeChange;
 
 - (void)onChangeFrame;
 
-
-///< 节日匹配
-- (void)matchFestivalByKeyWord:(NSString*)keyWord;
 
 @end
 

@@ -97,17 +97,34 @@
 	frame.origin = CGPointZero;
 	CGRect btnRect = CGRectMake(0, 0, 140, 64);
 //	btnRect.origin.x = frame.size.width - btnRect.size.width;
-	int nIndex = 0;
+	int nIndex = 1;
 	UIButton* pBtn = nil;
 	
+	// "发起搜索"按钮
+	btnRect = CGRectMake(0, 0, 60, 64);
+	pBtn = [self createButton:nIndex withName:@"UIButtonTest1" withTitle:@"搜索"];
+	[pBtn setFrame:btnRect];
+	
+	nIndex = 2;
 	// "把图片移到右下角变小透明"按钮
-	pBtn = [self createButton:nIndex withName:@"UIButtonTest1" withTitle:@"打开3D动画视图"];
+	btnRect.origin.x += 20 + btnRect.size.width;
+	btnRect.size.width = 140;
+	pBtn = [self createButton:nIndex withName:@"UIButtonTest2" withTitle:@"T3_页面加载完成"];
 	[pBtn setFrame:btnRect];
 }
 
 - (void)onButtonClickEvent:(UIButton*)sender
 {
-	[self startAnimation];
+	if (sender.tag == 1)
+	{
+		[self matchFestivalByKeyWord];
+	}
+	else if (sender.tag == 2)
+	{
+		[self showFEEmojiView];
+	}
+	
+//	[self startAnimation];
 }
 
 // =================================================================
@@ -123,7 +140,7 @@
 {
 	///< 测试动画调用接口
 //	[self executeAnimation9:self];
-	[self onExtEmojiAnimation];
+	[self showFEEmojiView];
 }
 
 - (void)executeAnimation9:(UIView*)pView
@@ -171,9 +188,14 @@
 }
 
 
-- (void)onExtEmojiAnimation
+- (void)showFEEmojiView
 {
-	[FEEmojiViewController showFEEmojiView:self];
+	[[FEEmojiViewController sharedInstance] showEmojiView:self];
+}
+
+- (void)matchFestivalByKeyWord
+{
+	[[FEEmojiViewController sharedInstance] matchFestivalByKeyWord:nil];
 }
 
 @end

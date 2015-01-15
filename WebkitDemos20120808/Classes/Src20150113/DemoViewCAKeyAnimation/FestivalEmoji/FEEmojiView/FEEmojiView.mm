@@ -15,16 +15,27 @@
  **/
 
 
-//#import "UCUIKit/UCUIKit.h"
 #import "FEEmojiLabel.h"
 #import "FEEmojiView.h"
-#import "FEEmojiViewMacroDefine.h"
+#import "NSMutableArray+ExceptionSafe.h"
+//#import "FEEmojiViewMacroDefine.h"
 
+
+
+#define kkeyTimes                             2
+
+///< 0.5f 之后隐藏
+#define kkeyHiddenEmojiViewTime              1.5f
+
+
+#define kAnimationKeyShowView                 @"kAnimationKeyShowView"
+#define kAnimationKeyHiddenView               @"kAnimationKeyHiddenView"
 
 
 @interface FEEmojiView ()
 
 @property (nonatomic, retain) FEEmojiParameterInfo* parameterInfo;   ///< 表情图标参数信息
+@property (nonatomic, retain) UIView *emojiContentView;
 
 @end
 
@@ -54,6 +65,7 @@
 //		[self forTest];
 		self.parameterInfo = parameterInfo;
 		
+		[self addEmojiContentView];
 		[self addLabels:parameterInfo];
     }
 	
@@ -62,10 +74,32 @@
 
 - (void)dealloc
 {
+	NSLog(@"==[dealloc]==FEEmojiView==");
+	
+	_delegate = nil;
+	
 	[_parameterInfo release];
 	_parameterInfo = nil;
 	
 	[super dealloc];
+}
+
+- (CGRect)getFrameContentView
+{
+	CGRect bounds = [self bounds];
+	CGRect rect = CGRectMake(0, 0, 320, 320);
+	rect.origin.x = 0.5f*(bounds.size.width - rect.size.width);
+	rect.origin.y = 0.5f*(bounds.size.height - rect.size.height);
+	
+	return rect;
+}
+
+- (void)addEmojiContentView
+{
+	_emojiContentView = [[UIView alloc] initWithFrame:[self getFrameContentView]];
+	[self addSubview:_emojiContentView];
+	
+	_emojiContentView.accessibilityLabel = @"_emojiContentView";
 }
 
 - (void)addLabels:(FEEmojiParameterInfo*)parameterInfo
@@ -75,24 +109,23 @@
 		CGPoint pt = CGPointFromString(temp);
 		pt = [self getPointWith:pt with:0.5f];
 		CGRect rect = CGRectMake(pt.x, pt.y, 32, 32);
-		[self addLabelView:parameterInfo with:rect];
+		[self addLabelView:parameterInfo with:rect parent:_emojiContentView];
 	}
 }
 
-- (void)addLabelView:(FEEmojiParameterInfo*)parameterInfo with:(CGRect)frame
+- (void)addLabelView:(FEEmojiParameterInfo*)parameterInfo with:(CGRect)frame parent:(UIView*)parentView
 {
 	UILabel* titleLabel = [[[FEEmojiLabel alloc] initWithFrame:frame] autorelease];
 	titleLabel.font = [UIFont systemFontOfSize:parameterInfo.fontSize*[self getUIScale]];
 	titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
 	titleLabel.backgroundColor = [UIColor clearColor];
-//	titleLabel.backgroundColor = [UIColor whiteColor];
 	titleLabel.textAlignment = NSTextAlignmentCenter;
 	titleLabel.text = parameterInfo.emojiChar;
 	
 	frame.size = [FEEmojiView getConstrainedToSize:titleLabel with:[self frame].size.width];
 	[titleLabel setFrame:frame];
 	
-	[self addSubview:titleLabel];
+	[parentView addSubview:titleLabel];
 }
 
 - (CGFloat)getUIScale
@@ -121,16 +154,6 @@
 	return pt;
 }
 
-- (CGRect)getRectWith:(CGRect&)rect with:(CGFloat)scale
-{
-	rect.origin.x *= scale;
-	rect.origin.y *= scale;
-	rect.size.width *= scale;
-	rect.size.height *= scale;
-	
-	return rect;
-}
-
 + (CGSize)getConstrainedToSize:(UILabel*)pLabel with:(int)nMaxWidth
 {
 	static CGSize textSize = CGSizeZero;
@@ -156,11 +179,6 @@
 	
 }
 
-//- (UIColor*)resGetColor:(NSString*)shortName
-//{
-//	return resGetColor(shortName);
-//}
-
 - (void)didThemeChange
 {
 //	UIColor* color = nil;
@@ -169,9 +187,185 @@
 //	self.backgroundColor = color;
 }
 
-- (void)executeHidden3DAnimation:(NSTimeInterval)duration
+#pragma mark - ==外部接口
+
+- (void)show3DAnimation
 {
-	for (FEEmojiLabel* subLabel in [self subviews])
+	self.alpha = 1.0f;
+	[self executeShow3DAnimation:_emojiContentView];
+}
+
+#pragma mark - ==动画执行完成
+- (void)animationDidStop:(CAAnimation *)animKeyName finished:(BOOL)flag;
+{
+	NSString* keyPath = nil;
+	
+	if ([animKeyName isKindOfClass:[CAAnimationGroup class]])
+	{
+		self.alpha = 1.0f;
+		
+		///< 自动隐藏
+		[self performSelector:@selector(hiddenFestivalEmojiView) withObject:nil afterDelay:kkeyHiddenEmojiViewTime];
+	}
+	
+	if ([animKeyName isKindOfClass:[CAKeyframeAnimation class]])
+	{
+		keyPath = [(CAKeyframeAnimation*)animKeyName keyPath];
+		if ([keyPath isEqualToString:kAnimationKeyHiddenView])
+		{
+			NSLog(@"=动画执行完成==kAnimationKeyHiddenView===");
+			[self hiddenAnimationDidFinished];
+		}
+	}
+}
+
+- (void)hidden3DAnimation
+{
+	NSLog(@"=执行隐藏emoji视图动画==delayHiddenAnimation===");
+	[self executeHidden3DAnimation:_emojiContentView];
+}
+
+///< 隐藏
+- (void)hiddenFestivalEmojiView
+{
+	[self performSelector:@selector(hidden3DAnimation) withObject:nil afterDelay:0.0f];
+}
+
+- (void)hiddenAnimationDidFinished
+{
+	self.alpha = 0.0f;
+	self.hidden = YES;
+	
+	if (_delegate && [_delegate respondsToSelector:@selector(hiddenAnimationDidFinished)])
+	{
+		[_delegate hiddenAnimationDidFinished];
+	}
+}
+
+#pragma mark - ==显示动画
+
+- (void)executeShow3DAnimation:(UIView*)pView
+{
+	CAKeyframeAnimation *scaleAnimation = [self buildSizeScaleAnimation:1.0f*kkeyTimes];
+	CAKeyframeAnimation *alphaAnimation = [self buildAlphaAnimate:0.2f*kkeyTimes];
+	//CABasicAnimation *opacityAnimation = [self buildAlphaAnimateWith2];
+	
+	// Create an animation group to combine the keyframe and basic animations
+	CAAnimationGroup *theGroup = [CAAnimationGroup animation];
+	
+	// Set self as the delegate to allow for a callback to reenable user interaction
+	theGroup.delegate = self;
+	theGroup.duration = scaleAnimation.duration;
+	theGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	theGroup.animations = @[scaleAnimation, alphaAnimation];
+	
+	///< 插入动画
+	// Add the animation group to the layer
+	[pView.layer addAnimation:theGroup forKey:@"theGroupAnimation"];
+}
+
+- (CAKeyframeAnimation *)buildAlphaAnimate:(NSTimeInterval)duration
+{
+	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:2];
+	NSValue* value = nil;
+	
+	///< 全透明 0
+	value = [NSNumber numberWithFloat:0.0f];
+	[animationValues safe_AddObject:value];
+	
+	///< 不透明 1
+	value = [NSNumber numberWithFloat:1.0f];
+	[animationValues safe_AddObject:value];
+	
+	// 创建关键帧动画
+	CAKeyframeAnimation *alphaAnimate = [CAKeyframeAnimation animation];
+	alphaAnimate.keyPath = @"opacity";
+	alphaAnimate.duration = duration;
+	alphaAnimate.delegate = self;
+	alphaAnimate.values = animationValues;
+	
+	alphaAnimate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	
+	alphaAnimate.keyTimes = @[@0.0, @(1.0f)];
+	
+	return alphaAnimate;
+}
+
+- (CAKeyframeAnimation*)buildSizeScaleAnimation:(NSTimeInterval)duration
+{
+	NSValue* value = nil;
+	CGFloat fScale = 1.0f;
+	
+	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:5];
+	
+	CATransform3D defTransform = CATransform3DIdentity;
+	CATransform3D tempTransform = defTransform;
+	
+	// 缩小到 0.8
+	fScale = 0.8;
+	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
+	value = [NSValue valueWithCATransform3D:tempTransform];
+	[animationValues addObject:value];
+	
+	// 放大 1.0f
+	fScale = 1.0f;
+	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
+	value = [NSValue valueWithCATransform3D:tempTransform];
+	[animationValues addObject:value];
+	
+	// 放大 1.2f
+	fScale = 1.2f;
+	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
+	value = [NSValue valueWithCATransform3D:tempTransform];
+	[animationValues addObject:value];
+	
+	// 缩小到 0.9
+	fScale = 0.9f;
+	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
+	value = [NSValue valueWithCATransform3D:tempTransform];
+	[animationValues addObject:value];
+	
+	// 恢复到 1.0f
+	fScale = 1.0f;
+	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
+	value = [NSValue valueWithCATransform3D:tempTransform];
+	[animationValues addObject:value];
+	
+	// 创建关键帧动画
+	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+	animation.keyPath = @"transform";
+	animation.duration = duration;
+	animation.delegate = self;
+	animation.values = animationValues;
+	
+	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	//	animation.timingFunctions = @[
+	////								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
+	//								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
+	//								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
+	//								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
+	//								  [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear],
+	//								  ];
+	
+	///< 这里是时间段的比率，第一个动画时间占总时间的比值
+	animation.keyTimes = @[@(0.0), @(20.0f/60), @(40.0f/60), @(50.0f/60), @(60.0f/60)];
+	
+	return animation;
+}
+
+#pragma mark - ==隐藏动画
+- (void)executeHidden3DAnimation:(UIView*)pView
+{
+	NSTimeInterval duration = kkeyTimes*1.0f;
+	
+	[self executeHiddenSubviews3DAnimation:duration];
+	///< 隐藏视图动画
+	[pView.layer addAnimation:[self buildNothingAnimation:duration] forKey:kAnimationKeyHiddenView];
+}
+
+- (void)executeHiddenSubviews3DAnimation:(NSTimeInterval)duration
+{
+	for (FEEmojiLabel* subLabel in [_emojiContentView subviews])
 	{
 		if ([subLabel isKindOfClass:[FEEmojiLabel class]])
 		{
@@ -179,5 +373,83 @@
 		}
 	}
 }
+
+- (CAKeyframeAnimation*)buildSizeScaleInAnimation2:(NSTimeInterval)duration
+{
+	NSValue* value = nil;
+	CGFloat fScale = 1.0f;
+	
+	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:5];
+	
+	CATransform3D defTransform = CATransform3DIdentity;
+	CATransform3D tempTransform = defTransform;
+	
+	// 1.0f
+	fScale = 1.0f;
+	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
+	value = [NSValue valueWithCATransform3D:tempTransform];
+	[animationValues addObject:value];
+	
+	// 放大 1.2f
+	fScale = 1.2f;
+	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
+	value = [NSValue valueWithCATransform3D:tempTransform];
+	[animationValues addObject:value];
+	
+	// 缩小到 0.2
+	fScale = 0.01f;
+	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
+	value = [NSValue valueWithCATransform3D:tempTransform];
+	[animationValues addObject:value];
+	
+	// 创建关键帧动画
+	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+	animation.keyPath = @"transform";
+	animation.duration = duration;
+	animation.delegate = self;
+	animation.values = animationValues;
+	
+	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	
+	///< 这里是时间段的比率，第一个动画时间占总时间的比值
+	animation.keyTimes = @[@(0.0), @(0.15), @(1.0)];
+	
+	return animation;
+}
+
+///< 没有实际的效果
+- (CAKeyframeAnimation*)buildNothingAnimation:(NSTimeInterval)duration
+{
+	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:2];
+	NSValue* value = nil;
+	
+	///< 不透明 1
+	value = [NSNumber numberWithFloat:1.0f];
+	[animationValues safe_AddObject:value];
+	
+	///< 不透明 1
+	value = [NSNumber numberWithFloat:1.0f];
+	[animationValues safe_AddObject:value];
+	
+	// 创建关键帧动画
+	CAKeyframeAnimation *alphaAnimate = [CAKeyframeAnimation animation];
+	alphaAnimate.keyPath = kAnimationKeyHiddenView;
+	alphaAnimate.duration = duration;
+	alphaAnimate.delegate = self;
+	alphaAnimate.values = animationValues;
+	
+	alphaAnimate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	
+	alphaAnimate.keyTimes = @[@0.0, @(1.0f)];
+	
+	return alphaAnimate;
+}
+
+/*
+ keyTimes
+ 
+ 一个与 values 值数组对应的时间数组，定义了动画在什么时间应该到达什么值。时间以0开始，1结束。
+ */
+
 
 @end

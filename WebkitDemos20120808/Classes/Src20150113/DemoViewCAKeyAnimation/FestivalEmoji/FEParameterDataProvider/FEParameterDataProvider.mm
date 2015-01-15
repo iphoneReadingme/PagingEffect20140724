@@ -19,7 +19,6 @@
 #import "FEShapeParameterInfo.h"
 #import "FEFestivalParameterInfo.h"
 #import "FEJSONParameterAnalyzer.h"
-//#import "FECDParmFetcher.h"
 #import "FEParameterDataProvider.h"
 
 
@@ -38,6 +37,8 @@
 
 - (void)dealloc
 {
+	NSLog(@"==[dealloc]==FEParameterDataProvider==");
+	
 	[_shapeInfoArray release];
 	_shapeInfoArray = nil;
 	
@@ -87,6 +88,7 @@
 		emojiInfo = [[[FEEmojiParameterInfo alloc] init] autorelease];
 		emojiInfo.emojiChar = [festivalObj emojiChar];
 		emojiInfo.fontSize = festivalObj.fontSize;
+		emojiInfo.bRepeat = festivalObj.bRepeat;
 		emojiInfo.coordinateArray = shapeInfo.coordinateArray;
 	}
 	
@@ -132,7 +134,7 @@
 	for (NSString* word in [item searchHotWords])
 	{
 		NSRange rang = [keyWord rangeOfString:word];
-		//if ([keyWord isEqualToString:festivalType])
+		
 		if (rang.location != NSNotFound)
 		{
 			bRet = YES;
@@ -141,61 +143,6 @@
 	}
 	
 	return bRet;
-}
-
-- (FEEmojiParameterInfo*)getEmojiParameterInfo:(NSString*)festivalType with:(NSString*)shapeType
-{
-	FEFestivalParameterInfo* festivalObj = [self getFestivalParameterInfoBy:festivalType];
-	
-	FEShapeParameterInfo* shapeInfo = nil;
-	
-	if ([festivalObj isValid])
-	{
-		shapeInfo = [self getShapeParameterInfoBy:festivalObj.shapeType];
-	}
-	
-	FEEmojiParameterInfo* emojiInfo = nil;
-	
-	if ([shapeInfo isValid])
-	{
-		emojiInfo = [[FEEmojiParameterInfo alloc] init];
-		emojiInfo.emojiChar = festivalObj.emojiChar;
-		emojiInfo.fontSize = festivalObj.fontSize;
-		emojiInfo.coordinateArray = shapeInfo.coordinateArray;
-	}
-	
-	return emojiInfo;
-}
-
-- (FEFestivalParameterInfo*)getFestivalParameterInfoBy:(NSString*)festivalType
-{
-	FEFestivalParameterInfo* festivalObj = nil;
-	
-	do
-	{
-		if ([festivalType length] < 1)
-		{
-			break;
-		}
-		
-		for (FEFestivalParameterInfo* item in _festivalInfoArray)
-		{
-			if (![item isKindOfClass:[FEFestivalParameterInfo class]])
-			{
-				assert(0);
-				continue;
-			}
-			
-			if ([item.festivalType isEqualToString:festivalType])
-			{
-				festivalObj = item;
-				break;
-			}
-		}
-		
-	}while (0);
-	
-	return festivalObj;
 }
 
 - (FEShapeParameterInfo*)getShapeParameterInfoBy:(NSString*)shapeType

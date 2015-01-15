@@ -22,8 +22,11 @@
 
 - (void)dealloc
 {
+	NSLog(@"==[dealloc]==FEEmojiParameterInfo==");
+	
 	[_emojiChar release];
 	_emojiChar = nil;
+	
 	[_coordinateArray release];
 	_coordinateArray = nil;
 	

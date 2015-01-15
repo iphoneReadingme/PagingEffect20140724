@@ -26,7 +26,6 @@
 ///< 通过搜索关键获取节日信息
 - (FEEmojiParameterInfo*)getFestivalEmojiParameterInfoByKeyWord:(NSString*)keyWord;
 
-//- (FEEmojiParameterInfo*)getFestivalParameterInfo:(NSString*)festivalType with:(NSString*)shapeType;
 
 @end
 

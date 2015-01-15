@@ -20,7 +20,16 @@
 #import "FEEmojiParameterInfo.h"
 #import "FEEmojiViewMacroDefine.h"
 
+
+@protocol FEEmojiViewDelegate <NSObject>
+
+- (void)hiddenAnimationDidFinished;
+
+@end
+
 @interface FEEmojiView : UIView
+
+@property (nonatomic, assign) id<FEEmojiViewDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame withData:(FEEmojiParameterInfo*)parameterInfo;
 
@@ -28,7 +37,7 @@
 
 - (void)didThemeChange;
 
-- (void)executeHidden3DAnimation:(NSTimeInterval)duration;
+- (void)show3DAnimation;
 
 @end
 

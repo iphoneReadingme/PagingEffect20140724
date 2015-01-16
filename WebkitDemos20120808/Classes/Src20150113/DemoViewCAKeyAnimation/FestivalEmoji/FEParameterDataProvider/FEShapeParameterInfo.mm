@@ -31,15 +31,6 @@
 	[super dealloc];
 }
 
-- (id)init
-{
-	if (self = [super init])
-	{
-	}
-	
-	return self;
-}
-
 - (BOOL)isValid
 {
 	return ([_coordinateArray count] > 0);

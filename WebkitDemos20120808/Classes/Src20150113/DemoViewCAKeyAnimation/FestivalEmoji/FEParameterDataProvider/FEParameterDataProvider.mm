@@ -26,6 +26,7 @@
 
 @interface FEParameterDataProvider()
 
+@property (nonatomic, retain) NSDateFormatter*    dateFormator;
 @property (nonatomic, retain) NSMutableArray*    shapeInfoArray;        ///< 图形列表 list<FEShapeParameterInfo*>
 @property (nonatomic, retain) NSMutableArray*    festivalInfoArray;        ///< 图形列表 list<FEShapeParameterInfo*>
 
@@ -37,6 +38,9 @@
 
 - (void)dealloc
 {
+	[_dateFormator release];
+	_dateFormator = nil;
+	
 	[_shapeInfoArray release];
 	_shapeInfoArray = nil;
 	
@@ -73,12 +77,26 @@
 		[FEFestivalAdaptor setLoadDataDate];
 		
 		NSDictionary* paramDict = [self readJSONDataFromFile];
-		self.festivalInfoArray = [FEJSONParameterAnalyzer parseFestivalJSONData:paramDict];
+		self.festivalInfoArray = [FEJSONParameterAnalyzer parseFestivalJSONData:paramDict with:[self getNSDateFormatter]];
 		if ([_festivalInfoArray count] > 0)
 		{
 			self.shapeInfoArray = [FEJSONParameterAnalyzer parseShapeJSONData:paramDict];
 		}
 	}
+}
+
+- (NSDateFormatter*)getNSDateFormatter
+{
+	if (_dateFormator == nil)
+	{
+		_dateFormator = [[NSDateFormatter alloc] init];
+		[_dateFormator setTimeZone:[NSTimeZone systemTimeZone]];
+		[_dateFormator setLocale:[NSLocale systemLocale]];
+		[_dateFormator setDateFormat:@"yyyy-MM-dd"];
+		[_dateFormator setFormatterBehavior:NSDateFormatterBehaviorDefault];
+	}
+	
+	return _dateFormator;
 }
 
 #pragma mark - == 读取文件数据

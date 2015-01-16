@@ -24,11 +24,6 @@
 #define kLastLoadFestivalDataDate            @"kLastLoadFestivalDataDate"
 
 
-@interface FEFestivalAdaptor ()
-
-
-@end
-
 @implementation FEFestivalAdaptor
 
 
@@ -62,33 +57,17 @@
 	return [dateObject isToday];
 }
 
-+ (NSDate*)buildDate:(NSString*)year m:(NSString*)month d:(NSString*)day;
-{
-	NSDate *date = nil;
-	if ([year length] > 0 && [month length] > 0 && [day length] > 0)
-	{
-		NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-		[dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
-		[dateFormat setLocale:[NSLocale systemLocale]];
-		[dateFormat setDateFormat:@"yyyy-MM-dd"];
-		[dateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
-		
-		NSString* dateText = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
-		date = [dateFormat dateFromString:dateText];
-	}
-	
-	return date;
-}
-
-+ (BOOL)isValidFestivalDate:(NSString*)year m:(NSString*)month d:(NSString*)day days:(NSUInteger)nDays
++ (BOOL)isValidFestivalDate:(NSDate*)festivalDate days:(NSUInteger)nDays
 {
 	BOOL bRet = NO;
 	
 	NSDate* date = [NSDate date];
 	
-	NSDate *festivalDate = [self buildDate:year m:month d:day];
-	
-	NSInteger nDayTemp = [date daysAfterDate:festivalDate];
+	NSInteger nDayTemp = -1;
+	if (festivalDate != nil)
+	{
+		nDayTemp = [date daysAfterDate:festivalDate];
+	}
 	
 	if (0 <= nDayTemp)
 	{

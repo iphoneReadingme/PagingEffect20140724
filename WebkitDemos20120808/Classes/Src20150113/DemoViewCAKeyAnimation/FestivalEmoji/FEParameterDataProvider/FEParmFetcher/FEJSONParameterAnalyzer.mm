@@ -89,7 +89,7 @@
 		
 		if ([pArray count])
 		{
-			shapeInfoArray = [pArray retain];
+			shapeInfoArray = pArray;
 		}
 		
 	}while (0);
@@ -172,7 +172,7 @@
 }
 
 #pragma mark - ==解释节日数据信息
-+ (NSMutableArray*)parseFestivalJSONData:(NSDictionary*)paramDict
++ (NSMutableArray*)parseFestivalJSONData:(NSDictionary*)paramDict with:(NSDateFormatter*)dateFormator
 {
 	NSMutableArray* festivalInfoArray = nil;
 	do
@@ -190,7 +190,7 @@
 		
 		for (NSDictionary* itemDict in sourceList)
 		{
-			parameterInfo = [self parseFestivalParameter:itemDict];
+			parameterInfo = [self parseFestivalParameter:itemDict with:dateFormator];
 			if (parameterInfo)
 			{
 				[pArray safe_AddObject:parameterInfo];
@@ -207,8 +207,20 @@
 	return festivalInfoArray;
 }
 
++ (NSDate*)buildDate:(NSString*)year m:(NSString*)month d:(NSString*)day with:(NSDateFormatter*)dateFormator
+{
+	NSDate *date = nil;
+	if ([year length] > 0 && [month length] > 0 && [day length] > 0)
+	{
+		NSString* dateText = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
+		date = [dateFormator dateFromString:dateText];
+	}
+	
+	return date;
+}
+
 ///< 提取单条记录信息
-+ (FEFestivalParameterInfo*)parseFestivalParameter:(NSDictionary*)recordDict
++ (FEFestivalParameterInfo*)parseFestivalParameter:(NSDictionary*)recordDict with:(NSDateFormatter*)dateFormator
 {
 	FEFestivalParameterInfo* parameterInfo = nil;
 	
@@ -243,7 +255,8 @@
 			break;
 		}
 		
-		if (![FEFestivalAdaptor isValidFestivalDate:year m:month d:day days:days])
+		NSDate *festivalDate = [self buildDate:year m:month d:day with:dateFormator];
+		if (![FEFestivalAdaptor isValidFestivalDate:festivalDate days:days])
 		{
 			break;
 		}

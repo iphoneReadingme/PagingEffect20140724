@@ -24,11 +24,14 @@
 
 #define kkeyTimes                             1
 
-#define kkeyShowEmojiViewTime                 0.8f*kkeyTimes
+#define kkeyShowEmojiViewTime                 0.6f*kkeyTimes
 #define kkeyHiddenEmojiViewTime               0.8f*kkeyTimes
 
+///< 隐藏表情图标时，各个表情图标消失时最大时间间隔
+#define kKeyOffsetTime                        0.3f
+
 ///< 0.5f 之后隐藏
-#define kkeyWaitTimeBeforeHidden              0.7f
+#define kkeyWaitTimeBeforeHidden              0.8f
 
 
 #define kAnimationKeyShowView                 @"kAnimationKeyShowView"
@@ -129,10 +132,10 @@
 	static CGFloat fUIScale = 1.0f;
 	
 	///< 如果是iphone6 plus, 比例为1.15
-	if ([UCUIGlobal is55inchDisplay])
-	{
-		fUIScale = 1.15;
-	}
+//	if ([UCUIGlobal is55inchDisplay])
+//	{
+//		fUIScale = 1.15;
+//	}
 	
 	return fUIScale;
 }
@@ -325,7 +328,7 @@
 - (void)executeHidden3DAnimation:(UIView*)pView with:(NSTimeInterval)duration
 {
 	///< 隐藏视图动画
-	[pView.layer addAnimation:[self buildNothingAnimation:duration] forKey:kAnimationKeyHiddenView];
+	[pView.layer addAnimation:[self buildNothingAnimation:duration + kKeyOffsetTime] forKey:kAnimationKeyHiddenView];
 	[self executeHiddenSubviews3DAnimation:duration];
 }
 
@@ -335,7 +338,8 @@
 	{
 		if ([subLabel isKindOfClass:[FEEmojiLabel class]])
 		{
-			[subLabel executeHiddenAnimation:duration];
+			float r = 0.1f * kKeyOffsetTime * (rand() % 10);
+			[subLabel executeHiddenAnimation:duration+r];
 		}
 	}
 }
@@ -431,6 +435,5 @@
  
  一个与 values 值数组对应的时间数组，定义了动画在什么时间应该到达什么值。时间以0开始，1结束。
  */
-
 
 @end

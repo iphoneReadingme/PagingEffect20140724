@@ -24,7 +24,7 @@
 + (NSDictionary*)readJSONDataFromFile;
 
 + (NSMutableArray*)parseShapeJSONData:(NSDictionary*)paramDict;
-+ (NSMutableArray*)parseFestivalJSONData:(NSDictionary*)paramDict;
++ (NSMutableArray*)parseFestivalJSONData:(NSDictionary*)paramDict with:(NSDateFormatter*)dateFormator;
 
 
 @end

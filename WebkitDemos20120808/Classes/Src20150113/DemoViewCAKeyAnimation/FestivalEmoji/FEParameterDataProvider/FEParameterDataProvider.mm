@@ -37,8 +37,6 @@
 
 - (void)dealloc
 {
-//	NSLog(@"==[dealloc]==FEParameterDataProvider==");
-	
 	[_shapeInfoArray release];
 	_shapeInfoArray = nil;
 	

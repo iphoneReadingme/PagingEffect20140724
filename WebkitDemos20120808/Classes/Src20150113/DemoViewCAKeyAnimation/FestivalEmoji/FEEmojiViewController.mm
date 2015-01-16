@@ -152,7 +152,6 @@
 		_emojiView = [[FEEmojiView alloc] initWithFrame:bounds withData:_emojiInfo];
 		_emojiView.delegate = self;
 		[parentView addSubview:_emojiView];
-		_emojiView.alpha = 0.0f;
 	}
 }
 

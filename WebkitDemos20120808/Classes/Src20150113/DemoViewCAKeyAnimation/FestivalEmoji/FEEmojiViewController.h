@@ -29,8 +29,6 @@
 ///< 节日匹配
 - (void)matchFestivalByKeyWord:(NSString*)keyWord;
 
-- (void)didThemeChange;
-
 - (void)onChangeFrame;
 
 

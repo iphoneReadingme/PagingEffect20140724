@@ -18,6 +18,7 @@
 #import "FEEmojiView.h"
 #import "FEEmojiViewController.h"
 #import "FEParameterDataProvider.h"
+//#import "NSObject_Event.h"
 
 
 
@@ -51,6 +52,7 @@
 	if (self = [super init])
 	{
 		_bNeedsShowEmojiView = NO;
+//		connectGlobalEvent(@selector(willAnimateRotationToInterfaceOrientation:duration:), self, @selector(willAnimateRotationToInterfaceOrientation:duration:));
 	}
 	
 	return self;
@@ -58,6 +60,8 @@
 
 - (void)dealloc
 {
+//	disconnectAllEvent(self);
+	
 	[self releaseEmojiView];
 	[self releaseDataProvider];
 	
@@ -93,26 +97,7 @@
 - (void)matchFestivalByKeyWord:(NSString*)keyWord
 {
 #ifdef _Enable_Hardcode_keyword
-	static int nType = 0;
-	
-	nType++;
-	if (nType >= FEEITypeMaxCount)
-	{
-		nType = 1;
-	}
-	
-	if (FESCTypeOne == nType)
-	{
-		keyWord = @"春节";
-	}
-	else if (FESCTypeTwo == nType)
-	{
-		keyWord = @"情人节";
-	}
-	else if (FESCTypeThree == nType)
-	{
-		keyWord = @"元宵";
-	}
+	keyWord = [self getTestKewWord];
 #endif
 	
 	if ([keyWord length] > 0)
@@ -171,7 +156,9 @@
 	}
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+#pragma mark - Rotation Support
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
 	[self onChangeFrame];
 }
@@ -184,11 +171,6 @@
 	[_emojiView onChangeFrame];
 }
 
-- (void)didThemeChange
-{
-	[_emojiView didThemeChange];
-}
-
 #pragma mark - ==动画显示和隐藏
 ///< 显示
 - (void)showAnimation
@@ -198,8 +180,6 @@
 
 - (void)hiddenAnimationDidFinished
 {
-//	[self releaseEmojiInfo];
-	
 	[self performSelector:@selector(releaseEmojiView) withObject:nil afterDelay:0.0f];
 	
 	_isAnimation = NO;
@@ -213,13 +193,38 @@
 	}
 	else
 	{
-		if ([_dataProvider isNeedReloadFestivalData])
-		{
-			///< 判断时间，如果已经是隔天
-			[_dataProvider loadDataWith:YES];
-		}
+		///< 判断时间，如果已经是隔天
+		[_dataProvider loadDataWith:YES];
 	}
 }
+
+#ifdef _Enable_Hardcode_keyword
+- (NSString*)getTestKewWord
+{
+	NSString* keyWord = nil;
+	static int nType = 0;
+	
+	nType++;
+	if (nType >= FEEITypeMaxCount)
+	{
+		nType = 1;
+	}
+	
+	if (FESCTypeOne == nType)
+	{
+		keyWord = @"春节";
+	}
+	else if (FESCTypeTwo == nType)
+	{
+		keyWord = @"情人节";
+	}
+	else if (FESCTypeThree == nType)
+	{
+		keyWord = @"元宵";
+	}
+	return keyWord;
+}
+#endif
 
 @end
 

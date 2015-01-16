@@ -17,11 +17,12 @@
 
 #import "FEEmojiLabel.h"
 #import "FEEmojiView.h"
+//#import "UCUIKit/UCUIKit.h"
 #import "NSMutableArray+ExceptionSafe.h"
 
 
 
-#define kkeyTimes                             2
+#define kkeyTimes                             1
 
 #define kkeyShowEmojiViewTime                 0.5f*kkeyTimes
 #define kkeyHiddenEmojiViewTime               0.5f*kkeyTimes
@@ -54,13 +55,6 @@
 
 - (id)initWithFrame:(CGRect)frame withData:(FEEmojiParameterInfo*)parameterInfo
 {
-	frame.origin.x = 0;
-	frame.origin.y = frame.size.width*0.25;
-	frame.size.width *= 0.5;
-	frame.size.height *= 0.5;
-	frame.size.width = 320;
-	frame.size.height = 320;
-	
     if (self = [super initWithFrame:frame])
 	{
 		self.backgroundColor = [UIColor clearColor];
@@ -89,7 +83,7 @@
 - (CGRect)getFrameContentView
 {
 	CGRect bounds = [self bounds];
-	CGRect rect = CGRectMake(0, 0, 320, 320);
+	CGRect rect = CGRectMake(0, 0, 320*[self getUIScale], 320*[self getUIScale]);
 	rect.origin.x = 0.5f*(bounds.size.width - rect.size.width);
 	rect.origin.y = 0.5f*(bounds.size.height - rect.size.height);
 	
@@ -99,6 +93,7 @@
 - (void)addEmojiContentView
 {
 	_emojiContentView = [[UIView alloc] initWithFrame:[self getFrameContentView]];
+	
 	[self addSubview:_emojiContentView];
 	
 	_emojiContentView.accessibilityLabel = @"_emojiContentView";
@@ -141,9 +136,9 @@
 	
 	///< 如果是iphone6 plus, 比例为1.15
 //	if ([UCUIGlobal is55inchDisplay])
-	{
+//	{
 //		fUIScale = 1.15;
-	}
+//	}
 	
 	return fUIScale;
 }
@@ -178,15 +173,7 @@
 
 - (void)onChangeFrame
 {
-	
-}
-
-- (void)didThemeChange
-{
-//	UIColor* color = nil;
-	
-//	color = [self resGetColor:@"NovelBox/NovelReaderBackground"];
-//	self.backgroundColor = color;
+	[self.emojiContentView setFrame:[self getFrameContentView]];
 }
 
 #pragma mark - ==外部接口
@@ -215,7 +202,7 @@
 		keyPath = [(CAKeyframeAnimation*)animKeyName keyPath];
 		if ([keyPath isEqualToString:kAnimationKeyHiddenView])
 		{
-			NSLog(@"=动画执行完成==kAnimationKeyHiddenView===");
+			//NSLog(@"=动画执行完成==kAnimationKeyHiddenView===");
 			[self hiddenAnimationDidFinished];
 		}
 	}
@@ -223,7 +210,7 @@
 
 - (void)hidden3DAnimation
 {
-	NSLog(@"=执行隐藏emoji视图动画==delayHiddenAnimation===");
+	//NSLog(@"=执行隐藏emoji视图动画==delayHiddenAnimation===");
 	[self executeHidden3DAnimation:_emojiContentView with:kkeyHiddenEmojiViewTime];
 }
 
@@ -348,7 +335,6 @@
 	animation.delegate = self;
 	animation.values = animationValues;
 	
-//	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
 	animation.timingFunctions = @[
 								  [CAMediaTimingFunction functionWithControlPoints:0.29 :0.00 :0.15 :1.00],
 								  [CAMediaTimingFunction functionWithControlPoints:0.29 :0.00 :0.15 :1.00],

@@ -80,7 +80,7 @@
 	return date;
 }
 
-+ (BOOL)isValidDate:(NSString*)year m:(NSString*)month d:(NSString*)day days:(NSUInteger)nDays
++ (BOOL)isValidFestivalDate:(NSString*)year m:(NSString*)month d:(NSString*)day days:(NSUInteger)nDays
 {
 	BOOL bRet = NO;
 	

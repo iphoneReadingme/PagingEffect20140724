@@ -30,7 +30,8 @@
 + (NSDate*)buildDate:(NSString*)year m:(NSString*)month d:(NSString*)day;
 
 #pragma mark - ==时间检测
-+ (BOOL)isValidDate:(NSString*)year m:(NSString*)month d:(NSString*)day days:(NSUInteger)nDays;
+///< 日期是否在节日有效期内
++ (BOOL)isValidFestivalDate:(NSString*)year m:(NSString*)month d:(NSString*)day days:(NSUInteger)nDays;
 
 @end
 

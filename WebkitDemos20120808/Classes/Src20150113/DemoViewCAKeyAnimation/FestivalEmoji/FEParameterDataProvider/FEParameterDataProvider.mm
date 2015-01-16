@@ -61,14 +61,17 @@
 - (void)loadDataWith:(BOOL)bForce
 {
 	BOOL bLoadData = NO;
-	if (bForce || _festivalInfoArray == nil)
+	
+	bLoadData = (bForce && [FEFestivalAdaptor isNeedReloadFestivalData]);
+	
+	if (!bLoadData && _festivalInfoArray == nil)
 	{
 		bLoadData = YES;
 	}
 	
 	if (bLoadData)
 	{
-		///< 更新本次统计时的日期
+		///< 更新本次数据加载时的日期
 		[FEFestivalAdaptor setLoadDataDate];
 		
 		NSDictionary* paramDict = [self readJSONDataFromFile];
@@ -78,11 +81,6 @@
 			self.shapeInfoArray = [FEJSONParameterAnalyzer parseShapeJSONData:paramDict];
 		}
 	}
-}
-
-- (BOOL)isNeedReloadFestivalData
-{
-	return [FEFestivalAdaptor isNeedReloadFestivalData];
 }
 
 #pragma mark - == 读取文件数据

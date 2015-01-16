@@ -35,8 +35,6 @@
 
 - (void)onChangeFrame;
 
-- (void)didThemeChange;
-
 - (void)show3DAnimation;
 
 @end

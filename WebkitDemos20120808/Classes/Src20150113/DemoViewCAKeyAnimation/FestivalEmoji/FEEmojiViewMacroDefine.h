@@ -18,7 +18,7 @@
 
 
 ///< for test
-//#define _Enable_Hardcode_keyword
+#define _Enable_Hardcode_keyword
 
 #ifdef _Enable_Hardcode_keyword
 ///< 服务器下发的节日命令动画类型
@@ -52,5 +52,14 @@ typedef NS_ENUM(NSInteger, FEServerCmdType)
 #define kKeyJSONFestivalType                     @"festivalType"
 #define kKeyJSONSearchHotWords                   @"searchHotWords"
 #define kKeyJSONWord                             @"word"
+
+#define kKeyJSONYear                             @"year"
+#define kKeyJSONMonth                            @"month"
+#define kKeyJSONDay                              @"day"
+#define kKeyJSONDays                             @"days"
+
+#define kKeyJSONEmojiChar                        @"emojiChar"
+#define kKeyJSONFontSize                         @"fontSize"
+#define kKeyJSONRepeat                           @"repeat"
 
 

@@ -231,11 +231,11 @@
 			break;
 		}
 		
-		NSString* year = [self getNSStringFromDiction:recordDict withKey:@"year"];
-		NSString* month = [self getNSStringFromDiction:recordDict withKey:@"month"];
-		NSString* day = [self getNSStringFromDiction:recordDict withKey:@"day"];
+		NSString* year = [self getNSStringFromDiction:recordDict withKey:kKeyJSONYear];
+		NSString* month = [self getNSStringFromDiction:recordDict withKey:kKeyJSONMonth];
+		NSString* day = [self getNSStringFromDiction:recordDict withKey:kKeyJSONDay];
 		
-		NSString* value = [self getNSStringFromDiction:recordDict withKey:@"days"];
+		NSString* value = [self getNSStringFromDiction:recordDict withKey:kKeyJSONDays];
 		
 		int days = [value intValue];
 		if (days < 1)
@@ -243,19 +243,19 @@
 			break;
 		}
 		
-		if (![FEFestivalAdaptor isValidDate:year m:month d:day days:days])
+		if (![FEFestivalAdaptor isValidFestivalDate:year m:month d:day days:days])
 		{
 			break;
 		}
 		
 		///< 找到节日动画图形后，提取相关参数，数据异常时终止
-		NSString* emojiChar = [self getNSStringFromDiction:recordDict withKey:@"emojiChar"];
+		NSString* emojiChar = [self getNSStringFromDiction:recordDict withKey:kKeyJSONEmojiChar];
 		if ([emojiChar length] < 1)
 		{
 			break;
 		}
 		
-		value = [self getNSStringFromDiction:recordDict withKey:@"fontSize"];
+		value = [self getNSStringFromDiction:recordDict withKey:kKeyJSONFontSize];
 		if ([value length] < 1)
 		{
 			break;
@@ -275,7 +275,7 @@
 			break;
 		}
 		
-		value = [self getNSStringFromDiction:recordDict withKey:@"repeat"];
+		value = [self getNSStringFromDiction:recordDict withKey:kKeyJSONRepeat];
 		if ([value length] < 1)
 		{
 			break;
@@ -320,7 +320,7 @@
 			continue;
 		}
 		
-		NSString* word = [self getNSStringFromDiction:itemDict withKey:@"word"];
+		NSString* word = [self getNSStringFromDiction:itemDict withKey:kKeyJSONWord];
 		if ([word length] < 1)
 		{
 			continue;

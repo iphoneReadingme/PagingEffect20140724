@@ -21,14 +21,13 @@
 #import "NSMutableArray+ExceptionSafe.h"
 
 
-
 #define kkeyTimes                             1
 
 #define kkeyShowEmojiViewTime                 0.6f*kkeyTimes
 #define kkeyHiddenEmojiViewTime               0.8f*kkeyTimes
 
 ///< 隐藏表情图标时，各个表情图标消失时最大时间间隔
-#define kKeyOffsetTime                        0.3f
+#define kKeyOffsetTime                        0.3f*kkeyTimes
 
 ///< 0.5f 之后隐藏
 #define kkeyWaitTimeBeforeHidden              0.8f
@@ -52,6 +51,7 @@
 {
     if (self = [super initWithFrame:frame])
 	{
+		self.hidden = YES;
 		self.backgroundColor = [UIColor clearColor];
 		self.parameterInfo = parameterInfo;
 		
@@ -67,6 +67,7 @@
 	_delegate = nil;
 	
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hiddenFestivalEmojiView) object:nil];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayShow3DAnimation) object:nil];
 	
 	[_emojiContentView release];
 	_emojiContentView = nil;
@@ -174,6 +175,14 @@
 
 - (void)show3DAnimation
 {
+	///< 目前会影响页面的刷新
+	[self performSelector:@selector(delayShow3DAnimation) withObject:nil afterDelay:0.3f];
+}
+
+- (void)delayShow3DAnimation
+{
+	self.hidden = NO;
+	
 	[self executeShow3DAnimation:_emojiContentView with:kkeyShowEmojiViewTime];
 }
 
@@ -339,47 +348,28 @@
 		if ([subLabel isKindOfClass:[FEEmojiLabel class]])
 		{
 			float r = 0.1f * kKeyOffsetTime * (rand() % 10);
-			[subLabel executeHiddenAnimation:duration+r];
+			[subLabel executeHiddenAnimation:duration + r];
 		}
 	}
 }
 
 - (CAKeyframeAnimation*)buildSizeScaleInAnimation2:(NSTimeInterval)duration
 {
-	NSValue* value = nil;
 	CGFloat fScale = 1.0f;
 	
 	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:5];
 	
-	CATransform3D defTransform = CATransform3DIdentity;
-	CATransform3D tempTransform = defTransform;
-	
 	// 1.0f
 	fScale = 1.0f;
-	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
-	value = [NSValue valueWithCATransform3D:tempTransform];
-	if (value)
-	{
-		[animationValues safe_AddObject:value];
-	}
+	[self addTransformWith:fScale with:animationValues];
 	
 	// 放大 1.2f
 	fScale = 1.2f;
-	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
-	value = [NSValue valueWithCATransform3D:tempTransform];
-	if (value)
-	{
-		[animationValues safe_AddObject:value];
-	}
+	[self addTransformWith:fScale with:animationValues];
 	
 	// 缩小到 0.2
 	fScale = 0.01f;
-	tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
-	value = [NSValue valueWithCATransform3D:tempTransform];
-	if (value)
-	{
-		[animationValues safe_AddObject:value];
-	}
+	[self addTransformWith:fScale with:animationValues];
 	
 	// 创建关键帧动画
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];

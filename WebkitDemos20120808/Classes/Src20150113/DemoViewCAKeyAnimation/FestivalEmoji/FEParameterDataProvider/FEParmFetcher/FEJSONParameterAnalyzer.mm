@@ -199,7 +199,7 @@
 		
 		if ([pArray count])
 		{
-			festivalInfoArray = [pArray retain];
+			festivalInfoArray = pArray;
 		}
 		
 	}while (0);

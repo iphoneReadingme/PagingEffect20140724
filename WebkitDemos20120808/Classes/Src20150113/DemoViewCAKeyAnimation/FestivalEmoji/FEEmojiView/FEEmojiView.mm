@@ -254,7 +254,10 @@
 	alphaAnimate.keyPath = @"opacity";
 	alphaAnimate.duration = duration;
 	alphaAnimate.delegate = self;
-	alphaAnimate.values = @[[NSNumber numberWithFloat:0.0f],
+	
+	///< 从 0.0f --> 1.0f(全透明-->不透明)
+	alphaAnimate.values = @[
+							[NSNumber numberWithFloat:0.0f],
 							[NSNumber numberWithFloat:1.0f]
 							];
 	
@@ -272,11 +275,14 @@
 	animation.keyPath = @"transform";
 	animation.duration = duration;
 	animation.delegate = self;
-	animation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)],
-							[NSValue valueWithCATransform3D:CATransform3DMakeScale( 1.1f, 1.1f, 1.0)],
-							[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.96f, 0.96f, 1.0)],
-							[NSValue valueWithCATransform3D:CATransform3DMakeScale( 1.0f, 1.0f, 1.0)]
-							];
+	
+	///< 缩小到 0.8 --> 放大 1.1f --> 缩小到 0.96 --> 恢复到 1.0f
+	animation.values = @[
+						 [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)],
+						 [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0)],
+						 [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.96f, 0.96f, 1.0)],
+						 [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0f, 1.0f, 1.0)]
+						 ];
 	
 	animation.timingFunctions = @[
 								  [CAMediaTimingFunction functionWithControlPoints:0.29 :0.00 :0.15 :1.00],
@@ -312,28 +318,18 @@
 
 - (CAKeyframeAnimation*)buildSizeScaleInAnimation2:(NSTimeInterval)duration
 {
-	CGFloat fScale = 1.0f;
-	
-	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:5];
-	
-	// 1.0f
-	fScale = 1.0f;
-	[self addTransformWith:fScale with:animationValues];
-	
-	// 放大 1.2f
-	fScale = 1.2f;
-	[self addTransformWith:fScale with:animationValues];
-	
-	// 缩小到 0.2
-	fScale = 0.01f;
-	[self addTransformWith:fScale with:animationValues];
-	
 	// 创建关键帧动画
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
 	animation.keyPath = @"transform";
 	animation.duration = duration;
 	animation.delegate = self;
-	animation.values = animationValues;
+	
+	///< 1.0f --> 放大 1.2f --> 缩小到 0.2
+	animation.values = @[
+						 [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0f, 1.0f, 1.0)],
+						 [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2f, 1.2f, 1.0)],
+						 [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.2, 0.2, 1.0)]
+						 ];
 	
 	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
 	
@@ -346,29 +342,16 @@
 ///< 没有实际的效果
 - (CAKeyframeAnimation*)buildNothingAnimation:(NSTimeInterval)duration
 {
-	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:2];
-	NSValue* value = nil;
-	
-	///< 不透明 1
-	value = [NSNumber numberWithFloat:1.0f];
-	if (value)
-	{
-		[animationValues safe_AddObject:value];
-	}
-	
-	///< 不透明 1
-	value = [NSNumber numberWithFloat:1.0f];
-	if (value)
-	{
-		[animationValues safe_AddObject:value];
-	}
-	
 	// 创建关键帧动画
 	CAKeyframeAnimation *alphaAnimate = [CAKeyframeAnimation animation];
 	alphaAnimate.keyPath = kAnimationKeyHiddenView;
 	alphaAnimate.duration = duration;
 	alphaAnimate.delegate = self;
-	alphaAnimate.values = animationValues;
+	
+	alphaAnimate.values = @[
+							[NSNumber numberWithFloat:1.0f],
+							[NSNumber numberWithFloat:1.0f]
+							];
 	
 	alphaAnimate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
 	

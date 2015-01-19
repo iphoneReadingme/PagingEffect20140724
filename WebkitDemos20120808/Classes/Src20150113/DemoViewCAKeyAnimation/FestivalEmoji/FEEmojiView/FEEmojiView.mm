@@ -249,29 +249,14 @@
 
 - (CAKeyframeAnimation *)buildAlphaAnimate:(NSTimeInterval)duration
 {
-	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:2];
-	NSValue* value = nil;
-	
-	///< 全透明 0
-	value = [NSNumber numberWithFloat:0.0f];
-	if (value)
-	{
-		[animationValues safe_AddObject:value];
-	}
-	
-	///< 不透明 1
-	value = [NSNumber numberWithFloat:1.0f];
-	if (value)
-	{
-		[animationValues safe_AddObject:value];
-	}
-	
 	// 创建关键帧动画
 	CAKeyframeAnimation *alphaAnimate = [CAKeyframeAnimation animation];
 	alphaAnimate.keyPath = @"opacity";
 	alphaAnimate.duration = duration;
 	alphaAnimate.delegate = self;
-	alphaAnimate.values = animationValues;
+	alphaAnimate.values = @[[NSNumber numberWithFloat:0.0f],
+							[NSNumber numberWithFloat:1.0f]
+							];
 	
 	alphaAnimate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
 	
@@ -280,46 +265,18 @@
 	return alphaAnimate;
 }
 
-- (void)addTransformWith:(CGFloat)fScale with:(NSMutableArray*)animationValues
-{
-	NSValue* value = nil;
-	CATransform3D defTransform = CATransform3DIdentity;
-	CATransform3D tempTransform = CATransform3DScale(defTransform, fScale, fScale, 1.0);
-	value = [NSValue valueWithCATransform3D:tempTransform];
-	if (value)
-	{
-		[animationValues safe_AddObject:value];
-	}
-}
-
 - (CAKeyframeAnimation*)buildSizeScaleAnimation:(NSTimeInterval)duration
 {
-	CGFloat fScale = 1.0f;
-	
-	NSMutableArray *animationValues = [NSMutableArray arrayWithCapacity:5];
-	
-	// 缩小到 0.8
-	fScale = 0.8;
-	[self addTransformWith:fScale with:animationValues];
-	
-	// 放大 1.1f
-	fScale = 1.1f;
-	[self addTransformWith:fScale with:animationValues];
-	
-	// 缩小到 0.96
-	fScale = 0.96f;
-	[self addTransformWith:fScale with:animationValues];
-	
-	// 恢复到 1.0f
-	fScale = 1.0f;
-	[self addTransformWith:fScale with:animationValues];
-	
 	// 创建关键帧动画
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
 	animation.keyPath = @"transform";
 	animation.duration = duration;
 	animation.delegate = self;
-	animation.values = animationValues;
+	animation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)],
+							[NSValue valueWithCATransform3D:CATransform3DMakeScale( 1.1f, 1.1f, 1.0)],
+							[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.96f, 0.96f, 1.0)],
+							[NSValue valueWithCATransform3D:CATransform3DMakeScale( 1.0f, 1.0f, 1.0)]
+							];
 	
 	animation.timingFunctions = @[
 								  [CAMediaTimingFunction functionWithControlPoints:0.29 :0.00 :0.15 :1.00],

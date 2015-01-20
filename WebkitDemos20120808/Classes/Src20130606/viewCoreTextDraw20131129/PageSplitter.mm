@@ -261,6 +261,100 @@
 	CFRelease(line);
 }
 
+
+///< [self drawLineOfTextLine:context withRect:columnFrame withFrame:pageFrame with:bLastPage];
+- (void)drawLineOfTextLine:(CGContextRef)context withRect:(CGRect)columnFrame withFrame:(CTFrameRef)pageFrame with:(BOOL)bLastPage
+{
+	///< 当前页面排版矩形
+	[self drawRect:context with:columnFrame];
+	//return;
+	// 每行文字绘制下边缘线, 查看文字绘制是否正常
+	// Drawing lines with a white stroke color
+	CGContextSetRGBStrokeColor(context, 1.0, 0, 0, 1.0);
+	// Draw them with a 2.0 stroke width so they are a bit more visible.
+	CGContextSetLineWidth(context, 1.0);
+	
+	// Restore the previous drawing state, and save it again.
+	CGContextSaveGState(context);
+	
+	CGFloat x = 0;
+	CGFloat y = columnFrame.origin.y;
+	//计算这一栏，有几行文字。
+	NSArray *lines = (NSArray*)CTFrameGetLines(pageFrame);
+	CGPoint lineOrigins[kMaxLineOfFrame];
+	
+	if ([lines count] >= kMaxLineOfFrame)
+	{
+		return;
+	}
+	
+	CTFrameGetLineOrigins(pageFrame, CFRangeMake(0, 0), lineOrigins);
+	
+	int i = 0;
+	CGRect aBounsRect[kMaxLineOfFrame];
+	CGRect imageBounsRect[kMaxLineOfFrame];
+	CGRect rectTest;
+	
+	for (id lineObj in lines)
+	{
+		CTLineRef line = (CTLineRef)lineObj;
+		aBounsRect[i]= CTLineGetBoundsWithOptions(line, kCTLineBoundsUseGlyphPathBounds);
+		imageBounsRect[i] = CTLineGetImageBounds(line, context);///< 但是在iOS(iPhone/iPad)上这个函数的结果略有不同。
+		i++;
+	}
+	
+	//CGPoint linePtOrigins[kMaxLineOfFrame];
+	//	BOOL bRet = [self getLineNewOrigins:context frame:pageFrame withRect:columnFrame withOut:linePtOrigins with:bLastPage];
+	
+	NSString* frameShowText = [PageSplitRender getShowTextOfChapter:self.chapterTextContent withChapterName:self.chapterName andLayoutConfig:self.layoutConfig];
+	//查看每一行文字的起始位置，和包含几个文字。并提取某行文字内容
+	i = 0;
+	for (id lineObj in lines)
+	{
+		CTLineRef line = (CTLineRef)lineObj;
+		
+		CFRange singleRange=CTLineGetStringRange(line);
+		NSRange range = NSMakeRange(singleRange.location, singleRange.length);
+		range.length = singleRange.length;
+		//取得單行文字的起始位置，和包含幾個文字。
+		//NSLog(@"lineNumber[%d], %ld,%ld", i, singleRange.location, singleRange.length);
+		NSString* lineText = nil;
+		if (range.location >= [frameShowText length] || range.location + range.length > [frameShowText length])
+		{
+			assert(0);
+		}
+		
+		lineText = [frameShowText substringWithRange:range];
+		NSLog(@"lineNumber[%d], %ld,%ld, %@", i, singleRange.location, singleRange.length, lineText);
+		
+		CGRect lineRect = aBounsRect[i];
+		lineRect.origin.x = lineOrigins[i].x + aBounsRect[i].origin.x + columnFrame.origin.x;
+		lineRect.origin.y = lineOrigins[i].y + aBounsRect[i].origin.y + columnFrame.origin.y;
+		
+		NSLog(@"CTLine :%@", NSStringFromCGRect(lineRect));
+		
+		rectTest = lineRect;
+		///< 本行的文字矩形
+		[self drawRect:context with:rectTest];
+		
+		CGContextSetRGBStrokeColor(context, 1.0, 0, 0, 1.0);
+		
+		///< 行号
+		x = columnFrame.origin.x;
+		y = lineRect.origin.y;
+		NSString* text = [NSString stringWithFormat:@"%d,(%.1f, %.1f)", i, x, y];
+		[self drawString:context withText:text with:CGPointMake(x, y)];
+		
+		CGContextStrokePath(context);
+		
+		i++;
+	}
+	
+	// Restore the previous drawing state, and save it again.
+	CGContextSaveGState(context);
+	
+}
+
 @end
 
 

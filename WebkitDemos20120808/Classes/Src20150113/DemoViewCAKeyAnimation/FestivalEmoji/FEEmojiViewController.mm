@@ -51,6 +51,30 @@
 {
 	if (self = [super init])
 	{
+//#define _DEBUG
+#ifdef _DEBUG
+		NSString *smiley = @"😄";
+		NSData *data = [smiley dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
+		uint32_t unicode;
+		[data getBytes:&unicode length:sizeof(unicode)];
+		NSLog(@"%x", unicode);
+		// Output: 1f604
+		
+		unicode = 0x1f604;
+		
+		smiley = [[NSString alloc] initWithBytes:&unicode length:sizeof(unicode) encoding:NSUTF32LittleEndianStringEncoding];
+		NSLog(@"%@", smiley);
+		// Output: 😄
+		
+		NSString *uniText = @"💘🏮😘🌟😍😄";
+		NSDictionary* jsonDict = @{@"title":uniText};
+		NSLog(@"jsonDict: %@", jsonDict);
+		
+		uint32_t buffer[10] = {0};
+		data = [uniText dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
+		[data getBytes:buffer length:sizeof(buffer)];
+#endif
+		
 		_bNeedsShowEmojiView = NO;
 //		connectGlobalEvent(@selector(willAnimateRotationToInterfaceOrientation:duration:), self, @selector(willAnimateRotationToInterfaceOrientation:duration:));
 	}

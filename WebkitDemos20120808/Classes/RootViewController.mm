@@ -193,6 +193,10 @@
 	
 	NSMutableArray *webkitList = [NSMutableArray array];
 	
+	
+	///< 2015-03-11 读写电话号码 demo
+	[webkitList addObject:[DemoIphoneNumberController class]];
+	
 	///< 2015-01-13 关键帧动画测试demo
 	[webkitList addObject:[DemoViewCAKeyAnimationController class]];
 	

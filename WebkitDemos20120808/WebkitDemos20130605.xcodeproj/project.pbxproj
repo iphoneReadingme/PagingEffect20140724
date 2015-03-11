@@ -61,17 +61,20 @@
 		5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */; };
 		5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703F187C0154003D3810 /* DeviceDiskConsumeStatusView.mm */; };
 		5B5AE36615D38FBC0078F293 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5AE36515D38FBC0078F293 /* AddressBook.framework */; };
-		5B5AE36815D38FE10078F293 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5AE36715D38FE10078F293 /* libz.1.dylib */; };
+		5B5D2DFB1AB067DB0073CF69 /* DemoIphoneNumberController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D2DF61AB067DB0073CF69 /* DemoIphoneNumberController.mm */; };
+		5B5D2DFC1AB067DB0073CF69 /* DemoIphoneNumberView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D2DF81AB067DB0073CF69 /* DemoIphoneNumberView.mm */; };
+		5B5D2DFF1AB0692E0073CF69 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5D2DFE1AB0692E0073CF69 /* AddressBookUI.framework */; };
+		5B5D2E011AB06BFB0073CF69 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5D2E001AB06BFB0073CF69 /* MessageUI.framework */; };
+		5B5D2E041AB073360073CF69 /* DemoIphoneNumberHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D2E031AB073360073CF69 /* DemoIphoneNumberHelper.mm */; };
 		5B6BD71014E3C076006E091C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD70F14E3C076006E091C /* CFNetwork.framework */; };
 		5B6BD71214E3C076006E091C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD71114E3C076006E091C /* QuartzCore.framework */; };
 		5B6BD71414E3C076006E091C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD71314E3C076006E091C /* SystemConfiguration.framework */; };
 		5B6BD73114E3C10A006E091C /* UCJavaScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 5B6BD72D14E3C0F7006E091C /* UCJavaScript.js */; };
-		5B6BD73614E3C156006E091C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD73514E3C156006E091C /* AudioToolbox.framework */; };
-		5B6BD73814E3C156006E091C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD73714E3C156006E091C /* AVFoundation.framework */; };
+		5B6CC73F1AB088CF00B017D4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6CC73D1AB088CF00B017D4 /* AudioToolbox.framework */; };
+		5B6CC7401AB088CF00B017D4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6CC73E1AB088CF00B017D4 /* AVFoundation.framework */; };
 		5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD961585E97A0091755F /* RootViewController.mm */; };
 		5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */; };
 		5BD359C015785871002FE41F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD359BF15785871002FE41F /* MapKit.framework */; };
-		5BD5E19E157DAADA0016CBB8 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD5E19D157DAADA0016CBB8 /* libxml2.dylib */; };
 		5BE109C81774072200045347 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 5BE109C71774072200045347 /* res */; };
 		5BE834F517603B0700532011 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BE834F417603B0700532011 /* Default-568h@2x.png */; };
 		5BE835051760406300532011 /* DemoViewCALayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BE835011760406300532011 /* DemoViewCALayer.mm */; };
@@ -186,18 +189,24 @@
 		5B42703E187C0154003D3810 /* DeviceDiskConsumeStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDiskConsumeStatusView.h; sourceTree = "<group>"; };
 		5B42703F187C0154003D3810 /* DeviceDiskConsumeStatusView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceDiskConsumeStatusView.mm; sourceTree = "<group>"; };
 		5B5AE36515D38FBC0078F293 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		5B5AE36715D38FE10078F293 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
+		5B5D2DF51AB067DB0073CF69 /* DemoIphoneNumberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberController.h; sourceTree = "<group>"; };
+		5B5D2DF61AB067DB0073CF69 /* DemoIphoneNumberController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberController.mm; sourceTree = "<group>"; };
+		5B5D2DF71AB067DB0073CF69 /* DemoIphoneNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberView.h; sourceTree = "<group>"; };
+		5B5D2DF81AB067DB0073CF69 /* DemoIphoneNumberView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberView.mm; sourceTree = "<group>"; };
+		5B5D2DFE1AB0692E0073CF69 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/AddressBookUI.framework; sourceTree = DEVELOPER_DIR; };
+		5B5D2E001AB06BFB0073CF69 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		5B5D2E021AB073360073CF69 /* DemoIphoneNumberHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberHelper.h; sourceTree = "<group>"; };
+		5B5D2E031AB073360073CF69 /* DemoIphoneNumberHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberHelper.mm; sourceTree = "<group>"; };
 		5B6BD70F14E3C076006E091C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5B6BD71114E3C076006E091C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5B6BD71314E3C076006E091C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5B6BD72D14E3C0F7006E091C /* UCJavaScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = UCJavaScript.js; sourceTree = "<group>"; };
-		5B6BD73514E3C156006E091C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		5B6BD73714E3C156006E091C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5B6CC73D1AB088CF00B017D4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		5B6CC73E1AB088CF00B017D4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		5B86CBF115D3873F005D96B6 /* DemoIncludeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIncludeHeaders.h; sourceTree = "<group>"; };
 		5BCFCD961585E97A0091755F /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
 		5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebkitDemosAppDelegate.mm; sourceTree = "<group>"; };
 		5BD359BF15785871002FE41F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		5BD5E19D157DAADA0016CBB8 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		5BDC308115EF454500B7BA8C /* DemoIncludeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIncludeHeaders.h; sourceTree = "<group>"; };
 		5BE109C71774072200045347 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		5BE834F417603B0700532011 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -216,18 +225,18 @@
 			files = (
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				5B38700B17CF40250076514D /* CoreData.framework in Frameworks */,
+				5B5D2E011AB06BFB0073CF69 /* MessageUI.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				5B1837B41848694A00E22AF4 /* CoreText.framework in Frameworks */,
+				5B6CC73F1AB088CF00B017D4 /* AudioToolbox.framework in Frameworks */,
+				5B5D2DFF1AB0692E0073CF69 /* AddressBookUI.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				5B6BD71014E3C076006E091C /* CFNetwork.framework in Frameworks */,
 				5B6BD71214E3C076006E091C /* QuartzCore.framework in Frameworks */,
 				5B6BD71414E3C076006E091C /* SystemConfiguration.framework in Frameworks */,
-				5B6BD73614E3C156006E091C /* AudioToolbox.framework in Frameworks */,
-				5B6BD73814E3C156006E091C /* AVFoundation.framework in Frameworks */,
 				5BD359C015785871002FE41F /* MapKit.framework in Frameworks */,
-				5BD5E19E157DAADA0016CBB8 /* libxml2.dylib in Frameworks */,
+				5B6CC7401AB088CF00B017D4 /* AVFoundation.framework in Frameworks */,
 				5B5AE36615D38FBC0078F293 /* AddressBook.framework in Frameworks */,
-				5B5AE36815D38FE10078F293 /* libz.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,11 +305,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B6CC73D1AB088CF00B017D4 /* AudioToolbox.framework */,
+				5B6CC73E1AB088CF00B017D4 /* AVFoundation.framework */,
+				5B5D2E001AB06BFB0073CF69 /* MessageUI.framework */,
+				5B5D2DFE1AB0692E0073CF69 /* AddressBookUI.framework */,
 				5B1837B31848694A00E22AF4 /* CoreText.framework */,
 				5B38700A17CF40250076514D /* CoreData.framework */,
 				5B5AE36515D38FBC0078F293 /* AddressBook.framework */,
-				5BD5E19D157DAADA0016CBB8 /* libxml2.dylib */,
-				5B5AE36715D38FE10078F293 /* libz.1.dylib */,
 				5BD359BF15785871002FE41F /* MapKit.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -308,8 +319,6 @@
 				5B6BD70F14E3C076006E091C /* CFNetwork.framework */,
 				5B6BD71114E3C076006E091C /* QuartzCore.framework */,
 				5B6BD71314E3C076006E091C /* SystemConfiguration.framework */,
-				5B6BD73514E3C156006E091C /* AudioToolbox.framework */,
-				5B6BD73714E3C156006E091C /* AVFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -412,6 +421,7 @@
 		5B37C0621A64EC00003FE853 /* Src20150113 */ = {
 			isa = PBXGroup;
 			children = (
+				5B5D2DF31AB067DB0073CF69 /* ABAddressBook */,
 				5B37C5301A650804003FE853 /* UCWeb */,
 				5B37C0631A64EC00003FE853 /* DemoViewCAKeyAnimation */,
 			);
@@ -544,6 +554,27 @@
 			path = DemoUIDeviceVIewController20140107;
 			sourceTree = "<group>";
 		};
+		5B5D2DF31AB067DB0073CF69 /* ABAddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				5B5D2DF41AB067DB0073CF69 /* DemoIphoneNumber */,
+			);
+			path = ABAddressBook;
+			sourceTree = "<group>";
+		};
+		5B5D2DF41AB067DB0073CF69 /* DemoIphoneNumber */ = {
+			isa = PBXGroup;
+			children = (
+				5B5D2DF51AB067DB0073CF69 /* DemoIphoneNumberController.h */,
+				5B5D2DF61AB067DB0073CF69 /* DemoIphoneNumberController.mm */,
+				5B5D2DF71AB067DB0073CF69 /* DemoIphoneNumberView.h */,
+				5B5D2DF81AB067DB0073CF69 /* DemoIphoneNumberView.mm */,
+				5B5D2E021AB073360073CF69 /* DemoIphoneNumberHelper.h */,
+				5B5D2E031AB073360073CF69 /* DemoIphoneNumberHelper.mm */,
+			);
+			path = DemoIphoneNumber;
+			sourceTree = "<group>";
+		};
 		5BE834F61760402E00532011 /* Src20130606 */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,10 +695,12 @@
 				5B37C8311A650805003FE853 /* NSDictionary+ExceptionSafe.mm in Sources */,
 				5B37CB2F1A667BFD003FE853 /* FEEmojiLabel.mm in Sources */,
 				5B37C8301A650805003FE853 /* NSArray+ExceptionSafe.mm in Sources */,
+				5B5D2E041AB073360073CF69 /* DemoIphoneNumberHelper.mm in Sources */,
 				5B195F3B199A4BAB009562C3 /* CommonToolBarView.mm in Sources */,
 				5B195F38199A4BAB009562C3 /* iUIAppFrame.mm in Sources */,
 				5B195F3C199A4BAB009562C3 /* InterfaceToolBarView.mm in Sources */,
 				5B195F39199A4BAB009562C3 /* MainFrameView.mm in Sources */,
+				5B5D2DFB1AB067DB0073CF69 /* DemoIphoneNumberController.mm in Sources */,
 				5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */,
 				5B37C0691A64EC00003FE853 /* DemoViewCAKeyAnimationController.mm in Sources */,
 				5B37C8331A650806003FE853 /* NSMutableArray+ExceptionSafe.mm in Sources */,
@@ -688,6 +721,7 @@
 				5B37C8351A650806003FE853 /* NSMutableString+ExceptionSafe.m in Sources */,
 				5B04785F184EBDDA007D4A10 /* BookLayoutConfig.mm in Sources */,
 				5B37C0CC1A64F17E003FE853 /* FEEmojiViewController.mm in Sources */,
+				5B5D2DFC1AB067DB0073CF69 /* DemoIphoneNumberView.mm in Sources */,
 				5B37CC811A67F38C003FE853 /* NSDateUtility.m in Sources */,
 				5B37C8321A650806003FE853 /* NSHTTPCookieStorage+ExceptionSafe.m in Sources */,
 				5B37CC7A1A67EA88003FE853 /* FEFestivalAdaptor.mm in Sources */,
@@ -702,10 +736,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -716,14 +753,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\"$(SRCROOT)/Library\"",
-					"$(PROJECT_DIR)/Classes/Src20150113/UCWeb/UCFoundations/UCFoundations/3rdParty/LevelDb/leveldbLib",
-					"$(PROJECT_DIR)/Classes/Src20150113/UCWeb/UCWeb/UCFoundations/UCFoundations/3rdParty/LevelDb/leveldbLib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = WebkitDemos;
-				PROVISIONING_PROFILE = "c08d218c-5ef6-49e1-a7a4-d76964656db2";
+				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
 				SYMROOT = /Users/yangfs/Desktop/E/Src20120215/Dev20120215/BaiduInput20120808/WebkitDemos20120808_OK/build;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
@@ -734,10 +768,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WebkitDemos_Prefix.pch;
 				GCC_VERSION = "";
@@ -746,14 +783,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\"$(SRCROOT)/Library\"",
-					"$(PROJECT_DIR)/Classes/Src20150113/UCWeb/UCFoundations/UCFoundations/3rdParty/LevelDb/leveldbLib",
-					"$(PROJECT_DIR)/Classes/Src20150113/UCWeb/UCWeb/UCFoundations/UCFoundations/3rdParty/LevelDb/leveldbLib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = WebkitDemos;
-				PROVISIONING_PROFILE = "c08d218c-5ef6-49e1-a7a4-d76964656db2";
+				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
 				SYMROOT = /Users/yangfs/Desktop/E/Src20120215/Dev20120215/BaiduInput20120808/WebkitDemos20120808_OK/build;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -780,6 +814,7 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -803,6 +838,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

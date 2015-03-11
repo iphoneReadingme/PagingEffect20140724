@@ -89,7 +89,9 @@
 
 - (NSString*)getPageContentText:(int)pageIndex
 {
-	NSMutableString *pageContent = [NSMutableString stringWithFormat:@"   当前页面\n 第[%d]页\n\n是否触发手势(上下拉事件控制)是否触发手势(上下拉事件控制)是否触发手势(上下拉事件控制)是否触发手势(上下拉事件控制)是否触发手势(上下拉事件控制)", pageIndex+1];
+	NSString* message = @"月落乌啼霜[U+1版本352]满天，\n江枫渔火对[U+1F353]🍒愁眠；\n姑苏[U+[U+1f352]🍒城外寒山寺，\n夜半钟声到客船。\n当前版本过旧，可能会造成系统不稳定。建议立即[U+1F353]🍓升级。\n/Users/yangfs/Library/Developer/CoreSimulator/Devices/2B9D9536-908B-46E7-9D1F-75065EF6372D/data/Containers/Bundle/Application/E6360C6C-F95F-4CD6-80A5-0ABD3702F76B/UCWEB.app";
+	
+	NSMutableString *pageContent = [NSMutableString stringWithFormat:@"   当前页面\n 第[%d]页\n\n是否触发手势(上下拉事件控制)是否触发手势(上下拉事件控制)是否触发手势(上下拉事件控制)是否触发手势(上下拉事件控制)是否触发手势(上下拉事件控制)%@", pageIndex+1, message];
     for(int i=0;i<100;i++)
     {
         [pageContent appendFormat:@"%d", pageIndex+1];

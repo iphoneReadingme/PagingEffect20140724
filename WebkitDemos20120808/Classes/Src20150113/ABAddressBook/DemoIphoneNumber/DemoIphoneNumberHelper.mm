@@ -169,8 +169,12 @@ NSString* g_pPersonNumber[][2] =
 #pragma mark 子视图对象
 + (ABAddressBookRef)getAddressBook
 {
-	ABAddressBookRef addressBook = nil;
+	static ABAddressBookRef addressBook = nil;
 	
+	if (addressBook)
+	{
+		return addressBook;
+	}
 	// 如果为iOS6以上系统，需要等待用户确认是否允许访问通讯录。
 	if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
 	{

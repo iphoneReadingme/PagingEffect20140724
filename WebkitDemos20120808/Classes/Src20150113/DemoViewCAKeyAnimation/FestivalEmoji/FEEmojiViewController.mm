@@ -55,6 +55,7 @@
 		[self handleDecodeEmojiCharsWith:message];
 		[self handleDecodeEmojiCharsWith:@"月落乌啼霜[U+1F352]满天"];
 		[self handleDecodeEmojiCharsWith:@"月落乌[U+1F352]啼霜[U+1F352]满天"];
+		[self handleDecodeEmojiCharsWith:@"月落乌[U+1版本352]啼霜[U+1F352]满天"];
 		[self handleDecodeEmojiCharsWith:@"月落乌啼霜[U+1满352]满天"];
 		[self handleDecodeEmojiCharsWith:@"月落乌啼霜[U+1A352]满天"];
 		[self handleDecodeEmojiCharsWith:@"江枫渔火对U+1F353愁眠"];

@@ -7,6 +7,10 @@ const NSString* kKeyPersonName = @"PersonName";
 const NSString* kKeyPersonFirst = @"PersonFirst";
 const NSString* kKeyPersonLast = @"PersonLast";
 const NSString* kKeyTelphone = @"telphone";
+const NSString* kKeyNote = @"note"; ///< 备注
+const NSString* kKeyCreationDate = @"CreationDate"; ///< 创建时间
+
+
 
 
 
@@ -14,7 +18,7 @@ NSString* g_pPersonNumber[][2] =
 {
 	// 2011-2-7
 	@"陈泓坤", @"13556101008",
-	@"陈老根", @"13057473461",
+	@"陈老根", @"18662528956",
 	@"陈勇生", @"13755491587",
 	@"陈能发", @"13697445769",
 	@"陈士彪", @"13688967176",
@@ -169,12 +173,12 @@ NSString* g_pPersonNumber[][2] =
 #pragma mark 子视图对象
 + (ABAddressBookRef)getAddressBook
 {
-	static ABAddressBookRef addressBook = nil;
+	ABAddressBookRef addressBook = nil;
 	
-	if (addressBook)
-	{
-		return addressBook;
-	}
+//	if (addressBook)
+//	{
+//		return addressBook;
+//	}
 	// 如果为iOS6以上系统，需要等待用户确认是否允许访问通讯录。
 	if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
 	{
@@ -202,6 +206,7 @@ NSString* g_pPersonNumber[][2] =
 	
 	if (addressBook)
 	{
+		CFErrorRef error;
 		CFArrayRef records = nil;
 		
 		// 获取通讯录中全部联系人
@@ -212,17 +217,19 @@ NSString* g_pPersonNumber[][2] =
 		{
 			ABRecordRef person = CFArrayGetValueAtIndex(records, i);
 			
-			CFErrorRef error;
-			BOOL success = ABAddressBookRemoveRecord(addressBook, person, &error);
+			BOOL success = (BOOL)ABAddressBookRemoveRecord(addressBook, person, &error);
 			if (success)
 			{
 				NSMutableDictionary* dict = [DemoIphoneNumberHelper getOnePersonInfo:person];
 				if (dict)
 				{
+#ifdef DEBUG
 					NSLog(@"%@, %@", [dict objectForKey:kKeyPersonName], [dict objectForKey:kKeyTelphone]);
+#endif
 				}
 			}
 		}
+		ABAddressBookSave(addressBook, &error);
 		
 		if (records)
 		{
@@ -234,41 +241,57 @@ NSString* g_pPersonNumber[][2] =
 
 + (void)addPersons
 {
+	ABAddressBookRef addressBook = [self getAddressBook];
+	
 	NSInteger i = 0;
 	while (g_pPersonNumber[i][0] != nil)
 	{
 		NSString* name = g_pPersonNumber[i][0];
 		NSString* phoneNumber = g_pPersonNumber[i][1];
-		NSString* text=  @"2015-03-11 添加";
-		[DemoIphoneNumberHelper addContactName:name phoneNum:phoneNumber withLabel:text];
+		NSString* iphoneLabel=  @"手机";
+		[DemoIphoneNumberHelper addContactName:name phoneNum:phoneNumber withLabel:iphoneLabel with:addressBook];
 		
 		i++;
+	}
+	
+	// 如果添加记录成功，保存更新到通讯录数据库中
+	CFErrorRef error;
+	ABAddressBookSave(addressBook, &error);
+	if (addressBook)
+	{
+		CFRelease(addressBook);//new
 	}
 }
 
 #pragma  mark 添加联系人
 // 添加联系人（联系人名称、号码、号码备注标签）
-+ (BOOL)addContactName:(NSString*)name phoneNum:(NSString*)num withLabel:(NSString*)label
++ (BOOL)addContactName:(NSString*)name phoneNum:(NSString*)phoneNum withLabel:(NSString*)label with:(ABAddressBookRef)addressBook
 {
 	// 创建一条空的联系人
-	ABRecordRef record = ABPersonCreate();
+	ABRecordRef personSecord = ABPersonCreate();
 	CFErrorRef error;
 	
 	// 设置联系人的名字
-	ABRecordSetValue(record, kABPersonFirstNameProperty, (__bridge CFTypeRef)name, &error);
+	ABRecordSetValue(personSecord, kABPersonFirstNameProperty, (__bridge CFTypeRef)name, &error);
 	
 	// 添加联系人电话号码以及该号码对应的标签名
 	ABMutableMultiValueRef multi = ABMultiValueCreateMutable(kABPersonPhoneProperty);
-	bool bAdd = ABMultiValueAddValueAndLabel(multi, (__bridge CFTypeRef)num, (__bridge CFStringRef)label, NULL);
+	bool bAdd = ABMultiValueAddValueAndLabel(multi, (__bridge CFTypeRef)phoneNum, (__bridge CFStringRef)label, NULL);
 	if (bAdd)
 	{
-		ABRecordSetValue(record, kABPersonPhoneProperty, multi, &error);
+		///< Generic phone number - kABMultiStringPropertyType
+		ABRecordSetValue(personSecord, kABPersonPhoneProperty, multi, &error);
+	}
+	if (multi)
+	{
+		CFRelease(multi);//new
 	}
 	
-	ABAddressBookRef addressBook = [self getAddressBook];
+	NSString* textNote=  @"2015-03-11 添加";
+	ABRecordSetValue(personSecord, kABPersonNoteProperty, (__bridge CFTypeRef)textNote, &error);
 	
 	// 将新建联系人记录添加入通讯录中
-	BOOL success = ABAddressBookAddRecord(addressBook, record, &error);
+	BOOL success = (BOOL)ABAddressBookAddRecord(addressBook, personSecord, &error);
 	if (!success)
 	{
 		return NO;
@@ -276,10 +299,15 @@ NSString* g_pPersonNumber[][2] =
 	else
 	{
 		// 如果添加记录成功，保存更新到通讯录数据库中
-		success = ABAddressBookSave(addressBook, &error);
+//		success = (BOOL)ABAddressBookSave(addressBook, &error);
 	}
 	
-	return success ? YES : NO;
+	if (personSecord)
+	{
+		CFRelease(personSecord);//new
+	}
+	
+	return success;
 }
 
 // =================================================================
@@ -351,6 +379,21 @@ NSString* g_pPersonNumber[][2] =
 	}
 	[personDict setObject:telphone forKey:kKeyTelphone];
 	CFRelease(tmlphone);
+	
+	//读取note备忘录
+	NSString *note = (NSString*)ABRecordCopyValue(recordPerson, kABPersonNoteProperty);
+	if(note != nil)
+	{
+		[personDict setObject:note forKey:kKeyNote];
+	}
+	//第一次添加该条记录的时间
+	NSString *firstknow = (NSString*)ABRecordCopyValue(recordPerson, kABPersonCreationDateProperty);
+	if(firstknow != nil)
+	{
+		//NSLog(@"第一次添加该条记录的时间%@\n",firstknow);
+		[personDict setObject:firstknow forKey:kKeyCreationDate];
+	}
+	//最后一次修改該条记录的时间
 	
 	if ([personDict count] < 1)
 	{

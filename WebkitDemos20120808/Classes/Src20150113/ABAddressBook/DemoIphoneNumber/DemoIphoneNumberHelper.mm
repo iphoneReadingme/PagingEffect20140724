@@ -242,23 +242,23 @@ NSString* g_pPersonNumber[][2] =
 + (void)addPersons
 {
 	ABAddressBookRef addressBook = [self getAddressBook];
-	
-	NSInteger i = 0;
-	while (g_pPersonNumber[i][0] != nil)
-	{
-		NSString* name = g_pPersonNumber[i][0];
-		NSString* phoneNumber = g_pPersonNumber[i][1];
-		NSString* iphoneLabel=  @"手机";
-		[DemoIphoneNumberHelper addContactName:name phoneNum:phoneNumber withLabel:iphoneLabel with:addressBook];
-		
-		i++;
-	}
-	
-	// 如果添加记录成功，保存更新到通讯录数据库中
-	CFErrorRef error;
-	ABAddressBookSave(addressBook, &error);
 	if (addressBook)
 	{
+		NSInteger i = 0;
+		while (g_pPersonNumber[i][0] != nil)
+		{
+			NSString* name = g_pPersonNumber[i][0];
+			NSString* phoneNumber = g_pPersonNumber[i][1];
+			NSString* iphoneLabel=  @"手机";
+			[DemoIphoneNumberHelper addContactName:name phoneNum:phoneNumber withLabel:iphoneLabel with:addressBook];
+			
+			i++;
+		}
+		
+		// 如果添加记录成功，保存更新到通讯录数据库中
+		CFErrorRef error;
+		ABAddressBookSave(addressBook, &error);
+		
 		CFRelease(addressBook);//new
 	}
 }
@@ -273,19 +273,7 @@ NSString* g_pPersonNumber[][2] =
 	
 	// 设置联系人的名字
 	ABRecordSetValue(personSecord, kABPersonFirstNameProperty, (__bridge CFTypeRef)name, &error);
-	
-	// 添加联系人电话号码以及该号码对应的标签名
-	ABMutableMultiValueRef multi = ABMultiValueCreateMutable(kABPersonPhoneProperty);
-	bool bAdd = ABMultiValueAddValueAndLabel(multi, (__bridge CFTypeRef)phoneNum, (__bridge CFStringRef)label, NULL);
-	if (bAdd)
-	{
-		///< Generic phone number - kABMultiStringPropertyType
-		ABRecordSetValue(personSecord, kABPersonPhoneProperty, multi, &error);
-	}
-	if (multi)
-	{
-		CFRelease(multi);//new
-	}
+	[DemoIphoneNumberHelper addValueAndLabel:personSecord value:phoneNum  withLabel:label with:kABPersonPhoneProperty];
 	
 	NSString* textNote=  @"2015-03-11 添加";
 	ABRecordSetValue(personSecord, kABPersonNoteProperty, (__bridge CFTypeRef)textNote, &error);
@@ -308,6 +296,25 @@ NSString* g_pPersonNumber[][2] =
 	}
 	
 	return success;
+}
+
+///< 多信息添加接口
++ (void)addValueAndLabel:(ABRecordRef)personSecord value:(NSString*)value withLabel:(NSString*)label with:(ABPropertyID)property
+{
+	// 添加联系人电话号码以及该号码对应的标签名
+	ABMutableMultiValueRef multi = ABMultiValueCreateMutable(property);
+	if (multi)
+	{
+		bool bAdd = ABMultiValueAddValueAndLabel(multi, (__bridge CFTypeRef)value, (__bridge CFStringRef)label, NULL);
+		if (bAdd)
+		{
+			CFErrorRef error;
+			///< Generic phone number - kABMultiStringPropertyType
+			ABRecordSetValue(personSecord, kABPersonPhoneProperty, multi, &error);
+		}
+		
+		CFRelease(multi);//new
+	}
 }
 
 // =================================================================

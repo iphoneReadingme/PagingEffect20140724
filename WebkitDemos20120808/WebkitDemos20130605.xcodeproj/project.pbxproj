@@ -60,6 +60,7 @@
 		5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */; };
 		5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */; };
 		5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703F187C0154003D3810 /* DeviceDiskConsumeStatusView.mm */; };
+		5B5AE36615D38FBC0078F293 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5AE36515D38FBC0078F293 /* AddressBook.framework */; };
 		5B5AE36815D38FE10078F293 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5AE36715D38FE10078F293 /* libz.1.dylib */; };
 		5B6BD71014E3C076006E091C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD70F14E3C076006E091C /* CFNetwork.framework */; };
 		5B6BD71214E3C076006E091C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD71114E3C076006E091C /* QuartzCore.framework */; };
@@ -67,12 +68,9 @@
 		5B6BD73114E3C10A006E091C /* UCJavaScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 5B6BD72D14E3C0F7006E091C /* UCJavaScript.js */; };
 		5B6BD73614E3C156006E091C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD73514E3C156006E091C /* AudioToolbox.framework */; };
 		5B6BD73814E3C156006E091C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD73714E3C156006E091C /* AVFoundation.framework */; };
-		5B78B3251AB105A60099686E /* DemoIphoneNumberController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B31E1AB105A50099686E /* DemoIphoneNumberController.mm */; };
-		5B78B3261AB105A60099686E /* DemoIphoneNumberHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B3201AB105A50099686E /* DemoIphoneNumberHelper.mm */; };
-		5B78B3271AB105A60099686E /* DemoIphoneNumberView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B3221AB105A60099686E /* DemoIphoneNumberView.mm */; };
-		5B78B3301AB1091C0099686E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B78B32D1AB1091C0099686E /* AddressBook.framework */; };
-		5B78B3311AB1091C0099686E /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B78B32E1AB1091C0099686E /* AddressBookUI.framework */; };
-		5B78B3321AB1091C0099686E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B78B32F1AB1091C0099686E /* MessageUI.framework */; };
+		5B78B7C51AB141490099686E /* DemoIphoneNumberController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B7BE1AB141490099686E /* DemoIphoneNumberController.mm */; };
+		5B78B7C61AB141490099686E /* DemoIphoneNumberHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B7C01AB141490099686E /* DemoIphoneNumberHelper.mm */; };
+		5B78B7C71AB141490099686E /* DemoIphoneNumberView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B7C21AB141490099686E /* DemoIphoneNumberView.mm */; };
 		5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD961585E97A0091755F /* RootViewController.mm */; };
 		5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */; };
 		5BD359C015785871002FE41F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD359BF15785871002FE41F /* MapKit.framework */; };
@@ -190,6 +188,7 @@
 		5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoUIDeviceVIewController.mm; sourceTree = "<group>"; };
 		5B42703E187C0154003D3810 /* DeviceDiskConsumeStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDiskConsumeStatusView.h; sourceTree = "<group>"; };
 		5B42703F187C0154003D3810 /* DeviceDiskConsumeStatusView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceDiskConsumeStatusView.mm; sourceTree = "<group>"; };
+		5B5AE36515D38FBC0078F293 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		5B5AE36715D38FE10078F293 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		5B6BD70F14E3C076006E091C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5B6BD71114E3C076006E091C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -197,15 +196,12 @@
 		5B6BD72D14E3C0F7006E091C /* UCJavaScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = UCJavaScript.js; sourceTree = "<group>"; };
 		5B6BD73514E3C156006E091C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5B6BD73714E3C156006E091C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		5B78B31D1AB105A50099686E /* DemoIphoneNumberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberController.h; sourceTree = "<group>"; };
-		5B78B31E1AB105A50099686E /* DemoIphoneNumberController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberController.mm; sourceTree = "<group>"; };
-		5B78B31F1AB105A50099686E /* DemoIphoneNumberHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberHelper.h; sourceTree = "<group>"; };
-		5B78B3201AB105A50099686E /* DemoIphoneNumberHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberHelper.mm; sourceTree = "<group>"; };
-		5B78B3211AB105A50099686E /* DemoIphoneNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberView.h; sourceTree = "<group>"; };
-		5B78B3221AB105A60099686E /* DemoIphoneNumberView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberView.mm; sourceTree = "<group>"; };
-		5B78B32D1AB1091C0099686E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AddressBook.framework; sourceTree = DEVELOPER_DIR; };
-		5B78B32E1AB1091C0099686E /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AddressBookUI.framework; sourceTree = DEVELOPER_DIR; };
-		5B78B32F1AB1091C0099686E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		5B78B7BD1AB141490099686E /* DemoIphoneNumberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberController.h; sourceTree = "<group>"; };
+		5B78B7BE1AB141490099686E /* DemoIphoneNumberController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberController.mm; sourceTree = "<group>"; };
+		5B78B7BF1AB141490099686E /* DemoIphoneNumberHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberHelper.h; sourceTree = "<group>"; };
+		5B78B7C01AB141490099686E /* DemoIphoneNumberHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberHelper.mm; sourceTree = "<group>"; };
+		5B78B7C11AB141490099686E /* DemoIphoneNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberView.h; sourceTree = "<group>"; };
+		5B78B7C21AB141490099686E /* DemoIphoneNumberView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberView.mm; sourceTree = "<group>"; };
 		5B86CBF115D3873F005D96B6 /* DemoIncludeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIncludeHeaders.h; sourceTree = "<group>"; };
 		5BCFCD961585E97A0091755F /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
 		5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebkitDemosAppDelegate.mm; sourceTree = "<group>"; };
@@ -229,19 +225,17 @@
 			files = (
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				5B38700B17CF40250076514D /* CoreData.framework in Frameworks */,
-				5B78B3321AB1091C0099686E /* MessageUI.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				5B1837B41848694A00E22AF4 /* CoreText.framework in Frameworks */,
-				5B78B3311AB1091C0099686E /* AddressBookUI.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				5B6BD71014E3C076006E091C /* CFNetwork.framework in Frameworks */,
 				5B6BD71214E3C076006E091C /* QuartzCore.framework in Frameworks */,
 				5B6BD71414E3C076006E091C /* SystemConfiguration.framework in Frameworks */,
-				5B78B3301AB1091C0099686E /* AddressBook.framework in Frameworks */,
 				5B6BD73614E3C156006E091C /* AudioToolbox.framework in Frameworks */,
 				5B6BD73814E3C156006E091C /* AVFoundation.framework in Frameworks */,
 				5BD359C015785871002FE41F /* MapKit.framework in Frameworks */,
 				5BD5E19E157DAADA0016CBB8 /* libxml2.dylib in Frameworks */,
+				5B5AE36615D38FBC0078F293 /* AddressBook.framework in Frameworks */,
 				5B5AE36815D38FE10078F293 /* libz.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,11 +305,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5B78B32D1AB1091C0099686E /* AddressBook.framework */,
-				5B78B32E1AB1091C0099686E /* AddressBookUI.framework */,
-				5B78B32F1AB1091C0099686E /* MessageUI.framework */,
 				5B1837B31848694A00E22AF4 /* CoreText.framework */,
 				5B38700A17CF40250076514D /* CoreData.framework */,
+				5B5AE36515D38FBC0078F293 /* AddressBook.framework */,
 				5BD5E19D157DAADA0016CBB8 /* libxml2.dylib */,
 				5B5AE36715D38FE10078F293 /* libz.1.dylib */,
 				5BD359BF15785871002FE41F /* MapKit.framework */,
@@ -429,7 +421,7 @@
 		5B37C0621A64EC00003FE853 /* Src20150113 */ = {
 			isa = PBXGroup;
 			children = (
-				5B78B31B1AB105A50099686E /* ABAddressBook */,
+				5B78B7BB1AB141490099686E /* ABAddressBook */,
 				5B37C5301A650804003FE853 /* UCWeb */,
 				5B37C0631A64EC00003FE853 /* DemoViewCAKeyAnimation */,
 			);
@@ -562,23 +554,23 @@
 			path = DemoUIDeviceVIewController20140107;
 			sourceTree = "<group>";
 		};
-		5B78B31B1AB105A50099686E /* ABAddressBook */ = {
+		5B78B7BB1AB141490099686E /* ABAddressBook */ = {
 			isa = PBXGroup;
 			children = (
-				5B78B31C1AB105A50099686E /* DemoIphoneNumber */,
+				5B78B7BC1AB141490099686E /* DemoIphoneNumber */,
 			);
 			path = ABAddressBook;
 			sourceTree = "<group>";
 		};
-		5B78B31C1AB105A50099686E /* DemoIphoneNumber */ = {
+		5B78B7BC1AB141490099686E /* DemoIphoneNumber */ = {
 			isa = PBXGroup;
 			children = (
-				5B78B31D1AB105A50099686E /* DemoIphoneNumberController.h */,
-				5B78B31E1AB105A50099686E /* DemoIphoneNumberController.mm */,
-				5B78B31F1AB105A50099686E /* DemoIphoneNumberHelper.h */,
-				5B78B3201AB105A50099686E /* DemoIphoneNumberHelper.mm */,
-				5B78B3211AB105A50099686E /* DemoIphoneNumberView.h */,
-				5B78B3221AB105A60099686E /* DemoIphoneNumberView.mm */,
+				5B78B7BD1AB141490099686E /* DemoIphoneNumberController.h */,
+				5B78B7BE1AB141490099686E /* DemoIphoneNumberController.mm */,
+				5B78B7BF1AB141490099686E /* DemoIphoneNumberHelper.h */,
+				5B78B7C01AB141490099686E /* DemoIphoneNumberHelper.mm */,
+				5B78B7C11AB141490099686E /* DemoIphoneNumberView.h */,
+				5B78B7C21AB141490099686E /* DemoIphoneNumberView.mm */,
 			);
 			path = DemoIphoneNumber;
 			sourceTree = "<group>";
@@ -690,7 +682,7 @@
 				5B1837B1184861B200E22AF4 /* DemoViewCoreTextDraw.mm in Sources */,
 				5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */,
 				5B1837B2184861B200E22AF4 /* DemoViewSimpleParagraph.mm in Sources */,
-				5B78B3271AB105A60099686E /* DemoIphoneNumberView.mm in Sources */,
+				5B78B7C71AB141490099686E /* DemoIphoneNumberView.mm in Sources */,
 				5B047872184F0FB0007D4A10 /* ColorPickerView.mm in Sources */,
 				5B05BA19156A6ABB00D72781 /* AnimationDemoView.mm in Sources */,
 				5B37C0681A64EC00003FE853 /* DemoViewCAKeyView.mm in Sources */,
@@ -704,12 +696,12 @@
 				5B37C8311A650805003FE853 /* NSDictionary+ExceptionSafe.mm in Sources */,
 				5B37CB2F1A667BFD003FE853 /* FEEmojiLabel.mm in Sources */,
 				5B37C8301A650805003FE853 /* NSArray+ExceptionSafe.mm in Sources */,
-				5B78B3261AB105A60099686E /* DemoIphoneNumberHelper.mm in Sources */,
+				5B78B7C61AB141490099686E /* DemoIphoneNumberHelper.mm in Sources */,
 				5B195F3B199A4BAB009562C3 /* CommonToolBarView.mm in Sources */,
 				5B195F38199A4BAB009562C3 /* iUIAppFrame.mm in Sources */,
 				5B195F3C199A4BAB009562C3 /* InterfaceToolBarView.mm in Sources */,
 				5B195F39199A4BAB009562C3 /* MainFrameView.mm in Sources */,
-				5B78B3251AB105A60099686E /* DemoIphoneNumberController.mm in Sources */,
+				5B78B7C51AB141490099686E /* DemoIphoneNumberController.mm in Sources */,
 				5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */,
 				5B37C0691A64EC00003FE853 /* DemoViewCAKeyAnimationController.mm in Sources */,
 				5B37C8331A650806003FE853 /* NSMutableArray+ExceptionSafe.mm in Sources */,
@@ -747,10 +739,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -771,7 +760,7 @@
 				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
 				SYMROOT = /Users/yangfs/Desktop/E/Src20120215/Dev20120215/BaiduInput20120808/WebkitDemos20120808_OK/build;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 i386 arm64 armv7s";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -782,10 +771,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WebkitDemos_Prefix.pch;
 				GCC_VERSION = "";
@@ -805,14 +791,14 @@
 				SYMROOT = /Users/yangfs/Desktop/E/Src20120215/Dev20120215/BaiduInput20120808/WebkitDemos20120808_OK/build;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 i386 arm64 armv7s";
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -830,14 +816,13 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -855,7 +840,6 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
 			name = Release;
 		};

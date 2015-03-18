@@ -193,6 +193,8 @@
 	
 	NSMutableArray *webkitList = [NSMutableArray array];
 	
+	///< 2015-03-18 设备摇一摇功能
+	[webkitList addObject:[DemoShakeController class]];
 	
 	///< 2015-03-11 读写电话号码 demo
 	[webkitList addObject:[DemoIphoneNumberController class]];

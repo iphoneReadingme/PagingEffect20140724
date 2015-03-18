@@ -13,6 +13,9 @@
 
 
 
+///< 2015-03-18 设备摇一摇功能
+#import "DemoShakeController.h"
+
 ///< 2015-03-11 读写电话号码 demo
 #import "DemoIphoneNumberController.h"
 

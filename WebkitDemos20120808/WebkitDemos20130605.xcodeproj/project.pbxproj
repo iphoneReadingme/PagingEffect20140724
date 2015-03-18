@@ -71,6 +71,9 @@
 		5B78B7C51AB141490099686E /* DemoIphoneNumberController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B7BE1AB141490099686E /* DemoIphoneNumberController.mm */; };
 		5B78B7C61AB141490099686E /* DemoIphoneNumberHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B7C01AB141490099686E /* DemoIphoneNumberHelper.mm */; };
 		5B78B7C71AB141490099686E /* DemoIphoneNumberView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B78B7C21AB141490099686E /* DemoIphoneNumberView.mm */; };
+		5B79331E1AB95392002ED33F /* DemoShakeController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B7933191AB95392002ED33F /* DemoShakeController.mm */; };
+		5B79331F1AB95392002ED33F /* DemoShakeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B79331B1AB95392002ED33F /* DemoShakeView.mm */; };
+		5B7933201AB95392002ED33F /* GenericInterfaceAccelerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B79331D1AB95392002ED33F /* GenericInterfaceAccelerator.mm */; };
 		5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD961585E97A0091755F /* RootViewController.mm */; };
 		5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */; };
 		5BD359C015785871002FE41F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD359BF15785871002FE41F /* MapKit.framework */; };
@@ -202,6 +205,12 @@
 		5B78B7C01AB141490099686E /* DemoIphoneNumberHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberHelper.mm; sourceTree = "<group>"; };
 		5B78B7C11AB141490099686E /* DemoIphoneNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIphoneNumberView.h; sourceTree = "<group>"; };
 		5B78B7C21AB141490099686E /* DemoIphoneNumberView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoIphoneNumberView.mm; sourceTree = "<group>"; };
+		5B7933181AB95392002ED33F /* DemoShakeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoShakeController.h; sourceTree = "<group>"; };
+		5B7933191AB95392002ED33F /* DemoShakeController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoShakeController.mm; sourceTree = "<group>"; };
+		5B79331A1AB95392002ED33F /* DemoShakeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoShakeView.h; sourceTree = "<group>"; };
+		5B79331B1AB95392002ED33F /* DemoShakeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoShakeView.mm; sourceTree = "<group>"; };
+		5B79331C1AB95392002ED33F /* GenericInterfaceAccelerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericInterfaceAccelerator.h; sourceTree = "<group>"; };
+		5B79331D1AB95392002ED33F /* GenericInterfaceAccelerator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GenericInterfaceAccelerator.mm; sourceTree = "<group>"; };
 		5B86CBF115D3873F005D96B6 /* DemoIncludeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIncludeHeaders.h; sourceTree = "<group>"; };
 		5BCFCD961585E97A0091755F /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
 		5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebkitDemosAppDelegate.mm; sourceTree = "<group>"; };
@@ -421,6 +430,7 @@
 		5B37C0621A64EC00003FE853 /* Src20150113 */ = {
 			isa = PBXGroup;
 			children = (
+				5B7933171AB95392002ED33F /* DemoShakeController */,
 				5B78B7BB1AB141490099686E /* ABAddressBook */,
 				5B37C5301A650804003FE853 /* UCWeb */,
 				5B37C0631A64EC00003FE853 /* DemoViewCAKeyAnimation */,
@@ -575,6 +585,19 @@
 			path = DemoIphoneNumber;
 			sourceTree = "<group>";
 		};
+		5B7933171AB95392002ED33F /* DemoShakeController */ = {
+			isa = PBXGroup;
+			children = (
+				5B7933181AB95392002ED33F /* DemoShakeController.h */,
+				5B7933191AB95392002ED33F /* DemoShakeController.mm */,
+				5B79331A1AB95392002ED33F /* DemoShakeView.h */,
+				5B79331B1AB95392002ED33F /* DemoShakeView.mm */,
+				5B79331C1AB95392002ED33F /* GenericInterfaceAccelerator.h */,
+				5B79331D1AB95392002ED33F /* GenericInterfaceAccelerator.mm */,
+			);
+			path = DemoShakeController;
+			sourceTree = "<group>";
+		};
 		5BE834F61760402E00532011 /* Src20130606 */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,6 +707,7 @@
 				5B1837B2184861B200E22AF4 /* DemoViewSimpleParagraph.mm in Sources */,
 				5B78B7C71AB141490099686E /* DemoIphoneNumberView.mm in Sources */,
 				5B047872184F0FB0007D4A10 /* ColorPickerView.mm in Sources */,
+				5B7933201AB95392002ED33F /* GenericInterfaceAccelerator.mm in Sources */,
 				5B05BA19156A6ABB00D72781 /* AnimationDemoView.mm in Sources */,
 				5B37C0681A64EC00003FE853 /* DemoViewCAKeyView.mm in Sources */,
 				5B37CB3A1A667C01003FE853 /* FEShapeParameterInfo.mm in Sources */,
@@ -700,6 +724,7 @@
 				5B195F3B199A4BAB009562C3 /* CommonToolBarView.mm in Sources */,
 				5B195F38199A4BAB009562C3 /* iUIAppFrame.mm in Sources */,
 				5B195F3C199A4BAB009562C3 /* InterfaceToolBarView.mm in Sources */,
+				5B79331F1AB95392002ED33F /* DemoShakeView.mm in Sources */,
 				5B195F39199A4BAB009562C3 /* MainFrameView.mm in Sources */,
 				5B78B7C51AB141490099686E /* DemoIphoneNumberController.mm in Sources */,
 				5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */,
@@ -716,6 +741,7 @@
 				5B195F3E199A4BAB009562C3 /* UITestView.mm in Sources */,
 				5B17BF5C185E9C810037A7BA /* DemoPageView.mm in Sources */,
 				5B37CB4B1A674E5F003FE853 /* FEJSONParameterAnalyzer.mm in Sources */,
+				5B79331E1AB95392002ED33F /* DemoShakeController.mm in Sources */,
 				5B1837B0184861B200E22AF4 /* DemoCoreTextDrawController.mm in Sources */,
 				5BE835051760406300532011 /* DemoViewCALayer.mm in Sources */,
 				5B37C8371A650806003FE853 /* UCFNDCollection.mm in Sources */,

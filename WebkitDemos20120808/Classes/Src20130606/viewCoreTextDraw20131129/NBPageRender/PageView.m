@@ -40,6 +40,9 @@ CGFloat distance(CGPoint a, CGPoint b)
 {
     if ((self = [super initWithFrame:frame]))
     {
+		self.layer.borderColor = [UIColor redColor].CGColor;
+		self.layer.borderWidth = 2;
+		
         self.clipsToBounds = YES;
         _pageCache = [[NBPageViewCache alloc] initWithPageSize:size];
     }
@@ -57,7 +60,8 @@ CGFloat distance(CGPoint a, CGPoint b)
 
 - (void)setPageBackgroundColor:(UIColor *)color
 {
-    self.backgroundColor = color;
+	self.backgroundColor = color;
+	self.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - data accessors

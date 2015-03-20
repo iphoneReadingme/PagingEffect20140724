@@ -30,11 +30,15 @@ return; \
 
 @interface NBContentViewController()
 
+@property (nonatomic, retain) UILongPressGestureRecognizer*     longPressGestureObj;     ///< 长按手势识别器
+
 @property (nonatomic, retain) PageView* pageView;
 @property (nonatomic, assign) CGRect rect;
 @property (nonatomic, retain) UILabel* pageTitleView;
 @property (nonatomic, retain) BottomStatusView* bottomStatusView;
 @property (nonatomic, assign) BOOL isFullPage;
+
+@property (nonatomic, retain) UIView                *selectedBackgroundView;
 
 ///< 单指点击起始点
 @property (nonatomic) CGPoint begin;
@@ -77,7 +81,8 @@ return; \
         self.rect = rect;
         self.isBackPage = YES;
         self.isFullPage = isFullPage;
-        
+		
+		[self addSelectedBGView];
         [self addTxtPageView:dataSource layoutSize:size];
         [self updateTxtPageView];
         
@@ -140,6 +145,8 @@ return; \
         [self addBottomStatusView];
         [self registerBatteryNotification];
     }
+	
+	[self addLongPressGestureRecognizer];
 }
 
 - (void)dealloc
@@ -148,6 +155,8 @@ return; \
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
+	[self removeLongPressGestureObj];
+	
     self.chapterItem = nil;
     
     self.pageView.dataSource = nil;
@@ -317,6 +326,73 @@ return; \
 - (void)didNovelBoxThemeChangeInAdvance
 {
     [self didThemeChange];
+}
+
+#pragma mark -==选择背景的处理
+- (CGRect)getPageViewFrame
+{
+	CGRect frame = self.rect;
+	
+	if (self.isFullPage)
+	{
+		frame.origin.y += kPageTitleViewHeight;
+		frame.size.height -= (kBottomStatusbarHeight + kPageTitleViewHeight);
+	}
+	
+	return frame;
+}
+- (void)addSelectedBGView
+{
+	_selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+	_selectedBackgroundView.backgroundColor = [UIColor grayColor];
+	[self.view addSubview:_selectedBackgroundView];
+}
+
+- (void)releaseSelectedBGView
+{
+	[_selectedBackgroundView release];
+	_selectedBackgroundView = nil;
+}
+
+#pragma mark -==长按手势处理
+- (void)removeLongPressGestureObj
+{
+	[_longPressGestureObj removeTarget:self action:@selector(handleLongPress:)];
+	_longPressGestureObj.delegate = nil;
+	[_longPressGestureObj release];
+	_longPressGestureObj = nil;
+}
+
+- (void)addLongPressGestureRecognizer
+{
+	if (_longPressGestureObj)
+	{
+		return;
+	}
+	
+	// 添加长按手势
+	_longPressGestureObj = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+	[self.view addGestureRecognizer:_longPressGestureObj];
+}
+
+-(void)handleLongPress:(UILongPressGestureRecognizer*)longPressRecognizer
+{
+	if (longPressRecognizer.state == UIGestureRecognizerStateBegan)
+	{
+		NSLog(@"==handleLongPress=gestureRecognizer===%@", longPressRecognizer);
+		
+		CGPoint pt = (CGPoint)[longPressRecognizer locationInView:self.pageView];
+		CGRect rect = CGRectZero;
+		rect.origin = pt;
+		rect.size.width = 100;
+		rect.size.height = 60;
+		[_selectedBackgroundView setFrame:rect];
+	}
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	
 }
 
 @end

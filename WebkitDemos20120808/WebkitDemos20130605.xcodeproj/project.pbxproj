@@ -836,7 +836,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = WebkitDemos;
-				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
+				PROVISIONING_PROFILE = "ef57628b-e4da-4657-8055-3bb8a8d31e2a";
 				SYMROOT = /Users/yangfs/Desktop/E/Src20120215/Dev20120215/BaiduInput20120808/WebkitDemos20120808_OK/build;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
@@ -866,7 +866,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = WebkitDemos;
-				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
+				PROVISIONING_PROFILE = "ef57628b-e4da-4657-8055-3bb8a8d31e2a";
 				SYMROOT = /Users/yangfs/Desktop/E/Src20120215/Dev20120215/BaiduInput20120808/WebkitDemos20120808_OK/build;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -893,7 +893,7 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "2ca5594e-1113-4041-9cbe-1fe19a33039b";
+				PROVISIONING_PROFILE = "ef57628b-e4da-4657-8055-3bb8a8d31e2a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -917,7 +917,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "2ca5594e-1113-4041-9cbe-1fe19a33039b";
+				PROVISIONING_PROFILE = "ef57628b-e4da-4657-8055-3bb8a8d31e2a";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

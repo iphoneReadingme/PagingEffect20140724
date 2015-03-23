@@ -23,9 +23,9 @@
 	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 	{
 		[application cancelAllLocalNotifications];
-		UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIRemoteNotificationTypeAll categories:nil];
-		[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-		
+//		UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIRemoteNotificationTypeAll categories:nil];
+//		[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+		[self setupNotificationSettingsEx:application];
 	}
 	else
 #endif
@@ -62,8 +62,8 @@
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
 	NSLog(@"[11 Register]didRegisterUserNotificationSettings: %@", notificationSettings);
-	//[application registerForRemoteNotifications];
-	[self setupNotificationSettingsEx:application];
+	[application registerForRemoteNotifications];
+	//[self setupNotificationSettingsEx:application];
 }
 #endif
 
@@ -91,7 +91,6 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-	
 	
 	NSLog(@"[33 Receive]didReceiveRemoteNotification: %@", userInfo);
 }
@@ -145,7 +144,7 @@
 	if ([application currentUserNotificationSettings].types != UIUserNotificationTypeNone)
 	{
 		///< 避免了重复注册通知类型
-		return;
+		//return;
 	}
 	
 	///< 1. 一个简单的通知，点击后消失，不会做任何事情。
@@ -212,6 +211,7 @@
 ///< 安排本地通知
 - (void)scheduleLocalNotification
 {
+	//return;
 	UILocalNotification *localNotification = [UILocalNotification new];
 	
 	localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];

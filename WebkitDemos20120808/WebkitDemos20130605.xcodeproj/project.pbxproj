@@ -74,6 +74,8 @@
 		5B79331E1AB95392002ED33F /* DemoShakeController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B7933191AB95392002ED33F /* DemoShakeController.mm */; };
 		5B79331F1AB95392002ED33F /* DemoShakeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B79331B1AB95392002ED33F /* DemoShakeView.mm */; };
 		5B7933201AB95392002ED33F /* GenericInterfaceAccelerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B79331D1AB95392002ED33F /* GenericInterfaceAccelerator.mm */; };
+		5B8721FD1ABFB5E300B7C237 /* DemoMessageCenterController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B8721FA1ABFB5E300B7C237 /* DemoMessageCenterController.mm */; };
+		5B8721FE1ABFB5E300B7C237 /* DemoMessageCenterView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B8721FC1ABFB5E300B7C237 /* DemoMessageCenterView.mm */; };
 		5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD961585E97A0091755F /* RootViewController.mm */; };
 		5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */; };
 		5BD359C015785871002FE41F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD359BF15785871002FE41F /* MapKit.framework */; };
@@ -212,6 +214,10 @@
 		5B79331C1AB95392002ED33F /* GenericInterfaceAccelerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericInterfaceAccelerator.h; sourceTree = "<group>"; };
 		5B79331D1AB95392002ED33F /* GenericInterfaceAccelerator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GenericInterfaceAccelerator.mm; sourceTree = "<group>"; };
 		5B86CBF115D3873F005D96B6 /* DemoIncludeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIncludeHeaders.h; sourceTree = "<group>"; };
+		5B8721F91ABFB5E300B7C237 /* DemoMessageCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoMessageCenterController.h; sourceTree = "<group>"; };
+		5B8721FA1ABFB5E300B7C237 /* DemoMessageCenterController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoMessageCenterController.mm; sourceTree = "<group>"; };
+		5B8721FB1ABFB5E300B7C237 /* DemoMessageCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoMessageCenterView.h; sourceTree = "<group>"; };
+		5B8721FC1ABFB5E300B7C237 /* DemoMessageCenterView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoMessageCenterView.mm; sourceTree = "<group>"; };
 		5BCFCD961585E97A0091755F /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
 		5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebkitDemosAppDelegate.mm; sourceTree = "<group>"; };
 		5BD359BF15785871002FE41F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -430,6 +436,7 @@
 		5B37C0621A64EC00003FE853 /* Src20150113 */ = {
 			isa = PBXGroup;
 			children = (
+				5B8721F81ABFB5E300B7C237 /* DemoMessageCenterController */,
 				5B7933171AB95392002ED33F /* DemoShakeController */,
 				5B78B7BB1AB141490099686E /* ABAddressBook */,
 				5B37C5301A650804003FE853 /* UCWeb */,
@@ -598,6 +605,17 @@
 			path = DemoShakeController;
 			sourceTree = "<group>";
 		};
+		5B8721F81ABFB5E300B7C237 /* DemoMessageCenterController */ = {
+			isa = PBXGroup;
+			children = (
+				5B8721F91ABFB5E300B7C237 /* DemoMessageCenterController.h */,
+				5B8721FA1ABFB5E300B7C237 /* DemoMessageCenterController.mm */,
+				5B8721FB1ABFB5E300B7C237 /* DemoMessageCenterView.h */,
+				5B8721FC1ABFB5E300B7C237 /* DemoMessageCenterView.mm */,
+			);
+			path = DemoMessageCenterController;
+			sourceTree = "<group>";
+		};
 		5BE834F61760402E00532011 /* Src20130606 */ = {
 			isa = PBXGroup;
 			children = (
@@ -723,6 +741,7 @@
 				5B78B7C61AB141490099686E /* DemoIphoneNumberHelper.mm in Sources */,
 				5B195F3B199A4BAB009562C3 /* CommonToolBarView.mm in Sources */,
 				5B195F38199A4BAB009562C3 /* iUIAppFrame.mm in Sources */,
+				5B8721FD1ABFB5E300B7C237 /* DemoMessageCenterController.mm in Sources */,
 				5B195F3C199A4BAB009562C3 /* InterfaceToolBarView.mm in Sources */,
 				5B79331F1AB95392002ED33F /* DemoShakeView.mm in Sources */,
 				5B195F39199A4BAB009562C3 /* MainFrameView.mm in Sources */,
@@ -737,6 +756,7 @@
 				5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */,
 				5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */,
 				5B37CB381A667C01003FE853 /* FEFestivalParameterInfo.mm in Sources */,
+				5B8721FE1ABFB5E300B7C237 /* DemoMessageCenterView.mm in Sources */,
 				5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */,
 				5B195F3E199A4BAB009562C3 /* UITestView.mm in Sources */,
 				5B17BF5C185E9C810037A7BA /* DemoPageView.mm in Sources */,

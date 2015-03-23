@@ -193,6 +193,8 @@
 	
 	NSMutableArray *webkitList = [NSMutableArray array];
 	
+	///< 2015-03-23 消息通知 demo"
+	[webkitList addObject:[DemoMessageCenterController class]];
 	///< 2015-03-18 设备摇一摇功能
 	[webkitList addObject:[DemoShakeController class]];
 	

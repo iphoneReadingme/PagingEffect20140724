@@ -12,6 +12,8 @@
  **/
 
 
+///< 2015-03-23 消息通知 demo"
+#import "DemoMessageCenterController.h"
 
 ///< 2015-03-18 设备摇一摇功能
 #import "DemoShakeController.h"

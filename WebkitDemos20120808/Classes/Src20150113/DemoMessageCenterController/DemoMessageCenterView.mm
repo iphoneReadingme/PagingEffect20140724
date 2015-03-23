@@ -113,6 +113,19 @@
 	return _sourceList;
 }
 
+///< 安排本地通知
+- (void)scheduleLocalNotification
+{
+	UILocalNotification *localNotification = [UILocalNotification new];
+	
+	localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+	localNotification.alertBody = @"You've closed me?!? 😡";
+	localNotification.alertAction = @"Open 😉";
+	localNotification.category = @"default_category";
+	
+	[[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
+
 #pragma mark -== UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

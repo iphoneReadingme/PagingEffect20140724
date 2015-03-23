@@ -72,6 +72,8 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
+	
+	[self scheduleLocalNotification];
 }
 
 
@@ -113,6 +115,20 @@
 	[super dealloc];
 }
 
-
+#pragma mark - presentNotification
+- (void)presentNotificationNowWithAlertBody:(NSString*)alertBody
+								andUserInfo:(NSDictionary*)userInfo
+								   andSound:(BOOL)needSound
+{
+	UILocalNotification* aNotify = [UILocalNotification new];
+	aNotify.soundName = needSound ? UILocalNotificationDefaultSoundName : nil;
+	aNotify.alertBody = alertBody;
+	aNotify.userInfo = userInfo;
+	[[UIApplication sharedApplication] presentLocalNotificationNow:aNotify];
+	//[_notifications safe_AddObject:aNotify];
+	[aNotify release];
+	
+	[UIApplication sharedApplication].applicationIconBadgeNumber += 1;
+}
 @end
 

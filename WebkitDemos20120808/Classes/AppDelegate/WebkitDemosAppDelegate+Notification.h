@@ -22,5 +22,10 @@
 
 - (void)registerNotification:(UIApplication *)application;
 
+///< 安排本地通知
+- (void)scheduleLocalNotification;
+
+- (void)clearNotifications;
+
 @end
 

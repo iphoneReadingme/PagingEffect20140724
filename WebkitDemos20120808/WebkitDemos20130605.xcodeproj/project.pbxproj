@@ -697,6 +697,11 @@
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = X3X7VZZ2J6;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -888,7 +893,7 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
+				PROVISIONING_PROFILE = "2ca5594e-1113-4041-9cbe-1fe19a33039b";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -912,7 +917,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "046c3d3b-b9c7-4540-99bf-be41db6eb8e0";
+				PROVISIONING_PROFILE = "2ca5594e-1113-4041-9cbe-1fe19a33039b";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

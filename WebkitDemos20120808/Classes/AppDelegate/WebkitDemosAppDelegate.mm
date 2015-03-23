@@ -8,10 +8,9 @@
 
 #import "UITestView.h"
 #import "WebkitDemosAppDelegate.h"
+#import "WebkitDemosAppDelegate+Notification.h"
 #import "RootViewController.h"
 #import "MainFrameView.h"
-
-//#import "CrashCaptureController.h"
 
 
 @implementation WebkitDemosAppDelegate
@@ -54,7 +53,7 @@
 	//[[CrashCaptureController shareInstance] registerCallBack];
 //	UC_START_CAPTURE_CRASH_LOG  // 捕捉UCWEB崩溃日志
 	
-	[self registerNotification];
+	[self registerNotification:application];
 	
     return YES;
 }
@@ -114,80 +113,6 @@
 	[super dealloc];
 }
 
-- (void)registerNotification
-{
-	//注册push服务
-#ifdef __IPHONE_8_0
-	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-	{
-		UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge) categories:nil];
-		[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-	}
-	else
-#endif
-	{
-		[[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge];
-	}
-}
-
-#pragma mark - ==[1] Local Notification
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-	NSLog(@"[11 Receive]didReceiveLocalNotification: %@", notification);
-	//[application clearNotifications];
-	
-	//清除通知中心的消息时通过设置角标为0的方法实现的，这里表示很难理解苹果的做法。并且目前方案是推送的消息不带角标的
-	//即角标默认为0，但此时如果直接设置角标为0，消息无法清除，必须先设非0值，再设为0才能实现，我认为这是个Bug。
-	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
-	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-}
-
-#pragma mark - User Notifications for iOS8
-#ifdef __IPHONE_8_0
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-	NSLog(@"[11 Register]didRegisterUserNotificationSettings: %@", notificationSettings);
-	[application registerForRemoteNotifications];
-}
-#endif
-
-#pragma mark - Remote Notification
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-	
-	NSLog(@"[22 Receive]didReceiveRemoteNotification: %@", userInfo);
-	
-}
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-	
-	NSLog(@"[22 Register]didRegisterForRemoteNotificationsWithDeviceToken: %@", deviceToken);
-	
-}
-
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-	
-	
-	NSLog(@"[44 did fail]didFailToRegisterForRemoteNotificationsWithError: %@", error);
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-	
-	
-	NSLog(@"[33 Receive]didReceiveRemoteNotification: %@", userInfo);
-}
-
-#pragma mark - Background Fetch
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-	
-	
-	NSLog(@"performFetchWithCompletionHandler: %@", completionHandler);
-}
 
 @end
 

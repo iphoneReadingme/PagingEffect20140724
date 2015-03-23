@@ -76,8 +76,10 @@
 		5B7933201AB95392002ED33F /* GenericInterfaceAccelerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B79331D1AB95392002ED33F /* GenericInterfaceAccelerator.mm */; };
 		5B8721FD1ABFB5E300B7C237 /* DemoMessageCenterController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B8721FA1ABFB5E300B7C237 /* DemoMessageCenterController.mm */; };
 		5B8721FE1ABFB5E300B7C237 /* DemoMessageCenterView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B8721FC1ABFB5E300B7C237 /* DemoMessageCenterView.mm */; };
+		5B8722291ABFE6A000B7C237 /* UIUserNotificationSettings+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8722271ABFE6A000B7C237 /* UIUserNotificationSettings+Extension.m */; };
+		5B87222F1ABFF12F00B7C237 /* WebkitDemosAppDelegate+Notification.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B87222C1ABFF12F00B7C237 /* WebkitDemosAppDelegate+Notification.mm */; };
+		5B8722301ABFF12F00B7C237 /* WebkitDemosAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B87222E1ABFF12F00B7C237 /* WebkitDemosAppDelegate.mm */; };
 		5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD961585E97A0091755F /* RootViewController.mm */; };
-		5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */; };
 		5BD359C015785871002FE41F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD359BF15785871002FE41F /* MapKit.framework */; };
 		5BD5E19E157DAADA0016CBB8 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD5E19D157DAADA0016CBB8 /* libxml2.dylib */; };
 		5BE109C81774072200045347 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 5BE109C71774072200045347 /* res */; };
@@ -88,7 +90,6 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* WebkitDemosAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebkitDemosAppDelegate.h; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* WebkitDemos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebkitDemos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -218,8 +219,13 @@
 		5B8721FA1ABFB5E300B7C237 /* DemoMessageCenterController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoMessageCenterController.mm; sourceTree = "<group>"; };
 		5B8721FB1ABFB5E300B7C237 /* DemoMessageCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoMessageCenterView.h; sourceTree = "<group>"; };
 		5B8721FC1ABFB5E300B7C237 /* DemoMessageCenterView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoMessageCenterView.mm; sourceTree = "<group>"; };
+		5B8722261ABFE6A000B7C237 /* UIUserNotificationSettings+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIUserNotificationSettings+Extension.h"; sourceTree = "<group>"; };
+		5B8722271ABFE6A000B7C237 /* UIUserNotificationSettings+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIUserNotificationSettings+Extension.m"; sourceTree = "<group>"; };
+		5B87222B1ABFF12F00B7C237 /* WebkitDemosAppDelegate+Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebkitDemosAppDelegate+Notification.h"; sourceTree = "<group>"; };
+		5B87222C1ABFF12F00B7C237 /* WebkitDemosAppDelegate+Notification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "WebkitDemosAppDelegate+Notification.mm"; sourceTree = "<group>"; };
+		5B87222D1ABFF12F00B7C237 /* WebkitDemosAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebkitDemosAppDelegate.h; sourceTree = "<group>"; };
+		5B87222E1ABFF12F00B7C237 /* WebkitDemosAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebkitDemosAppDelegate.mm; sourceTree = "<group>"; };
 		5BCFCD961585E97A0091755F /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
-		5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebkitDemosAppDelegate.mm; sourceTree = "<group>"; };
 		5BD359BF15785871002FE41F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5BD5E19D157DAADA0016CBB8 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		5BDC308115EF454500B7BA8C /* DemoIncludeHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoIncludeHeaders.h; sourceTree = "<group>"; };
@@ -264,8 +270,7 @@
 				5BDC308115EF454500B7BA8C /* DemoIncludeHeaders.h */,
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				5BCFCD961585E97A0091755F /* RootViewController.mm */,
-				1D3623240D0F684500981E51 /* WebkitDemosAppDelegate.h */,
-				5BCFCD971585E97A0091755F /* WebkitDemosAppDelegate.mm */,
+				5B87222A1ABFF12F00B7C237 /* AppDelegate */,
 				5B86CBF115D3873F005D96B6 /* DemoIncludeHeaders.h */,
 				5B37C0621A64EC00003FE853 /* Src20150113 */,
 				5B195F23199A4BAB009562C3 /* Src20120606 */,
@@ -612,8 +617,29 @@
 				5B8721FA1ABFB5E300B7C237 /* DemoMessageCenterController.mm */,
 				5B8721FB1ABFB5E300B7C237 /* DemoMessageCenterView.h */,
 				5B8721FC1ABFB5E300B7C237 /* DemoMessageCenterView.mm */,
+				5B8722241ABFE6A000B7C237 /* NotificationExtensio */,
 			);
 			path = DemoMessageCenterController;
+			sourceTree = "<group>";
+		};
+		5B8722241ABFE6A000B7C237 /* NotificationExtensio */ = {
+			isa = PBXGroup;
+			children = (
+				5B8722261ABFE6A000B7C237 /* UIUserNotificationSettings+Extension.h */,
+				5B8722271ABFE6A000B7C237 /* UIUserNotificationSettings+Extension.m */,
+			);
+			path = NotificationExtensio;
+			sourceTree = "<group>";
+		};
+		5B87222A1ABFF12F00B7C237 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5B87222B1ABFF12F00B7C237 /* WebkitDemosAppDelegate+Notification.h */,
+				5B87222C1ABFF12F00B7C237 /* WebkitDemosAppDelegate+Notification.mm */,
+				5B87222D1ABFF12F00B7C237 /* WebkitDemosAppDelegate.h */,
+				5B87222E1ABFF12F00B7C237 /* WebkitDemosAppDelegate.mm */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		5BE834F61760402E00532011 /* Src20130606 */ = {
@@ -719,6 +745,7 @@
 				5B37C82F1A650805003FE853 /* JSONKit.m in Sources */,
 				5B37CC801A67F38C003FE853 /* NSDate+String.m in Sources */,
 				5B195F3D199A4BAB009562C3 /* UIGlobal.mm in Sources */,
+				5B8722301ABFF12F00B7C237 /* WebkitDemosAppDelegate.mm in Sources */,
 				5B37C8361A650806003FE853 /* NSString+ExceptionSafe.m in Sources */,
 				5B1837B1184861B200E22AF4 /* DemoViewCoreTextDraw.mm in Sources */,
 				5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */,
@@ -754,7 +781,6 @@
 				5B37CB391A667C01003FE853 /* FEParameterDataProvider.mm in Sources */,
 				5B37C8341A650806003FE853 /* NSMutableDictionary+ExceptionSafe.mm in Sources */,
 				5BCFCD981585E97A0091755F /* RootViewController.mm in Sources */,
-				5BCFCD991585E97A0091755F /* WebkitDemosAppDelegate.mm in Sources */,
 				5B37CB381A667C01003FE853 /* FEFestivalParameterInfo.mm in Sources */,
 				5B8721FE1ABFB5E300B7C237 /* DemoMessageCenterView.mm in Sources */,
 				5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */,
@@ -764,6 +790,7 @@
 				5B79331E1AB95392002ED33F /* DemoShakeController.mm in Sources */,
 				5B1837B0184861B200E22AF4 /* DemoCoreTextDrawController.mm in Sources */,
 				5BE835051760406300532011 /* DemoViewCALayer.mm in Sources */,
+				5B87222F1ABFF12F00B7C237 /* WebkitDemosAppDelegate+Notification.mm in Sources */,
 				5B37C8371A650806003FE853 /* UCFNDCollection.mm in Sources */,
 				5B37C8351A650806003FE853 /* NSMutableString+ExceptionSafe.m in Sources */,
 				5B04785F184EBDDA007D4A10 /* BookLayoutConfig.mm in Sources */,
@@ -771,6 +798,7 @@
 				5B37CC811A67F38C003FE853 /* NSDateUtility.m in Sources */,
 				5B37C8321A650806003FE853 /* NSHTTPCookieStorage+ExceptionSafe.m in Sources */,
 				5B37CC7A1A67EA88003FE853 /* FEFestivalAdaptor.mm in Sources */,
+				5B8722291ABFE6A000B7C237 /* UIUserNotificationSettings+Extension.m in Sources */,
 				5BE835061760406300532011 /* DemoViewCALayerController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

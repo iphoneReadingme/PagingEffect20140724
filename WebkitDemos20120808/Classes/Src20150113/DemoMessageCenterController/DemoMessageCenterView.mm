@@ -3,11 +3,17 @@
 #import "DemoMessageCenterView.h"
 
 
+#define kTableCellHeight            (50.0f)
+
+
 ///< 私有方法
-@interface DemoMessageCenterView()<UIActionSheetDelegate>
+@interface DemoMessageCenterView()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, retain) UIView *bgAnimationView;
 
+@property (nonatomic, retain) UITableView *msgTableView;
+
+@property (nonatomic, retain) NSMutableArray *sourceList;
 
 @end
 
@@ -30,10 +36,11 @@
 	if (self) {
 		// Initialization code.
 		[self forTest];
-		self.backgroundColor = [UIColor clearColor];
+		self.backgroundColor = [UIColor whiteColor];
+		
+		[self loadData];
 		[self addSubViews:frame];
 		
-//		[self addShakeEvent];
     }
     return self;
 }
@@ -47,14 +54,22 @@
 
 -(void)releaseObject
 {
+	[_sourceList release];
+	_sourceList = nil;
+	
+	[_bgAnimationView release];
+	_bgAnimationView = nil;
+	
+	[_msgTableView release];
+	_msgTableView = nil;
 }
 
 - (void)addSubViews:(CGRect)frame
 {
 	CGSize size = frame.size;
-	size.height = 2048;
 	self.contentSize = size;
 	
+	[self addMsgTableView];
 }
 
 - (void)addBgView:(CGRect)frame
@@ -64,6 +79,83 @@
 	pView.backgroundColor = [UIColor whiteColor];
 	[self addSubview:pView];
 }
+
+- (void)addMsgTableView
+{
+	CGRect rect = [self bounds];
+	
+	UITableView* tableView = [[UITableView alloc] initWithFrame:rect style: UITableViewStylePlain];
+	tableView.delegate = self;
+	tableView.dataSource = self;
+	tableView.autoresizesSubviews = YES;
+	tableView.backgroundColor = [UIColor clearColor];
+	tableView.opaque = YES;
+	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	[self addSubview: tableView];
+	_msgTableView = tableView;
+}
+
+- (void)loadData
+{
+	[self getSourceData];
+}
+
+- (NSMutableArray*)getSourceData
+{
+//	NSMutableArray* sourceList = nil;
+	
+	if (_sourceList == nil)
+	{
+		_sourceList = [NSMutableArray arrayWithArray: @[@"apple", @"pearch", @"tomato", @"test", @"test2"]];
+		[_sourceList retain];
+	}
+	
+	return _sourceList;
+}
+
+#pragma mark -== UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return kTableCellHeight;
+}
+
+- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	
+}
+
+#pragma mark -== UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+	return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return [_sourceList count];
+}
+
+NSString* kKeyCellIdentifier = @"kKeyCellIdentifier";
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kKeyCellIdentifier];
+	if (cell == nil)
+	{
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kKeyCellIdentifier] autorelease];
+	}
+	
+	NSUInteger nRow = [indexPath row];
+	NSString* title = nil;
+	if (nRow < [_sourceList count])
+	{
+		title = [_sourceList objectAtIndex:nRow];
+	}
+	cell.textLabel.text = title;
+	
+	return cell;
+}
+
 
 @end
 

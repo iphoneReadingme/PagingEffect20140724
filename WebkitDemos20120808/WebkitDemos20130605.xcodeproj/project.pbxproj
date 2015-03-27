@@ -60,6 +60,8 @@
 		5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B38703017CF4EEB0076514D /* DemoViewCATransform3D.mm */; };
 		5B427041187C0154003D3810 /* DemoUIDeviceVIewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */; };
 		5B427042187C0154003D3810 /* DeviceDiskConsumeStatusView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B42703F187C0154003D3810 /* DeviceDiskConsumeStatusView.mm */; };
+		5B44B4761AC5351C00D30340 /* DemoAccelerometerManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B44B4751AC5351C00D30340 /* DemoAccelerometerManager.mm */; };
+		5B44B4781AC53BF200D30340 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B44B4771AC53BF200D30340 /* CoreMotion.framework */; };
 		5B5AE36615D38FBC0078F293 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5AE36515D38FBC0078F293 /* AddressBook.framework */; };
 		5B5AE36815D38FE10078F293 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5AE36715D38FE10078F293 /* libz.1.dylib */; };
 		5B6BD71014E3C076006E091C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BD70F14E3C076006E091C /* CFNetwork.framework */; };
@@ -194,6 +196,9 @@
 		5B42703D187C0154003D3810 /* DemoUIDeviceVIewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoUIDeviceVIewController.mm; sourceTree = "<group>"; };
 		5B42703E187C0154003D3810 /* DeviceDiskConsumeStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDiskConsumeStatusView.h; sourceTree = "<group>"; };
 		5B42703F187C0154003D3810 /* DeviceDiskConsumeStatusView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceDiskConsumeStatusView.mm; sourceTree = "<group>"; };
+		5B44B4741AC5351C00D30340 /* DemoAccelerometerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoAccelerometerManager.h; sourceTree = "<group>"; };
+		5B44B4751AC5351C00D30340 /* DemoAccelerometerManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DemoAccelerometerManager.mm; sourceTree = "<group>"; };
+		5B44B4771AC53BF200D30340 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		5B5AE36515D38FBC0078F293 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		5B5AE36715D38FE10078F293 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		5B6BD70F14E3C076006E091C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -257,6 +262,7 @@
 				5BD359C015785871002FE41F /* MapKit.framework in Frameworks */,
 				5BD5E19E157DAADA0016CBB8 /* libxml2.dylib in Frameworks */,
 				5B5AE36615D38FBC0078F293 /* AddressBook.framework in Frameworks */,
+				5B44B4781AC53BF200D30340 /* CoreMotion.framework in Frameworks */,
 				5B5AE36815D38FE10078F293 /* libz.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,6 +331,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B44B4771AC53BF200D30340 /* CoreMotion.framework */,
 				5B1837B31848694A00E22AF4 /* CoreText.framework */,
 				5B38700A17CF40250076514D /* CoreData.framework */,
 				5B5AE36515D38FBC0078F293 /* AddressBook.framework */,
@@ -600,6 +607,8 @@
 		5B7933171AB95392002ED33F /* DemoShakeController */ = {
 			isa = PBXGroup;
 			children = (
+				5B44B4741AC5351C00D30340 /* DemoAccelerometerManager.h */,
+				5B44B4751AC5351C00D30340 /* DemoAccelerometerManager.mm */,
 				5B7933181AB95392002ED33F /* DemoShakeController.h */,
 				5B7933191AB95392002ED33F /* DemoShakeController.mm */,
 				5B79331A1AB95392002ED33F /* DemoShakeView.h */,
@@ -790,6 +799,7 @@
 				5B8721FE1ABFB5E300B7C237 /* DemoMessageCenterView.mm in Sources */,
 				5B38703117CF4EEB0076514D /* DemoViewCATransform3D.mm in Sources */,
 				5B195F3E199A4BAB009562C3 /* UITestView.mm in Sources */,
+				5B44B4761AC5351C00D30340 /* DemoAccelerometerManager.mm in Sources */,
 				5B17BF5C185E9C810037A7BA /* DemoPageView.mm in Sources */,
 				5B37CB4B1A674E5F003FE853 /* FEJSONParameterAnalyzer.mm in Sources */,
 				5B79331E1AB95392002ED33F /* DemoShakeController.mm in Sources */,
@@ -818,7 +828,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -850,7 +863,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WebkitDemos_Prefix.pch;
 				GCC_VERSION = "";

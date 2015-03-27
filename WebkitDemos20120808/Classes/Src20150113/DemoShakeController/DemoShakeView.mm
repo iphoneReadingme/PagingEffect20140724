@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #import "DemoShakeView.h"
 #import "GenericInterfaceAccelerator.h"
+#import "DemoAccelerometerManager.h"
 
 
 ///< 私有方法
@@ -43,7 +44,9 @@
 - (void)dealloc
 {
 	[self releaseObject];
-    
+	
+	[self stopMotionManager];
+	
     [super dealloc];
 }
 
@@ -117,6 +120,12 @@
 	btnRect.origin.x += 20 + btnRect.size.width;
 	pBtn = [self createButton:nIndex withName:@"UIButtonTest2" withTitle:@"清空联系人"];
 	[pBtn setFrame:btnRect];
+	
+	nIndex = 4;
+	// "摇一摇"按钮
+	btnRect = CGRectMake(0, 30+btnRect.size.height + btnRect.origin.y, 80, 64);
+	pBtn = [self createButton:nIndex withName:@"UIButtonTest4" withTitle:@"摇一摇"];
+	[pBtn setFrame:btnRect];
 }
 
 - (void)onButtonClickEvent:(UIButton*)sender
@@ -134,6 +143,10 @@
 	{
 		[self clearAllPersons];
 	}
+	else if (nTag == 4)
+	{
+		[self initMotionManager];
+	}
 }
 
 - (void)clearAllPersons
@@ -148,17 +161,30 @@
 {
 }
 
-
 #pragma mark - == 摇一摇相关
+
+- (void)initMotionManager
+{
+	[[DemoAccelerometerManager sharedInstance] initMotionManager];
+	[[DemoAccelerometerManager sharedInstance] setUserSelector:@selector(onShakeChangeTheme) withObj:self];
+}
+
+- (void)stopMotionManager
+{
+	[[DemoAccelerometerManager sharedInstance] setUserSelector:nil withObj:nil];
+}
 
 - (void)addShakeEvent
 {
-	GenericInterfaceAccelerator *accelAccessory = [GenericInterfaceAccelerator instance];
-	[accelAccessory directCreateUiAccelerometer:self UserSelector:@selector(onShakeChangeTheme)];
+	[[DemoAccelerometerManager sharedInstance] setUserSelector:@selector(onShakeChangeTheme) withObj:self];
+//	GenericInterfaceAccelerator *accelAccessory = [GenericInterfaceAccelerator instance];
+//	[accelAccessory directCreateUiAccelerometer:self UserSelector:@selector(onShakeChangeTheme)];
 }
 
 - (void)onShakeChangeTheme
 {
+	[self stopMotionManager];
+	
 	[self showShakeMessageAlertView];
 //	if (m_bIsKeyboardShow)
 //	{

@@ -5,6 +5,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
 
+///< http://govo.info/2014/02/ios-make-shake-gesture-by-coremotion/
+
 ///< 私有方法
 @interface DemoAccelerometerManager()
 
@@ -79,7 +81,7 @@
 	{
 		//设置频率值，适合游戏和大部分app的检测
 		///< //加速仪更新频率，以秒为单位
-		_motionManager.accelerometerUpdateInterval = 0.1;
+		_motionManager.accelerometerUpdateInterval = 0.2f;
 		[self startAccelerometer];
 	}
 }
@@ -115,19 +117,30 @@
 											 }];
 }
 
+///< 停止接收加速仪数据
+-(void)stopAccelerometer
+{
+	[_motionManager stopAccelerometerUpdates];
+}
+
 -(void)outputAccelertionData:(CMAcceleration)acceleration
 {
-	static int g_shakeCount = 0;
-	if(g_shakeCount++ < 10) ///< 防止主线程阻塞导致多次响应摇晃事件的bug
+	static int g_shakeCount = 5;
+	if(g_shakeCount++ < 5) ///< 防止主线程阻塞导致多次响应摇晃事件的bug
 	{
 		return ;
 	}
 	
+	NSLog(@"g_shakeCount = %d", g_shakeCount);
+	
 	//综合3个方向的加速度
 	double accelerameter =sqrt(pow(acceleration.x, 2) + pow(acceleration.y, 2) + pow(acceleration.z ,2));
 	//当综合加速度大于2.3时，就激活效果（此数值根据需求可以调整，数据越小，用户摇动的动作就越小，越容易激活，反之加大难度，但不容易误触发）
-	if (accelerameter>2.3f)
+	if (accelerameter > 4.3f)
 	{
+		g_shakeCount = 0;
+		NSLog(@"==receive iphone shake event===");
+		
 		//立即停止更新加速仪（很重要！）
 		//[self.motionManager stopAccelerometerUpdates];
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -148,7 +161,7 @@
 //对应上面的通知中心回调的消息接收
 -(void)didEnterBackgroundNotification:(NSNotification *)notification
 {
-	[_motionManager stopAccelerometerUpdates];
+	[self stopAccelerometer];
 }
 
 -(void)willEnterForegroundNotification:(NSNotification *)notification
@@ -159,7 +172,7 @@
 @end
 
 
-/*
+#if 0
  
  ///< 【外部调用接口实现】
  
@@ -189,6 +202,6 @@
  #endif
  }
 
-*/
+#endif
 
 #endif

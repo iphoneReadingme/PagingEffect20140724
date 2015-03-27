@@ -1,8 +1,9 @@
 
-#import <UIKit/UIKit.h>
 #import "DemoAccelerometerManager.h"
-#import <CoreMotion/CoreMotion.h>
 
+#ifdef Enable_Test_Accelerometer_Manager
+#import <UIKit/UIKit.h>
+#import <CoreMotion/CoreMotion.h>
 
 ///< 私有方法
 @interface DemoAccelerometerManager()
@@ -62,10 +63,12 @@
 
 - (void)initMotionManager
 {
+#if !TARGET_IPHONE_SIMULATOR
 	if (_motionManager == nil)
 	{
 		_motionManager = [[CMMotionManager alloc] init];
 	}
+#endif
 	
 	if (!_motionManager.accelerometerAvailable)
 	{
@@ -114,16 +117,22 @@
 
 -(void)outputAccelertionData:(CMAcceleration)acceleration
 {
+	static int g_shakeCount = 0;
+	if(g_shakeCount++ < 10) ///< 防止主线程阻塞导致多次响应摇晃事件的bug
+	{
+		return ;
+	}
+	
 	//综合3个方向的加速度
 	double accelerameter =sqrt(pow(acceleration.x, 2) + pow(acceleration.y, 2) + pow(acceleration.z ,2));
 	//当综合加速度大于2.3时，就激活效果（此数值根据需求可以调整，数据越小，用户摇动的动作就越小，越容易激活，反之加大难度，但不容易误触发）
 	if (accelerameter>2.3f)
 	{
 		//立即停止更新加速仪（很重要！）
-		[self.motionManager stopAccelerometerUpdates];
+		//[self.motionManager stopAccelerometerUpdates];
 		dispatch_async(dispatch_get_main_queue(), ^{
-			//UI线程必须在此block内执行，例如摇一摇动画、UIAlertView之类
 			
+			//UI线程必须在此block内执行，例如摇一摇动画、UIAlertView之类
 			[self performSelector:@selector(onShakeChangeTheme)];
 		});
 	}
@@ -150,3 +159,36 @@
 @end
 
 
+/*
+ 
+ ///< 【外部调用接口实现】
+ 
+ #pragma mark - == 摇一摇相关
+ 
+ + (void)initMotionManager
+ {
+ #ifdef Enable_Test_Accelerometer_Manager
+	[[DemoAccelerometerManager sharedInstance] initMotionManager];
+	[[DemoAccelerometerManager sharedInstance] setUserSelector:@selector(onShakeChangeTheme) withObj:self];
+ #endif
+ }
+ 
+ + (void)stopMotionManager
+ {
+ #ifdef Enable_Test_Accelerometer_Manager
+	[[DemoAccelerometerManager sharedInstance] setUserSelector:nil withObj:nil];
+ #endif
+ }
+ 
+ + (void)onShakeChangeTheme
+ {
+ #ifdef Enable_Test_Accelerometer_Manager
+	//[self stopMotionManager];
+	
+	[[ThemeManager sharedInstance] switchDayNightMode:YES];
+ #endif
+ }
+
+*/
+
+#endif

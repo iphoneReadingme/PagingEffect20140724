@@ -15,6 +15,10 @@
  **/
 
 
+///< 测试开关
+#define Enable_Test_Accelerometer_Manager
+#ifdef Enable_Test_Accelerometer_Manager
+
 @interface DemoAccelerometerManager : NSObject
 {
 }
@@ -27,3 +31,4 @@
 
 @end
 
+#endif

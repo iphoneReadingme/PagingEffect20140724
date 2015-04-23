@@ -179,6 +179,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.view.clipsToBounds = NO;
+	
 	items = [[NSMutableArray alloc] init];
 	
 	//=====================================================================
@@ -341,6 +343,11 @@
 	;
 }
 
+#pragma mark - == UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	NSLog(@"===scrollViewDidScroll===");
+}
 
 @end
 
